@@ -627,3 +627,63 @@ p {
         height: 45vh; /* Adapts height beautifully for compact phone screens */
     }
 }
+
+/* ==========================================================================
+   Luxury Sonic Architecture Interface Styles
+   ========================================================================== */
+.sonic-control-dock {
+    position: fixed;
+    bottom: 3rem;
+    right: 3rem;
+    z-index: 9999;
+}
+
+.sonic-toggle-btn {
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--color-primary);
+    padding: 0.6rem;
+    opacity: 0.6;
+    transition: opacity 0.4s ease, transform 0.3s ease;
+}
+
+.sonic-toggle-btn:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+}
+
+/* Minimalist Audio Activity Indicator */
+.sonic-icon-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 8px;
+    width: 12px;
+}
+
+.sonic-icon-bars span {
+    width: 1px;
+    height: 100%;
+    background-color: var(--color-primary);
+    transform-origin: bottom;
+    transform: scaleY(0.3);
+    transition: transform 0.3s ease;
+}
+
+/* Audio Active State Styling */
+.sonic-toggle-btn.muted .sonic-status-label {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+.sonic-toggle-btn.muted .sonic-icon-bars span {
+    transform: scaleY(0.1) !important;
+}
