@@ -283,3 +283,71 @@ h1, h2, h3, .text-serif {
     display: block;
     margin-bottom: 1rem;
 }
+
+/* Mobile Responsive Breakpoints */
+.menu-toggle {
+    display: none; /* Hidden on desktop screens */
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 100;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 22px;
+    height: 1px;
+    background-color: #1a1a1a;
+    transition: all 0.3s ease;
+}
+
+/* Responsive adjustments for screens under 768px */
+@media (max-width: 768px) {
+    .site-header {
+        padding: 1.5rem 2rem;
+    }
+
+    .menu-toggle {
+        display: flex; /* Show hamburger icon on mobile */
+    }
+
+    .main-nav {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Hide menu off-screen initially */
+        width: 75%;
+        height: 100vh;
+        background-color: #fcfbf7; /* Matches editorial cream */
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 3rem;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.05);
+        transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .main-nav.open {
+        right: 0; /* Slide menu into view beautifully */
+    }
+
+    /* Transform Hamburger lines into an 'X' when active */
+    .menu-toggle.active span:nth-child(1) {
+        transform: translateY(6px) rotate(45deg);
+    }
+    .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+    .menu-toggle.active span:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg);
+    }
+    
+    /* Let grids stack on mobile columns safely */
+    .services-grid, .narrative-grid {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+        gap: 2.5rem;
+    }
+}
