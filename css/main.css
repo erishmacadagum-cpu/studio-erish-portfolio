@@ -194,3 +194,63 @@ h1, h2, h3, .text-serif {
 .frame-elegant:hover img {
     transform: scale(1.03);
 }
+
+/* Premium Navigation Layout */
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 4rem;
+    background-color: #fcfbf7; /* Matches your editorial cream background */
+    border-bottom: 1px solid #e5e0d8;
+}
+
+.header-logo {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    letter-spacing: 0.2em;
+    text-decoration: none;
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+.logo-sub {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: #706c64;
+    margin-top: 0.2rem;
+}
+
+/* Fixes the text links, removes purple colors and default underlines */
+.main-nav {
+    display: flex;
+    gap: 2.5rem;
+}
+
+.nav-link {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    text-decoration: none; /* Removes the underline */
+    color: #504d46; /* Clean, elegant charcoal instead of blue/purple */
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #1a1a1a;
+}
+
+/* Subtle accent for the page you are currently on */
+.nav-link.active {
+    color: #1a1a1a;
+    font-weight: 500;
+    border-bottom: 1px solid #1a1a1a;
+    padding-bottom: 0.2rem;
+}
