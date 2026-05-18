@@ -687,3 +687,86 @@ p {
 .sonic-toggle-btn.muted .sonic-icon-bars span {
     transform: scaleY(0.1) !important;
 }
+
+/* ==========================================================================
+   Cinematic Entry Curtain & Experience Button
+   ========================================================================== */
+.entrance-curtain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fcfbf7; /* A beautiful, seamless luxury cream background */
+    z-index: 100000; /* Keeps it completely on top of everything else */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1), visibility 1.5s;
+}
+
+/* This rule effortlessly dissolves the curtain into thin air on click */
+.entrance-curtain.dissolved {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.entrance-content {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: entranceFadeUp 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.3s;
+}
+
+.entrance-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+}
+
+.entrance-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    opacity: 0.6;
+    margin-bottom: 4rem;
+}
+
+.enter-studio-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: #1a1a1a;
+    position: relative;
+    padding: 1rem 2rem;
+}
+
+.btn-line {
+    width: 40%;
+    height: 1px;
+    background-color: #1a1a1a;
+    margin: 0.6rem auto 0;
+    opacity: 0.4;
+    transition: width 0.4s ease;
+}
+
+.enter-studio-btn:hover .btn-line {
+    width: 100%;
+    opacity: 1;
+}
+
+@keyframes entranceFadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
