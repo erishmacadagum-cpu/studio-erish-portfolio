@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. SELF-CONTAINED SYNTHETIC LUXURY AUDIO ENGINE
+    // 2. LUXURY SENSORY AUDIO ENGINE
     const entranceCurtain = document.getElementById('entranceCurtain');
     const enterStudioBtn = document.getElementById('enterStudioBtn');
     const globalSoundToggle = document.getElementById('globalSoundToggle');
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let isMuted = false;
     let audioCtx = null;
 
-    // Function to initialize the browser's native audio engine safely
+    // Safely initialize the browser's native audio engine
     const initAudioEngine = () => {
         if (!audioCtx) {
             audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -31,19 +31,15 @@ document.addEventListener('DOMContentLoaded', () => {
         initAudioEngine();
         
         const now = audioCtx.currentTime;
-        
-        // Create an elegant multi-tone luxury chord (F Major 7 Atmosphere)
-        const frequencies = [174.61, 220.00, 261.63, 329.63]; 
+        const frequencies = [174.61, 220.00, 261.63, 329.63]; // Elegant F Major 7 Chord Structure
         
         frequencies.forEach((freq, index) => {
             const oscillator = audioCtx.createOscillator();
             const gainNode = audioCtx.createGain();
             
-            // Soft, organic sine waves for a pure, cinematic tone
             oscillator.type = 'sine';
             oscillator.frequency.value = freq;
             
-            // Volume Envelope: Smooth 2-second fade-in, long 4-second luxury fade-out
             gainNode.gain.setValueAtTime(0, now);
             gainNode.gain.linearRampToValueAtTime(0.08, now + 2.0 + (index * 0.1)); 
             gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 6.0);
@@ -56,8 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Synthesizes a velvet, organic micro-click tactile response
-    // Synthesizes a premium, velvet-damped mechanical click response
+    // Synthesizes a premium, velvet-damped mechanical micro-click response
     const playSyntheticClick = () => {
         if (isMuted) return;
         initAudioEngine();
@@ -66,16 +61,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const oscillator = audioCtx.createOscillator();
         const gainNode = audioCtx.createGain();
         
-        // A pure, organic sine wave instead of a sharp triangle
-        oscillator.type = 'sine'; 
-        
-        // Low, warm, luxury frequency (reminiscent of a physical button click)
-        oscillator.frequency.setValueAtTime(160, now); 
+        oscillator.type = 'sine'; // Smooth, pure wave form
+        oscillator.frequency.setValueAtTime(160, now); // Warm, luxury frequency tone
         oscillator.frequency.exponentialRampToValueAtTime(80, now + 0.04);
         
-        // Ultra-subtle volume envelope (a faint, rapid whisper of a sound)
-        gainNode.gain.setValueAtTime(0.04, now); // Significantly lowered volume
-        gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.04); // Fast, clean decay
+        gainNode.gain.setValueAtTime(0.04, now); // Quiet sensory whisper volume
+        gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.04); // Fast precision decay
         
         oscillator.connect(gainNode);
         gainNode.connect(audioCtx.destination);
@@ -83,29 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
         oscillator.start(now);
         oscillator.stop(now + 0.04);
     };
-        if (isMuted) return;
-        initAudioEngine();
-        
-        const now = audioCtx.currentTime;
-        const oscillator = audioCtx.createOscillator();
-        const gainNode = audioCtx.createGain();
-        
-        oscillator.type = 'triangle'; // Warmer, wood-like tone
-        oscillator.frequency.setValueAtTime(120, now); // Low-frequency dampening click
-        oscillator.frequency.exponentialRampToValueAtTime(40, now + 0.08);
-        
-        // Rapid snap envelope
-        gainNode.gain.setValueAtTime(0.15, now);
-        gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.08);
-        
-        oscillator.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-        
-        oscillator.start(now);
-        oscillator.stop(now + 0.08);
-    };
 
-    // Trigger Overture and dissolve screen on deliberate click
+    // Trigger Overture and dissolve screen on deliberate button click
     if (enterStudioBtn && entranceCurtain) {
         enterStudioBtn.addEventListener('click', () => {
             playSyntheticOverture();
@@ -113,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Attach click audio signature to all interactive elements
+    // Attach click audio signature to all interactive parameters
     const attachSensoryClicks = () => {
         const interactiveElements = document.querySelectorAll('a, button, input[type="submit"], .menu-toggle');
         interactiveElements.forEach(element => {
@@ -122,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    // Run the sensory mapping safely
     attachSensoryClicks();
 
     // Master Audio Dock Toggle Control
