@@ -1,1 +1,196 @@
-/* Studio Erish Core Styles */
+/* ==========================================================================
+   STUDIO ERISH — CORE LUXURY DESIGN SYSTEM (2026)
+   ========================================================================== */
+
+/* 1. Design Tokens & Variables */
+:root {
+    /* Color Palette: Editorial, Sophisticated, High-Contrast Minimalist */
+    --color-bg: #FAF9F6;         /* Creamy, editorial off-white */
+    --color-primary: #111111;    /* Deep charcoal, softer than pure black */
+    --color-muted: #666666;      /* Slate grey for readable body prose */
+    --color-accent: #8C7853;     /* Muted champagne gold for intentional highlights */
+    --color-border: #E5E2DA;     /* Soft lines for structural grid separation */
+
+    /* Typography Scale */
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+    --font-sans: 'Montserrat', sans-serif;
+}
+
+/* 2. Global Resets & Body Rules */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-primary);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 3. Typography Hierarchy */
+h1, h2, h3, .text-serif {
+    font-family: var(--font-serif);
+    font-weight: 400;
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem); /* Dynamically scales smoothly on mobile vs desktop */
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+.section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 1rem;
+}
+
+/* 4. Layout Structure (Containers & Grids) */
+.container {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.container-narrow {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Premium Navigation Bar */
+.site-header {
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    background-color: rgba(250, 249, 246, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.brand-logo {
+    text-decoration: none;
+    color: var(--color-primary);
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-main {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    letter-spacing: 0.2em;
+    font-weight: 600;
+}
+
+.logo-sub {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--color-muted);
+    margin-top: 0.2rem;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--color-primary);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--color-accent);
+}
+
+/* Asymmetrical Editorial Hero Section */
+.hero-editorial {
+    padding: 8rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+@media (max-width: 968px) {
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+}
+
+.hero-eyebrow {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--color-accent);
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.hero-lead {
+    font-size: 1.15rem;
+    color: var(--color-muted);
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+}
+
+.cta-link-editorial {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-primary);
+    padding-bottom: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.cta-link-editorial:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+/* Image Presentation Frame */
+.frame-elegant {
+    overflow: hidden;
+    background-color: var(--color-border);
+    position: relative;
+}
+
+.frame-elegant img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.frame-elegant:hover img {
+    transform: scale(1.03);
+}
