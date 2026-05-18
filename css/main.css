@@ -5,8 +5,8 @@
 /* 1. Design Tokens & Variables */
 :root {
     /* Color Palette: Editorial, Sophisticated, High-Contrast Minimalist */
-    --color-bg: #FAF9F6;         /* Creamy, editorial off-white */
-    --color-primary: #111111;    /* Deep charcoal, softer than pure black */
+    --color-bg: #FBF9F6;         /* Creamy, editorial off-white */
+    --color-primary: #2A2927;    /* Deep charcoal, softer than pure black */
     --color-muted: #666666;      /* Slate grey for readable body prose */
     --color-accent: #8C7853;     /* Muted champagne gold for intentional highlights */
     --color-border: #E5E2DA;     /* Soft lines for structural grid separation */
@@ -350,4 +350,53 @@ h1, h2, h3, .text-serif {
         padding: 2rem;
         gap: 2.5rem;
     }
+}
+/* ==========================================================================
+   Luxury Curation Extensions
+   ========================================================================== */
+
+/* 1. Fluid Page Entrance Animation */
+main {
+    animation: editorialFade 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes editorialFade {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 2. Editorial Image Framing & Zoom Effects */
+.narrative-media {
+    overflow: hidden; /* Contains the internal hover zoom perfectly */
+    background-color: #f2eee7; /* Soft base if an image takes a second to load */
+    border: 1px solid rgba(42, 41, 39, 0.04); /* Microscopic elegant framing border */
+}
+
+.editorial-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    filter: brightness(98%) contrast(98%);
+    /* Ultra-slow, cinematic easing curve for luxury motion */
+    transition: transform 2.5s cubic-bezier(0.16, 1, 0.3, 1), filter 2.5s ease;
+}
+
+/* Slowly magnifies the photo when hovered */
+.narrative-media:hover .editorial-img {
+    transform: scale(1.03);
+    filter: brightness(100%) contrast(100%);
+}
+
+/* 3. Global Text Breathing Room */
+p {
+    font-weight: 300;
+    letter-spacing: 0.01em;
+    color: #55514b; /* Subtle tone drop for body prose so headers pop beautifully */
 }
