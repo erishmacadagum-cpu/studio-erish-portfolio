@@ -10,52 +10,96 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. LUXURY SENSORY AUDIO ENGINE
-    const welcomeOverture = document.getElementById('welcomeOverture');
-    const tactileClick = document.getElementById('tactileClick');
-    const globalSoundToggle = document.getElementById('globalSoundToggle');
+    // 2. SELF-CONTAINED SYNTHETIC LUXURY AUDIO ENGINE
     const entranceCurtain = document.getElementById('entranceCurtain');
     const enterStudioBtn = document.getElementById('enterStudioBtn');
+    const globalSoundToggle = document.getElementById('globalSoundToggle');
     
     let isMuted = false;
+    let audioCtx = null;
 
-    // Subdued, luxury mixing volume levels
-    if (welcomeOverture) welcomeOverture.volume = 0.45;
-    if (tactileClick) tactileClick.volume = 0.25;
+    // Function to initialize the browser's native audio engine safely
+    const initAudioEngine = () => {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+    };
 
-    // Trigger Overture and dissolve screen on deliberate button click
+    // Synthesizes a beautiful, warm 6-second Neoclassical Ambient Swell
+    const playSyntheticOverture = () => {
+        if (isMuted) return;
+        initAudioEngine();
+        
+        const now = audioCtx.currentTime;
+        
+        // Create an elegant multi-tone luxury chord (F Major 7 Atmosphere)
+        const frequencies = [174.61, 220.00, 261.63, 329.63]; 
+        
+        frequencies.forEach((freq, index) => {
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            
+            // Soft, organic sine waves for a pure, cinematic tone
+            oscillator.type = 'sine';
+            oscillator.frequency.value = freq;
+            
+            // Volume Envelope: Smooth 2-second fade-in, long 4-second luxury fade-out
+            gainNode.gain.setValueAtTime(0, now);
+            gainNode.gain.linearRampToValueAtTime(0.08, now + 2.0 + (index * 0.1)); 
+            gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 6.0);
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            oscillator.start(now);
+            oscillator.stop(now + 6.0);
+        });
+    };
+
+    // Synthesizes a velvet, organic micro-click tactile response
+    const playSyntheticClick = () => {
+        if (isMuted) return;
+        initAudioEngine();
+        
+        const now = audioCtx.currentTime;
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        
+        oscillator.type = 'triangle'; // Warmer, wood-like tone
+        oscillator.frequency.setValueAtTime(120, now); // Low-frequency dampening click
+        oscillator.frequency.exponentialRampToValueAtTime(40, now + 0.08);
+        
+        // Rapid snap envelope
+        gainNode.gain.setValueAtTime(0.15, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.08);
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        
+        oscillator.start(now);
+        oscillator.stop(now + 0.08);
+    };
+
+    // Trigger Overture and dissolve screen on deliberate click
     if (enterStudioBtn && entranceCurtain) {
         enterStudioBtn.addEventListener('click', () => {
-            // Play the welcome sound signature instantly
-            if (welcomeOverture && !isMuted) {
-                welcomeOverture.play().catch(err => console.log("Audio unlock handled:", err));
-            }
-            // Beautifully dissolve the screen overlay curtain
+            playSyntheticOverture();
             entranceCurtain.classList.add('dissolved');
         });
     }
 
-    // Function to trigger micro-tactile click sounds
-    const playTactileClick = () => {
-        if (tactileClick && !isMuted) {
-            tactileClick.currentTime = 0;
-            tactileClick.play();
-        }
-    };
-
-    // Attach click audio signature to all interactive parameters
+    // Attach click audio signature to all interactive elements
     const attachSensoryClicks = () => {
         const interactiveElements = document.querySelectorAll('a, button, input[type="submit"], .menu-toggle');
         interactiveElements.forEach(element => {
             if (element.id === 'globalSoundToggle' || element.id === 'enterStudioBtn' || element.closest('#globalSoundToggle')) return;
-            element.addEventListener('click', playTactileClick);
+            element.addEventListener('click', playSyntheticClick);
         });
     };
 
-    // Run the click setup
     attachSensoryClicks();
 
-    // Master Audio Dock Toggle Control (Sound On/Off Button)
+    // Master Audio Dock Toggle Control
     if (globalSoundToggle) {
         globalSoundToggle.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -64,10 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isMuted) {
                 globalSoundToggle.classList.add('muted');
                 globalSoundToggle.querySelector('.sonic-status-label').textContent = "SOUND OFF";
-                if (welcomeOverture) welcomeOverture.pause();
             } else {
                 globalSoundToggle.classList.remove('muted');
                 globalSoundToggle.querySelector('.sonic-status-label').textContent = "SOUND ON";
+                playSyntheticClick();
             }
         });
     }
