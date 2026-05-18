@@ -560,3 +560,70 @@ p {
         gap: 2.5rem;
     }
 }
+
+/* ==========================================================================
+   The Journal (Homepage) Layout Rules
+   ========================================================================== */
+.journal-layout {
+    padding: 4rem 4rem 8rem 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.journal-hero {
+    text-align: center;
+    margin-bottom: 6rem;
+}
+
+.journal-hero .hero-title {
+    margin-bottom: 4rem;
+    font-size: clamp(2.5rem, 4.5vw, 4.5rem);
+    line-height: 1.1;
+}
+
+.journal-cover-frame {
+    width: 100%;
+    height: 65vh; /* Gives it an incredible full-screen editorial depth */
+    margin-top: 3rem;
+}
+
+.journal-manifesto {
+    display: flex;
+    justify-content: center;
+    padding: 0 2rem;
+}
+
+.manifesto-text-block {
+    max-width: 700px;
+    text-align: center;
+}
+
+.cta-link-minimal {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-primary);
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 2rem;
+    font-weight: 500;
+    border-bottom: 1px solid var(--color-primary);
+    padding-bottom: 0.4rem;
+    transition: letter-spacing 0.3s ease, color 0.3s ease;
+}
+
+.cta-link-minimal:hover {
+    color: #706c64;
+    letter-spacing: 0.2em;
+}
+
+/* Mobile Cover Fixes */
+@media (max-width: 768px) {
+    .journal-layout {
+        padding: 3rem 2rem 4rem 2rem;
+    }
+    .journal-cover-frame {
+        height: 45vh; /* Adapts height beautifully for compact phone screens */
+    }
+}
