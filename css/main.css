@@ -254,3 +254,32 @@ h1, h2, h3, .text-serif {
     border-bottom: 1px solid #1a1a1a;
     padding-bottom: 0.2rem;
 }
+/* Services Layout Rules */
+.services-hero {
+    text-align: center;
+    max-width: 800px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3.5rem;
+    padding: 2rem 4rem;
+    margin-bottom: 6rem;
+}
+
+.service-card {
+    border-top: 1px solid #e5e0d8;
+    padding-top: 2rem;
+}
+
+.service-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: #a39e93;
+    display: block;
+    margin-bottom: 1rem;
+}
