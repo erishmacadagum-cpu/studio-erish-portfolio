@@ -1,76 +1,64 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // 1. MOBILE NAVIGATION MENU LOGIC
     const menuToggle = document.querySelector('.menu-toggle');
     const mainNav = document.querySelector('.main-nav');
 
     if (menuToggle && mainNav) {
         menuToggle.addEventListener('click', () => {
-            // Toggle active classes to open/close menu
             menuToggle.classList.toggle('active');
             mainNav.classList.toggle('open');
         });
     }
-});
 
-// ==========================================================================
-// Studio Erish — Luxury Sensory Audio Engine
-// ==========================================================================
-document.addEventListener('DOMContentLoaded', () => {
+    // 2. LUXURY SENSORY AUDIO ENGINE
     const welcomeOverture = document.getElementById('welcomeOverture');
     const tactileClick = document.getElementById('tactileClick');
     const globalSoundToggle = document.getElementById('globalSoundToggle');
+    const entranceCurtain = document.getElementById('entranceCurtain');
+    const enterStudioBtn = document.getElementById('enterStudioBtn');
     
     let isMuted = false;
-    let overturePlayed = false;
 
-    // Adjust volume increments for luxury subtlety (never harsh or loud)
-    if (welcomeOverture) welcomeOverture.volume = 0.4;
+    // Subdued, luxury mixing volume levels
+    if (welcomeOverture) welcomeOverture.volume = 0.45;
     if (tactileClick) tactileClick.volume = 0.25;
 
-    // Function to trigger the 7-Second Welcome Overture
-    const playWelcomeOverture = () => {
-        if (!overturePlayed && welcomeOverture && !isMuted) {
-            welcomeOverture.play().then(() => {
-                overturePlayed = true;
-                // Remove the global trigger listeners once played successfully
-                document.removeEventListener('click', playWelcomeOverture);
-                document.removeEventListener('touchstart', playWelcomeOverture);
-            }).catch(error => {
-                console.log("Awaiting deliberate user interaction to release audio signature.");
-            });
-        }
-    };
-
-    // Trigger overture on the client's very first interaction with the interface
-    document.addEventListener('click', playWelcomeOverture);
-    document.addEventListener('touchstart', playWelcomeOverture);
+    // Trigger Overture and dissolve screen on deliberate button click
+    if (enterStudioBtn && entranceCurtain) {
+        enterStudioBtn.addEventListener('click', () => {
+            // Play the welcome sound signature instantly
+            if (welcomeOverture && !isMuted) {
+                welcomeOverture.play().catch(err => console.log("Audio unlock handled:", err));
+            }
+            // Beautifully dissolve the screen overlay curtain
+            entranceCurtain.classList.add('dissolved');
+        });
+    }
 
     // Function to trigger micro-tactile click sounds
     const playTactileClick = () => {
         if (tactileClick && !isMuted) {
-            // Reset audio track timeline to 0 so overlapping rapid clicks execute instantly
             tactileClick.currentTime = 0;
             tactileClick.play();
         }
     };
 
-    // Attach click audio signature to all interactive brand parameters
+    // Attach click audio signature to all interactive parameters
     const attachSensoryClicks = () => {
         const interactiveElements = document.querySelectorAll('a, button, input[type="submit"], .menu-toggle');
         interactiveElements.forEach(element => {
-            // Skip the audio master controller itself to prevent loop confusion
-            if (element.id === 'globalSoundToggle' || element.closest('#globalSoundToggle')) return;
-            
+            if (element.id === 'globalSoundToggle' || element.id === 'enterStudioBtn' || element.closest('#globalSoundToggle')) return;
             element.addEventListener('click', playTactileClick);
         });
     };
 
-    // Initialize sensory mapping
+    // Run the click setup
     attachSensoryClicks();
 
-    // Master Audio Dock Toggle Control
+    // Master Audio Dock Toggle Control (Sound On/Off Button)
     if (globalSoundToggle) {
         globalSoundToggle.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevents toggle click from firing the welcome overture accidentally
+            e.stopPropagation();
             isMuted = !isMuted;
             
             if (isMuted) {
