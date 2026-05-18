@@ -400,3 +400,68 @@ p {
     letter-spacing: 0.01em;
     color: #55514b; /* Subtle tone drop for body prose so headers pop beautifully */
 }
+/* ==========================================================================
+   Asymmetric Lookbook Grid System
+   ========================================================================== */
+.portfolio-hero {
+    text-align: left;
+    max-width: 700px;
+    margin: 6rem auto 4rem 4rem;
+}
+
+.lookbook-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 5rem 4rem;
+    padding: 0 4rem 8rem 4rem;
+}
+
+.lookbook-item {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Metadata styling beneath the portfolio frames */
+.item-meta {
+    margin-top: 1.2rem;
+}
+
+.item-location {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #a39e93;
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+/* Asymmetric Grid Spanning Rules */
+.item-wide {
+    grid-column: span 12; /* Spans full width for jaw-dropping entrance */
+}
+
+.item-tall {
+    grid-column: span 5; /* Sitting on the left side */
+}
+
+.item-standard {
+    grid-column: span 7; /* Offset on the right side */
+    margin-top: 8rem; /* Pushes it down intentionally to create visual contrast */
+}
+
+/* Mobile Fallbacks to keep it clean on phones */
+@media (max-width: 768px) {
+    .portfolio-hero {
+        margin: 4rem 2rem 2rem 2rem;
+    }
+    .lookbook-grid {
+        grid-template-columns: 1fr;
+        padding: 0 2rem 4rem 2rem;
+        gap: 3.5rem;
+    }
+    .item-wide, .item-tall, .item-standard {
+        grid-column: span 1!important;
+        margin-top: 0!important;
+    }
+}
