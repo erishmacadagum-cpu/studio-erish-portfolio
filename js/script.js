@@ -57,7 +57,32 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Synthesizes a velvet, organic micro-click tactile response
+    // Synthesizes a premium, velvet-damped mechanical click response
     const playSyntheticClick = () => {
+        if (isMuted) return;
+        initAudioEngine();
+        
+        const now = audioCtx.currentTime;
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        
+        // A pure, organic sine wave instead of a sharp triangle
+        oscillator.type = 'sine'; 
+        
+        // Low, warm, luxury frequency (reminiscent of a physical button click)
+        oscillator.frequency.setValueAtTime(160, now); 
+        oscillator.frequency.exponentialRampToValueAtTime(80, now + 0.04);
+        
+        // Ultra-subtle volume envelope (a faint, rapid whisper of a sound)
+        gainNode.gain.setValueAtTime(0.04, now); // Significantly lowered volume
+        gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.04); // Fast, clean decay
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        
+        oscillator.start(now);
+        oscillator.stop(now + 0.04);
+    };
         if (isMuted) return;
         initAudioEngine();
         
