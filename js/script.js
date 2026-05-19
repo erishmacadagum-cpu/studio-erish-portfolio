@@ -15,11 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const enterStudioBtn = document.getElementById('enterStudioBtn');
     const globalSoundToggle = document.getElementById('globalSoundToggle');
 
-    // System States
     let isMuted = false;
-    let hasEntered = false; // Audio is safely locked until experience begins
+    let hasEntered = false;
 
-    // Pre-load audio elements cleanly so browser memory never chokes
+    // Pre-loading audio players
     const clickAudioPlayer = new Audio('./velvet-snap.mp3');
     clickAudioPlayer.volume = 0.9;
     clickAudioPlayer.preload = 'auto';
@@ -28,27 +27,33 @@ document.addEventListener('DOMContentLoaded', () => {
     openingAudioPlayer.volume = 0.9;
     openingAudioPlayer.preload = 'auto';
 
-    // Global tactile micro-click handler
+    // Global tactile micro-click handler with strict diagnostic reporting
     const playSyntheticClick = () => {
-        // Only allow clicking sound if the user is inside and not muted
-        if (isMuted || !hasEntered) return;
+        if (isMuted) {
+            console.log("🔊 Click blocked: Site is muted.");
+            return;
+        }
+        if (!hasEntered) {
+            console.log("🔊 Click blocked: User has not cleared the entrance curtain yet.");
+            return;
+        }
         
-        // Instant recoil reset so rapid clicks never drop sound
         clickAudioPlayer.currentTime = 0; 
-        clickAudioPlayer.play().catch(err => console.log("Audio play blocked:", err));
+        
+        clickAudioPlayer.play()
+            .then(() => console.log("✅ SUCCESS: velvet-snap.mp3 played perfectly!"))
+            .catch(err => {
+                console.error("❌ ERROR playing velvet-snap.mp3:", err.name, "-", err.message);
+                console.log("💡 Tip: Check if the file is inside a folder, or if the name is spelled exactly correctly.");
+            });
     };
 
     // 3. GLOBAL EVENT DELEGATION POOL
-    // Listens to the entire document dynamically. This guarantees that elements loaded 
-    // behind the curtain are caught perfectly without relying on fragile loops.
     document.addEventListener('click', (event) => {
         const target = event.target;
-        
-        // Check if the clicked element (or its parent) matches your target elements
         const interactiveElement = target.closest('a, button, input[type="submit"], .menu-toggle');
         
         if (interactiveElement) {
-            // Bypass exclusions completely (control elements should not trigger the snap click)
             if (interactiveElement.id !== 'globalSoundToggle' && 
                 interactiveElement.id !== 'enterStudioBtn' && 
                 !interactiveElement.closest('#globalSoundToggle')) {
@@ -61,15 +66,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. EXPERIENTIAL TRANSITION TRIGGER
     if (enterStudioBtn && entranceCurtain) {
         enterStudioBtn.addEventListener('click', () => {
-            // Unlocks the interactive sound gate safely inside the browser's permitted window
             hasEntered = true;
             
-            // Play the gorgeous 8-second ambient overture
+            // Explicitly force-wake both audio elements using the primary click gesture
+            clickAudioPlayer.load(); 
+            openingAudioPlayer.load();
+
             if (!isMuted) {
-                openingAudioPlayer.play().catch(err => console.log("Audio play blocked:", err));
+                openingAudioPlayer.play()
+                    .then(() => console.log("✅ SUCCESS: opening.mp3 started playing."))
+                    .catch(err => console.error("❌ ERROR playing opening.mp3:", err));
             }
             
-            // Dissolve loading overlay seamlessly
             entranceCurtain.style.transition = "opacity 1.5s ease, visibility 1.5s";
             entranceCurtain.style.opacity = "0";
             entranceCurtain.style.visibility = "hidden";
