@@ -57,11 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isMuted) return;
         initAudioEngine();
         
-       // Synthesizes a premium, velvet-damped mechanical micro-click response
-    const playSyntheticClick = () => {
-        if (isMuted) return;
-        initAudioEngine();
-        
         const now = audioCtx.currentTime;
         const oscillator = audioCtx.createOscillator();
         const gainNode = audioCtx.createGain();
@@ -69,13 +64,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Pure, elegant sine wave
         oscillator.type = 'sine'; 
         
-        // Deeper, woodier frequency (110 instead of 160) for a matte, linen feel
+        // Deeper, woodier frequency for a matte, linen feel
         oscillator.frequency.setValueAtTime(110, now); 
         oscillator.frequency.exponentialRampToValueAtTime(60, now + 0.02);
         
         // Faint, rapid sensory whisper volume
         gainNode.gain.setValueAtTime(0.03, now); 
-        gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.02); // Snaps shut twice as fast
+        gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.02); // Snaps shut fast
         
         oscillator.connect(gainNode);
         gainNode.connect(audioCtx.destination);
