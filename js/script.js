@@ -57,22 +57,31 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isMuted) return;
         initAudioEngine();
         
+       // Synthesizes a premium, velvet-damped mechanical micro-click response
+    const playSyntheticClick = () => {
+        if (isMuted) return;
+        initAudioEngine();
+        
         const now = audioCtx.currentTime;
         const oscillator = audioCtx.createOscillator();
         const gainNode = audioCtx.createGain();
         
-        oscillator.type = 'sine'; // Smooth, pure wave form
-        oscillator.frequency.setValueAtTime(160, now); // Warm, luxury frequency tone
-        oscillator.frequency.exponentialRampToValueAtTime(80, now + 0.04);
+        // Pure, elegant sine wave
+        oscillator.type = 'sine'; 
         
-        gainNode.gain.setValueAtTime(0.04, now); // Quiet sensory whisper volume
-        gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.04); // Fast precision decay
+        // Deeper, woodier frequency (110 instead of 160) for a matte, linen feel
+        oscillator.frequency.setValueAtTime(110, now); 
+        oscillator.frequency.exponentialRampToValueAtTime(60, now + 0.02);
+        
+        // Faint, rapid sensory whisper volume
+        gainNode.gain.setValueAtTime(0.03, now); 
+        gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.02); // Snaps shut twice as fast
         
         oscillator.connect(gainNode);
         gainNode.connect(audioCtx.destination);
         
         oscillator.start(now);
-        oscillator.stop(now + 0.04);
+        oscillator.stop(now + 0.02);
     };
 
     // Trigger Overture and dissolve screen on deliberate button click
