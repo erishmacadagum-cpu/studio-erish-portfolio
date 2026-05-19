@@ -59,11 +59,11 @@ document.addEventListener('DOMContentLoaded', () => {
    const playSyntheticClick = () => {
         if (isMuted) return;
         
-        // Connects directly to your uploaded luxury asset
-        const clickAudio = new Audio('velvet-snap.mp3'); 
+        // Tells Cloudflare to look at the absolute root folder, out of the 'js' folder
+        const clickAudio = new Audio('/velvet-snap.mp3'); 
         
-        // Set at 0.4 so it's beautifully audible, smooth, and not startling
-        clickAudio.volume = 0.4; 
+        // Smooth, audible luxury volume
+        clickAudio.volume = 0.5; 
         
         clickAudio.play().catch(err => console.log("Audio playback blocked:", err));
     };
