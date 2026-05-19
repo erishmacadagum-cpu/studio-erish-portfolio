@@ -17,20 +17,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let isMuted = false;
 
-    // Tactile micro-click response (Paths updated to absolute root)
+    // PRE-LOAD THE AUDIO ASSETS ONCE (This stops the browser from blocking them)
+    const clickAudioPlayer = new Audio('./velvet-snap.mp3');
+    clickAudioPlayer.volume = 0.9; // Maximize crispness
+    clickAudioPlayer.preload = 'auto';
+
+    const openingAudioPlayer = new Audio('./opening.mp3');
+    openingAudioPlayer.volume = 0.9;
+    openingAudioPlayer.preload = 'auto';
+
+    // Tactile micro-click response using the pre-loaded player
     const playSyntheticClick = () => {
         if (isMuted) return;
-        const clickAudio = new Audio('./velvet-snap.mp3');
-        clickAudio.volume = 0.8; 
-        clickAudio.play().catch(err => console.log("Audio playback blocked:", err));
+        
+        // Reset sound to start instantly even if clicked repeatedly
+        clickAudioPlayer.currentTime = 0; 
+        clickAudioPlayer.play().catch(err => console.log("Audio playback blocked:", err));
     };
 
-    // Grand cinematic opening audio track (Paths updated to absolute root)
+    // Grand cinematic opening audio track using the pre-loaded player
     const playCinematicOverture = () => {
         if (isMuted) return;
-        const openingAudio = new Audio('./opening.mp3');
-        openingAudio.volume = 0.9; 
-        openingAudio.play().catch(err => console.log("Audio playback blocked:", err));
+        openingAudioPlayer.play().catch(err => console.log("Audio playback blocked:", err));
     };
 
     // Attach click audio signature securely to all interactive parameters
@@ -52,6 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (enterStudioBtn && entranceCurtain) {
         enterStudioBtn.addEventListener('click', () => {
             playCinematicOverture();
+            
+            // Activate the click sounds instantly when entering
             attachSensoryClicks();
             
             entranceCurtain.style.transition = "opacity 1.5s ease, visibility 1.5s";
