@@ -17,19 +17,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let isMuted = false;
 
-    // Tactile micro-click response (Volume boosted to 0.8)
+    // Tactile micro-click response (Paths updated to absolute root)
     const playSyntheticClick = () => {
         if (isMuted) return;
-        const clickAudio = new Audio('velvet-snap.mp3');
+        const clickAudio = new Audio('./velvet-snap.mp3');
         clickAudio.volume = 0.8; 
         clickAudio.play().catch(err => console.log("Audio playback blocked:", err));
     };
 
-    // Grand cinematic opening audio track
+    // Grand cinematic opening audio track (Paths updated to absolute root)
     const playCinematicOverture = () => {
         if (isMuted) return;
-        const openingAudio = new Audio('opening.mp3');
-        openingAudio.volume = 0.9; // Keeps the grand intro crisp and clear
+        const openingAudio = new Audio('./opening.mp3');
+        openingAudio.volume = 0.9; 
         openingAudio.play().catch(err => console.log("Audio playback blocked:", err));
     };
 
@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const interactiveElements = document.querySelectorAll('a, button, input[type="submit"], .menu-toggle');
         
         interactiveElements.forEach(element => {
-            // Perfect bypass rule: prevents the intro and mute button from triggering the snap click
             if (element.id !== 'globalSoundToggle' && 
                 element.id !== 'enterStudioBtn' && 
                 !element.closest('#globalSoundToggle')) {
@@ -52,13 +51,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Trigger Overture, activate links, and dissolve screen on deliberate button click
     if (enterStudioBtn && entranceCurtain) {
         enterStudioBtn.addEventListener('click', () => {
-            // Plays your beautiful 8-second opening track immediately
             playCinematicOverture();
-
-            // Safely activate navigation click sounds now that user interacted
             attachSensoryClicks();
             
-            // Dissolve loading overlay instantly with a smooth transition
             entranceCurtain.style.transition = "opacity 1.5s ease, visibility 1.5s";
             entranceCurtain.style.opacity = "0";
             entranceCurtain.style.visibility = "hidden";
