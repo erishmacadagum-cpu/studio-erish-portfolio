@@ -15,34 +15,50 @@ document.addEventListener('DOMContentLoaded', () => {
     const enterStudioBtn = document.getElementById('enterStudioBtn');
     const globalSoundToggle = document.getElementById('globalSoundToggle');
 
-    // System States
     let isMuted = false;
-    let hasEntered = false; // Audio is safely locked until experience begins
+    let hasEntered = false;
+    let audioCtx = null;
 
-    // Pre-load audio elements cleanly so the browser memory never chokes
-    const clickAudioPlayer = new Audio('./velvet-snap.mp3');
-    clickAudioPlayer.volume = 0.9;
-    clickAudioPlayer.preload = 'auto';
-
+    // Pre-load the working opening file track cleanly
     const openingAudioPlayer = new Audio('./opening.mp3');
     openingAudioPlayer.volume = 0.9;
     openingAudioPlayer.preload = 'auto';
 
-    // Global tactile micro-click handler
+    // Generates a flawless, organic, premium mechanical micro-click using pure frequency waves
     const playSyntheticClick = () => {
-        // Only allow clicking sound if the user is inside and not muted
         if (isMuted || !hasEntered) return;
-        
-        // Instant recoil reset so rapid clicks never drop sound
-        clickAudioPlayer.currentTime = 0; 
-        clickAudioPlayer.play().catch(err => console.log("Audio play blocked:", err));
+
+        // Initialize Web Audio Context if it hasn't started yet
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+
+        const now = audioCtx.currentTime;
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+
+        // High-end acoustic signature tuning
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(160, now); // Crisp tactile strike frequency
+        oscillator.frequency.exponentialRampToValueAtTime(80, now + 0.04); // Deep mechanical drop
+
+        // Volume Envelope (Damped, high-end studio sound)
+        gainNode.gain.setValueAtTime(0.4, now); // Audible, clean volume height
+        gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.04); // Smooth velvet fade
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+
+        oscillator.start(now);
+        oscillator.stop(now + 0.04);
     };
 
     // 3. IMMEDIATE BINDING POOL
-    // Bind listeners immediately on load so the logic never chokes during transition animations
     const interactiveElements = document.querySelectorAll('a, button, input[type="submit"], .menu-toggle');
     interactiveElements.forEach(element => {
-        // Protect the control panels from getting double-triggered
         if (element.id !== 'globalSoundToggle' && element.id !== 'enterStudioBtn' && !element.closest('#globalSoundToggle')) {
             element.addEventListener('click', playSyntheticClick);
         }
@@ -51,15 +67,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. EXPERIENTIAL TRANSITION TRIGGER
     if (enterStudioBtn && entranceCurtain) {
         enterStudioBtn.addEventListener('click', () => {
-            // Unlocks the interactive sound gate safely inside the browser's permitted window
             hasEntered = true;
             
-            // Play the gorgeous 8-second ambient overture
+            // Start browser audio system instantly on user interaction
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
             if (!isMuted) {
                 openingAudioPlayer.play().catch(err => console.log("Audio play blocked:", err));
             }
             
-            // Dissolve loading overlay seamlessly
             entranceCurtain.style.transition = "opacity 1.5s ease, visibility 1.5s";
             entranceCurtain.style.opacity = "0";
             entranceCurtain.style.visibility = "hidden";
