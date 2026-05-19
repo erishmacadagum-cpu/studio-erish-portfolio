@@ -56,26 +56,16 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Synthesizes a premium, velvet-damped mechanical micro-click response
-    const playSyntheticClick = () => {
+   const playSyntheticClick = () => {
         if (isMuted) return;
-        initAudioEngine();
         
-        const now = audioCtx.currentTime;
-        const oscillator = audioCtx.createOscillator();
-        const gainNode = audioCtx.createGain();
+        // Connects directly to your uploaded luxury asset
+        const clickAudio = new Audio('velvet-snap.mp3'); 
         
-        oscillator.type = 'sine'; 
-        oscillator.frequency.setValueAtTime(140, now); 
-        oscillator.frequency.exponentialRampToValueAtTime(70, now + 0.03);
+        // Set at 0.4 so it's beautifully audible, smooth, and not startling
+        clickAudio.volume = 0.4; 
         
-        gainNode.gain.setValueAtTime(0.07, now); 
-        gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.03);
-        
-        oscillator.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-        
-        oscillator.start(now);
-        oscillator.stop(now + 0.03);
+        clickAudio.play().catch(err => console.log("Audio playback blocked:", err));
     };
 
     // Attach click audio signature securely to all interactive parameters
