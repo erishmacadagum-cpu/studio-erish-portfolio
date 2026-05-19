@@ -57,26 +57,26 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isMuted) return;
         initAudioEngine();
         
-        const now = audioCtx.currentTime;
+       const now = audioCtx.currentTime;
         const oscillator = audioCtx.createOscillator();
         const gainNode = audioCtx.createGain();
         
         // Pure, elegant sine wave
         oscillator.type = 'sine'; 
         
-        // Deeper, woodier frequency for a matte, linen feel
-        oscillator.frequency.setValueAtTime(110, now); 
-        oscillator.frequency.exponentialRampToValueAtTime(60, now + 0.02);
+        // Lifted slightly from 110Hz to 140Hz so laptop speakers can physically reproduce it
+        oscillator.frequency.setValueAtTime(140, now); 
+        oscillator.frequency.exponentialRampToValueAtTime(70, now + 0.03);
         
-        // Faint, rapid sensory whisper volume
-        gainNode.gain.setValueAtTime(0.03, now); 
-        gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.02); // Snaps shut fast
+        // Bumped volume from 0.03 to 0.07 so it's beautifully audible but still elegant
+        gainNode.gain.setValueAtTime(0.07, now); 
+        gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.03); // Lasts just a tiny bit longer
         
         oscillator.connect(gainNode);
         gainNode.connect(audioCtx.destination);
         
         oscillator.start(now);
-        oscillator.stop(now + 0.02);
+        oscillator.stop(now + 0.03);
     };
 
     // Trigger Overture and dissolve screen on deliberate button click
