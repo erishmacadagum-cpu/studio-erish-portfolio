@@ -18,6 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let isMuted = false;
     let audioCtx = null;
 
+    // Pre-load the custom audio asset instantly
+    const clickAudio = new Audio('velvet-snap.mp3');
+    clickAudio.volume = 0.5;
+    clickAudio.preload = 'auto';
+
     // Safely initialize the browser's native audio engine
     const initAudioEngine = () => {
         if (!audioCtx) {
@@ -55,21 +60,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Synthesizes a premium, velvet-damped mechanical micro-click response
-   const playSyntheticClick = () => {
+    // Master function to play your velvet snap asset
+    const playSyntheticClick = () => {
         if (isMuted) return;
+        initAudioEngine();
         
-        // Tells Cloudflare to look at the absolute root folder, out of the 'js' folder
-        const clickAudio = new Audio('/velvet-snap.mp3'); 
+        // Reset sound pointer to the beginning so rapid clicks trigger perfectly
+        clickAudio.currentTime = 0;
         
-        // Smooth, audible luxury volume
-        clickAudio.volume = 0.5; 
-        
-        clickAudio.play().catch(err => console.log("Audio playback blocked:", err));
+        // Play trigger with a built-in backup path fallback
+        clickAudio.play().catch(() => {
+            // Backup fallback attempt if root pathing shifts
+            const fallbackAudio = new Audio('/velvet-snap.mp3');
+            fallbackAudio.volume = 0.5;
+            fallbackAudio.play().catch(err => console.log("Audio completely blocked:", err));
+        });
     };
 
     // Attach click audio signature securely to all interactive parameters
-   // Attach click audio signature securely to all interactive parameters
     const attachSensoryClicks = () => {
         const interactiveElements = document.querySelectorAll('a, button, input[type="submit"], .menu-toggle');
         interactiveElements.forEach(element => {
@@ -84,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (enterStudioBtn && entranceCurtain) {
         enterStudioBtn.addEventListener('click', () => {
             playSyntheticOverture();
-            attachSensoryClicks(); // Binds the clicks instantly inside the authorized user action
+            attachSensoryClicks(); // Binds click listeners inside an approved user gesture
             entranceCurtain.classList.add('dissolved');
         });
     }
