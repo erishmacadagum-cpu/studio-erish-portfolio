@@ -15,67 +15,61 @@ document.addEventListener('DOMContentLoaded', () => {
     const enterStudioBtn = document.getElementById('enterStudioBtn');
     const globalSoundToggle = document.getElementById('globalSoundToggle');
 
+    // System States
     let isMuted = false;
-    let hasEntered = false;
-    let audioCtx = null;
+    let hasEntered = false; // Audio is safely locked until experience begins
 
-    // Pre-load the working opening file track cleanly
+    // Pre-load audio elements cleanly so browser memory never chokes
+    const clickAudioPlayer = new Audio('./velvet-snap.mp3');
+    clickAudioPlayer.volume = 0.9;
+    clickAudioPlayer.preload = 'auto';
+
     const openingAudioPlayer = new Audio('./opening.mp3');
     openingAudioPlayer.volume = 0.9;
     openingAudioPlayer.preload = 'auto';
 
-    // Generates a flawless, organic, premium mechanical micro-click using pure frequency waves
+    // Global tactile micro-click handler
     const playSyntheticClick = () => {
+        // Only allow clicking sound if the user is inside and not muted
         if (isMuted || !hasEntered) return;
-
-        // Initialize Web Audio Context if it hasn't started yet
-        if (!audioCtx) {
-            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        }
-        if (audioCtx.state === 'suspended') {
-            audioCtx.resume();
-        }
-
-        const now = audioCtx.currentTime;
-        const oscillator = audioCtx.createOscillator();
-        const gainNode = audioCtx.createGain();
-
-        // High-end acoustic signature tuning
-        oscillator.type = 'sine';
-        oscillator.frequency.setValueAtTime(160, now); // Crisp tactile strike frequency
-        oscillator.frequency.exponentialRampToValueAtTime(80, now + 0.04); // Deep mechanical drop
-
-        // Volume Envelope (Damped, high-end studio sound)
-        gainNode.gain.setValueAtTime(0.4, now); // Audible, clean volume height
-        gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.04); // Smooth velvet fade
-
-        oscillator.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-
-        oscillator.start(now);
-        oscillator.stop(now + 0.04);
+        
+        // Instant recoil reset so rapid clicks never drop sound
+        clickAudioPlayer.currentTime = 0; 
+        clickAudioPlayer.play().catch(err => console.log("Audio play blocked:", err));
     };
 
-    // 3. IMMEDIATE BINDING POOL
-    const interactiveElements = document.querySelectorAll('a, button, input[type="submit"], .menu-toggle');
-    interactiveElements.forEach(element => {
-        if (element.id !== 'globalSoundToggle' && element.id !== 'enterStudioBtn' && !element.closest('#globalSoundToggle')) {
-            element.addEventListener('click', playSyntheticClick);
+    // 3. GLOBAL EVENT DELEGATION POOL
+    // Listens to the entire document dynamically. This guarantees that elements loaded 
+    // behind the curtain are caught perfectly without relying on fragile loops.
+    document.addEventListener('click', (event) => {
+        const target = event.target;
+        
+        // Check if the clicked element (or its parent) matches your target elements
+        const interactiveElement = target.closest('a, button, input[type="submit"], .menu-toggle');
+        
+        if (interactiveElement) {
+            // Bypass exclusions completely (control elements should not trigger the snap click)
+            if (interactiveElement.id !== 'globalSoundToggle' && 
+                interactiveElement.id !== 'enterStudioBtn' && 
+                !interactiveElement.closest('#globalSoundToggle')) {
+                
+                playSyntheticClick();
+            }
         }
     });
 
     // 4. EXPERIENTIAL TRANSITION TRIGGER
     if (enterStudioBtn && entranceCurtain) {
         enterStudioBtn.addEventListener('click', () => {
+            // Unlocks the interactive sound gate safely inside the browser's permitted window
             hasEntered = true;
             
-            // Start browser audio system instantly on user interaction
-            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
+            // Play the gorgeous 8-second ambient overture
             if (!isMuted) {
                 openingAudioPlayer.play().catch(err => console.log("Audio play blocked:", err));
             }
             
+            // Dissolve loading overlay seamlessly
             entranceCurtain.style.transition = "opacity 1.5s ease, visibility 1.5s";
             entranceCurtain.style.opacity = "0";
             entranceCurtain.style.visibility = "hidden";
