@@ -23,6 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!audioCtx) {
             audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         }
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
     };
 
     // Synthesizes a beautiful, warm 6-second Neoclassical Ambient Swell
@@ -57,20 +60,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isMuted) return;
         initAudioEngine();
         
-       const now = audioCtx.currentTime;
+        const now = audioCtx.currentTime;
         const oscillator = audioCtx.createOscillator();
         const gainNode = audioCtx.createGain();
         
-        // Pure, elegant sine wave
         oscillator.type = 'sine'; 
-        
-        // Lifted slightly from 110Hz to 140Hz so laptop speakers can physically reproduce it
         oscillator.frequency.setValueAtTime(140, now); 
         oscillator.frequency.exponentialRampToValueAtTime(70, now + 0.03);
         
-        // Bumped volume from 0.03 to 0.07 so it's beautifully audible but still elegant
         gainNode.gain.setValueAtTime(0.07, now); 
-        gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.03); // Lasts just a tiny bit longer
+        gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.03);
         
         oscillator.connect(gainNode);
         gainNode.connect(audioCtx.destination);
@@ -79,25 +78,26 @@ document.addEventListener('DOMContentLoaded', () => {
         oscillator.stop(now + 0.03);
     };
 
-    // Trigger Overture and dissolve screen on deliberate button click
-    if (enterStudioBtn && entranceCurtain) {
-        enterStudioBtn.addEventListener('click', () => {
-            playSyntheticOverture();
-            entranceCurtain.classList.add('dissolved');
-        });
-    }
-
-    // Attach click audio signature to all interactive parameters
+    // Attach click audio signature securely to all interactive parameters
     const attachSensoryClicks = () => {
         const interactiveElements = document.querySelectorAll('a, button, input[type="submit"], .menu-toggle');
         interactiveElements.forEach(element => {
             if (element.id === 'globalSoundToggle' || element.id === 'enterStudioBtn' || element.closest('#globalSoundToggle')) return;
+            
+            // Remove any old lingering listeners and bind freshly
+            element.removeEventListener('click', playSyntheticClick);
             element.addEventListener('click', playSyntheticClick);
         });
     };
 
-    // Run the sensory mapping safely
-    attachSensoryClicks();
+    // Trigger Overture, activate links, and dissolve screen on deliberate button click
+    if (enterStudioBtn && entranceCurtain) {
+        enterStudioBtn.addEventListener('click', () => {
+            playSyntheticOverture();
+            attachSensoryClicks(); // Binds the clicks instantly inside the authorized user action
+            entranceCurtain.classList.add('dissolved');
+        });
+    }
 
     // Master Audio Dock Toggle Control
     if (globalSoundToggle) {
@@ -111,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 globalSoundToggle.classList.remove('muted');
                 globalSoundToggle.querySelector('.sonic-status-label').textContent = "SOUND ON";
+                initAudioEngine();
                 playSyntheticClick();
             }
         });
