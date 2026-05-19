@@ -69,12 +69,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Attach click audio signature securely to all interactive parameters
+   // Attach click audio signature securely to all interactive parameters
     const attachSensoryClicks = () => {
         const interactiveElements = document.querySelectorAll('a, button, input[type="submit"], .menu-toggle');
         interactiveElements.forEach(element => {
             if (element.id === 'globalSoundToggle' || element.id === 'enterStudioBtn' || element.closest('#globalSoundToggle')) return;
             
-            // Remove any old lingering listeners and bind freshly
             element.removeEventListener('click', playSyntheticClick);
             element.addEventListener('click', playSyntheticClick);
         });
