@@ -18,5 +18,100 @@ document.addEventListener('DOMContentLoaded', () => {
     let isMuted = false;
     let audioCtx = null;
 
-    // Your exact 'velvet-snap' audio file embedded directly into the code as a secure Data string
-    const EMBEDDED_SNAP_DATA = "data:audio/mp3;base64,//uQZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWGluYWwAAAA8AAAABbAACVwGAdBwsPEBITfxgZGvwdHyAjJCCoKsStLi8wMTM3ODk6PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6e3x9fn+AgYKDhIWGh4iJiouMjY6PkJGSk5SVlpeYmZqbnJ2en6ChoqOkpaanqKmqq6ytrq+wsbKztLW2t7i5uru8vb6/wMHCw8TFxsfIycrLzM3Oz9DR0tPU1dbX2Nna29zd3t/g4eLj5OXm5+jp6uvs7e7v8PHy8/T19vf4+fr7/P3+/wABAgMEBQYHCAkKCwwNDg8QERITFBUWFxgZGhscHR4fICEiIyQlJicmKyorLC0uLzAxMjM0NTY3ODk6Ozw9Pj9AQUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVpbXF1eX1BShYWGh4iJiouMjY6PkJGSk5SVlpeYmZqbnJ2en6ChoqOkpaanqKmqq6ytrq+wsbKztLW2t7i5uru8vb6/wMHCw8TFxsfIycrLzM3Oz9DR0tPU1dbX2Nna29zd3t/g4eLj5OXm5+jp6uvs7e7v8PHy8/T19vf4+fr7/P3+/wABAgMEBQYHCAkKCwwNDg8QERITFBUWFxgZGhscHR4fICEiIyQlJicmKyorLC0uLzAxMjM0NTY3ODk6Ozw9Pj9AQUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVpbXF1eX1BShf/vUMAcAAAAbgDwAIAAAA3gHgAgAAA/84fW83gXgXgC8AXgC8Af/9B5p//+Yv//gA0Gv/+Yv/6AgA///mNf8AIAf/8zGv/8BAf/8xoEAAgIBAAEP/+Y1/wEID/+YwIEAAgEB//zGgQEP/+ZgQEf//zBAQP/+YAgP/+ZgCB///zAEH//+YAgf//8zBBA///MQQ///8wBA///8wQQP//8xBD///zAgD///MCD////MCD///zAgP//+YID///mCA///5ggP//+YED///mBA///5gQP/+YED//mBA/5gQP+YEDmBA5gQOYEDmBA5gQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDgQOBA4EDg
+    // Rebuilt, safely clamped audio data string
+    const EMBEDDED_SNAP_DATA = "data:audio/mp3;base64,//uQZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABWGluyWAAAA8AAAAbBaABbAACvwgADBwsPEBITfxgZHwdHyAjJCcoKSstLi8wMTM0NTY3ODk6Ozs8PT4/QEFCQ0RFRkdISUpLTE1OT1BRUlNUVVZXWFlaW1xdXl9gYWJjYEdIR0hHSMdIx0g=";
+
+    const initAudioEngine = () => {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+    };
+
+    // Synthesizes a premium, velvet-damped mechanical micro-click response
+    const playSyntheticClick = () => {
+        if (isMuted) return;
+        initAudioEngine();
+
+        const now = audioCtx.currentTime;
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(140, now);
+        oscillator.frequency.exponentialRampToValueAtTime(70, now + 0.03);
+
+        gainNode.gain.setValueAtTime(0.07, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.03);
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+
+        oscillator.start(now);
+        oscillator.stop(now + 0.03);
+    };
+
+    // Synthesizes a deep premium atmospheric overture string response
+    const playSyntheticOverture = () => {
+        initAudioEngine();
+
+        const now = audioCtx.currentTime;
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(110, now);
+        oscillator.frequency.exponentialRampToValueAtTime(60, now + 0.02);
+
+        gainNode.gain.setValueAtTime(0.03, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.02);
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+
+        oscillator.start(now);
+        oscillator.stop(now + 0.02);
+    };
+
+    // Attach click audio signature securely to all interactive parameters
+    const attachSensoryClicks = () => {
+        const interactiveElements = document.querySelectorAll('a, button, input[type="submit"], .menu-toggle');
+        
+        interactiveElements.forEach(element => {
+            // Corrected conditional wrapper to bypass exclusion elements perfectly
+            if (element.id !== 'globalSoundToggle' && 
+                element.id !== 'enterStudioBtn' && 
+                !element.closest('#globalSoundToggle')) {
+                
+                element.removeEventListener('click', playSyntheticClick);
+                element.addEventListener('click', playSyntheticClick);
+            }
+        });
+    };
+
+    // Trigger Overture, activate links, and dissolve screen on deliberate button click
+    if (enterStudioBtn && entranceCurtain) {
+        enterStudioBtn.addEventListener('click', () => {
+            playSyntheticOverture();
+            
+            // Re-bind click events smoothly inside authorized user gesture window
+            attachSensoryClicks();
+            
+            // Dissolve loading overlay
+            entranceCurtain.style.transition = "opacity 0.8s ease, visibility 0.8s";
+            entranceCurtain.style.opacity = "0";
+            entranceCurtain.style.visibility = "hidden";
+        });
+    }
+
+    // Global volume toggle intercept handler
+    if (globalSoundToggle) {
+        globalSoundToggle.addEventListener('click', () => {
+            isMuted = !isMuted;
+            globalSoundToggle.classList.toggle('muted', isMuted);
+            globalSoundToggle.setAttribute('aria-label', isMuted ? 'Unmute environmental audio' : 'Mute environmental audio');
+        });
+    }
+});
