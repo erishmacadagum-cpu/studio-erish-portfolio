@@ -15,62 +15,58 @@ document.addEventListener('DOMContentLoaded', () => {
     const enterStudioBtn = document.getElementById('enterStudioBtn');
     const globalSoundToggle = document.getElementById('globalSoundToggle');
 
+    // System States
     let isMuted = false;
+    let hasEntered = false; // Audio is safely locked until experience begins
 
-    // PRE-LOAD THE AUDIO ASSETS ONCE (This stops the browser from blocking them)
+    // Pre-load audio elements cleanly so the browser memory never chokes
     const clickAudioPlayer = new Audio('./velvet-snap.mp3');
-    clickAudioPlayer.volume = 0.9; // Maximize crispness
+    clickAudioPlayer.volume = 0.9;
     clickAudioPlayer.preload = 'auto';
 
     const openingAudioPlayer = new Audio('./opening.mp3');
     openingAudioPlayer.volume = 0.9;
     openingAudioPlayer.preload = 'auto';
 
-    // Tactile micro-click response using the pre-loaded player
+    // Global tactile micro-click handler
     const playSyntheticClick = () => {
-        if (isMuted) return;
+        // Only allow clicking sound if the user is inside and not muted
+        if (isMuted || !hasEntered) return;
         
-        // Reset sound to start instantly even if clicked repeatedly
+        // Instant recoil reset so rapid clicks never drop sound
         clickAudioPlayer.currentTime = 0; 
-        clickAudioPlayer.play().catch(err => console.log("Audio playback blocked:", err));
+        clickAudioPlayer.play().catch(err => console.log("Audio play blocked:", err));
     };
 
-    // Grand cinematic opening audio track using the pre-loaded player
-    const playCinematicOverture = () => {
-        if (isMuted) return;
-        openingAudioPlayer.play().catch(err => console.log("Audio playback blocked:", err));
-    };
+    // 3. IMMEDIATE BINDING POOL
+    // Bind listeners immediately on load so the logic never chokes during transition animations
+    const interactiveElements = document.querySelectorAll('a, button, input[type="submit"], .menu-toggle');
+    interactiveElements.forEach(element => {
+        // Protect the control panels from getting double-triggered
+        if (element.id !== 'globalSoundToggle' && element.id !== 'enterStudioBtn' && !element.closest('#globalSoundToggle')) {
+            element.addEventListener('click', playSyntheticClick);
+        }
+    });
 
-    // Attach click audio signature securely to all interactive parameters
-    const attachSensoryClicks = () => {
-        const interactiveElements = document.querySelectorAll('a, button, input[type="submit"], .menu-toggle');
-        
-        interactiveElements.forEach(element => {
-            if (element.id !== 'globalSoundToggle' && 
-                element.id !== 'enterStudioBtn' && 
-                !element.closest('#globalSoundToggle')) {
-                
-                element.removeEventListener('click', playSyntheticClick);
-                element.addEventListener('click', playSyntheticClick);
-            }
-        });
-    };
-
-    // Trigger Overture, activate links, and dissolve screen on deliberate button click
+    // 4. EXPERIENTIAL TRANSITION TRIGGER
     if (enterStudioBtn && entranceCurtain) {
         enterStudioBtn.addEventListener('click', () => {
-            playCinematicOverture();
+            // Unlocks the interactive sound gate safely inside the browser's permitted window
+            hasEntered = true;
             
-            // Activate the click sounds instantly when entering
-            attachSensoryClicks();
+            // Play the gorgeous 8-second ambient overture
+            if (!isMuted) {
+                openingAudioPlayer.play().catch(err => console.log("Audio play blocked:", err));
+            }
             
+            // Dissolve loading overlay seamlessly
             entranceCurtain.style.transition = "opacity 1.5s ease, visibility 1.5s";
             entranceCurtain.style.opacity = "0";
             entranceCurtain.style.visibility = "hidden";
         });
     }
 
-    // Global volume toggle intercept handler
+    // 5. GLOBAL MUTE CONTROL
     if (globalSoundToggle) {
         globalSoundToggle.addEventListener('click', () => {
             isMuted = !isMuted;
