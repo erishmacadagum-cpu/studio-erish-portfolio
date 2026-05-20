@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let isMuted = false;
     let hasEntered = false;
+    let audioCtx = null;
 
     // Pre-loading audio players cleanly
     const clickAudioPlayer = new Audio('./velvet-snap.mp3');
@@ -27,23 +28,50 @@ document.addEventListener('DOMContentLoaded', () => {
     openingAudioPlayer.volume = 0.9;
     openingAudioPlayer.preload = 'auto';
 
-    // Global tactile micro-click handler with a desktop navigation safety hold
+    // Desktop Studio Trick: Keeps the hardware sound card awake so short snaps aren't cut off
+    const startSilentHardwareCarrier = () => {
+        try {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            
+            // Create a continuous wave set to 0 volume (completely silent)
+            const silentOsc = audioCtx.createOscillator();
+            const silentGain = audioCtx.createGain();
+            
+            silentOsc.type = 'sine';
+            silentOsc.frequency.setValueAtTime(440, audioCtx.currentTime);
+            silentGain.gain.setValueAtTime(0.0001, audioCtx.currentTime); // Inaudible to human ears
+            
+            silentOsc.connect(silentGain);
+            silentGain.connect(audioCtx.destination);
+            
+            silentOsc.start();
+            console.log("🔊 Desktop Audio Hardware Carrier activated successfully.");
+        } catch (e) {
+            console.log("AudioContext not supported or blocked:", e);
+        }
+    };
+
+    // Global tactile micro-click handler with desktop navigation safety hold
     const playSyntheticClick = (event, interactiveElement) => {
         if (isMuted || !hasEntered) return;
         
+        // Force wake the Audio Context if desktop suspended it
+        if (audioCtx && audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+
         clickAudioPlayer.currentTime = 0; 
         clickAudioPlayer.play().catch(err => console.log("Audio play blocked:", err));
 
-        // DESKTOP SAFEGUARD: If it's a standard linking anchor tag, pause action briefly for the sound to play
+        // DESKTOP SAFEGUARD: Pause action briefly for the sound wave to clear the hardware gate
         if (interactiveElement.tagName === 'A' && interactiveElement.getAttribute('href')) {
             const href = interactiveElement.getAttribute('href');
             
-            // Only delay if it's an external link or smooth-scrolling link
             if (href !== '#' && !href.startsWith('javascript:')) {
-                event.preventDefault(); // Pause the instant browser jump
+                event.preventDefault();
                 
                 setTimeout(() => {
-                    window.location.href = href; // Execute link after 150ms snap window
+                    window.location.href = href;
                 }, 150);
             }
         }
@@ -69,6 +97,9 @@ document.addEventListener('DOMContentLoaded', () => {
         enterStudioBtn.addEventListener('click', () => {
             hasEntered = true;
             
+            // Wake up desktop audio drivers instantly on the first click
+            startSilentHardwareCarrier();
+            
             clickAudioPlayer.load(); 
             openingAudioPlayer.load();
 
@@ -86,6 +117,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (globalSoundToggle) {
         globalSoundToggle.addEventListener('click', () => {
             isMuted = !isMuted;
+            
+            // If user mutes, suspend the carrier to save computing power
+            if (isMuted && audioCtx) {
+                audioCtx.suspend();
+            } else if (!isMuted && audioCtx) {
+                audioCtx.resume();
+            }
+
             globalSoundToggle.classList.toggle('muted', isMuted);
             globalSoundToggle.setAttribute('aria-label', isMuted ? 'Unmute environmental audio' : 'Mute environmental audio');
         });
