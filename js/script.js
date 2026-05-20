@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let isMuted = false;
     let hasEntered = false;
 
-    // Pre-loading audio players
+    // Pre-loading audio players cleanly
     const clickAudioPlayer = new Audio('./velvet-snap.mp3');
     clickAudioPlayer.volume = 0.9;
     clickAudioPlayer.preload = 'auto';
@@ -27,25 +27,26 @@ document.addEventListener('DOMContentLoaded', () => {
     openingAudioPlayer.volume = 0.9;
     openingAudioPlayer.preload = 'auto';
 
-    // Global tactile micro-click handler with strict diagnostic reporting
-    const playSyntheticClick = () => {
-        if (isMuted) {
-            console.log("🔊 Click blocked: Site is muted.");
-            return;
-        }
-        if (!hasEntered) {
-            console.log("🔊 Click blocked: User has not cleared the entrance curtain yet.");
-            return;
-        }
+    // Global tactile micro-click handler with a desktop navigation safety hold
+    const playSyntheticClick = (event, interactiveElement) => {
+        if (isMuted || !hasEntered) return;
         
         clickAudioPlayer.currentTime = 0; 
-        
-        clickAudioPlayer.play()
-            .then(() => console.log("✅ SUCCESS: velvet-snap.mp3 played perfectly!"))
-            .catch(err => {
-                console.error("❌ ERROR playing velvet-snap.mp3:", err.name, "-", err.message);
-                console.log("💡 Tip: Check if the file is inside a folder, or if the name is spelled exactly correctly.");
-            });
+        clickAudioPlayer.play().catch(err => console.log("Audio play blocked:", err));
+
+        // DESKTOP SAFEGUARD: If it's a standard linking anchor tag, pause action briefly for the sound to play
+        if (interactiveElement.tagName === 'A' && interactiveElement.getAttribute('href')) {
+            const href = interactiveElement.getAttribute('href');
+            
+            // Only delay if it's an external link or smooth-scrolling link
+            if (href !== '#' && !href.startsWith('javascript:')) {
+                event.preventDefault(); // Pause the instant browser jump
+                
+                setTimeout(() => {
+                    window.location.href = href; // Execute link after 150ms snap window
+                }, 150);
+            }
+        }
     };
 
     // 3. GLOBAL EVENT DELEGATION POOL
@@ -58,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 interactiveElement.id !== 'enterStudioBtn' && 
                 !interactiveElement.closest('#globalSoundToggle')) {
                 
-                playSyntheticClick();
+                playSyntheticClick(event, interactiveElement);
             }
         }
     });
@@ -68,14 +69,11 @@ document.addEventListener('DOMContentLoaded', () => {
         enterStudioBtn.addEventListener('click', () => {
             hasEntered = true;
             
-            // Explicitly force-wake both audio elements using the primary click gesture
             clickAudioPlayer.load(); 
             openingAudioPlayer.load();
 
             if (!isMuted) {
-                openingAudioPlayer.play()
-                    .then(() => console.log("✅ SUCCESS: opening.mp3 started playing."))
-                    .catch(err => console.error("❌ ERROR playing opening.mp3:", err));
+                openingAudioPlayer.play().catch(err => console.error("Audio play blocked:", err));
             }
             
             entranceCurtain.style.transition = "opacity 1.5s ease, visibility 1.5s";
