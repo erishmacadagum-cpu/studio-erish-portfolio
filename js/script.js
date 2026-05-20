@@ -18,36 +18,45 @@ document.addEventListener('DOMContentLoaded', () => {
     let isMuted = false;
     let hasEntered = false;
     let audioCtx = null;
+    let gainNode = null;
+    let audioSource = null;
 
     // Pre-loading audio players cleanly
     const clickAudioPlayer = new Audio('./velvet-snap.mp3');
-    clickAudioPlayer.volume = 0.9;
     clickAudioPlayer.preload = 'auto';
 
     const openingAudioPlayer = new Audio('./opening.mp3');
     openingAudioPlayer.volume = 0.9;
     openingAudioPlayer.preload = 'auto';
 
-    // Desktop Studio Trick: Keeps the hardware sound card awake so short snaps aren't cut off
-    const startSilentHardwareCarrier = () => {
+    // Desktop Studio Engine: Connects the click file to a powerful volume booster
+    const initializeAudioEngine = () => {
         try {
             audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             
-            // Create a continuous wave set to 0 volume (completely silent)
+            // Create a Gain Node to manually overdrive the volume wave
+            gainNode = audioCtx.createGain();
+            gainNode.gain.setValueAtTime(2.5, audioCtx.currentTime); // 🚀 OVERDRIVE: Boosts volume to 250%
+
+            // Hook the click audio element into our amplifier
+            audioSource = audioCtx.createMediaElementSource(clickAudioPlayer);
+            audioSource.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+
+            // Create a background silent carrier to keep the desktop channel open
             const silentOsc = audioCtx.createOscillator();
             const silentGain = audioCtx.createGain();
-            
             silentOsc.type = 'sine';
             silentOsc.frequency.setValueAtTime(440, audioCtx.currentTime);
-            silentGain.gain.setValueAtTime(0.0001, audioCtx.currentTime); // Inaudible to human ears
+            silentGain.gain.setValueAtTime(0.0001, audioCtx.currentTime); 
             
             silentOsc.connect(silentGain);
             silentGain.connect(audioCtx.destination);
-            
             silentOsc.start();
-            console.log("🔊 Desktop Audio Hardware Carrier activated successfully.");
+            
+            console.log("🔊 Web Audio Engine with 250% Volume Overdrive activated.");
         } catch (e) {
-            console.log("AudioContext not supported or blocked:", e);
+            console.log("Audio Engine setup skipped or handled:", e);
         }
     };
 
@@ -55,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const playSyntheticClick = (event, interactiveElement) => {
         if (isMuted || !hasEntered) return;
         
-        // Force wake the Audio Context if desktop suspended it
         if (audioCtx && audioCtx.state === 'suspended') {
             audioCtx.resume();
         }
@@ -63,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         clickAudioPlayer.currentTime = 0; 
         clickAudioPlayer.play().catch(err => console.log("Audio play blocked:", err));
 
-        // DESKTOP SAFEGUARD: Pause action briefly for the sound wave to clear the hardware gate
+        // DESKTOP SAFEGUARD: Pause action briefly for the heavy sound wave to clear the hardware gate
         if (interactiveElement.tagName === 'A' && interactiveElement.getAttribute('href')) {
             const href = interactiveElement.getAttribute('href');
             
@@ -97,8 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
         enterStudioBtn.addEventListener('click', () => {
             hasEntered = true;
             
-            // Wake up desktop audio drivers instantly on the first click
-            startSilentHardwareCarrier();
+            // Fire up the overdrive amplifier immediately
+            initializeAudioEngine();
             
             clickAudioPlayer.load(); 
             openingAudioPlayer.load();
@@ -118,11 +126,12 @@ document.addEventListener('DOMContentLoaded', () => {
         globalSoundToggle.addEventListener('click', () => {
             isMuted = !isMuted;
             
-            // If user mutes, suspend the carrier to save computing power
-            if (isMuted && audioCtx) {
-                audioCtx.suspend();
-            } else if (!isMuted && audioCtx) {
-                audioCtx.resume();
+            if (audioCtx) {
+                if (isMuted) {
+                    audioCtx.suspend();
+                } else {
+                    audioCtx.resume();
+                }
             }
 
             globalSoundToggle.classList.toggle('muted', isMuted);
