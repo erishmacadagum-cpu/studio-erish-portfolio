@@ -19,16 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let hasEntered = false;
     let audioCtx = null;
 
-    // Keep your beautiful opening music track exactly as it is
     const openingAudioPlayer = new Audio('./opening.mp3');
     openingAudioPlayer.volume = 0.9;
     openingAudioPlayer.preload = 'auto';
 
-    // Generates a flawless luxury mechanical click using pure frequencies (Unblockable on Desktop)
+    // Generates the mechanical click and forces the engine awake on every single trigger
     const playSyntheticClick = () => {
         if (isMuted || !hasEntered) return;
 
-        // Initialize Web Audio Context if it hasn't started yet
+        // Force create or resume the audio context instantly on every single click
         if (!audioCtx) {
             audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         }
@@ -40,14 +39,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const oscillator = audioCtx.createOscillator();
         const gainNode = audioCtx.createGain();
 
-        // Premium acoustic tuning: High-end crisp tactile strike
         oscillator.type = 'sine';
         oscillator.frequency.setValueAtTime(150, now); 
         oscillator.frequency.exponentialRampToValueAtTime(70, now + 0.03); 
 
-        // Volume Envelope: Crisp, dampened, organic studio click sound
-        gainNode.gain.setValueAtTime(0.6, now); // Strong, audible volume spike
-        gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.03); // Quick velvet fade
+        gainNode.gain.setValueAtTime(0.6, now); 
+        gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.03); 
 
         oscillator.connect(gainNode);
         gainNode.connect(audioCtx.destination);
@@ -75,8 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (enterStudioBtn && entranceCurtain) {
         enterStudioBtn.addEventListener('click', () => {
             hasEntered = true;
-            
-            // Wake up browser audio systems instantly on interaction
             audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
             if (!isMuted) {
@@ -93,17 +88,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (globalSoundToggle) {
         globalSoundToggle.addEventListener('click', () => {
             isMuted = !isMuted;
-            
             if (audioCtx) {
-                if (isMuted) {
-                    audioCtx.suspend();
-                } else {
-                    audioCtx.resume();
-                }
+                if (isMuted) audioCtx.suspend();
+                else audioCtx.resume();
             }
-
             globalSoundToggle.classList.toggle('muted', isMuted);
-            globalSoundToggle.setAttribute('aria-label', isMuted ? 'Unmute environmental audio' : 'Mute environmental audio');
         });
     }
 });
