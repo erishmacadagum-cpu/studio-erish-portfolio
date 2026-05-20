@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     openingAudioPlayer.preload = 'auto';
 
     // Generates the mechanical click and forces the engine awake on every single trigger
-    const playSyntheticClick = () => {
+    const playSyntheticClick = (event, interactiveElement) => {
         if (isMuted || !hasEntered) return;
 
         // Force create or resume the audio context instantly on every single click
@@ -51,6 +51,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         oscillator.start(now);
         oscillator.stop(now + 0.03);
+
+        // DESKTOP SAFEGUARD: Pause action briefly for the synthesizer wave to complete before navigating away
+        if (interactiveElement.tagName === 'A' && interactiveElement.getAttribute('href')) {
+            const href = interactiveElement.getAttribute('href');
+            
+            if (href !== '#' && !href.startsWith('javascript:') && !href.startsWith('#')) {
+                event.preventDefault(); // Stop the instant jump
+                
+                setTimeout(() => {
+                    window.location.href = href; // Move to the link after 100ms click window
+                }, 100);
+            }
+        }
     };
 
     // 3. GLOBAL EVENT DELEGATION POOL
@@ -63,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 interactiveElement.id !== 'enterStudioBtn' && 
                 !interactiveElement.closest('#globalSoundToggle')) {
                 
-                playSyntheticClick();
+                playSyntheticClick(event, interactiveElement);
             }
         }
     });
