@@ -18,71 +18,42 @@ document.addEventListener('DOMContentLoaded', () => {
     let isMuted = false;
     let hasEntered = false;
     let audioCtx = null;
-    let gainNode = null;
-    let audioSource = null;
 
-    // Pre-loading audio players cleanly
-    const clickAudioPlayer = new Audio('./velvet-snap.mp3');
-    clickAudioPlayer.preload = 'auto';
-
+    // Keep your beautiful opening music track exactly as it is
     const openingAudioPlayer = new Audio('./opening.mp3');
     openingAudioPlayer.volume = 0.9;
     openingAudioPlayer.preload = 'auto';
 
-    // Desktop Studio Engine: Connects the click file to a powerful volume booster
-    const initializeAudioEngine = () => {
-        try {
-            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            
-            // Create a Gain Node to manually overdrive the volume wave
-            gainNode = audioCtx.createGain();
-            gainNode.gain.setValueAtTime(2.5, audioCtx.currentTime); // 🚀 OVERDRIVE: Boosts volume to 250%
-
-            // Hook the click audio element into our amplifier
-            audioSource = audioCtx.createMediaElementSource(clickAudioPlayer);
-            audioSource.connect(gainNode);
-            gainNode.connect(audioCtx.destination);
-
-            // Create a background silent carrier to keep the desktop channel open
-            const silentOsc = audioCtx.createOscillator();
-            const silentGain = audioCtx.createGain();
-            silentOsc.type = 'sine';
-            silentOsc.frequency.setValueAtTime(440, audioCtx.currentTime);
-            silentGain.gain.setValueAtTime(0.0001, audioCtx.currentTime); 
-            
-            silentOsc.connect(silentGain);
-            silentGain.connect(audioCtx.destination);
-            silentOsc.start();
-            
-            console.log("🔊 Web Audio Engine with 250% Volume Overdrive activated.");
-        } catch (e) {
-            console.log("Audio Engine setup skipped or handled:", e);
-        }
-    };
-
-    // Global tactile micro-click handler with desktop navigation safety hold
-    const playSyntheticClick = (event, interactiveElement) => {
+    // Generates a flawless luxury mechanical click using pure frequencies (Unblockable on Desktop)
+    const playSyntheticClick = () => {
         if (isMuted || !hasEntered) return;
-        
-        if (audioCtx && audioCtx.state === 'suspended') {
+
+        // Initialize Web Audio Context if it hasn't started yet
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
             audioCtx.resume();
         }
 
-        clickAudioPlayer.currentTime = 0; 
-        clickAudioPlayer.play().catch(err => console.log("Audio play blocked:", err));
+        const now = audioCtx.currentTime;
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
 
-        // DESKTOP SAFEGUARD: Pause action briefly for the heavy sound wave to clear the hardware gate
-        if (interactiveElement.tagName === 'A' && interactiveElement.getAttribute('href')) {
-            const href = interactiveElement.getAttribute('href');
-            
-            if (href !== '#' && !href.startsWith('javascript:')) {
-                event.preventDefault();
-                
-                setTimeout(() => {
-                    window.location.href = href;
-                }, 150);
-            }
-        }
+        // Premium acoustic tuning: High-end crisp tactile strike
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(150, now); 
+        oscillator.frequency.exponentialRampToValueAtTime(70, now + 0.03); 
+
+        // Volume Envelope: Crisp, dampened, organic studio click sound
+        gainNode.gain.setValueAtTime(0.6, now); // Strong, audible volume spike
+        gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.03); // Quick velvet fade
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+
+        oscillator.start(now);
+        oscillator.stop(now + 0.03);
     };
 
     // 3. GLOBAL EVENT DELEGATION POOL
@@ -95,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 interactiveElement.id !== 'enterStudioBtn' && 
                 !interactiveElement.closest('#globalSoundToggle')) {
                 
-                playSyntheticClick(event, interactiveElement);
+                playSyntheticClick();
             }
         }
     });
@@ -105,11 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
         enterStudioBtn.addEventListener('click', () => {
             hasEntered = true;
             
-            // Fire up the overdrive amplifier immediately
-            initializeAudioEngine();
-            
-            clickAudioPlayer.load(); 
-            openingAudioPlayer.load();
+            // Wake up browser audio systems instantly on interaction
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
             if (!isMuted) {
                 openingAudioPlayer.play().catch(err => console.error("Audio play blocked:", err));
