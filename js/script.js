@@ -1,37 +1,46 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // 1. Create a completely invisible background audio element
+// Ensure the audio engine only runs after the page completely loads
+window.addEventListener("load", function () {
+    // Check if the audio element already exists to prevent duplicate stacking
     let audio = document.getElementById("bg-audio");
     
     if (!audio) {
         audio = document.createElement("audio");
         audio.id = "bg-audio";
-        audio.src = "velvet-snap.mp3"; // Smooth background audio track
+        audio.src = "velvet-snap.mp3"; 
         audio.loop = true;
-        audio.style.display = "none"; // Keeps it 100% invisible
+        audio.style.display = "none"; 
         document.body.appendChild(audio);
     }
 
-    // 2. Track audio timestamps in local memory for continuous playback across pages
-    if (localStorage.getItem("audioTime")) {
-        audio.currentTime = parseFloat(localStorage.getItem("audioTime"));
+    // Safely retrieve the exact timestamp from the previous page
+    const savedTime = localStorage.getItem("audioTime");
+    if (savedTime) {
+        audio.currentTime = parseFloat(savedTime);
     }
 
+    // Check if it was already playing before the user clicked a new link
     if (localStorage.getItem("audioPlaying") === "true") {
-        audio.play().catch(err => console.log("Audio waiting for user click to resume seamlessly."));
+        audio.play().catch(() => {
+            // If the browser blocks auto-play, wait for a single safe click anywhere
+            document.addEventListener("click", function startAudio() {
+                audio.play();
+                document.removeEventListener("click", startAudio);
+            });
+        });
     }
 
-    // Save playback position constantly right before switching pages
+    // CRITICAL: Save the exact timestamp ONLY when the user clicks a link to leave the page
     window.addEventListener("beforeunload", function () {
         localStorage.setItem("audioTime", audio.currentTime);
         localStorage.setItem("audioPlaying", !audio.paused);
     });
 
-    // 3. Clean, layout-safe interaction trigger
-    // Instead of rendering an ugly button, audio activates gracefully when a user clicks anywhere on your luxury experience
-    document.addEventListener("click", function () {
+    // Fallback click trigger for the very first visit
+    document.addEventListener("click", function firstPlay() {
         if (audio.paused) {
             audio.play();
             localStorage.setItem("audioPlaying", "true");
         }
-    }, { once: true }); // Triggers only once per page visit so it never interferes with navigation
+        document.removeEventListener("click", firstPlay);
+    }, { once: true });
 });
