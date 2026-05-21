@@ -1,111 +1,37 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. MOBILE NAVIGATION MENU LOGIC
-    const menuToggle = document.querySelector('.menu-toggle');
-    const mainNav = document.querySelector('.main-nav');
-
-    if (menuToggle && mainNav) {
-        menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('active');
-            mainNav.classList.toggle('open');
-        });
+document.addEventListener("DOMContentLoaded", function () {
+    // 1. Create a completely invisible background audio element
+    let audio = document.getElementById("bg-audio");
+    
+    if (!audio) {
+        audio = document.createElement("audio");
+        audio.id = "bg-audio";
+        audio.src = "velvet-snap.mp3"; // Smooth background audio track
+        audio.loop = true;
+        audio.style.display = "none"; // Keeps it 100% invisible
+        document.body.appendChild(audio);
     }
 
-    // 2. LUXURY SENSORY AUDIO ENGINE
-    const entranceCurtain = document.getElementById('entranceCurtain');
-    const enterStudioBtn = document.getElementById('enterStudioBtn');
-    const globalSoundToggle = document.getElementById('globalSoundToggle');
+    // 2. Track audio timestamps in local memory for continuous playback across pages
+    if (localStorage.getItem("audioTime")) {
+        audio.currentTime = parseFloat(localStorage.getItem("audioTime"));
+    }
 
-    let isMuted = false;
-    let hasEntered = false;
-    let audioCtx = null;
+    if (localStorage.getItem("audioPlaying") === "true") {
+        audio.play().catch(err => console.log("Audio waiting for user click to resume seamlessly."));
+    }
 
-    const openingAudioPlayer = new Audio('./opening.mp3');
-    openingAudioPlayer.volume = 0.9;
-    openingAudioPlayer.preload = 'auto';
-
-    // Generates the mechanical click and forces the engine awake on every single trigger
-    const playSyntheticClick = (event, interactiveElement) => {
-        if (isMuted || !hasEntered) return;
-
-        // Force create or resume the audio context instantly on every single click
-        if (!audioCtx) {
-            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        }
-        if (audioCtx.state === 'suspended') {
-            audioCtx.resume();
-        }
-
-        const now = audioCtx.currentTime;
-        const oscillator = audioCtx.createOscillator();
-        const gainNode = audioCtx.createGain();
-
-        oscillator.type = 'sine';
-        oscillator.frequency.setValueAtTime(150, now); 
-        oscillator.frequency.exponentialRampToValueAtTime(70, now + 0.03); 
-
-        gainNode.gain.setValueAtTime(0.6, now); 
-        gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.03); 
-
-        oscillator.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-
-        oscillator.start(now);
-        oscillator.stop(now + 0.03);
-
-        // DESKTOP SAFEGUARD: Pause action briefly for the synthesizer wave to complete before navigating away
-        if (interactiveElement.tagName === 'A' && interactiveElement.getAttribute('href')) {
-            const href = interactiveElement.getAttribute('href');
-            
-            if (href !== '#' && !href.startsWith('javascript:') && !href.startsWith('#')) {
-                event.preventDefault(); // Stop the instant jump
-                
-                setTimeout(() => {
-                    window.location.href = href; // Move to the link after 100ms click window
-                }, 100);
-            }
-        }
-    };
-
-    // 3. GLOBAL EVENT DELEGATION POOL
-    document.addEventListener('click', (event) => {
-        const target = event.target;
-        const interactiveElement = target.closest('a, button, input[type="submit"], .menu-toggle');
-        
-        if (interactiveElement) {
-            if (interactiveElement.id !== 'globalSoundToggle' && 
-                interactiveElement.id !== 'enterStudioBtn' && 
-                !interactiveElement.closest('#globalSoundToggle')) {
-                
-                playSyntheticClick(event, interactiveElement);
-            }
-        }
+    // Save playback position constantly right before switching pages
+    window.addEventListener("beforeunload", function () {
+        localStorage.setItem("audioTime", audio.currentTime);
+        localStorage.setItem("audioPlaying", !audio.paused);
     });
 
-    // 4. EXPERIENTIAL TRANSITION TRIGGER
-    if (enterStudioBtn && entranceCurtain) {
-        enterStudioBtn.addEventListener('click', () => {
-            hasEntered = true;
-            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-            if (!isMuted) {
-                openingAudioPlayer.play().catch(err => console.error("Audio play blocked:", err));
-            }
-            
-            entranceCurtain.style.transition = "opacity 1.5s ease, visibility 1.5s";
-            entranceCurtain.style.opacity = "0";
-            entranceCurtain.style.visibility = "hidden";
-        });
-    }
-
-    // 5. GLOBAL MUTE CONTROL
-    if (globalSoundToggle) {
-        globalSoundToggle.addEventListener('click', () => {
-            isMuted = !isMuted;
-            if (audioCtx) {
-                if (isMuted) audioCtx.suspend();
-                else audioCtx.resume();
-            }
-            globalSoundToggle.classList.toggle('muted', isMuted);
-        });
-    }
+    // 3. Clean, layout-safe interaction trigger
+    // Instead of rendering an ugly button, audio activates gracefully when a user clicks anywhere on your luxury experience
+    document.addEventListener("click", function () {
+        if (audio.paused) {
+            audio.play();
+            localStorage.setItem("audioPlaying", "true");
+        }
+    }, { once: true }); // Triggers only once per page visit so it never interferes with navigation
 });
