@@ -69,18 +69,45 @@
         <p>&copy; 2026 Studio Erish. All Rights Reserved.</p>
     </footer>
 
-    <script src="/js/script.js"></script>
-<div class="sonic-control-dock">
-        <button id="globalSoundToggle" class="sonic-toggle-btn" aria-label="Toggle Studio Audio">
-            <span class="sonic-status-label">SOUND ON</span>
-            <div class="sonic-icon-bars">
-                <span></span><span></span><span></span>
-            </div>
-        </button>
-    </div>
+   <script>
+window.addEventListener("DOMContentLoaded", () => {
+    // 1. Create a safe, unique audio instance
+    let audio = document.getElementById("luxury-audio-engine");
+    if (!audio) {
+        audio = document.createElement("audio");
+        audio.id = "luxury-audio-engine";
+        audio.src = "velvet-snap.mp3"; // Points cleanly to your file
+        audio.loop = true;
+        audio.style.display = "none";
+        document.body.appendChild(audio);
+    }
 
-   <audio id="welcomeOverture" src="https://archive.org/download/ambient-swell-test/ambient-swell.mp3" preload="auto"></audio>
-    
-    <audio id="tactileClick" src="https://actions.google.com/sounds/v1/alarms/digital_watch_alarm_long.ogg" preload="auto"></audio>
+    // 2. Sync playback position perfectly without refresh triggers
+    const savedTime = localStorage.getItem("luxuryTime");
+    if (savedTime) {
+        audio.currentTime = parseFloat(savedTime);
+    }
+
+    if (localStorage.getItem("luxuryPlaying") === "true") {
+        audio.play().catch(() => {});
+    }
+
+    // 3. Save progress only when changing pages
+    window.addEventListener("beforeunload", () => {
+        localStorage.setItem("luxuryTime", audio.currentTime);
+        localStorage.setItem("luxuryPlaying", !audio.paused);
+    });
+
+    // 4. One-time clean touch listener to start playback safely
+    const startLuxuryAudio = () => {
+        if (audio.paused) {
+            audio.play();
+            localStorage.setItem("luxuryPlaying", "true");
+        }
+        document.removeEventListener("click", startLuxuryAudio);
+    };
+    document.addEventListener("click", startLuxuryAudio);
+});
+</script>
 </body>
 </html>
