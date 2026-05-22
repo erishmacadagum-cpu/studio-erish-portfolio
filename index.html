@@ -71,18 +71,18 @@
 
 <script>
 window.addEventListener("DOMContentLoaded", () => {
-    // 1. Create a dedicated ambient player specifically for background music
+    // 1. Setup dedicated background music engine
     let ambientMusic = document.getElementById("studio-ambient-music");
     if (!ambientMusic) {
         ambientMusic = document.createElement("audio");
         ambientMusic.id = "studio-ambient-music";
-        ambientMusic.src = "opening.mp3"; // PURELY for your beautiful ambient background track
+        ambientMusic.src = "opening.mp3"; // ONLY loops the beautiful music track
         ambientMusic.loop = true;
         ambientMusic.style.display = "none";
         document.body.appendChild(ambientMusic);
     }
 
-    // Sync music playback tracking status safely across transitions
+    // Sync background music across page changes seamlessly
     const savedTime = localStorage.getItem("luxuryTime");
     if (savedTime) { ambientMusic.currentTime = parseFloat(savedTime); }
     if (localStorage.getItem("luxuryPlaying") === "true") { ambientMusic.play().catch(() => {}); }
@@ -92,14 +92,14 @@ window.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("luxuryPlaying", !ambientMusic.paused);
     });
 
-    // 2. Isolated Single-Play Click Effect
+    // 2. Isolated Single-Play Shutter Click function
     const playShutterSnap = () => {
-        const shutter = new Audio("velvet-snap.mp3"); // Sharp mechanical click
+        const shutter = new Audio("velvet-snap.mp3"); // The crisp click effect
         shutter.volume = 0.95;
         shutter.play().catch(() => {});
     };
 
-    // 3. Gateway Curtain Trigger with a Staggered Delay Split
+    // 3. Gateway Curtain Trigger (Perfectly Split)
     const enterBtn = document.getElementById("enterStudioBtn");
     const curtain = document.getElementById("entranceCurtain");
 
@@ -107,7 +107,7 @@ window.addEventListener("DOMContentLoaded", () => {
         enterBtn.addEventListener("click", (e) => {
             e.preventDefault();
             
-            // Instantly snap the sound cue on interaction
+            // Instantly snap the physical shutter on click
             playShutterSnap();
 
             if (curtain) {
@@ -115,7 +115,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 setTimeout(() => {
                     curtain.style.display = "none";
                     
-                    // Start the music ONLY after the gate has fully dissolved
+                    // Start the music ONLY after the curtain completely vanishes
                     if (ambientMusic.paused) {
                         ambientMusic.play().catch(() => {});
                         localStorage.setItem("luxuryPlaying", "true");
@@ -125,7 +125,7 @@ window.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Global Link Snap Handler
+    // Menu Navigation Click Snapper
     document.querySelectorAll("nav a, .cta-link-minimal, .logo-brand").forEach(link => {
         link.addEventListener("click", function (e) {
             if (this.hostname === window.location.hostname) {
@@ -138,3 +138,5 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 });
 </script>
+</body>
+</html>
