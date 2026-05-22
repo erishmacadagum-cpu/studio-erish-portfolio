@@ -71,18 +71,18 @@
 
 <script>
 window.addEventListener("DOMContentLoaded", () => {
-    // 1. Establish the background ambient loop using opening.mp3
+    // 1. Initialize the background ambience loop quietly
     let ambientAudio = document.getElementById("luxury-audio-engine");
     if (!ambientAudio) {
         ambientAudio = document.createElement("audio");
         ambientAudio.id = "luxury-audio-engine";
-        ambientAudio.src = "opening.mp3"; // Uses your true opening track file
+        ambientAudio.src = "opening.mp3"; // The long, beautiful background music
         ambientAudio.loop = true;
         ambientAudio.style.display = "none";
         document.body.appendChild(ambientAudio);
     }
 
-    // Sync ambient tracking data across page changes seamlessly
+    // Sync ambient tracking positions across page transitions safely
     const savedTime = localStorage.getItem("luxuryTime");
     if (savedTime) { ambientAudio.currentTime = parseFloat(savedTime); }
     if (localStorage.getItem("luxuryPlaying") === "true") { ambientAudio.play().catch(() => {}); }
@@ -92,49 +92,56 @@ window.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("luxuryPlaying", !ambientAudio.paused);
     });
 
-    // 2. THE CHOSEN VELVET SHUTTER SNAP ENGINE
+    // 2. Clear & Isolated Shutter Trigger Function
     const playShutterSnap = () => {
-        const shutter = new Audio("velvet-snap.mp3"); // Uses your true snappy click file
-        shutter.currentTime = 0; 
-        shutter.volume = 0.90;
-        shutter.play().catch(() => {});
+        const shutter = new Audio("velvet-snap.mp3"); // The crisp tactile click
+        shutter.volume = 0.85;
+        shutter.play().catch((err) => console.log("Audio play blocked or delayed safely"));
     };
 
-    // Trigger A: Snap sound directly when clicking the "ENTER EXPERIENCE" curtain button
+    // 3. THE ENTER EXPERIENCE GATEWAY (Fixes the freeze)
     const enterBtn = document.getElementById("enterStudioBtn");
+    const curtain = document.getElementById("entranceCurtain");
+
     if (enterBtn) {
-        enterBtn.addEventListener("click", () => {
+        enterBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            
+            // Step A: Immediately play the crisp shutter snap
             playShutterSnap();
-            // Transition immediately into the smooth background opening loop
+
+            // Step B: Instantly kick off the background music stream
             if (ambientAudio.paused) {
-                ambientAudio.play();
+                ambientAudio.play().catch(() => {});
                 localStorage.setItem("luxuryPlaying", "true");
+            }
+
+            // Step C: Safely drop the curtain so the site opens no matter what
+            if (curtain) {
+                curtain.style.opacity = "0";
+                setTimeout(() => {
+                    curtain.style.display = "none";
+                }, 500); // Matches your CSS fade animation smoothly
             }
         });
     }
 
-    // Trigger B: Snap sound when clicking any navigation link
+    // 4. LINK NAVIGATION CLICK HANDLER
     document.querySelectorAll("nav a, .cta-link-minimal, .logo-brand").forEach(link => {
         link.addEventListener("click", function (e) {
             if (this.hostname === window.location.hostname) {
                 e.preventDefault();
                 const destination = this.href;
+                
                 playShutterSnap();
                 
-                // 180ms delay allows the physical shutter click to resonate beautifully before the page slide
+                // 180ms transition buffer allows the mechanical shutter frequencies to sound out elegantly
                 setTimeout(() => {
                     window.location.href = destination;
                 }, 180);
             }
         });
     });
-
-    // Global touch fallback to ensure uninterrupted background audio streams
-    document.addEventListener("click", () => {
-        if (ambientAudio.paused && localStorage.getItem("luxuryPlaying") === "true") {
-            ambientAudio.play();
-        }
-    }, { once: true });
 });
 </script>
 </body>
