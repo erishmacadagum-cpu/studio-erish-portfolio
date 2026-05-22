@@ -1,54 +1,53 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // 1. One-Time Ambient Soundscape Initialization Tracker
-    let studioAmbientTrack = document.getElementById("global-studio-audio");
+    // 1. Precise Ambient Audio Initialization Engine
+    let ambientTrack = document.getElementById("global-studio-audio");
 
-    if (!studioAmbientTrack) {
-        studioAmbientTrack = document.createElement("audio");
-        studioAmbientTrack.id = "global-studio-audio";
-        studioAmbientTrack.src = "opening.mp3";
-        studioAmbientTrack.loop = false; // Must play only once upon click activation
-        studioAmbientTrack.style.display = "none";
-        document.body.appendChild(studioAmbientTrack);
+    if (!ambientTrack) {
+        ambientTrack = document.createElement("audio");
+        ambientTrack.id = "global-studio-audio";
+        ambientTrack.src = "opening.mp3";
+        ambientTrack.loop = false; // Strictly run track once
+        ambientTrack.style.display = "none";
+        document.body.appendChild(ambientTrack);
     }
 
-    // Verify system session state to completely freeze repeat triggers
-    const ambientHasFired = sessionStorage.getItem("ambientAudioFired");
+    const sessionAudioTracker = sessionStorage.getItem("luxuryAmbientFired");
 
-    const releaseStudioSoundscape = () => {
-        if (!sessionStorage.getItem("ambientAudioFired")) {
-            studioAmbientTrack.play()
+    const releaseAmbientSound = () => {
+        if (!sessionStorage.getItem("luxuryAmbientFired")) {
+            ambientTrack.play()
                 .then(() => {
-                    sessionStorage.setItem("ambientAudioFired", "true");
+                    sessionStorage.setItem("luxuryAmbientFired", "true");
                 })
-                .catch(err => console.log("Sound configuration optimized"));
+                .catch(err => console.log("Sound engine active and on standby"));
         }
     };
 
-    // Attach activation trigger to first interactive movement on the luxury framework
-    if (!ambientHasFired) {
-        document.addEventListener("click", releaseStudioSoundscape, { once: true });
+    // Initialize track precisely upon user's first interactive landing choice click
+    if (!sessionAudioTracker) {
+        document.addEventListener("click", releaseAmbientSound, { once: true });
     }
 
-    // 2. High-Fidelity Mechanical Shutter Action Execution
-    const fireCameraShutterClick = () => {
-        const structuralSnap = new Audio("velvet-snap.mp3");
-        structuralSnap.volume = 0.50;
-        structuralSnap.play().catch(() => {});
+    // 2. High-Precision Mechanical Shutter Click Execution
+    const triggerMechanicalSnap = () => {
+        const shutterAudio = new Audio("velvet-snap.mp3");
+        shutterAudio.volume = 0.55;
+        shutterAudio.play().catch(() => {});
     };
 
-    // Instantly inject shutter precision into all local domain route elements
-    document.querySelectorAll("nav a, .logo-brand, .header-logo a").forEach(navigationLink => {
-        navigationLink.addEventListener("click", function (event) {
+    // Inject snappy transition camera sound effects across all routing paths
+    document.querySelectorAll("nav a, .logo-brand, .header-logo a").forEach(targetLink => {
+        targetLink.addEventListener("click", function (event) {
             if (this.hostname === window.location.hostname) {
                 event.preventDefault();
-                const targetURL = this.href;
+                const navigationRoute = this.href;
                 
-                // Fire mechanical snap sound instantly
-                fireCameraShutterClick();
+                // Trigger camera snap instantly
+                triggerMechanicalSnap();
                 
-                // Keep transition moving seamlessly behind the audio snap
+                // Direct route jump seamlessly immediately behind the snap audio audio clearance
                 setTimeout(() => {
-                    window.location.href = targetURL;
+                    window.location.href = navigationRoute;
                 }, 200);
             }
         });
