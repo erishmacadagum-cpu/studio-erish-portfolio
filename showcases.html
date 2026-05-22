@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Showcases | Studio Erish — Luxury Event Production</title>
+    <title>Showcases | Studio Erish — Luxury Production Portfolios</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         @keyframes luxuryBreathe {
             0% { transform: scale(1.00); filter: brightness(0.95) contrast(1.03); }
@@ -23,6 +24,33 @@
             margin: 0 !important;
             padding: 0 !important;
             width: 100% !important;
+        }
+        /* Minimalist Footer Grid Styles */
+        .luxury-footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            border-top: 1px solid #eaeaea;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            color: #666;
+        }
+        .footer-column h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #111;
+            letter-spacing: 1px;
+            margin: 0 0 1rem 0;
+            text-transform: uppercase;
+        }
+        #site-qr-code img {
+            margin: 0 auto;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
     </style>
 </head>
@@ -47,50 +75,78 @@
         </nav>
     </header>
 
-    <main style="padding: 4rem 0; width: 100vw; display: block;">
+    <main class="container showcases-layout" style="padding: 4rem 2rem !important; display: block;">
         
-        <section style="text-align: center; margin-bottom: 6rem; padding: 0 1.5rem;">
-            <span style="letter-spacing: 4px; font-size: 0.8rem; color: #8c8c8c; text-transform: uppercase;">SELECTED WORKS</span>
-            <h1 class="serif-title" style="font-size: 3rem; margin-top: 1.5rem; letter-spacing: 1px; font-weight: 300;">A Visual Record of Extraordinary Atmospheres.</h1>
+        <section class="portfolio-hero" style="margin-bottom: 4rem;">
+            <span class="section-tag" style="letter-spacing: 3px; font-size: 0.8rem; color: #8c8c8c; text-transform: uppercase;">SELECTED WORKS</span>
+            <h1 class="serif-title" style="font-size: 3rem; font-weight: 300; margin-top: 1rem;">A Visual Record of Extraordinary Atmospheres.</h1>
         </section>
 
-        <div style="display: flex; flex-direction: column; gap: 9rem; width: 100vw;">
-
-            <div style="width: 100vw; display: block;">
-                <div style="width: 100vw; height: auto; margin-bottom: 2.5rem; overflow: hidden; background-color: #000;">
-                    <img src="images/project1.jpg" class="cinematic-breathe" style="width: 100vw; height: auto; display: block; object-fit: cover; border: none;" alt="The Grand Ballroom Transformation" />
+        <section class="lookbook-grid" style="display: flex; flex-direction: column; gap: 6rem; width: 100%; max-width: 1200px; margin: 0 auto;">
+            
+            <div style="width: 100%; margin-bottom: 2rem;">
+                <div style="width: 100%; overflow: visible; margin-bottom: 1.5rem;">
+                    <img src="images/project1.jpg" style="width: 100%; height: auto; display: block; object-fit: contain;" alt="The Grand Ballroom Transformation" />
                 </div>
-                <div style="max-width: 1200px; margin: 0 auto; padding: 0 2.5rem;">
-                    <span style="display: block; letter-spacing: 4px; text-transform: uppercase; font-size: 0.8rem; color: #8c8c8c; margin-bottom: 0.6rem;">Davao City</span>
-                    <h2 class="serif-sub" style="font-size: 2.6rem; font-weight: 300; margin: 0; letter-spacing: 1px; color: #111;">The Grand Ballroom Transformation</h2>
-                </div>
-            </div>
-
-            <div style="width: 100vw; display: block;">
-                <div style="width: 100vw; height: auto; margin-bottom: 2.5rem; overflow: hidden; background-color: #000;">
-                    <img src="images/project2.jpg" class="cinematic-breathe" style="width: 100vw; height: auto; display: block; object-fit: cover; border: none;" alt="Oceanfront Coastal Vows" />
-                </div>
-                <div style="max-width: 1200px; margin: 0 auto; padding: 0 2.5rem;">
-                    <span style="display: block; letter-spacing: 4px; text-transform: uppercase; font-size: 0.8rem; color: #8c8c8c; margin-bottom: 0.6rem;">Waterfront Insular Hotel</span>
-                    <h2 class="serif-sub" style="font-size: 2.6rem; font-weight: 300; margin: 0; letter-spacing: 1px; color: #111;">Oceanfront Coastal Vows</h2>
+                <div style="padding-left: 0; margin-top: 1rem;">
+                    <span style="display: block; letter-spacing: 3px; text-transform: uppercase; font-size: 0.85rem; color: #8c8c8c; margin-bottom: 0.5rem;">Davao City</span>
+                    <h2 class="serif-sub" style="font-size: 2.5rem; font-weight: 300; letter-spacing: 1px; margin: 0;">The Grand Ballroom Transformation</h2>
                 </div>
             </div>
 
-            <div style="width: 100vw; display: block;">
-                <div style="width: 100vw; height: auto; margin-bottom: 2.5rem; overflow: hidden; background-color: #000;">
-                    <img src="images/project3.jpg" class="cinematic-breathe" style="width: 100vw; height: auto; display: block; object-fit: cover; border: none;" alt="The Ceremonial Hallmark" />
+            <div style="width: 100%; margin-bottom: 2rem;">
+                <div style="width: 100%; overflow: visible; margin-bottom: 1.5rem;">
+                    <img src="images/project2.jpg" style="width: 100%; height: auto; display: block; object-fit: contain;" alt="Oceanfront Coastal Vows" />
                 </div>
-                <div style="max-width: 1200px; margin: 0 auto; padding: 0 2.5rem;">
-                    <span style="display: block; letter-spacing: 4px; text-transform: uppercase; font-size: 0.8rem; color: #8c8c8c; margin-bottom: 0.6rem;">Davao City</span>
-                    <h2 class="serif-sub" style="font-size: 2.6rem; font-weight: 300; margin: 0; letter-spacing: 1px; color: #111;">The Ceremonial Hallmark</h2>
+                <div style="padding-left: 0; margin-top: 1rem;">
+                    <span style="display: block; letter-spacing: 3px; text-transform: uppercase; font-size: 0.85rem; color: #8c8c8c; margin-bottom: 0.5rem;">Samal Island</span>
+                    <h2 class="serif-sub" style="font-size: 2.5rem; font-weight: 300; letter-spacing: 1px; margin: 0;">Oceanfront Coastal Vows</h2>
                 </div>
+            </div>
+
+            <div style="width: 100%; margin-bottom: 4rem;">
+                <div style="width: 100%; overflow: visible; margin-bottom: 1.5rem;">
+                    <img src="images/project3.jpg" style="width: 100%; height: auto; display: block; object-fit: contain;" alt="The Avant-Garde Milestone" />
+                </div>
+                <div style="padding-left: 0; margin-top: 1rem;">
+                    <span style="display: block; letter-spacing: 3px; text-transform: uppercase; font-size: 0.85rem; color: #8c8c8c; margin-bottom: 0.5rem;">Tagum</span>
+                    <h2 class="serif-sub" style="font-size: 2.5rem; font-weight: 300; letter-spacing: 1px; margin: 0;">The Avant-Garde Milestone</h2>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer style="background-color: #fafafa; margin-top: 5rem; padding: 2rem 0 4rem 0;">
+        <div class="luxury-footer-grid">
+            
+            <div class="footer-column" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h4>Studio Erish</h4>
+                    <p style="line-height: 1.6; margin: 0;">Bespoke Styling &amp; High-End Production Management frameworks.</p>
+                </div>
+                <p style="margin-top: 2rem; font-size: 0.75rem; color: #999;">&copy; 2026 All Rights Reserved.</p>
+            </div>
+
+            <div class="footer-column" style="text-align: center;">
+                <h4>Studio Metrics</h4>
+                <div style="margin-bottom: 1.5rem;">
+                    <span style="display: block; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 0.25rem;">Local Time</span>
+                    <div id="studio-timeclock" style="font-family: 'Montserrat', sans-serif; font-size: 1.3rem; font-weight: 300; color: #222; letter-spacing: 1px;">00:00:00 AM</div>
+                </div>
+                <div>
+                    <span style="display: block; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 0.5rem;">Total Ledger Visits</span>
+                    <img src="https://counter.vone.me/counter/page?id=studio-erish-production" alt="Visitor Counter" style="height: 22px; filter: grayscale(100%) contrast(120%);" />
+                </div>
+            </div>
+
+            <div class="footer-column" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+                <h4>Digital Access</h4>
+                <div id="site-qr-code" style="display: inline-block; padding: 0.25rem;"></div>
+                <span style="display: block; font-size: 0.65rem; color: #999; margin-top: 0.75rem; letter-spacing: 1px;">SCAN TO SHARE PORTFOLIO</span>
             </div>
 
         </div>
-    </main>
-
-    <footer class="site-footer" style="padding: 3rem 2rem; margin-top: 5rem;">
-        <p>&copy; 2026 Studio Erish. All Rights Reserved.</p>
     </footer>
 
     <script src="js/script.js"></script>
