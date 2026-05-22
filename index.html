@@ -104,28 +104,26 @@ window.addEventListener("DOMContentLoaded", () => {
     const curtain = document.getElementById("entranceCurtain");
 
     if (enterBtn) {
-        enterBtn.addEventListener("click", (e) => {
+       enterBtn.addEventListener("click", (e) => {
             e.preventDefault();
             
-            // Step A: Play ONLY the crisp shutter snap right at the click
+            // Step A: Play ONLY the sharp velvet snap right away
             playShutterSnap();
 
-            // Step B: Safely drop the curtain
+            // Step B: Fade out the curtain overlay
             if (curtain) {
                 curtain.style.opacity = "0";
+                
+                // Step C: WAIT a full 500ms until the curtain completely disappears
+                // BEFORE letting the opening background music start playing!
                 setTimeout(() => {
                     curtain.style.display = "none";
-                }, 500);
+                    if (ambientAudio.paused) {
+                        ambientAudio.play().catch(() => {});
+                        localStorage.setItem("luxuryPlaying", "true");
+                    }
+                }, 500); 
             }
-
-            // Step C: Delay the opening.mp3 background music by 400ms 
-            // This prevents them from mixing together!
-            setTimeout(() => {
-                if (ambientAudio.paused) {
-                    ambientAudio.play().catch(() => {});
-                    localStorage.setItem("luxuryPlaying", "true");
-                }
-            }, 400); 
         });
     }
 
