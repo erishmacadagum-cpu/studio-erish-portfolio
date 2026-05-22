@@ -1,5 +1,51 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // 1. Setup Sound Elements
+    
+    // 1. Precise Live Studio Timeclock Engine
+    const launchTimeclock = () => {
+        const timeclockContainer = document.getElementById("studio-timeclock");
+        if (!timeclockContainer) return;
+
+        setInterval(() => {
+            const rawDate = new Date();
+            let hours = rawDate.getHours();
+            let minutes = rawDate.getMinutes();
+            let seconds = rawDate.getSeconds();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+
+            // Format hours to standard 12-hour clock setup
+            hours = hours % 12;
+            hours = hours ? hours : 12; 
+            
+            // Padding zeros for clean structure metrics
+            hours = hours < 10 ? '0' + hours : hours;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+
+            timeclockContainer.textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
+        }, 1000);
+    };
+    launchTimeclock();
+
+    // 2. Automated Site QR Code Generator
+    const generateSiteQR = () => {
+        const qrContainer = document.getElementById("site-qr-code");
+        if (!qrContainer) return;
+
+        // Automatically captures the exact web address the site is live on
+        const activeWebAddress = window.location.href;
+
+        new QRCode(qrContainer, {
+            text: activeWebAddress,
+            width: 90,
+            height: 90,
+            colorDark: "#111111",
+            colorLight: "#fafafa",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    };
+    generateSiteQR();
+
+    // 3. One-Time Ambient Soundscape Initialization Tracker
     let ambientMusic = document.getElementById("global-studio-audio");
 
     if (!ambientMusic) {
@@ -11,7 +57,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.appendChild(ambientMusic);
     }
 
-    // Read session state to block duplicate audio instances
     const hasAudioPlayed = sessionStorage.getItem("luxuryAmbientFired");
 
     const playAmbientSoundscape = () => {
@@ -20,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(() => {
                     sessionStorage.setItem("luxuryAmbientFired", "true");
                 })
-                .catch(err => console.log("Audio waiting for explicit interaction context"));
+                .catch(err => console.log("Audio pipeline primed"));
         }
     };
 
@@ -29,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.addEventListener("click", playAmbientSoundscape, { once: true });
     }
 
-    // 2. Crisp Camera Shutter Effect Trigger
+    // 4. Crisp Camera Shutter Effect Trigger
     const playCameraSnap = () => {
         const shutterAudio = new Audio("velvet-snap.mp3");
         shutterAudio.volume = 0.60;
@@ -48,9 +93,4 @@ document.addEventListener("DOMContentLoaded", function () {
                 
                 // Route transition delay to allow audio clip room to execute cleanly
                 setTimeout(() => {
-                    window.location.href = routeDestination;
-                }, 220);
-            }
-        });
-    });
-});
+                    window.location.href = routeDestinatio
