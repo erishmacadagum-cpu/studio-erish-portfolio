@@ -1,55 +1,55 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // 1. One-Time Global Background Audio Initializer
+    // 1. Precise Audio Initializer Engine
     let backgroundTrack = document.getElementById("global-studio-audio");
 
     if (!backgroundTrack) {
         backgroundTrack = document.createElement("audio");
         backgroundTrack.id = "global-studio-audio";
         backgroundTrack.src = "opening.mp3";
-        backgroundTrack.loop = false; // Setting explicitly to play only once
+        backgroundTrack.loop = false; // Intentionally play once only
         backgroundTrack.style.display = "none";
         document.body.appendChild(backgroundTrack);
     }
 
-    // Check if the track was already launched during this web session
-    const hasPlayedThisSession = sessionStorage.getItem("studioAmbientPlayed");
+    // Lock session tracking to ensure it doesn't loop or start fresh on next pages
+    const hasFiredThisSession = sessionStorage.getItem("studioAmbientPlayed");
 
-    if (!hasPlayedThisSession) {
-        const executeAudioPlay = () => {
+    const initializeSoundtrack = () => {
+        if (!sessionStorage.getItem("studioAmbientPlayed")) {
             backgroundTrack.play()
                 .then(() => {
                     sessionStorage.setItem("studioAmbientPlayed", "true");
                 })
-                .catch(err => console.log("Interaction required to unmute luxury soundscape"));
-        };
+                .catch(err => console.log("Sound ready for next action initialization"));
+        }
+    };
 
-        // Try playing automatically, fall back to initial user interaction click if restricted
-        backgroundTrack.play()
-            .then(() => {
-                sessionStorage.setItem("studioAmbientPlayed", "true");
-            })
-            .catch(() => {
-                document.addEventListener("click", executeAudioPlay, { once: true });
-            });
+    // Listen globally for the initial choice click to unleash the opening sound smoothly
+    if (!hasFiredThisSession) {
+        document.addEventListener("click", initializeSoundtrack, { once: true });
     }
 
-    // 2. Snappy Mechanical Camera Shutter Click Effect
+    // 2. High-Precision Mechanical Shutter Click Execution
     const executeCameraSnap = () => {
         const shutterAudio = new Audio("velvet-snap.mp3");
-        shutterAudio.volume = 0.45;
+        shutterAudio.volume = 0.50;
         shutterAudio.play().catch(() => {});
     };
 
-    // Attach instant snap effect seamlessly to luxury transitions
+    // Attach instant structural transition snap tracking across link arrays
     document.querySelectorAll("nav a, .logo-brand, .header-logo a").forEach(link => {
         link.addEventListener("click", function (event) {
             if (this.hostname === window.location.hostname) {
                 event.preventDefault();
                 const routeDestination = this.href;
+                
+                // Fire instant sharp mechanical snap click
                 executeCameraSnap();
+                
+                // Allow sound execution window clearance before pushing target location
                 setTimeout(() => {
                     window.location.href = routeDestination;
-                }, 200);
+                }, 220);
             }
         });
     });
