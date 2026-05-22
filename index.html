@@ -69,44 +69,64 @@
         <p>&copy; 2026 Studio Erish. All Rights Reserved.</p>
     </footer>
 
-   <script>
+  <script>
 window.addEventListener("DOMContentLoaded", () => {
-    // 1. Create a safe, unique audio instance
-    let audio = document.getElementById("luxury-audio-engine");
-    if (!audio) {
-        audio = document.createElement("audio");
-        audio.id = "luxury-audio-engine";
-        audio.src = "velvet-snap.mp3"; // Points cleanly to your file
-        audio.loop = true;
-        audio.style.display = "none";
-        document.body.appendChild(audio);
+    // 1. Establish the clean, hidden ambient player instance
+    let ambientAudio = document.getElementById("luxury-audio-engine");
+    if (!ambientAudio) {
+        ambientAudio = document.createElement("audio");
+        ambientAudio.id = "luxury-audio-engine";
+        ambientAudio.src = "velvet-snap.mp3"; 
+        ambientAudio.loop = true;
+        ambientAudio.style.display = "none";
+        document.body.appendChild(ambientAudio);
     }
 
-    // 2. Sync playback position perfectly without refresh triggers
+    // Safely sync time positions across luxury page transitions
     const savedTime = localStorage.getItem("luxuryTime");
-    if (savedTime) {
-        audio.currentTime = parseFloat(savedTime);
-    }
+    if (savedTime) { ambientAudio.currentTime = parseFloat(savedTime); }
+    if (localStorage.getItem("luxuryPlaying") === "true") { ambientAudio.play().catch(() => {}); }
 
-    if (localStorage.getItem("luxuryPlaying") === "true") {
-        audio.play().catch(() => {});
-    }
-
-    // 3. Save progress only when changing pages
     window.addEventListener("beforeunload", () => {
-        localStorage.setItem("luxuryTime", audio.currentTime);
-        localStorage.setItem("luxuryPlaying", !audio.paused);
+        localStorage.setItem("luxuryTime", ambientAudio.currentTime);
+        localStorage.setItem("luxuryPlaying", !ambientAudio.paused);
     });
 
-    // 4. One-time clean touch listener to start playback safely
-    const startLuxuryAudio = () => {
-        if (audio.paused) {
-            audio.play();
+    // Start background audio seamlessly on the user's very first click
+    const startAmbience = () => {
+        if (ambientAudio.paused) {
+            ambientAudio.play();
             localStorage.setItem("luxuryPlaying", "true");
         }
-        document.removeEventListener("click", startLuxuryAudio);
+        document.removeEventListener("click", startAmbience);
     };
-    document.addEventListener("click", startLuxuryAudio);
+    document.addEventListener("click", startAmbience);
+
+    // 2. THE VELVET SHUTTER CLICK HANDLER
+    // This catches your menu link clicks and forces the crisp snap sound before loading the new page
+    document.querySelectorAll("nav a, .cta-link-minimal, site-header a, footer a").forEach(link => {
+        link.addEventListener("click", function (e) {
+            // Check if it's an internal link
+            if (this.hostname === window.location.hostname) {
+                e.preventDefault(); 
+                const destination = this.href;
+
+                // Fire an isolated, snappy audio trigger
+                const shutter = new Audio("velvet-snap.mp3");
+                shutter.currentTime = 0; // Capture the immediate crisp start
+                shutter.volume = 0.85;
+                
+                shutter.play().then(() => {
+                    // 180ms delay gives the tactile shutter mechanism time to ring out luxuriously
+                    setTimeout(() => {
+                        window.location.href = destination;
+                    }, 180);
+                }).catch(() => {
+                    window.location.href = destination;
+                });
+            }
+        });
+    });
 });
 </script>
 </body>
