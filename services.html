@@ -3,11 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curated Services | Studio Erish — Luxury Event Curation</title>
+    <title>Curated Services | Studio Erish — Premium Event Design</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        @keyframes luxuryBreathe {
+            0% { transform: scale(1.00); filter: brightness(0.95) contrast(1.03); }
+            50% { transform: scale(1.03); filter: brightness(1.03) contrast(0.97); }
+            100% { transform: scale(1.00); filter: brightness(0.95) contrast(1.03); }
+        }
+        .cinematic-breathe {
+            animation: luxuryBreathe 14s ease-in-out infinite !important;
+            transform-origin: center center;
+        }
+        html, body {
+            overflow-x: hidden !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+        }
+        .service-card {
+            background: #fff;
+            padding: 3rem;
+            border: 1px solid #eee;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            transition: all 0.4s ease;
+        }
+        .service-card:hover {
+            border-color: #111;
+        }
+        /* Minimalist Footer Grid Styles */
+        .luxury-footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            border-top: 1px solid #eaeaea;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            color: #666;
+        }
+        .footer-column h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #111;
+            letter-spacing: 1px;
+            margin: 0 0 1rem 0;
+            text-transform: uppercase;
+        }
+        #site-qr-code img {
+            margin: 0 auto;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+    </style>
 </head>
 <body class="editorial-bg">
 
@@ -30,39 +85,65 @@
         </nav>
     </header>
 
-    <main style="padding: 6rem 2rem; max-width: 900px; margin: 0 auto; min-height: 80vh; display: block;">
-        <h1 class="serif-title" style="text-align: center; font-size: 3rem; margin-bottom: 1.5rem; letter-spacing: 2px;">CURATED SERVICES</h1>
-        <p style="text-align: center; color: #666; margin-bottom: 6rem; font-size: 1rem; letter-spacing: 1px;">Bespoke event planning and high-end design production frameworks.</p>
+    <main style="max-width: 1200px; margin: 0 auto; padding: 5rem 2rem; display: block;">
+        
+        <section style="text-align: center; margin-bottom: 5rem;">
+            <span style="letter-spacing: 4px; font-size: 0.8rem; color: #8c8c8c; text-transform: uppercase;">MANAGEMENT FRAMEWORKS</span>
+            <h1 class="serif-title" style="font-size: 3rem; margin-top: 1.5rem; font-weight: 300; letter-spacing: 1px;">Curated Orchestrations.</h1>
+        </section>
 
-        <div style="display: flex; flex-direction: column; gap: 5rem; width: 100%;">
-            <div style="border-bottom: 1px solid #eaeaea; padding-bottom: 3rem; display: flex; flex-direction: column; gap: 1rem;">
-                <span style="font-size: 0.8rem; color: #8c8c8c; letter-spacing: 3px; text-transform: uppercase;">01 / High-End Aesthetics</span>
-                <h2 class="serif-sub" style="font-size: 2rem; font-weight: 300; margin: 0; color: #111111;">Bespoke Styling &amp; Luxe Grand Themes</h2>
-                <p style="color: #444444; font-size: 1.05rem; line-height: 1.7; margin: 0;">
-                    Tailored visual styling engineered exclusively for luxury grand galas and high-profile destination milestones. We draft comprehensive design concepts, structural floral architectures, custom lightscapes, and unique art direction to transform premium spaces into unforgettable environments.
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; margin-bottom: 4rem;">
+            
+            <div class="service-card">
+                <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 400; margin: 0 0 1rem 0;">Full-Scale Production</h3>
+                <p style="font-family: 'Montserrat', sans-serif; font-size: 0.9rem; line-height: 1.7; color: #555; font-weight: 300;">
+                    Complete end-to-end master planning, structural design curation, architectural lighting layout layouts, spatial engineering, and absolute vendor tier alignment.
                 </p>
             </div>
 
-            <div style="border-bottom: 1px solid #eaeaea; padding-bottom: 3rem; display: flex; flex-direction: column; gap: 1rem;">
-                <span style="font-size: 0.8rem; color: #8c8c8c; letter-spacing: 3px; text-transform: uppercase;">02 / Elite Logistics Framework</span>
-                <h2 class="serif-sub" style="font-size: 2rem; font-weight: 300; margin: 0; color: #111111;">Full-Service Coordination &amp; Personalized Collections</h2>
-                <p style="color: #444444; font-size: 1.05rem; line-height: 1.7; margin: 0;">
-                    Meticulous full-scale management structured around an 18-year legacy of luxury wedding and event execution. Featuring seamless vendor procurement, precision budget management, custom milestone tracking, and flawless timeline oversight built entirely around your personal vision.
+            <div class="service-card">
+                <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 400; margin: 0 0 1rem 0;">Bespoke Art Direction</h3>
+                <p style="font-family: 'Montserrat', sans-serif; font-size: 0.9rem; line-height: 1.7; color: #555; font-weight: 300;">
+                    Dedicated focus on aesthetic styling parameters, floor layout mechanics, botanical structural setups, luxury material selections, and event colorway cohesion.
                 </p>
             </div>
 
-            <div style="padding-bottom: 3rem; display: flex; flex-direction: column; gap: 1rem;">
-                <span style="font-size: 0.8rem; color: #8c8c8c; letter-spacing: 3px; text-transform: uppercase;">03 / Turnkey Execution</span>
-                <h2 class="serif-sub" style="font-size: 2rem; font-weight: 300; margin: 0; color: #111111;">All-In-One Luxury Production Frameworks</h2>
-                <p style="color: #444444; font-size: 1.05rem; line-height: 1.7; margin: 0;">
-                    The definitive, stress-free curation choice for global clients hosting celebrations in the region. An absolute signature turnkey experience fusing premium local vendor alignment, comprehensive site design, immersive styling assets, and masterful day-of execution under one unified, elegant standard.
+            <div class="service-card">
+                <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 400; margin: 0 0 1rem 0;">Destination Architecture</h3>
+                <p style="font-family: 'Montserrat', sans-serif; font-size: 0.9rem; line-height: 1.7; color: #555; font-weight: 300;">
+                    Specialized production logistics for coastal setups and remote luxury properties, custom engineering travel vendor frameworks across regional island zones.
                 </p>
             </div>
+
         </div>
     </main>
 
-    <footer class="site-footer">
-        <p>&copy; 2026 Studio Erish. All Rights Reserved.</p>
+    <footer style="background-color: #fafafa; margin-top: 5rem; padding: 2rem 0 4rem 0;">
+        <div class="luxury-footer-grid">
+            <div class="footer-column" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h4>Studio Erish</h4>
+                    <p style="line-height: 1.6; margin: 0;">Bespoke Styling &amp; High-End Production Management frameworks.</p>
+                </div>
+                <p style="margin-top: 2rem; font-size: 0.75rem; color: #999;">&copy; 2026 All Rights Reserved.</p>
+            </div>
+            <div class="footer-column" style="text-align: center;">
+                <h4>Studio Metrics</h4>
+                <div style="margin-bottom: 1.5rem;">
+                    <span style="display: block; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 0.25rem;">Local Time</span>
+                    <div id="studio-timeclock" style="font-family: 'Montserrat', sans-serif; font-size: 1.3rem; font-weight: 300; color: #222; letter-spacing: 1px;">00:00:00 AM</div>
+                </div>
+                <div>
+                    <span style="display: block; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 0.5rem;">Total Ledger Visits</span>
+                    <img src="https://counter.vone.me/counter/page?id=studio-erish-production" alt="Visitor Counter" style="height: 22px; filter: grayscale(100%) contrast(120%);" />
+                </div>
+            </div>
+            <div class="footer-column" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+                <h4>Digital Access</h4>
+                <div id="site-qr-code" style="display: inline-block; padding: 0.25rem;"></div>
+                <span style="display: block; font-size: 0.65rem; color: #999; margin-top: 0.75rem; letter-spacing: 1px;">SCAN TO SHARE PORTFOLIO</span>
+            </div>
+        </div>
     </footer>
 
     <script src="js/script.js"></script>
