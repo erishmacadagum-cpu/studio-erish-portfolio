@@ -10,12 +10,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         @keyframes luxuryBreathe {
-            0% { transform: scale(1.02); filter: brightness(0.95) contrast(1.05); }
-            50% { transform: scale(1.00); filter: brightness(1.02) contrast(0.98); }
-            100% { transform: scale(1.02); filter: brightness(0.95) contrast(1.05); }
+            0% { transform: scale(1.00); filter: brightness(0.93) contrast(1.04); opacity: 0.95; }
+            50% { transform: scale(1.03); filter: brightness(1.03) contrast(0.96); opacity: 1; }
+            100% { transform: scale(1.00); filter: brightness(0.93) contrast(1.04); opacity: 0.95; }
         }
         .cinematic-breathe {
-            animation: luxuryBreathe 12s ease-in-out infinite !important;
+            animation: luxuryBreathe 14s ease-in-out infinite !important;
+            transform-origin: center center;
+            transition: opacity 1.5s ease-in-out;
+        }
+        html, body {
+            overflow-x: hidden !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
         }
     </style>
 </head>
@@ -40,18 +48,18 @@
         </nav>
     </header>
 
-    <main style="padding: 2rem 0; width: 100vw; min-height: 90vh; display: block; overflow: hidden;">
-        <div style="width: 100vw; height: 85vh; overflow: hidden; position: relative; background-color: #000;">
-            <img src="images/hero-journal.jpg" class="cinematic-breathe" style="width: 100%; height: 100%; display: block; object-fit: cover; border: none;" alt="Studio Erish Luxury Presentation Cover" />
+    <main style="padding: 0 !important; margin: 0 !important; width: 100vw !important; min-height: 90vh; display: block; overflow: hidden;">
+        <div style="width: 100vw !important; margin-left: calc(-50vw + 50%) !important; margin-right: calc(-50vw + 50%) !important; height: 88vh; overflow: hidden; position: relative; background-color: #000;">
+            <img src="images/profile.jpg" class="cinematic-breathe" style="width: 100vw !important; width: 100% !important; height: 100% !important; display: block !important; object-fit: cover !important; border: none !important;" alt="Studio Erish Master Artwork" />
             
-            <div style="position: absolute; bottom: 4rem; left: 3rem; right: 3rem; color: #ffffff; z-index: 10;">
-                <span style="letter-spacing: 4px; font-size: 0.85rem; text-transform: uppercase; color: #dfdfdf; display: block; margin-bottom: 1rem;">EDITORIAL COVER</span>
-                <h1 class="serif-title" style="font-size: 3.5rem; font-weight: 300; line-height: 1.1; margin: 0; color: #ffffff; text-shadow: 0px 4px 12px rgba(0,0,0,0.4);">Engineering Elusive Spaces.</h1>
+            <div style="position: absolute; bottom: 5rem; left: 4rem; right: 4rem; color: #ffffff; z-index: 10;">
+                <span style="letter-spacing: 5px; font-size: 0.85rem; text-transform: uppercase; color: #e0e0e0; display: block; margin-bottom: 1.2rem;">EDITORIAL COVER</span>
+                <h1 class="serif-title" style="font-size: 3.8rem; font-weight: 300; line-height: 1.1; margin: 0; color: #ffffff; text-shadow: 0px 4px 15px rgba(0,0,0,0.5);">Engineering Elusive Spaces.</h1>
             </div>
         </div>
     </main>
 
-    <footer class="site-footer" style="margin-top: 0;">
+    <footer class="site-footer" style="margin-top: 0; padding: 3rem 2rem;">
         <p>&copy; 2026 Studio Erish. All Rights Reserved.</p>
     </footer>
 
