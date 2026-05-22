@@ -49,7 +49,7 @@
             <h1 class="hero-title serif-title">Orchestrating Atmospheres <br><em>for Life's Grandest Moments.</em></h1>
             
             <div class="narrative-media journal-cover-frame">
-               <img src="images/hero-bg.jpg" alt="Studio Erish Composition Frame" />
+              <img src="images/hero-bg.jpg" alt="Studio Erish Composition Frame" />
             </div>
         </section>
 
@@ -71,12 +71,12 @@
 
 <script>
 window.addEventListener("DOMContentLoaded", () => {
-    // 1. Initialize the background ambience loop quietly
+    // 1. Initialize the background ambient loop quietly using your opening track
     let ambientAudio = document.getElementById("luxury-audio-engine");
     if (!ambientAudio) {
         ambientAudio = document.createElement("audio");
         ambientAudio.id = "luxury-audio-engine";
-        ambientAudio.src = "opening.mp3"; // The long, beautiful background music
+        ambientAudio.src = "opening.mp3"; // Fixed to point to your true background track
         ambientAudio.loop = true;
         ambientAudio.style.display = "none";
         document.body.appendChild(ambientAudio);
@@ -95,11 +95,11 @@ window.addEventListener("DOMContentLoaded", () => {
     // 2. Clear & Isolated Shutter Trigger Function
     const playShutterSnap = () => {
         const shutter = new Audio("velvet-snap.mp3"); // The crisp tactile click
-        shutter.volume = 0.85;
-        shutter.play().catch((err) => console.log("Audio play blocked or delayed safely"));
+        shutter.volume = 0.95;
+        shutter.play().catch((err) => console.log("Audio play delayed safely"));
     };
 
-    // 3. THE ENTER EXPERIENCE GATEWAY (Fixes the freeze)
+    // 3. THE ENTER EXPERIENCE GATEWAY (With Staggered Audio Delay)
     const enterBtn = document.getElementById("enterStudioBtn");
     const curtain = document.getElementById("entranceCurtain");
 
@@ -107,22 +107,25 @@ window.addEventListener("DOMContentLoaded", () => {
         enterBtn.addEventListener("click", (e) => {
             e.preventDefault();
             
-            // Step A: Immediately play the crisp shutter snap
+            // Step A: Play ONLY the crisp shutter snap right at the click
             playShutterSnap();
 
-            // Step B: Instantly kick off the background music stream
-            if (ambientAudio.paused) {
-                ambientAudio.play().catch(() => {});
-                localStorage.setItem("luxuryPlaying", "true");
-            }
-
-            // Step C: Safely drop the curtain so the site opens no matter what
+            // Step B: Safely drop the curtain
             if (curtain) {
                 curtain.style.opacity = "0";
                 setTimeout(() => {
                     curtain.style.display = "none";
-                }, 500); // Matches your CSS fade animation smoothly
+                }, 500);
             }
+
+            // Step C: Delay the opening.mp3 background music by 400ms 
+            // This prevents them from mixing together!
+            setTimeout(() => {
+                if (ambientAudio.paused) {
+                    ambientAudio.play().catch(() => {});
+                    localStorage.setItem("luxuryPlaying", "true");
+                }
+            }, 400); 
         });
     }
 
@@ -135,7 +138,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 
                 playShutterSnap();
                 
-                // 180ms transition buffer allows the mechanical shutter frequencies to sound out elegantly
+                // 180ms transition buffer allows the mechanical shutter to sound out elegantly
                 setTimeout(() => {
                     window.location.href = destination;
                 }, 180);
