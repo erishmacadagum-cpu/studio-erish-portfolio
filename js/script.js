@@ -1,5 +1,5 @@
 window.addEventListener("DOMContentLoaded", function () {
-    // Look for the dedicated ambient music track
+    // Target the global background music engine
     let audio = document.getElementById("studio-ambient-music");
     
     if (!audio) {
