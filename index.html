@@ -71,55 +71,53 @@
 
 <script>
 window.addEventListener("DOMContentLoaded", () => {
-    // 1. Initialize the background ambient loop quietly using your opening track
-    let ambientAudio = document.getElementById("luxury-audio-engine");
-    if (!ambientAudio) {
-        ambientAudio = document.createElement("audio");
-        ambientAudio.id = "luxury-audio-engine";
-        ambientAudio.src = "opening.mp3"; // Fixed to point to your true background track
-        ambientAudio.loop = true;
-        ambientAudio.style.display = "none";
-        document.body.appendChild(ambientAudio);
+    // 1. Create a dedicated ambient player specifically for background music
+    let ambientMusic = document.getElementById("studio-ambient-music");
+    if (!ambientMusic) {
+        ambientMusic = document.createElement("audio");
+        ambientMusic.id = "studio-ambient-music";
+        ambientMusic.src = "opening.mp3"; // PURELY for your beautiful ambient background track
+        ambientMusic.loop = true;
+        ambientMusic.style.display = "none";
+        document.body.appendChild(ambientMusic);
     }
 
-    // Sync ambient tracking positions across page transitions safely
+    // Sync music playback tracking status safely across transitions
     const savedTime = localStorage.getItem("luxuryTime");
-    if (savedTime) { ambientAudio.currentTime = parseFloat(savedTime); }
-    if (localStorage.getItem("luxuryPlaying") === "true") { ambientAudio.play().catch(() => {}); }
+    if (savedTime) { ambientMusic.currentTime = parseFloat(savedTime); }
+    if (localStorage.getItem("luxuryPlaying") === "true") { ambientMusic.play().catch(() => {}); }
 
     window.addEventListener("beforeunload", () => {
-        localStorage.setItem("luxuryTime", ambientAudio.currentTime);
-        localStorage.setItem("luxuryPlaying", !ambientAudio.paused);
+        localStorage.setItem("luxuryTime", ambientMusic.currentTime);
+        localStorage.setItem("luxuryPlaying", !ambientMusic.paused);
     });
 
-    // 2. Clear & Isolated Shutter Trigger Function
+    // 2. Isolated Single-Play Click Effect
     const playShutterSnap = () => {
-        const shutter = new Audio("velvet-snap.mp3"); // The crisp tactile click
+        const shutter = new Audio("velvet-snap.mp3"); // Sharp mechanical click
         shutter.volume = 0.95;
-        shutter.play().catch((err) => console.log("Audio play delayed safely"));
+        shutter.play().catch(() => {});
     };
 
-    // 3. THE ENTER EXPERIENCE GATEWAY (With Staggered Audio Delay)
+    // 3. Gateway Curtain Trigger with a Staggered Delay Split
     const enterBtn = document.getElementById("enterStudioBtn");
     const curtain = document.getElementById("entranceCurtain");
 
     if (enterBtn) {
-       enterBtn.addEventListener("click", (e) => {
+        enterBtn.addEventListener("click", (e) => {
             e.preventDefault();
             
-            // Step A: Play ONLY the sharp velvet snap right away
+            // Instantly snap the sound cue on interaction
             playShutterSnap();
 
-            // Step B: Fade out the curtain overlay
             if (curtain) {
                 curtain.style.opacity = "0";
-                
-                // Step C: WAIT a full 500ms until the curtain completely disappears
-                // BEFORE letting the opening background music start playing!
                 setTimeout(() => {
                     curtain.style.display = "none";
-                    if (ambientAudio.paused) {
-                        ambientAudio.play().catch(() => {});
+                    
+                    // Start the music ONLY after the gate has fully dissolved
+                    if (ambientMusic.paused) {
+                        ambientMusic.play().catch(() => {});
                         localStorage.setItem("luxuryPlaying", "true");
                     }
                 }, 500); 
@@ -127,23 +125,16 @@ window.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 4. LINK NAVIGATION CLICK HANDLER
+    // Global Link Snap Handler
     document.querySelectorAll("nav a, .cta-link-minimal, .logo-brand").forEach(link => {
         link.addEventListener("click", function (e) {
             if (this.hostname === window.location.hostname) {
                 e.preventDefault();
                 const destination = this.href;
-                
                 playShutterSnap();
-                
-                // 180ms transition buffer allows the mechanical shutter to sound out elegantly
-                setTimeout(() => {
-                    window.location.href = destination;
-                }, 180);
+                setTimeout(() => { window.location.href = destination; }, 180);
             }
         });
     });
 });
 </script>
-</body>
-</html>
