@@ -1,47 +1,50 @@
 window.addEventListener("DOMContentLoaded", function () {
-    // Target the global background music engine
-    let audio = document.getElementById("studio-ambient-music");
+    // 1. Setup Isolated Ambient Background Engine
+    let audioEngine = document.getElementById("studio-ambient-music");
     
-    if (!audio) {
-        audio = document.createElement("audio");
-        audio.id = "studio-ambient-music";
-        audio.src = "opening.mp3"; // Keeps your true musical theme looping on interior pages
-        audio.loop = true;
-        audio.style.display = "none"; 
-        document.body.appendChild(audio);
+    if (!audioEngine) {
+        audioEngine = document.createElement("audio");
+        audioEngine.id = "studio-ambient-music";
+        audioEngine.src = "opening.mp3"; // Background loop ONLY
+        audioEngine.loop = true;
+        audioEngine.style.display = "none"; 
+        document.body.appendChild(audioEngine);
     }
 
+    // Load saved tracking states
     const savedTime = localStorage.getItem("luxuryTime");
-    if (savedTime) { audio.currentTime = parseFloat(savedTime); }
+    if (savedTime) { audioEngine.currentTime = parseFloat(savedTime); }
 
     if (localStorage.getItem("luxuryPlaying") === "true") {
-        audio.play().catch(() => {
+        audioEngine.play().catch(() => {
+            // Unblock browser interactions
             document.addEventListener("click", function startAudio() {
-                audio.play();
+                audioEngine.play();
                 document.removeEventListener("click", startAudio);
             });
         });
     }
 
     window.addEventListener("beforeunload", function () {
-        localStorage.setItem("luxuryTime", audio.currentTime);
-        localStorage.setItem("luxuryPlaying", !audio.paused);
+        localStorage.setItem("luxuryTime", audioEngine.currentTime);
+        localStorage.setItem("luxuryPlaying", !audioEngine.paused);
     });
 
-    // Interaction Trigger
-    const playShutterSnap = () => {
-        const shutter = new Audio("velvet-snap.mp3");
-        shutter.volume = 0.95;
-        shutter.play().catch(() => {});
+    // 2. Completely Isolated Instant Interaction Click Trigger
+    const playMechanicalSnap = () => {
+        const snapEffect = new Audio("velvet-snap.mp3"); // Quick effect file ONLY
+        snapEffect.volume = 0.95;
+        snapEffect.play().catch(() => {});
     };
 
-    document.querySelectorAll("nav a, .cta-link-minimal, .logo-brand, .project-card a").forEach(link => {
+    // Apply snap effect to all navigation changes
+    document.querySelectorAll("nav a, .cta-link-minimal, .logo-brand, .header-logo a").forEach(link => {
         link.addEventListener("click", function (e) {
             if (this.hostname === window.location.hostname) {
                 e.preventDefault();
-                const destination = this.href;
-                playShutterSnap();
-                setTimeout(() => { window.location.href = destination; }, 180);
+                const destinationUrl = this.href;
+                playMechanicalSnap();
+                setTimeout(() => { window.location.href = destinationUrl; }, 200);
             }
         });
     });
