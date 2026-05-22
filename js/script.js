@@ -1,50 +1,55 @@
-window.addEventListener("DOMContentLoaded", function () {
-    // 1. Setup Isolated Ambient Background Engine
-    let audioEngine = document.getElementById("studio-ambient-music");
-    
-    if (!audioEngine) {
-        audioEngine = document.createElement("audio");
-        audioEngine.id = "studio-ambient-music";
-        audioEngine.src = "opening.mp3"; // Background loop ONLY
-        audioEngine.loop = true;
-        audioEngine.style.display = "none"; 
-        document.body.appendChild(audioEngine);
+document.addEventListener("DOMContentLoaded", function () {
+    // 1. One-Time Global Background Audio Initializer
+    let backgroundTrack = document.getElementById("global-studio-audio");
+
+    if (!backgroundTrack) {
+        backgroundTrack = document.createElement("audio");
+        backgroundTrack.id = "global-studio-audio";
+        backgroundTrack.src = "opening.mp3";
+        backgroundTrack.loop = false; // Setting explicitly to play only once
+        backgroundTrack.style.display = "none";
+        document.body.appendChild(backgroundTrack);
     }
 
-    // Load saved tracking states
-    const savedTime = localStorage.getItem("luxuryTime");
-    if (savedTime) { audioEngine.currentTime = parseFloat(savedTime); }
+    // Check if the track was already launched during this web session
+    const hasPlayedThisSession = sessionStorage.getItem("studioAmbientPlayed");
 
-    if (localStorage.getItem("luxuryPlaying") === "true") {
-        audioEngine.play().catch(() => {
-            // Unblock browser interactions
-            document.addEventListener("click", function startAudio() {
-                audioEngine.play();
-                document.removeEventListener("click", startAudio);
+    if (!hasPlayedThisSession) {
+        const executeAudioPlay = () => {
+            backgroundTrack.play()
+                .then(() => {
+                    sessionStorage.setItem("studioAmbientPlayed", "true");
+                })
+                .catch(err => console.log("Interaction required to unmute luxury soundscape"));
+        };
+
+        // Try playing automatically, fall back to initial user interaction click if restricted
+        backgroundTrack.play()
+            .then(() => {
+                sessionStorage.setItem("studioAmbientPlayed", "true");
+            })
+            .catch(() => {
+                document.addEventListener("click", executeAudioPlay, { once: true });
             });
-        });
     }
 
-    window.addEventListener("beforeunload", function () {
-        localStorage.setItem("luxuryTime", audioEngine.currentTime);
-        localStorage.setItem("luxuryPlaying", !audioEngine.paused);
-    });
-
-    // 2. Completely Isolated Instant Interaction Click Trigger
-    const playMechanicalSnap = () => {
-        const snapEffect = new Audio("velvet-snap.mp3"); // Quick effect file ONLY
-        snapEffect.volume = 0.95;
-        snapEffect.play().catch(() => {});
+    // 2. Snappy Mechanical Camera Shutter Click Effect
+    const executeCameraSnap = () => {
+        const shutterAudio = new Audio("velvet-snap.mp3");
+        shutterAudio.volume = 0.45;
+        shutterAudio.play().catch(() => {});
     };
 
-    // Apply snap effect to all navigation changes
-    document.querySelectorAll("nav a, .cta-link-minimal, .logo-brand, .header-logo a").forEach(link => {
-        link.addEventListener("click", function (e) {
+    // Attach instant snap effect seamlessly to luxury transitions
+    document.querySelectorAll("nav a, .logo-brand, .header-logo a").forEach(link => {
+        link.addEventListener("click", function (event) {
             if (this.hostname === window.location.hostname) {
-                e.preventDefault();
-                const destinationUrl = this.href;
-                playMechanicalSnap();
-                setTimeout(() => { window.location.href = destinationUrl; }, 200);
+                event.preventDefault();
+                const routeDestination = this.href;
+                executeCameraSnap();
+                setTimeout(() => {
+                    window.location.href = routeDestination;
+                }, 200);
             }
         });
     });
