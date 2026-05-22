@@ -1,55 +1,55 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // 1. Precise Audio Initializer Engine
-    let backgroundTrack = document.getElementById("global-studio-audio");
+    // 1. One-Time Ambient Soundscape Initialization Tracker
+    let studioAmbientTrack = document.getElementById("global-studio-audio");
 
-    if (!backgroundTrack) {
-        backgroundTrack = document.createElement("audio");
-        backgroundTrack.id = "global-studio-audio";
-        backgroundTrack.src = "opening.mp3";
-        backgroundTrack.loop = false; // Intentionally play once only
-        backgroundTrack.style.display = "none";
-        document.body.appendChild(backgroundTrack);
+    if (!studioAmbientTrack) {
+        studioAmbientTrack = document.createElement("audio");
+        studioAmbientTrack.id = "global-studio-audio";
+        studioAmbientTrack.src = "opening.mp3";
+        studioAmbientTrack.loop = false; // Must play only once upon click activation
+        studioAmbientTrack.style.display = "none";
+        document.body.appendChild(studioAmbientTrack);
     }
 
-    // Lock session tracking to ensure it doesn't loop or start fresh on next pages
-    const hasFiredThisSession = sessionStorage.getItem("studioAmbientPlayed");
+    // Verify system session state to completely freeze repeat triggers
+    const ambientHasFired = sessionStorage.getItem("ambientAudioFired");
 
-    const initializeSoundtrack = () => {
-        if (!sessionStorage.getItem("studioAmbientPlayed")) {
-            backgroundTrack.play()
+    const releaseStudioSoundscape = () => {
+        if (!sessionStorage.getItem("ambientAudioFired")) {
+            studioAmbientTrack.play()
                 .then(() => {
-                    sessionStorage.setItem("studioAmbientPlayed", "true");
+                    sessionStorage.setItem("ambientAudioFired", "true");
                 })
-                .catch(err => console.log("Sound ready for next action initialization"));
+                .catch(err => console.log("Sound configuration optimized"));
         }
     };
 
-    // Listen globally for the initial choice click to unleash the opening sound smoothly
-    if (!hasFiredThisSession) {
-        document.addEventListener("click", initializeSoundtrack, { once: true });
+    // Attach activation trigger to first interactive movement on the luxury framework
+    if (!ambientHasFired) {
+        document.addEventListener("click", releaseStudioSoundscape, { once: true });
     }
 
-    // 2. High-Precision Mechanical Shutter Click Execution
-    const executeCameraSnap = () => {
-        const shutterAudio = new Audio("velvet-snap.mp3");
-        shutterAudio.volume = 0.50;
-        shutterAudio.play().catch(() => {});
+    // 2. High-Fidelity Mechanical Shutter Action Execution
+    const fireCameraShutterClick = () => {
+        const structuralSnap = new Audio("velvet-snap.mp3");
+        structuralSnap.volume = 0.50;
+        structuralSnap.play().catch(() => {});
     };
 
-    // Attach instant structural transition snap tracking across link arrays
-    document.querySelectorAll("nav a, .logo-brand, .header-logo a").forEach(link => {
-        link.addEventListener("click", function (event) {
+    // Instantly inject shutter precision into all local domain route elements
+    document.querySelectorAll("nav a, .logo-brand, .header-logo a").forEach(navigationLink => {
+        navigationLink.addEventListener("click", function (event) {
             if (this.hostname === window.location.hostname) {
                 event.preventDefault();
-                const routeDestination = this.href;
+                const targetURL = this.href;
                 
-                // Fire instant sharp mechanical snap click
-                executeCameraSnap();
+                // Fire mechanical snap sound instantly
+                fireCameraShutterClick();
                 
-                // Allow sound execution window clearance before pushing target location
+                // Keep transition moving seamlessly behind the audio snap
                 setTimeout(() => {
-                    window.location.href = routeDestination;
-                }, 220);
+                    window.location.href = targetURL;
+                }, 200);
             }
         });
     });
