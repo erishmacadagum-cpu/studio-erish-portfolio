@@ -49,7 +49,7 @@
             <h1 class="hero-title serif-title">Orchestrating Atmospheres <br><em>for Life's Grandest Moments.</em></h1>
             
             <div class="narrative-media journal-cover-frame">
-                <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1600&q=80">
+               <img src="images/hero-bg.jpg" alt="Studio Erish Master Composition">
             </div>
         </section>
 
@@ -69,9 +69,9 @@
         <p>&copy; 2026 Studio Erish. All Rights Reserved.</p>
     </footer>
 
-  <script>
+<script>
 window.addEventListener("DOMContentLoaded", () => {
-    // 1. Establish the clean, hidden ambient player instance
+    // 1. Setup global ambient background audio layer
     let ambientAudio = document.getElementById("luxury-audio-engine");
     if (!ambientAudio) {
         ambientAudio = document.createElement("audio");
@@ -82,7 +82,7 @@ window.addEventListener("DOMContentLoaded", () => {
         document.body.appendChild(ambientAudio);
     }
 
-    // Safely sync time positions across luxury page transitions
+    // Sync ambient tracking data across page changes seamlessly
     const savedTime = localStorage.getItem("luxuryTime");
     if (savedTime) { ambientAudio.currentTime = parseFloat(savedTime); }
     if (localStorage.getItem("luxuryPlaying") === "true") { ambientAudio.play().catch(() => {}); }
@@ -92,41 +92,49 @@ window.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("luxuryPlaying", !ambientAudio.paused);
     });
 
-    // Start background audio seamlessly on the user's very first click
-    const startAmbience = () => {
-        if (ambientAudio.paused) {
-            ambientAudio.play();
-            localStorage.setItem("luxuryPlaying", "true");
-        }
-        document.removeEventListener("click", startAmbience);
+    // 2. THE CHOSEN VELVET SHUTTER SNAP ENGINE
+    const playShutterSnap = () => {
+        const shutter = new Audio("velvet-snap.mp3");
+        shutter.currentTime = 0; // Capture the immediate tactile snap beginning
+        shutter.volume = 0.90;
+        shutter.play().catch(() => {});
     };
-    document.addEventListener("click", startAmbience);
 
-    // 2. THE VELVET SHUTTER CLICK HANDLER
-    // This catches your menu link clicks and forces the crisp snap sound before loading the new page
-    document.querySelectorAll("nav a, .cta-link-minimal, site-header a, footer a").forEach(link => {
+    // Trigger A: Snap sound directly when clicking the "ENTER EXPERIENCE" button
+    const enterBtn = document.getElementById("enterStudioBtn");
+    if (enterBtn) {
+        enterBtn.addEventListener("click", () => {
+            playShutterSnap();
+            // Start the low ambient tracking loop right as they cross the curtain
+            if (ambientAudio.paused) {
+                ambientAudio.play();
+                localStorage.setItem("luxuryPlaying", "true");
+            }
+        });
+    }
+
+    // Trigger B: Snap sound when clicking any luxury menu layout link
+    document.querySelectorAll("nav a, .cta-link-minimal, .logo-brand").forEach(link => {
         link.addEventListener("click", function (e) {
-            // Check if it's an internal link
             if (this.hostname === window.location.hostname) {
-                e.preventDefault(); 
+                e.preventDefault();
                 const destination = this.href;
-
-                // Fire an isolated, snappy audio trigger
-                const shutter = new Audio("velvet-snap.mp3");
-                shutter.currentTime = 0; // Capture the immediate crisp start
-                shutter.volume = 0.85;
+                playShutterSnap();
                 
-                shutter.play().then(() => {
-                    // 180ms delay gives the tactile shutter mechanism time to ring out luxuriously
-                    setTimeout(() => {
-                        window.location.href = destination;
-                    }, 180);
-                }).catch(() => {
+                // Allow 180ms for the mechanical snap frequency to ring out before transitioning
+                setTimeout(() => {
                     window.location.href = destination;
-                });
+                }, 180);
             }
         });
     });
+
+    // Fallback global touch alternative
+    document.addEventListener("click", () => {
+        if (ambientAudio.paused && localStorage.getItem("luxuryPlaying") === "true") {
+            ambientAudio.play();
+        }
+    }, { once: true });
 });
 </script>
 </body>
