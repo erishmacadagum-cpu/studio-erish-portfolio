@@ -136,7 +136,7 @@
                 </div>
                 <div>
                     <span style="display: block; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 0.6rem; font-weight: 500;">Total Ledger Visits</span>
-                  <span style="display: block; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: #999; font-weight: 500;">ACTIVE LEDGER</span>
+                <div id="visit-counter" style="font-size: 0.7rem; color: #999; letter-spacing: 2px;">0</div>
                 </div>
             </div>
             <div class="footer-column" style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start;">
@@ -165,7 +165,10 @@
                 colorLight: "#fafafa"
             });
         }
-    </script>
+    // 3. Simple Counter Logic
+    let visits = localStorage.getItem('page_visits') || 1240;
+    document.getElementById('visit-counter').innerText = visits;
+    localStorage.setItem('page_visits', parseInt(visits) + 1);/script>
 </body>
 </html>
 </html>
