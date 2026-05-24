@@ -144,12 +144,6 @@
 <script>
     // 1. SOUND & BUTTON
     const btn = document.getElementById('exp-btn');
-    // Ensure 'velvet-snap.mp3' exists in your files
-    const clickSound = new Audio('velvet-snap.mp3'); 
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script>
-    // 1. SOUND & BUTTON
-    const btn = document.getElementById('exp-btn');
     const clickSound = new Audio('velvet-snap.mp3'); 
     btn.onclick = () => {
         clickSound.play();
@@ -161,7 +155,7 @@
         document.getElementById("studio-timeclock").innerText = new Date().toLocaleTimeString();
     }, 1000);
 
-    // 3. QR (Clean generation)
+    // 3. QR
     const qrEl = document.getElementById("site-qr-code");
     qrEl.innerHTML = ""; 
     new QRCode(qrEl, { text: window.location.href, width: 60, height: 60 });
