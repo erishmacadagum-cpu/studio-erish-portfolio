@@ -144,20 +144,35 @@
 <script>
     // 1. SOUND & BUTTON
     const btn = document.getElementById('exp-btn');
-    const clickSound = new Audio('velvet-snap.mp3'); 
-    btn.onclick = () => {
-        clickSound.play();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
+    if (btn) {
+        const clickSound = new Audio('velvet-snap.mp3'); 
+        btn.onclick = () => {
+            clickSound.play();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+    }
 
     // 2. CLOCK
     setInterval(() => {
-        document.getElementById("studio-timeclock").innerText = new Date().toLocaleTimeString();
+        const timeEl = document.getElementById("studio-timeclock");
+        if (timeEl) timeEl.innerText = new Date().toLocaleTimeString();
     }, 1000);
 
     // 3. QR
     const qrEl = document.getElementById("site-qr-code");
-    qrEl.innerHTML = ""; 
+    if (qrEl) {
+        qrEl.innerHTML = ""; 
+        new QRCode(qrEl, { text: window.location.href, width: 60, height: 60 });
+    }
+
+    // 4. COUNTER
+    const countEl = document.getElementById("visit-counter");
+    if (countEl) {
+        let count = localStorage.getItem('page_visits') || 1240;
+        countEl.innerText = count;
+        localStorage.setItem('page_visits', parseInt(count) + 1);
+    }
+</script>
     new QRCode(qrEl, { text: window.location.href, width: 60, height: 60 });
 
     // 4. COUNTER
