@@ -146,6 +146,11 @@
     const btn = document.getElementById('exp-btn');
     // Ensure 'velvet-snap.mp3' exists in your files
     const clickSound = new Audio('velvet-snap.mp3'); 
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+    // 1. SOUND & BUTTON
+    const btn = document.getElementById('exp-btn');
+    const clickSound = new Audio('velvet-snap.mp3'); 
     btn.onclick = () => {
         clickSound.play();
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -166,9 +171,3 @@
     document.getElementById("visit-counter").innerText = count;
     localStorage.setItem('page_visits', parseInt(count) + 1);
 </script>
-    let visits = localStorage.getItem('page_visits') || 1240;
-    document.getElementById('visit-counter').innerText = visits;
-    localStorage.setItem('page_visits', parseInt(visits) + 1);/script>
-</body>
-</html>
-</html>
