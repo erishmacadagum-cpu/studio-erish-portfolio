@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Erish Experience — Signature Highlights</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --cream:#FAF7F2;--warm:#F2EDE4;--gold:#B8965A;--gold-lt:#D4B07A;
+  --gold-dk:#8B6C38;--dark:#1C1610;--text:#3A3028;--muted:#8A7A6A;--border:#DDD5C8;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:#fff;font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;}
+
+.preloader{position:fixed;inset:0;background:var(--dark);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:24px;transition:opacity 0.8s ease,visibility 0.8s ease;}
+.preloader.hidden{opacity:0;visibility:hidden;}
+.pre-logo{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;font-style:italic;color:rgba(255,255,255,0.15);letter-spacing:4px;animation:breathe 2s ease infinite;}
+.pre-line{width:0;height:0.5px;background:var(--gold);animation:expand 1.8s ease forwards;}
+@keyframes breathe{0%,100%{opacity:0.15;}50%{opacity:0.4;}}
+@keyframes expand{to{width:120px;}}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:22px 56px;display:flex;align-items:center;justify-content:space-between;background:rgba(28,22,16,0.88);backdrop-filter:blur(20px);border-bottom:0.5px solid rgba(184,150,90,0.1);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;color:#fff;letter-spacing:3px;}
+.nav-logo em{font-style:italic;color:var(--gold);}
+.nav-links{display:flex;gap:32px;}
+.nav-links a{font-size:9.5px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.3s;}
+.nav-links a:hover{color:var(--gold);}
+
+.c-hero{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--dark);}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+.orb-1{width:600px;height:600px;background:radial-gradient(circle,rgba(184,150,90,0.08) 0%,transparent 70%);top:-100px;left:-100px;animation:drift1 12s ease-in-out infinite;}
+.orb-2{width:400px;height:400px;background:radial-gradient(circle,rgba(255,255,255,0.025) 0%,transparent 70%);bottom:0;right:0;animation:drift2 16s ease-in-out infinite;}
+@keyframes drift1{0%,100%{transform:translate(0,0);}50%{transform:translate(60px,40px);}}
+@keyframes drift2{0%,100%{transform:translate(0,0);}50%{transform:translate(-40px,-30px);}}
+.hero-border{position:absolute;inset:24px;border:0.5px solid rgba(255,255,255,0.04);pointer-events:none;}
+.hero-border::before{content:'';position:absolute;inset:14px;border:0.3px solid rgba(184,150,90,0.08);}
+.cn{position:absolute;width:40px;height:40px;}
+.cn::before,.cn::after{content:'';position:absolute;background:var(--gold);opacity:0.35;}
+.cn::before{width:100%;height:0.7px;top:0;left:0;}
+.cn::after{width:0.7px;height:100%;top:0;left:0;}
+.cn.tl{top:36px;left:36px;}.cn.tr{top:36px;right:36px;transform:rotate(90deg);}
+.cn.bl{bottom:36px;left:36px;transform:rotate(270deg);}.cn.br{bottom:36px;right:36px;transform:rotate(180deg);}
+.hero-watermark{position:absolute;font-family:'Cormorant Garamond',serif;font-size:320px;font-weight:300;font-style:italic;color:rgba(255,255,255,0.02);line-height:1;user-select:none;right:-40px;bottom:-40px;letter-spacing:-10px;}
+.hero-inner{position:relative;z-index:2;text-align:center;padding:40px 24px;max-width:900px;margin:0 auto;}
+.hero-badge{display:inline-flex;align-items:center;gap:12px;border:0.5px solid rgba(184,150,90,0.25);padding:10px 24px;margin-bottom:40px;animation:fadeUp 1s ease both;}
+.hero-badge span{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);opacity:0.8;}
+.hero-badge .bd{width:3px;height:3px;background:var(--gold);transform:rotate(45deg);opacity:0.5;}
+.hero-sup{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;font-weight:300;color:rgba(255,255,255,0.25);letter-spacing:3px;margin-bottom:16px;display:block;animation:fadeUp 1s 0.1s ease both;}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,9vw,120px);font-weight:300;color:#fff;line-height:0.9;letter-spacing:-2px;margin-bottom:20px;animation:fadeUp 1s 0.2s ease both;}
+.hero-title em{font-style:italic;color:var(--gold-lt);}
+.hero-title .thin{font-weight:200;color:rgba(255,255,255,0.3);}
+.hero-div{display:flex;align-items:center;justify-content:center;gap:16px;margin:32px auto;animation:fadeUp 1s 0.3s ease both;}
+.hdl{width:80px;height:0.5px;background:linear-gradient(to right,transparent,var(--gold));}.hdl.r{background:linear-gradient(to left,transparent,var(--gold));}
+.hdd{width:6px;height:6px;background:var(--gold);transform:rotate(45deg);opacity:0.7;}
+.hero-desc{font-family:'Cormorant Garamond',serif;font-size:clamp(17px,2.5vw,22px);font-style:italic;font-weight:300;color:rgba(255,255,255,0.35);line-height:1.8;max-width:600px;margin:0 auto;animation:fadeUp 1s 0.4s ease both;}
+.scroll-indicator{position:absolute;bottom:48px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;animation:fadeUp 1s 0.8s ease both;}
+.scroll-indicator span{font-size:8.5px;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.15);}
+.scroll-track{width:1px;height:48px;background:linear-gradient(to bottom,var(--gold),transparent);opacity:0.4;animation:sPulse 2s ease infinite;}
+@keyframes sPulse{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}51%{transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+
+.manifesto{background:var(--cream);padding:120px 24px;position:relative;}
+.manifesto::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:0.5px;height:80px;background:linear-gradient(to bottom,var(--gold),transparent);opacity:0.4;}
+.manifesto-inner{max-width:820px;margin:0 auto;text-align:center;}
+.m-label{font-size:9px;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:32px;display:block;}
+.m-pull{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,4vw,44px);font-weight:300;color:var(--dark);line-height:1.5;margin-bottom:40px;}
+.m-pull em{font-style:italic;color:var(--gold);}
+.m-body{font-size:15px;line-height:2.1;color:var(--muted);max-width:620px;margin:0 auto 48px;}
+.m-body strong{color:var(--text);font-weight:500;}
+.m-div{display:flex;align-items:center;justify-content:center;gap:12px;margin:0 auto 48px;}
+.mdl{width:50px;height:0.5px;background:var(--gold);opacity:0.4;}.mdd{width:4px;height:4px;background:var(--gold);transform:rotate(45deg);opacity:0.6;}
+.m-stats{display:flex;align-items:stretch;border:0.5px solid var(--border);max-width:560px;margin:0 auto;}
+.m-stat{flex:1;padding:32px 20px;text-align:center;border-right:0.5px solid var(--border);}
+.m-stat:last-child{border-right:none;}
+.msn{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;color:var(--dark);line-height:1;margin-bottom:6px;}
+.msl{font-size:8.5px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);}
+
+.highlights{background:var(--dark);}
+.hl-item{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;}
+.hl-item:nth-child(odd) .hl-content{flex-direction:row;}
+.hl-item:nth-child(even) .hl-content{flex-direction:row-reverse;}
+.hl-item::before{content:'';position:absolute;inset:0;pointer-events:none;}
+.h1::before{background:radial-gradient(ellipse 50% 70% at 30% 50%,rgba(184,150,90,0.06) 0%,transparent 70%);}
+.h2::before{background:radial-gradient(ellipse 50% 70% at 70% 50%,rgba(184,150,90,0.05) 0%,transparent 70%);}
+.h3::before{background:radial-gradient(ellipse 50% 70% at 30% 50%,rgba(255,255,255,0.02) 0%,transparent 70%);}
+.h4::before{background:radial-gradient(ellipse 50% 70% at 70% 50%,rgba(184,150,90,0.04) 0%,transparent 70%);}
+.h5::before{background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(184,150,90,0.06) 0%,transparent 70%);}
+.hl-content{width:100%;max-width:1300px;margin:0 auto;display:flex;align-items:center;padding:80px 56px;gap:0;position:relative;z-index:2;}
+.hl-visual{flex:0 0 52%;position:relative;}
+.hl-img-frame{position:relative;aspect-ratio:3/4;max-height:680px;overflow:hidden;}
+.hl-img-frame::before{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;}
+.hl-item:nth-child(odd) .hl-img-frame::before{background:linear-gradient(to right,transparent 70%,var(--dark) 100%);}
+.hl-item:nth-child(even) .hl-img-frame::before{background:linear-gradient(to left,transparent 70%,var(--dark) 100%);}
+.hl-img-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;position:relative;transition:transform 0.8s ease;}
+.hl-visual:hover .hl-img-inner{transform:scale(1.03);}
+.ev1{background:linear-gradient(145deg,#1E1810 0%,#2E2416 40%,#241C0E 100%);}
+.ev2{background:linear-gradient(145deg,#161820 0%,#20243A 40%,#1A1E30 100%);}
+.ev3{background:linear-gradient(145deg,#1A1018 0%,#2C1A28 40%,#201418 100%);}
+.ev4{background:linear-gradient(145deg,#101818 0%,#182828 40%,#142020 100%);}
+.ev5{background:linear-gradient(145deg,#18100E 0%,#2A1814 40%,#201210 100%);}
+.hl-img-number{font-family:'Cormorant Garamond',serif;font-size:120px;font-weight:300;font-style:italic;color:rgba(255,255,255,0.04);line-height:1;user-select:none;}
+.hl-img-tag{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.1);}
+.hl-img-orn{display:flex;align-items:center;gap:8px;opacity:0.15;}
+.hl-img-orn .ol{width:32px;height:0.5px;background:var(--gold-lt);}.hl-img-orn .od{width:4px;height:4px;background:var(--gold-lt);transform:rotate(45deg);}
+.hl-add-photo{position:absolute;top:20px;font-size:8px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);opacity:0.35;border:0.5px solid rgba(184,150,90,0.2);padding:8px 16px;z-index:3;}
+.hl-item:nth-child(odd) .hl-add-photo{right:20px;}.hl-item:nth-child(even) .hl-add-photo{left:20px;}
+.hl-rank{position:absolute;font-family:'Cormorant Garamond',serif;font-size:11px;font-style:italic;color:var(--gold);letter-spacing:2px;z-index:3;bottom:24px;}
+.hl-item:nth-child(odd) .hl-rank{left:24px;}.hl-item:nth-child(even) .hl-rank{right:24px;}
+.hl-text{flex:1;}
+.hl-item:nth-child(odd) .hl-text{padding:0 0 0 64px;}.hl-item:nth-child(even) .hl-text{padding:0 64px 0 0;}
+.hl-index{font-family:'Cormorant Garamond',serif;font-size:80px;font-weight:300;color:transparent;-webkit-text-stroke:0.5px rgba(184,150,90,0.2);line-height:1;margin-bottom:-16px;}
+.hl-category{font-size:8.5px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:16px;display:block;}
+.hl-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,58px);font-weight:300;color:#fff;line-height:1.1;margin-bottom:8px;}
+.hl-title em{font-style:italic;color:var(--gold-lt);}
+.hl-subtitle{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;font-style:italic;color:rgba(255,255,255,0.22);margin-bottom:32px;letter-spacing:1px;}
+.hl-line{width:36px;height:1px;background:var(--gold);margin-bottom:32px;opacity:0.6;}
+.hl-story{font-size:14.5px;line-height:2.1;color:rgba(255,255,255,0.42);margin-bottom:28px;}
+.hl-story strong{color:rgba(255,255,255,0.68);font-weight:400;}
+.hl-pull{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;font-weight:300;color:rgba(255,255,255,0.55);border-left:1.5px solid var(--gold);padding-left:20px;margin:32px 0;line-height:1.7;}
+.hl-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px;}
+.hl-tag{font-size:8.5px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.22);border:0.5px solid rgba(255,255,255,0.08);padding:8px 16px;}
+.hl-divider{display:flex;align-items:center;justify-content:center;gap:16px;padding:20px 0;background:var(--dark);}
+.hdiv-l{width:120px;height:0.5px;background:linear-gradient(to right,transparent,rgba(184,150,90,0.2));}.hdiv-l.r{background:linear-gradient(to left,transparent,rgba(184,150,90,0.2));}
+.hdiv-d{width:4px;height:4px;background:rgba(184,150,90,0.3);transform:rotate(45deg);}
+
+.testament{background:var(--cream);padding:140px 24px;position:relative;overflow:hidden;}
+.testament::before{content:'"';position:absolute;top:-40px;left:50%;transform:translateX(-50%);font-family:'Cormorant Garamond',serif;font-size:400px;font-weight:300;font-style:italic;color:rgba(184,150,90,0.04);line-height:1;user-select:none;pointer-events:none;}
+.testament-inner{max-width:800px;margin:0 auto;text-align:center;position:relative;z-index:2;}
+.t-label{font-size:9px;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:40px;display:block;}
+.t-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,4vw,44px);font-weight:300;font-style:italic;color:var(--dark);line-height:1.5;margin-bottom:40px;}
+.t-quote em{color:var(--gold);}
+.t-div{display:flex;align-items:center;justify-content:center;gap:12px;margin:40px auto;}
+.tdl{width:48px;height:0.5px;background:var(--gold);opacity:0.4;}.tdd{width:4px;height:4px;background:var(--gold);transform:rotate(45deg);opacity:0.6;}
+.t-body{font-size:15px;line-height:2.1;color:var(--muted);max-width:600px;margin:0 auto 56px;}
+.t-body strong{color:var(--text);font-weight:500;}
+.trust-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:0.5px solid var(--border);max-width:800px;margin:0 auto;}
+.trust-item{background:var(--cream);padding:40px 24px;text-align:center;}
+.trust-icon{font-family:'Cormorant Garamond',serif;font-size:32px;font-style:italic;color:var(--gold);opacity:0.5;margin-bottom:12px;display:block;}
+.trust-title{font-size:9.5px;letter-spacing:3px;text-transform:uppercase;color:var(--text);margin-bottom:10px;font-weight:500;}
+.trust-body{font-size:12.5px;line-height:1.9;color:var(--muted);}
+
+.closing{background:var(--dark);padding:160px 24px;text-align:center;position:relative;overflow:hidden;}
+.closing::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(184,150,90,0.07) 0%,transparent 70%);}
+.c-bdr{position:absolute;inset:24px;border:0.5px solid rgba(255,255,255,0.04);pointer-events:none;}
+.c-bdr::before{content:'';position:absolute;inset:14px;border:0.3px solid rgba(184,150,90,0.07);}
+.cn2{position:absolute;width:32px;height:32px;}.cn2::before,.cn2::after{content:'';position:absolute;background:var(--gold);opacity:0.25;}
+.cn2::before{width:100%;height:0.7px;top:0;left:0;}.cn2::after{width:0.7px;height:100%;top:0;left:0;}
+.cn2.tl{top:36px;left:36px;}.cn2.tr{top:36px;right:36px;transform:rotate(90deg);}
+.cn2.bl{bottom:36px;left:36px;transform:rotate(270deg);}.cn2.br{bottom:36px;right:36px;transform:rotate(180deg);}
+.closing-inner{position:relative;z-index:2;max-width:700px;margin:0 auto;}
+.c-eyebrow{font-size:9px;letter-spacing:6px;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:32px;display:block;}
+.c-title{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,7vw,88px);font-weight:300;color:#fff;line-height:0.95;margin-bottom:32px;letter-spacing:-1px;}
+.c-title em{font-style:italic;color:var(--gold-lt);}
+.c-sub{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;font-weight:300;color:rgba(255,255,255,0.25);margin-bottom:16px;}
+.c-body{font-size:14px;line-height:2;color:rgba(255,255,255,0.25);max-width:480px;margin:0 auto 56px;}
+.c-btns{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;}
+.btn-primary{display:inline-block;font-family:'Jost',sans-serif;font-size:9.5px;letter-spacing:5px;text-transform:uppercase;color:var(--dark);background:var(--gold-lt);padding:18px 48px;text-decoration:none;border:none;cursor:pointer;transition:all 0.3s;font-weight:500;}
+.btn-primary:hover{background:#fff;letter-spacing:6px;}
+.btn-ghost{display:inline-block;font-family:'Jost',sans-serif;font-size:9.5px;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.35);padding:18px 48px;text-decoration:none;border:0.5px solid rgba(255,255,255,0.1);cursor:pointer;transition:all 0.3s;}
+.btn-ghost:hover{color:#fff;border-color:rgba(255,255,255,0.3);}
+.c-note{font-size:10px;color:rgba(255,255,255,0.12);margin-top:32px;letter-spacing:1px;line-height:2;}
+
+footer{background:var(--dark);border-top:0.5px solid rgba(255,255,255,0.05);padding:36px 56px;display:flex;align-items:center;justify-content:space-between;}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:400;color:rgba(255,255,255,0.2);letter-spacing:3px;}
+.f-logo em{font-style:italic;color:var(--gold);opacity:0.5;}
+.f-note{font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.1);}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.9s ease,transform 0.9s ease;}
+.reveal.left{transform:translateX(-32px);}.reveal.right{transform:translateX(32px);}
+.reveal.visible{opacity:1;transform:translate(0);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+
+@media(max-width:900px){
+  nav{padding:16px 24px;}.nav-links{display:none;}
+  .hl-content,.hl-item:nth-child(odd) .hl-content,.hl-item:nth-child(even) .hl-content{flex-direction:column;padding:60px 24px;}
+  .hl-visual{flex:none;width:100%;}.hl-img-frame{max-height:400px;}
+  .hl-text,.hl-item:nth-child(odd) .hl-text,.hl-item:nth-child(even) .hl-text{padding:40px 0 0;}
+  .hl-item:nth-child(odd) .hl-img-frame::before,.hl-item:nth-child(even) .hl-img-frame::before{background:linear-gradient(to top,var(--dark) 0%,transparent 40%);}
+  .trust-row{grid-template-columns:1fr;}
+  footer{flex-direction:column;gap:12px;text-align:center;}
+  .c-btns{flex-direction:column;align-items:center;}
+}
+</style>
+</head>
+<body>
+
+<div class="preloader" id="preloader">
+  <div class="pre-logo">Erish Studio</div>
+  <div class="pre-line"></div>
+</div>
+
+<nav>
+  <div class="nav-logo"><em>Erish</em> Studio</div>
+  <div class="nav-links">
+    <a href="#">Home</a><a href="#">About</a>
+    <a href="#">Showcase</a><a href="#highlights">Highlights</a><a href="#">Inquire</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="c-hero">
+  <div class="hero-border"></div>
+  <div class="cn tl"></div><div class="cn tr"></div><div class="cn bl"></div><div class="cn br"></div>
+  <div class="orb orb-1"></div><div class="orb orb-2"></div>
+  <div class="hero-watermark">XVIII</div>
+  <div class="hero-inner">
+    <div class="hero-badge"><div class="bd"></div><span>The Erish Experience — Signature Highlights</span><div class="bd"></div></div>
+    <span class="hero-sup">18 Years of Artistry &nbsp;·&nbsp; Five Defining Moments</span>
+    <h1 class="hero-title">This Is <em>Not</em><br/><span class="thin">Just Décor.</span></h1>
+    <div class="hero-div"><div class="hdl"></div><div class="hdd"></div><div class="hdl r"></div></div>
+    <p class="hero-desc">These are five events that stopped time — where every detail became a declaration, and every moment became a memory you never let go.</p>
+  </div>
+  <div class="scroll-indicator"><span>Experience</span><div class="scroll-track"></div></div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <div class="manifesto-inner">
+    <span class="m-label reveal">A Letter From Erish</span>
+    <h2 class="m-pull reveal">I have never once approached an event thinking, <em>"This will do."</em> For me, <em>ordinary is not an option.</em></h2>
+    <div class="m-div reveal"><div class="mdl"></div><div class="mdd"></div><div class="mdl"></div></div>
+    <p class="m-body reveal">Since <strong>2007</strong>, I have stood in empty rooms and seen what they could become. I have listened to couples describe a feeling — not a theme — and built entire worlds around that feeling. I have held the nervous hands of debutantes and turned their anxiety into radiance. I have transformed bare halls into places that made grown people weep with beauty.<br/><br/>The five events you are about to witness are not our loudest moments. They are our most <strong>true</strong> ones — where the Erish Studio philosophy was felt most deeply. They are living proof that when you combine <strong>18 years of mastery</strong> with genuine love for the craft, something extraordinary happens.<br/><br/><strong>These are not just events. These are experiences that prove you are speaking to exactly the right person.</strong></p>
+    <div class="m-stats reveal">
+      <div class="m-stat"><div class="msn">18</div><div class="msl">Years Since 2007</div></div>
+      <div class="m-stat"><div class="msn">5</div><div class="msl">Defining Moments</div></div>
+      <div class="m-stat"><div class="msn">∞</div><div class="msl">Details. Always.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- HIGHLIGHTS -->
+<div class="highlights" id="highlights">
+
+<!-- 01 -->
+<section class="hl-item h1">
+  <div class="hl-content">
+    <div class="hl-visual reveal left">
+      <div class="hl-img-frame">
+        <div class="hl-img-inner ev1"><div class="hl-img-number">01</div><div class="hl-img-tag">Add Your Best Photo Here</div><div class="hl-img-orn"><div class="ol"></div><div class="od"></div><div class="ol"></div></div></div>
+        <div class="hl-add-photo">Replace with Photo</div><div class="hl-rank">Highlight No. 01 of 05</div>
+      </div>
+    </div>
+    <div class="hl-text reveal right">
+      <div class="hl-index">01</div>
+      <span class="hl-category">Wedding Reception · Grand Styling</span>
+      <h2 class="hl-title">The Night the Room<br/><em>Wept</em> with Beauty.</h2>
+      <p class="hl-subtitle">A Grand Ballroom Wedding — Davao City</p>
+      <div class="hl-line"></div>
+      <p class="hl-story">They came to us with a single word: <strong>"Timeless."</strong> No mood board. No Pinterest. Just that one word and absolute trust — and that is exactly the kind of brief that brings out the very best of what we do at Erish Studio.</p>
+      <div class="hl-pull">"We walked in and I burst into tears. Not because it was beautiful — but because it was <em>us.</em> It was exactly us."<br/><span style="font-size:11px;opacity:0.5;letter-spacing:2px;font-style:normal;">— The Bride</span></div>
+      <p class="hl-story">From floor-to-ceiling trusses wrapped in cascading ivory drapery, to hand-picked florals arranged in ways that felt like breathing gardens — every inch of that venue told their love story. This is what <strong>18 years of understanding people</strong> looks like when it meets the art of styling.</p>
+      <div class="hl-tags"><span class="hl-tag">Grand Ballroom</span><span class="hl-tag">Full Trusses</span><span class="hl-tag">Luxury Florals</span><span class="hl-tag">Full Coordination</span></div>
+    </div>
+  </div>
+</section>
+<div class="hl-divider"><div class="hdiv-l"></div><div class="hdiv-d"></div><div class="hdiv-l r"></div></div>
+
+<!-- 02 -->
+<section class="hl-item h2">
+  <div class="hl-content">
+    <div class="hl-visual reveal right">
+      <div class="hl-img-frame">
+        <div class="hl-img-inner ev2"><div class="hl-img-number">02</div><div class="hl-img-tag">Add Your Best Photo Here</div><div class="hl-img-orn"><div class="ol"></div><div class="od"></div><div class="ol"></div></div></div>
+        <div class="hl-add-photo">Replace with Photo</div><div class="hl-rank">Highlight No. 02 of 05</div>
+      </div>
+    </div>
+    <div class="hl-text reveal left">
+      <div class="hl-index">02</div>
+      <span class="hl-category">Garden Ceremony · Outdoor Styling</span>
+      <h2 class="hl-title">Where Heaven Met<br/>the <em>Earth</em> in Flowers.</h2>
+      <p class="hl-subtitle">An Outdoor Garden Ceremony — Davao del Sur</p>
+      <div class="hl-line"></div>
+      <p class="hl-story">No walls. No ceiling. Just sky, greenery, and the quiet conviction that <strong>nature, when styled with intention, becomes a cathedral</strong> unlike anything man-made. This ceremony required not just a designer's eye — but a deep respect for what already existed.</p>
+      <div class="hl-pull">"I always wanted to marry under the open sky. Erish made it look like <em>the sky itself dressed up for us.</em>"<br/><span style="font-size:11px;opacity:0.5;letter-spacing:2px;font-style:normal;">— The Bride</span></div>
+      <p class="hl-story">The floral arch. The petal-lined aisle stretching into the distance. The way late afternoon light caught the ivory draping at the altar. None of it was accidental. Every placement was a decision made with <strong>intention, love, and 18 years of knowing exactly what moves people.</strong></p>
+      <div class="hl-tags"><span class="hl-tag">Garden Ceremony</span><span class="hl-tag">Floral Arch</span><span class="hl-tag">Petal Aisle</span><span class="hl-tag">Out-of-Town Event</span></div>
+    </div>
+  </div>
+</section>
+<div class="hl-divider"><div class="hdiv-l"></div><div class="hdiv-d"></div><div class="hdiv-l r"></div></div>
+
+<!-- 03 -->
+<section class="hl-item h3">
+  <div class="hl-content">
+    <div class="hl-visual reveal left">
+      <div class="hl-img-frame">
+        <div class="hl-img-inner ev3"><div class="hl-img-number">03</div><div class="hl-img-tag">Add Your Best Photo Here</div><div class="hl-img-orn"><div class="ol"></div><div class="od"></div><div class="ol"></div></div></div>
+        <div class="hl-add-photo">Replace with Photo</div><div class="hl-rank">Highlight No. 03 of 05</div>
+      </div>
+    </div>
+    <div class="hl-text reveal right">
+      <div class="hl-index">03</div>
+      <span class="hl-category">Debut · 18th Birthday Celebration</span>
+      <h2 class="hl-title">She Walked In a Girl.<br/>She Left a <em>Queen.</em></h2>
+      <p class="hl-subtitle">An Elegant Debut Celebration — Davao City</p>
+      <div class="hl-line"></div>
+      <p class="hl-story">A debut is unlike any other event we style — because at its heart, it is a <strong>rite of passage</strong>. It is the moment a young woman steps into the fullness of who she is becoming. That kind of moment deserves a setting that rises to meet her.</p>
+      <div class="hl-pull">"My daughter has dreamed of this night since she was ten. Erish gave her something <em>beyond her dreams.</em>"<br/><span style="font-size:11px;opacity:0.5;letter-spacing:2px;font-style:normal;">— The Debutante's Mother</span></div>
+      <p class="hl-story">The grand entrance arch. The cotillion stage draped in her chosen palette. The table styling so refined it looked like a luxury editorial spread. <strong>But most importantly — her face when she saw it for the first time.</strong> That face is why Erish Studio exists.</p>
+      <div class="hl-tags"><span class="hl-tag">Debut Styling</span><span class="hl-tag">Grand Entrance</span><span class="hl-tag">Cotillion Stage</span><span class="hl-tag">Bespoke Florals</span></div>
+    </div>
+  </div>
+</section>
+<div class="hl-divider"><div class="hdiv-l"></div><div class="hdiv-d"></div><div class="hdiv-l r"></div></div>
+
+<!-- 04 -->
+<section class="hl-item h4">
+  <div class="hl-content">
+    <div class="hl-visual reveal right">
+      <div class="hl-img-frame">
+        <div class="hl-img-inner ev4"><div class="hl-img-number">04</div><div class="hl-img-tag">Add Your Best Photo Here</div><div class="hl-img-orn"><div class="ol"></div><div class="od"></div><div class="ol"></div></div></div>
+        <div class="hl-add-photo">Replace with Photo</div><div class="hl-rank">Highlight No. 04 of 05</div>
+      </div>
+    </div>
+    <div class="hl-text reveal left">
+      <div class="hl-index">04</div>
+      <span class="hl-category">Bespoke Bouquet · Bridal Florals</span>
+      <h2 class="hl-title">The Last Thing She Held<br/>Before <em>Forever.</em></h2>
+      <p class="hl-subtitle">A Signature Bridal Bouquet Collection</p>
+      <div class="hl-line"></div>
+      <p class="hl-story">People often underestimate the bouquet — they see it as an accessory. But we see it differently. <strong>The bouquet is the one thing in every photograph she will look at for the rest of her life.</strong> It deserves to be extraordinary.</p>
+      <div class="hl-pull">"I couldn't put it down even after the ceremony. It felt like <em>it was made for my hands.</em>"<br/><span style="font-size:11px;opacity:0.5;letter-spacing:2px;font-style:normal;">— The Bride</span></div>
+      <p class="hl-story">Each bespoke bouquet we craft begins not with flowers — but with a conversation. We ask about her personality, her story, the feeling she wants to carry as she walks toward the person she loves. <strong>The blooms come after. The meaning comes first.</strong></p>
+      <div class="hl-tags"><span class="hl-tag">Hand-tied Bouquet</span><span class="hl-tag">Bespoke Design</span><span class="hl-tag">Entourage Florals</span><span class="hl-tag">Bridal Accessories</span></div>
+    </div>
+  </div>
+</section>
+<div class="hl-divider"><div class="hdiv-l"></div><div class="hdiv-d"></div><div class="hdiv-l r"></div></div>
+
+<!-- 05 -->
+<section class="hl-item h5">
+  <div class="hl-content">
+    <div class="hl-visual reveal left">
+      <div class="hl-img-frame">
+        <div class="hl-img-inner ev5"><div class="hl-img-number">05</div><div class="hl-img-tag">Add Your Best Photo Here</div><div class="hl-img-orn"><div class="ol"></div><div class="od"></div><div class="ol"></div></div></div>
+        <div class="hl-add-photo">Replace with Photo</div><div class="hl-rank">Highlight No. 05 of 05</div>
+      </div>
+    </div>
+    <div class="hl-text reveal right">
+      <div class="hl-index">05</div>
+      <span class="hl-category">Birthday Celebration · Intimate Styling</span>
+      <h2 class="hl-title">Because Every Life<br/>Deserves to Be<br/><em>Celebrated Loudly.</em></h2>
+      <p class="hl-subtitle">A Milestone Birthday — Intimate & Grand</p>
+      <div class="hl-line"></div>
+      <p class="hl-story">She said she wanted something <strong>"simple but unforgettable."</strong> That is perhaps the most difficult brief in events styling — because simplicity, done at the highest level, requires more skill, more restraint, and more mastery than spectacle ever does.</p>
+      <div class="hl-pull">"I told her I wanted simple. She gave me something so <em>quietly extraordinary</em> that I forgot I ever used that word."<br/><span style="font-size:11px;opacity:0.5;letter-spacing:2px;font-style:normal;">— The Birthday Celebrant</span></div>
+      <p class="hl-story">The styling was precise, considered, and deeply personal. A hand-lettered welcome sign. A dessert table that felt like a gallery installation. Florals placed not to impress — but to <strong>hold space for the person being celebrated.</strong> This is what Erish Studio does differently. We celebrate people. Not trends.</p>
+      <div class="hl-tags"><span class="hl-tag">Intimate Styling</span><span class="hl-tag">Dessert Table</span><span class="hl-tag">Custom Signage</span><span class="hl-tag">Milestone Birthday</span></div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<!-- TESTAMENT -->
+<section class="testament">
+  <div class="testament-inner">
+    <span class="t-label reveal">Why Erish Studio</span>
+    <h2 class="t-quote reveal">You are not looking for someone who can style a room.<br/><em>You are looking for someone who understands your soul.</em></h2>
+    <div class="t-div reveal"><div class="tdl"></div><div class="tdd"></div><div class="tdl"></div></div>
+    <p class="t-body reveal">After 18 years and hundreds of events, the one thing that has never changed is this: <strong>people do not remember the flowers.</strong> They remember how the room made them feel. They remember walking in and losing their breath. They remember standing in a space and thinking — <strong>"This is exactly who I am."</strong><br/><br/>That is the Erish experience. It is not something you replicate with a template or a shortcut. It is the result of nearly two decades of listening, learning, and loving what we do with every single event.</p>
+    <div class="trust-row reveal">
+      <div class="trust-item"><span class="trust-icon">I</span><div class="trust-title">We Listen First</div><div class="trust-body">Before we design a single element, we listen until we truly understand who you are — and what your celebration needs to feel like.</div></div>
+      <div class="trust-item"><span class="trust-icon">II</span><div class="trust-title">We Never Repeat</div><div class="trust-body">No two Erish Studio events have ever looked the same. Every celebration is conceived, designed, and executed as a singular original.</div></div>
+      <div class="trust-item"><span class="trust-icon">III</span><div class="trust-title">We Stay Until Perfect</div><div class="trust-body">We do not leave a venue until every detail — every fold, every bloom, every light — is exactly as it should be. Not close. Exactly.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="c-bdr"></div>
+  <div class="cn2 tl"></div><div class="cn2 tr"></div><div class="cn2 bl"></div><div class="cn2 br"></div>
+  <div class="closing-inner">
+    <span class="c-eyebrow reveal">Begin Your Story</span>
+    <h2 class="c-title reveal">Your Event<br/>Could Be <em>Number</em><br/><em>Six.</em></h2>
+    <p class="c-sub reveal">The next defining moment is yours.</p>
+    <p class="c-body reveal">If even one moment on this page made you pause and think <em>"I want that feeling"</em> — then you already know you are in the right place. Let us sit down and begin creating something that belongs entirely to you.</p>
+    <div class="c-btns reveal">
+      <a href="#" class="btn-primary">Begin Your Inquiry</a>
+      <a href="#" class="btn-ghost">View Full Showcase</a>
+    </div>
+    <p class="c-note reveal">Limited bookings accepted each month &nbsp;·&nbsp; 18+ years of experience &nbsp;·&nbsp; Davao City & Beyond<br/>"Where Every Detail Tells Your Story."</p>
+  </div>
+</section>
+
+<footer>
+  <div class="f-logo"><em>Erish</em> Studio</div>
+  <div class="f-note">© 2026 Erish Studio Events & Styling · Davao City, Philippines</div>
+</footer>
+
+<script>
+window.addEventListener('load',()=>{setTimeout(()=>document.getElementById('preloader').classList.add('hidden'),1400);});
+const reveals=document.querySelectorAll('.reveal');
+const obs=new IntersectionObserver((entries)=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*70);obs.unobserve(e.target);}});},{threshold:0.08});
+reveals.forEach(r=>obs.observe(r));
+</script>
+</body>
+</html>

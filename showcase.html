@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Showcase — Erish Studio Events & Styling</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --cream:   #FAF7F2;
+  --warm:    #F2EDE4;
+  --gold:    #B8965A;
+  --gold-lt: #D4B07A;
+  --gold-dk: #8B6C38;
+  --dark:    #1C1610;
+  --charcoal:#2E2620;
+  --brown:   #5C4A35;
+  --text:    #3A3028;
+  --muted:   #8A7A6A;
+  --border:  #DDD5C8;
+  --white:   #FFFFFF;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--text);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 48px;
+  background:rgba(250,247,242,0.92);
+  backdrop-filter:blur(12px);
+  border-bottom:0.5px solid var(--border);
+}
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;font-weight:400;
+  color:var(--dark);letter-spacing:2px;
+}
+.nav-logo em{font-style:italic;color:var(--gold);}
+.nav-links{display:flex;gap:36px;}
+.nav-links a{
+  font-size:10px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;
+  transition:color 0.3s;
+}
+.nav-links a:hover{color:var(--gold);}
+
+/* ── HERO ── */
+.hero{
+  min-height:90vh;background:var(--dark);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;padding-top:80px;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 60% at 30% 60%,rgba(184,150,90,0.07) 0%,transparent 70%),
+    radial-gradient(ellipse 50% 40% at 80% 20%,rgba(255,255,255,0.02) 0%,transparent 60%);
+}
+.hero-frame{position:absolute;inset:20px;border:0.5px solid rgba(255,255,255,0.05);pointer-events:none;}
+.hero-frame::before{content:'';position:absolute;inset:12px;border:0.3px solid rgba(184,150,90,0.12);}
+
+.corner{position:absolute;width:32px;height:32px;}
+.corner::before,.corner::after{content:'';position:absolute;background:var(--gold);opacity:0.45;}
+.corner::before{width:100%;height:0.7px;top:0;left:0;}
+.corner::after{width:0.7px;height:100%;top:0;left:0;}
+.corner.tr{top:32px;right:32px;transform:rotate(90deg);}
+.corner.bl{bottom:32px;left:32px;transform:rotate(270deg);}
+.corner.br{bottom:32px;right:32px;transform:rotate(180deg);}
+.corner.tl{top:32px;left:32px;}
+
+.hero-content{position:relative;z-index:2;text-align:center;padding:40px 24px;animation:fadeUp 1.2s ease both;}
+.eyebrow{font-size:9.5px;letter-spacing:7px;text-transform:uppercase;color:var(--gold);opacity:0.75;margin-bottom:24px;display:block;}
+.hero-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(52px,9vw,110px);
+  font-weight:300;color:#fff;line-height:0.95;
+  letter-spacing:-1px;margin-bottom:12px;
+}
+.hero-title em{font-style:italic;color:var(--gold-lt);}
+.hero-sub{font-size:10px;letter-spacing:9px;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:48px;}
+.hero-divider{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:28px;}
+.hd-line{width:72px;height:0.5px;background:linear-gradient(to right,transparent,var(--gold));}
+.hd-line.r{background:linear-gradient(to left,transparent,var(--gold));}
+.hd-dia{width:5px;height:5px;background:var(--gold);transform:rotate(45deg);opacity:0.8;}
+.hero-desc{
+  font-family:'Cormorant Garamond',serif;
+  font-size:18px;font-style:italic;font-weight:300;
+  color:rgba(255,255,255,0.4);max-width:520px;margin:0 auto;line-height:1.8;
+}
+
+/* ── CATEGORY NAV ── */
+.cat-nav{
+  background:var(--white);
+  border-bottom:0.5px solid var(--border);
+  position:sticky;top:61px;z-index:90;
+}
+.cat-nav-inner{
+  max-width:1000px;margin:0 auto;
+  display:flex;align-items:center;justify-content:center;
+  gap:0;overflow-x:auto;
+}
+.cat-btn{
+  padding:22px 32px;
+  font-size:9.5px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--muted);background:none;border:none;cursor:pointer;
+  border-bottom:2px solid transparent;
+  transition:all 0.3s;white-space:nowrap;font-family:'Jost',sans-serif;
+}
+.cat-btn:hover,.cat-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
+
+/* ── SECTION WRAPPER ── */
+.showcase-section{padding:100px 24px;}
+.showcase-section:nth-child(even){background:var(--warm);}
+
+.sec-header{text-align:center;margin-bottom:72px;}
+.sec-label{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:block;}
+.sec-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(36px,5vw,58px);font-weight:300;
+  color:var(--dark);margin-bottom:16px;line-height:1.1;
+}
+.sec-title em{font-style:italic;color:var(--gold);}
+.sec-desc{
+  font-size:15px;line-height:1.9;color:var(--muted);
+  max-width:560px;margin:0 auto 32px;
+}
+.gold-bar{display:flex;align-items:center;justify-content:center;gap:10px;margin:0 auto;}
+.gb-line{width:48px;height:0.5px;background:var(--gold);opacity:0.5;}
+.gb-dia{width:4px;height:4px;background:var(--gold);transform:rotate(45deg);opacity:0.7;}
+
+/* ── GRIDS ── */
+.grid-hero{max-width:1200px;margin:0 auto;display:grid;gap:4px;}
+
+/* Reception - asymmetric 3-col */
+.grid-reception{grid-template-columns:1.4fr 1fr 1fr;grid-template-rows:380px 280px;}
+.grid-reception .g1{grid-column:1;grid-row:1/3;}
+.grid-reception .g2{grid-column:2;grid-row:1;}
+.grid-reception .g3{grid-column:3;grid-row:1;}
+.grid-reception .g4{grid-column:2;grid-row:2;}
+.grid-reception .g5{grid-column:3;grid-row:2;}
+
+/* Ceremony - 2 tall + 1 wide bottom */
+.grid-ceremony{grid-template-columns:1fr 1fr;grid-template-rows:420px 260px;}
+.grid-ceremony .g1{grid-column:1;grid-row:1;}
+.grid-ceremony .g2{grid-column:2;grid-row:1;}
+.grid-ceremony .g3{grid-column:1/3;grid-row:2;}
+
+/* Bouquet - masonry feel */
+.grid-bouquet{grid-template-columns:1fr 1fr 1fr;grid-template-rows:300px 300px;}
+.grid-bouquet .g1{grid-column:1;grid-row:1/3;}
+.grid-bouquet .g2{grid-column:2;grid-row:1;}
+.grid-bouquet .g3{grid-column:3;grid-row:1;}
+.grid-bouquet .g4{grid-column:2/4;grid-row:2;}
+
+/* Debut - elegant 2+2 */
+.grid-debut{grid-template-columns:1fr 1fr;grid-template-rows:320px 320px;}
+
+/* Birthday - mix */
+.grid-birthday{grid-template-columns:1fr 1fr 1.2fr;grid-template-rows:280px 280px;}
+.grid-birthday .g1{grid-column:1;grid-row:1;}
+.grid-birthday .g2{grid-column:2;grid-row:1;}
+.grid-birthday .g3{grid-column:3;grid-row:1/3;}
+.grid-birthday .g4{grid-column:1/3;grid-row:2;}
+
+/* ── IMAGE CARDS ── */
+.img-card{
+  position:relative;overflow:hidden;
+  cursor:pointer;
+}
+.img-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(28,22,16,0.55) 0%,transparent 50%);
+  opacity:0;transition:opacity 0.4s;
+}
+.img-card:hover::after{opacity:1;}
+
+.img-placeholder{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:12px;
+  transition:transform 0.6s ease;
+}
+.img-card:hover .img-placeholder{transform:scale(1.04);}
+
+/* Each category gets its own palette */
+.reception-1{background:linear-gradient(135deg,#2C2018 0%,#3D2E1A 40%,#2A1E12 100%);}
+.reception-2{background:linear-gradient(160deg,#1A1408 0%,#2E2216 100%);}
+.reception-3{background:linear-gradient(120deg,#241A0C 0%,#3A2A18 100%);}
+.reception-4{background:linear-gradient(150deg,#20180C 0%,#302214 100%);}
+.reception-5{background:linear-gradient(140deg,#1E1610 0%,#2A2010 100%);}
+
+.ceremony-1{background:linear-gradient(135deg,#1E1A18 0%,#2E2824 100%);}
+.ceremony-2{background:linear-gradient(160deg,#18181A 0%,#28242C 100%);}
+.ceremony-3{background:linear-gradient(120deg,#1A1C1E 0%,#242830 100%);}
+
+.bouquet-1{background:linear-gradient(135deg,#1A1818 0%,#2E2426 100%);}
+.bouquet-2{background:linear-gradient(160deg,#1E1416 0%,#2C2022 100%);}
+.bouquet-3{background:linear-gradient(120deg,#1C1618 0%,#2A2224 100%);}
+.bouquet-4{background:linear-gradient(150deg,#201A1C 0%,#2E2628 100%);}
+
+.debut-1{background:linear-gradient(135deg,#1A1A22 0%,#28283A 100%);}
+.debut-2{background:linear-gradient(160deg,#1C1A24 0%,#2A2838 100%);}
+.debut-3{background:linear-gradient(120deg,#18182A 0%,#26263C 100%);}
+.debut-4{background:linear-gradient(150deg,#1E1C2A 0%,#2E2C40 100%);}
+
+.bday-1{background:linear-gradient(135deg,#1A1218 0%,#2C1E28 100%);}
+.bday-2{background:linear-gradient(160deg,#1C1220 0%,#2E2032 100%);}
+.bday-3{background:linear-gradient(120deg,#18101E 0%,#2A1C30 100%);}
+.bday-4{background:linear-gradient(150deg,#1E1422 0%,#30222C 100%);}
+
+.card-icon{
+  font-family:'Cormorant Garamond',serif;
+  font-size:38px;font-style:italic;font-weight:300;
+  color:rgba(255,255,255,0.06);letter-spacing:2px;
+  text-align:center;line-height:1.2;
+  user-select:none;
+}
+.card-ornament{
+  display:flex;align-items:center;gap:8px;opacity:0.2;
+}
+.card-ornament .ol{width:28px;height:0.5px;background:var(--gold-lt);}
+.card-ornament .od{width:3px;height:3px;background:var(--gold-lt);transform:rotate(45deg);}
+
+.card-overlay{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:20px 20px 18px;
+  opacity:0;transform:translateY(8px);
+  transition:all 0.4s ease;z-index:2;
+}
+.img-card:hover .card-overlay{opacity:1;transform:translateY(0);}
+.card-overlay-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:15px;font-weight:400;font-style:italic;
+  color:#fff;letter-spacing:1px;
+}
+.card-overlay-sub{
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold-lt);margin-top:4px;opacity:0.8;
+}
+
+/* ── ADD PHOTO BADGE ── */
+.photo-badge{
+  position:absolute;top:14px;right:14px;
+  background:rgba(184,150,90,0.15);
+  border:0.5px solid rgba(184,150,90,0.3);
+  padding:6px 12px;
+  font-size:8px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold-lt);opacity:0;
+  transition:opacity 0.3s;
+  backdrop-filter:blur(4px);
+  z-index:3;
+}
+.img-card:hover .photo-badge{opacity:1;}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ── INQUIRY FORM ── */
+.inquiry{
+  background:var(--dark);padding:120px 24px;
+  position:relative;overflow:hidden;
+}
+.inquiry::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 60% at 50% 30%,rgba(184,150,90,0.06) 0%,transparent 70%);
+}
+.inquiry-inner{
+  max-width:920px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1.6fr;
+  gap:80px;align-items:start;position:relative;z-index:2;
+}
+.inquiry-left{}
+.inq-label{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);opacity:0.8;margin-bottom:20px;display:block;}
+.inq-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(36px,4vw,52px);font-weight:300;
+  color:#fff;line-height:1.2;margin-bottom:24px;
+}
+.inq-title em{font-style:italic;color:var(--gold-lt);}
+.inq-desc{font-size:14px;line-height:2;color:rgba(255,255,255,0.3);margin-bottom:40px;}
+.inq-detail{display:flex;flex-direction:column;gap:16px;}
+.inq-detail-item{display:flex;align-items:flex-start;gap:14px;}
+.inq-detail-dot{
+  width:5px;height:5px;background:var(--gold);
+  transform:rotate(45deg);margin-top:6px;flex-shrink:0;opacity:0.7;
+}
+.inq-detail-text{font-size:13px;line-height:1.8;color:rgba(255,255,255,0.25);}
+.inq-detail-text strong{color:rgba(255,255,255,0.5);font-weight:400;}
+
+/* form */
+.form-wrap{
+  background:rgba(255,255,255,0.03);
+  border:0.5px solid rgba(255,255,255,0.07);
+  padding:48px 40px;
+}
+.form-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;font-weight:400;font-style:italic;
+  color:#fff;margin-bottom:32px;opacity:0.6;
+}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
+.form-group{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
+.form-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);}
+.form-input,.form-select,.form-textarea{
+  background:rgba(255,255,255,0.04);
+  border:0.5px solid rgba(255,255,255,0.1);
+  color:#fff;
+  padding:14px 16px;
+  font-family:'Jost',sans-serif;
+  font-size:13px;font-weight:300;
+  outline:none;
+  transition:border-color 0.3s;
+  width:100%;
+}
+.form-input::placeholder,.form-textarea::placeholder{color:rgba(255,255,255,0.15);}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--gold);}
+.form-select{
+  -webkit-appearance:none;appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23B8965A' opacity='0.5'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 16px center;
+  color:rgba(255,255,255,0.4);
+}
+.form-select option{background:#1C1610;color:#fff;}
+.form-textarea{resize:vertical;min-height:100px;line-height:1.7;}
+
+.form-check-group{display:flex;flex-wrap:wrap;gap:12px;margin-top:4px;}
+.form-check{display:flex;align-items:center;gap:8px;cursor:pointer;}
+.form-check input[type=checkbox]{
+  width:14px;height:14px;
+  border:0.5px solid rgba(255,255,255,0.2);
+  appearance:none;-webkit-appearance:none;
+  background:rgba(255,255,255,0.04);
+  cursor:pointer;position:relative;flex-shrink:0;
+}
+.form-check input[type=checkbox]:checked{background:var(--gold);border-color:var(--gold);}
+.form-check input[type=checkbox]:checked::after{
+  content:'';position:absolute;
+  left:3px;top:1px;width:5px;height:8px;
+  border:1.5px solid #fff;border-left:none;border-top:none;
+  transform:rotate(45deg);
+}
+.form-check-label{font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.5px;}
+
+.form-divider{height:0.5px;background:rgba(255,255,255,0.06);margin:28px 0;}
+
+.btn-submit{
+  width:100%;padding:18px;
+  background:var(--gold);border:none;cursor:pointer;
+  font-family:'Jost',sans-serif;
+  font-size:10px;letter-spacing:5px;text-transform:uppercase;
+  color:var(--dark);font-weight:500;
+  transition:all 0.3s;margin-top:8px;
+}
+.btn-submit:hover{background:var(--gold-lt);letter-spacing:6px;}
+
+.form-note{
+  font-size:10px;color:rgba(255,255,255,0.15);
+  text-align:center;margin-top:16px;line-height:1.8;
+  letter-spacing:0.3px;
+}
+
+/* success */
+.form-success{
+  display:none;text-align:center;padding:60px 20px;
+}
+.form-success.show{display:block;}
+.success-icon{
+  font-family:'Cormorant Garamond',serif;
+  font-size:48px;font-style:italic;color:var(--gold);
+  opacity:0.6;margin-bottom:16px;display:block;
+}
+.success-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;font-weight:300;color:#fff;margin-bottom:12px;
+}
+.success-msg{font-size:13px;line-height:2;color:rgba(255,255,255,0.3);}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--dark);
+  border-top:0.5px solid rgba(255,255,255,0.06);
+  padding:40px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.foot-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:18px;font-weight:400;color:rgba(255,255,255,0.3);letter-spacing:2px;
+}
+.foot-logo em{font-style:italic;color:var(--gold);opacity:0.6;}
+.foot-note{font-size:9.5px;letter-spacing:2px;color:rgba(255,255,255,0.15);}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:16px 24px;}
+  .nav-links{display:none;}
+  .grid-reception,.grid-bouquet,.grid-birthday{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
+  .grid-reception .g1,.grid-bouquet .g1,.grid-birthday .g3,.grid-birthday .g4{grid-column:auto;grid-row:auto;}
+  .grid-ceremony{grid-template-columns:1fr;}
+  .grid-ceremony .g3{grid-column:auto;}
+  .img-card{height:240px !important;}
+  .inquiry-inner{grid-template-columns:1fr;gap:48px;}
+  .form-row{grid-template-columns:1fr;}
+  footer{flex-direction:column;gap:12px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-logo"><em>Erish</em> Studio</div>
+  <div class="nav-links">
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#showcase">Showcase</a>
+    <a href="#inquiry">Inquire</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+  <div class="hero-content">
+    <span class="eyebrow">Erish Studio — Portfolio</span>
+    <h1 class="hero-title">Our <em>Work</em><br/>Speaks.</h1>
+    <p class="hero-sub">Events &nbsp;·&nbsp; Styling &nbsp;·&nbsp; Florals</p>
+    <div class="hero-divider">
+      <div class="hd-line"></div><div class="hd-dia"></div><div class="hd-line r"></div>
+    </div>
+    <p class="hero-desc">
+      Every event we touch is a canvas — and every canvas tells a story that is entirely, beautifully yours.
+    </p>
+  </div>
+</section>
+
+<!-- ── CATEGORY NAV ── -->
+<div class="cat-nav" id="showcase">
+  <div class="cat-nav-inner">
+    <button class="cat-btn active" onclick="scrollTo('reception')">Reception</button>
+    <button class="cat-btn" onclick="scrollTo('ceremony')">Ceremony</button>
+    <button class="cat-btn" onclick="scrollTo('bouquet')">Bespoke Bouquet</button>
+    <button class="cat-btn" onclick="scrollTo('debut')">Debut</button>
+    <button class="cat-btn" onclick="scrollTo('birthday')">Birthday</button>
+    <button class="cat-btn" onclick="scrollTo('inquiry')">Inquire</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- ── RECEPTION ── -->
+<!-- ════════════════════════════════════════════ -->
+<section class="showcase-section" id="reception">
+  <div class="sec-header reveal">
+    <span class="sec-label">Category 01</span>
+    <h2 class="sec-title">Wedding <em>Reception</em></h2>
+    <p class="sec-desc">
+      From intimate dinners to grand ballroom affairs, our reception styling transforms any space into an immersive world of beauty — where every table, every light, and every floral whispers the couple's love story.
+    </p>
+    <div class="gold-bar"><div class="gb-line"></div><div class="gb-dia"></div><div class="gb-line"></div></div>
+  </div>
+
+  <div class="grid-hero grid-reception reveal">
+    <div class="img-card g1" style="height:100%;">
+      <div class="img-placeholder reception-1">
+        <div class="card-icon">Reception<br/>Styling</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Grand Ballroom Reception</div>
+        <div class="card-overlay-sub">Full Styling · Trusses · Florals</div>
+      </div>
+    </div>
+    <div class="img-card g2" style="height:100%;">
+      <div class="img-placeholder reception-2">
+        <div class="card-icon">Head<br/>Table</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Sweetheart Table Styling</div>
+        <div class="card-overlay-sub">Intimate · Elegant</div>
+      </div>
+    </div>
+    <div class="img-card g3" style="height:100%;">
+      <div class="img-placeholder reception-3">
+        <div class="card-icon">Ceiling<br/>Draping</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Trusses & Ceiling Drapery</div>
+        <div class="card-overlay-sub">Premium · Full Install</div>
+      </div>
+    </div>
+    <div class="img-card g4" style="height:100%;">
+      <div class="img-placeholder reception-4">
+        <div class="card-icon">Table<br/>Setting</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Centerpiece & Table Design</div>
+        <div class="card-overlay-sub">Curated · Styled</div>
+      </div>
+    </div>
+    <div class="img-card g5" style="height:100%;">
+      <div class="img-placeholder reception-5">
+        <div class="card-icon">Entrance<br/>Styling</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Entrance & Welcome Area</div>
+        <div class="card-overlay-sub">First Impressions · Memorable</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- ── CEREMONY ── -->
+<!-- ════════════════════════════════════════════ -->
+<section class="showcase-section" id="ceremony">
+  <div class="sec-header reveal">
+    <span class="sec-label">Category 02</span>
+    <h2 class="sec-title">Wedding <em>Ceremony</em></h2>
+    <p class="sec-desc">
+      The ceremony is where two lives become one — and it deserves a setting that takes your breath away. We craft sacred, stunning ceremony spaces that honour the weight and beauty of the moment.
+    </p>
+    <div class="gold-bar"><div class="gb-line"></div><div class="gb-dia"></div><div class="gb-line"></div></div>
+  </div>
+
+  <div class="grid-hero grid-ceremony reveal">
+    <div class="img-card g1">
+      <div class="img-placeholder ceremony-1" style="height:420px;">
+        <div class="card-icon">Altar<br/>Design</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Altar & Arch Styling</div>
+        <div class="card-overlay-sub">Sacred · Breathtaking</div>
+      </div>
+    </div>
+    <div class="img-card g2">
+      <div class="img-placeholder ceremony-2" style="height:420px;">
+        <div class="card-icon">Aisle<br/>Décor</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Aisle & Pew Styling</div>
+        <div class="card-overlay-sub">Florals · Ribbons · Elegance</div>
+      </div>
+    </div>
+    <div class="img-card g3">
+      <div class="img-placeholder ceremony-3" style="height:260px;">
+        <div class="card-icon">Garden Ceremony Setup</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Outdoor Garden Ceremony</div>
+        <div class="card-overlay-sub">Al Fresco · Natural · Romantic</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- ── BESPOKE BOUQUET ── -->
+<!-- ════════════════════════════════════════════ -->
+<section class="showcase-section" id="bouquet">
+  <div class="sec-header reveal">
+    <span class="sec-label">Category 03</span>
+    <h2 class="sec-title">Bespoke <em>Bouquet</em></h2>
+    <p class="sec-desc">
+      A bouquet is not merely flowers — it is the last thing you hold before you walk into forever. Each one we create is entirely one-of-a-kind, hand-crafted to reflect your personality, palette, and the love you carry.
+    </p>
+    <div class="gold-bar"><div class="gb-line"></div><div class="gb-dia"></div><div class="gb-line"></div></div>
+  </div>
+
+  <div class="grid-hero grid-bouquet reveal">
+    <div class="img-card g1" style="height:600px;">
+      <div class="img-placeholder bouquet-1" style="height:100%;">
+        <div class="card-icon">Bridal<br/>Bouquet</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Signature Bridal Bouquet</div>
+        <div class="card-overlay-sub">Hand-tied · Bespoke · Luxe</div>
+      </div>
+    </div>
+    <div class="img-card g2" style="height:300px;">
+      <div class="img-placeholder bouquet-2" style="height:100%;">
+        <div class="card-icon">Bridesmaid<br/>Blooms</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Bridesmaid Bouquets</div>
+        <div class="card-overlay-sub">Complementary · Curated</div>
+      </div>
+    </div>
+    <div class="img-card g3" style="height:300px;">
+      <div class="img-placeholder bouquet-3" style="height:100%;">
+        <div class="card-icon">Boutonniere<br/>& Corsage</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Boutonnieres & Corsages</div>
+        <div class="card-overlay-sub">Entourage · Finished Detail</div>
+      </div>
+    </div>
+    <div class="img-card g4" style="height:300px;">
+      <div class="img-placeholder bouquet-4" style="height:100%;">
+        <div class="card-icon">Flower Crown · Petal Toss · Flower Girl</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Floral Accessories</div>
+        <div class="card-overlay-sub">Crowns · Petals · Girl Baskets</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- ── DEBUT ── -->
+<!-- ════════════════════════════════════════════ -->
+<section class="showcase-section" id="debut">
+  <div class="sec-header reveal">
+    <span class="sec-label">Category 04</span>
+    <h2 class="sec-title">Debut <em>Celebrations</em></h2>
+    <p class="sec-desc">
+      A debut is more than a party — it is a young woman's first grand entrance into the world. We craft debut experiences that are as extraordinary, elegant, and memorable as the debutante herself.
+    </p>
+    <div class="gold-bar"><div class="gb-line"></div><div class="gb-dia"></div><div class="gb-line"></div></div>
+  </div>
+
+  <div class="grid-hero grid-debut reveal">
+    <div class="img-card g1" style="height:320px;">
+      <div class="img-placeholder debut-1" style="height:100%;">
+        <div class="card-icon">Grand<br/>Entrance</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Grand Entrance Setup</div>
+        <div class="card-overlay-sub">Dramatic · Statement · Unforgettable</div>
+      </div>
+    </div>
+    <div class="img-card g2" style="height:320px;">
+      <div class="img-placeholder debut-2" style="height:100%;">
+        <div class="card-icon">Cotillion<br/>Stage</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Stage & Cotillion Area</div>
+        <div class="card-overlay-sub">Elegant · Styled · Curated</div>
+      </div>
+    </div>
+    <div class="img-card g3" style="height:320px;">
+      <div class="img-placeholder debut-3" style="height:100%;">
+        <div class="card-icon">Debut<br/>Tablescape</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Reception & Table Styling</div>
+        <div class="card-overlay-sub">Feminine · Lush · Refined</div>
+      </div>
+    </div>
+    <div class="img-card g4" style="height:320px;">
+      <div class="img-placeholder debut-4" style="height:100%;">
+        <div class="card-icon">Photo<br/>Backdrop</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Debut Photo Backdrop</div>
+        <div class="card-overlay-sub">Instagrammable · Custom · Styled</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- ── BIRTHDAY ── -->
+<!-- ════════════════════════════════════════════ -->
+<section class="showcase-section" id="birthday">
+  <div class="sec-header reveal">
+    <span class="sec-label">Category 05</span>
+    <h2 class="sec-title">Birthday <em>Events</em></h2>
+    <p class="sec-desc">
+      Birthdays are a celebration of life — and life deserves to be celebrated beautifully. From intimate gatherings to lavish parties, we style every birthday as a reflection of the person at the center of it all.
+    </p>
+    <div class="gold-bar"><div class="gb-line"></div><div class="gb-dia"></div><div class="gb-line"></div></div>
+  </div>
+
+  <div class="grid-hero grid-birthday reveal">
+    <div class="img-card g1" style="height:280px;">
+      <div class="img-placeholder bday-1" style="height:100%;">
+        <div class="card-icon">Party<br/>Styling</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Themed Birthday Styling</div>
+        <div class="card-overlay-sub">Creative · Bold · Personalized</div>
+      </div>
+    </div>
+    <div class="img-card g2" style="height:280px;">
+      <div class="img-placeholder bday-2" style="height:100%;">
+        <div class="card-icon">Dessert<br/>Table</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Dessert & Cake Table</div>
+        <div class="card-overlay-sub">Styled · Curated · Delicious</div>
+      </div>
+    </div>
+    <div class="img-card g3" style="height:560px;">
+      <div class="img-placeholder bday-3" style="height:100%;">
+        <div class="card-icon">Grand<br/>Backdrop</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Statement Backdrop & Balloon Art</div>
+        <div class="card-overlay-sub">Dramatic · Custom · Stunning</div>
+      </div>
+    </div>
+    <div class="img-card g4" style="height:280px;">
+      <div class="img-placeholder bday-4" style="height:100%;">
+        <div class="card-icon">Intimate Birthday Dinner Styling</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Intimate Dinner Celebration</div>
+        <div class="card-overlay-sub">Refined · Warm · Personal</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- ── INQUIRY FORM ── -->
+<!-- ════════════════════════════════════════════ -->
+<section class="inquiry" id="inquiry">
+  <div class="inquiry-inner">
+
+    <div class="inquiry-left reveal">
+      <span class="inq-label">Start Here</span>
+      <h2 class="inq-title">Let's Create<br/>Something <em>Beautiful</em><br/>Together.</h2>
+      <p class="inq-desc">
+        Tell us about your vision and we will craft an experience that is entirely, uniquely yours. We respond to all inquiries within 24 hours.
+      </p>
+      <div class="inq-detail">
+        <div class="inq-detail-item">
+          <div class="inq-detail-dot"></div>
+          <div class="inq-detail-text"><strong>Based in Davao City</strong> — serving Mindanao and beyond, including out-of-town events.</div>
+        </div>
+        <div class="inq-detail-item">
+          <div class="inq-detail-dot"></div>
+          <div class="inq-detail-text"><strong>18+ Years of Experience</strong> — your celebration is in the most trusted hands.</div>
+        </div>
+        <div class="inq-detail-item">
+          <div class="inq-detail-dot"></div>
+          <div class="inq-detail-text"><strong>Limited bookings per month</strong> — we give every client our full, undivided attention.</div>
+        </div>
+        <div class="inq-detail-item">
+          <div class="inq-detail-dot"></div>
+          <div class="inq-detail-text"><strong>Free initial consultation</strong> — let's talk before you commit to anything.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-wrap reveal">
+      <div id="formContent">
+        <p class="form-title">"Where Every Detail Tells Your Story."</p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First Name *</label>
+            <input class="form-input" type="text" placeholder="Your first name"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name *</label>
+            <input class="form-input" type="text" placeholder="Your last name"/>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Email Address *</label>
+            <input class="form-input" type="email" placeholder="your@email.com"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Contact Number *</label>
+            <input class="form-input" type="tel" placeholder="+63 9XX XXX XXXX"/>
+          </div>
+        </div>
+
+        <div class="form-divider"></div>
+
+        <div class="form-group">
+          <label class="form-label">Type of Event *</label>
+          <select class="form-select form-input">
+            <option value="" disabled selected>Select event type</option>
+            <option>Wedding — Full Coordination</option>
+            <option>Wedding — Styling Only</option>
+            <option>Debut Celebration</option>
+            <option>Birthday Party</option>
+            <option>Corporate Event</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Event Date *</label>
+            <input class="form-input" type="date"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Estimated Guest Count</label>
+            <select class="form-select form-input">
+              <option value="" disabled selected>Select range</option>
+              <option>Below 50 guests</option>
+              <option>50 – 100 guests</option>
+              <option>100 – 150 guests</option>
+              <option>150 – 200 guests</option>
+              <option>200 – 300 guests</option>
+              <option>300+ guests</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Event Location / Venue</label>
+          <input class="form-input" type="text" placeholder="Venue name or city (e.g. Malalag, Davao del Sur)"/>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Budget Range</label>
+          <select class="form-select form-input">
+            <option value="" disabled selected>Select budget range</option>
+            <option>Below P80,000</option>
+            <option>P80,000 – P150,000</option>
+            <option>P150,000 – P250,000</option>
+            <option>P250,000 – P400,000</option>
+            <option>P400,000 – P600,000</option>
+            <option>Above P600,000</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Services Interested In</label>
+          <div class="form-check-group">
+            <label class="form-check"><input type="checkbox"/><span class="form-check-label">Decor & Styling</span></label>
+            <label class="form-check"><input type="checkbox"/><span class="form-check-label">Trusses & Drapery</span></label>
+            <label class="form-check"><input type="checkbox"/><span class="form-check-label">Florals & Bouquets</span></label>
+            <label class="form-check"><input type="checkbox"/><span class="form-check-label">On-the-Day Coordination</span></label>
+            <label class="form-check"><input type="checkbox"/><span class="form-check-label">Full Event Planning</span></label>
+            <label class="form-check"><input type="checkbox"/><span class="form-check-label">Not Sure Yet</span></label>
+          </div>
+        </div>
+
+        <div class="form-divider"></div>
+
+        <div class="form-group">
+          <label class="form-label">Tell Us About Your Vision</label>
+          <textarea class="form-textarea" placeholder="Share your theme, color palette, inspiration, or anything you'd like us to know about your dream celebration..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">How Did You Hear About Us?</label>
+          <select class="form-select form-input">
+            <option value="" disabled selected>Select one</option>
+            <option>Referral from a friend or family</option>
+            <option>Instagram</option>
+            <option>Facebook</option>
+            <option>Google Search</option>
+            <option>I attended an event you styled</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <button class="btn-submit" onclick="submitForm()">Send My Inquiry →</button>
+        <p class="form-note">
+          We respect your privacy. Your information will never be shared.<br/>
+          We respond to all inquiries within 24 hours.
+        </p>
+      </div>
+
+      <div class="form-success" id="formSuccess">
+        <span class="success-icon">✦</span>
+        <h3 class="success-title">Thank You for Reaching Out.</h3>
+        <p class="success-msg">
+          Your inquiry has been received. We are already looking forward to hearing more about your celebration.<br/><br/>
+          Erish will be in touch with you within <strong style="color:var(--gold-lt);">24 hours.</strong><br/><br/>
+          <em style="opacity:0.6;">"Where Every Detail Tells Your Story."</em>
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="foot-logo"><em>Erish</em> Studio</div>
+  <div class="foot-note">© 2026 Erish Studio Events & Styling · Davao City, Philippines</div>
+</footer>
+
+<script>
+// Category nav scroll
+function scrollTo(id){
+  const el = document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+// Active cat nav on scroll
+const sections = ['reception','ceremony','bouquet','debut','birthday','inquiry'];
+const catBtns = document.querySelectorAll('.cat-btn');
+window.addEventListener('scroll',()=>{
+  let current='';
+  sections.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el && window.scrollY >= el.offsetTop - 200) current=id;
+  });
+  catBtns.forEach((btn,i)=>{
+    btn.classList.toggle('active', sections[i]===current);
+  });
+});
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('visible'), i*60);
+      obs.unobserve(e.target);
+    }
+  });
+},{threshold:0.08});
+reveals.forEach(r=>obs.observe(r));
+
+// Form submit
+function submitForm(){
+  document.getElementById('formContent').style.display='none';
+  const s=document.getElementById('formSuccess');
+  s.style.display='block';
+  s.classList.add('show');
+}
+</script>
+</body>
+</html>
