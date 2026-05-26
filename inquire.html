@@ -36,7 +36,7 @@
         <h1 class="serif-title" style="font-size: 3rem !important; margin-bottom: 1rem !important; letter-spacing: 2px !important;">INQUIRE</h1>
         <p style="color: #555 !important; margin-bottom: 4rem !important; font-size: 1rem !important; letter-spacing: 1px !important; line-height: 1.5;">Let's curate your milestone experience. Please complete our intake profile below.</p>
 
-        <form style="display: flex !important; flex-direction: column !important; gap: 2.5rem !important; text-align: left !important; width: 100% !important; margin: 0 auto !important;">
+       <form id="my-form" action="https://formspree.io/f/mqejgkyy" method="POST" style="display: flex !important; flex-direction: column !important; gap: 2.5rem !important; text-align: left !important; width: 100% !important;">
             
             <div style="display: flex !important; flex-direction: column !important; gap: 0.5rem !important; width: 100% !important;">
                 <label style="font-size: 0.85rem !important; text-transform: uppercase !important; letter-spacing: 2px !important; color: #111111 !important;">Your Full Name</label>
@@ -82,6 +82,16 @@
                 Submit Inquiry
             </button>
         </form>
+        <div id="form-status" style="display: none; text-align: center; padding: 40px 20px; font-family: 'Cormorant Garamond', serif;">
+    <h3 style="font-size: 2rem; color: #111111; margin-bottom: 15px;">Thank You for Reaching Out.</h3>
+    <p style="font-size: 1.1rem; color: #555555; margin-bottom: 25px; line-height: 1.6;">
+        Your inquiry has been received. We are already looking forward to hearing more about your celebration.<br>
+        <span style="font-style: italic; color: #ccaa66;">Erish will be in touch with you within 24 hours.</span>
+    </p>
+    <p style="font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; color: #111111; font-weight: bold; margin-top: 30px;">
+        "Where Every Detail Tells Your Story."
+    </p>
+</div>
     </main>
 
     <footer class="site-footer">
@@ -89,5 +99,38 @@
     </footer>
 
     <script src="js/script.js"></script>
+    <script>
+  var form = document.getElementById("my-form");
+  
+  async function handleSubmit(event) {
+    event.preventDefault();
+    var status = document.getElementById("form-status");
+    var data = new FormData(event.target);
+    fetch(event.target.action, {
+      method: form.method,
+      body: data,
+      headers: {
+          'Accept': 'application/json'
+      }
+    }).then(response => {
+      if (response.ok) {
+        form.style.display = "none";
+        status.style.display = "block";
+        form.reset();
+      } else {
+        response.json().then(data => {
+          if (Object.hasOwn(data, 'errors')) {
+            alert(data["errors"].map(error => error["message"]).join(", "));
+          } else {
+            alert("Oops! There was a problem submitting your form");
+          }
+        })
+      }
+    }).catch(error => {
+      alert("Oops! There was a problem submitting your form");
+    });
+  }
+  form.addEventListener("submit", handleSubmit)
+</script>
 </body>
 </html>
