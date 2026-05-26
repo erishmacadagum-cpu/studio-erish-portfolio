@@ -40,33 +40,33 @@
             
             <div style="display: flex !important; flex-direction: column !important; gap: 0.5rem !important; width: 100% !important;">
                 <label style="font-size: 0.85rem !important; text-transform: uppercase !important; letter-spacing: 2px !important; color: #111111 !important;">Your Full Name</label>
-                <input type="text" placeholder="Enter your full name" style="width: 100% !important; padding: 1.2rem !important; border: 1px solid #111111 !important; background-color: #ffffff !important; color: #111111 !important; font-size: 1rem !important; outline: none !important; box-sizing: border-box !important; border-radius: 0 !important;" required />
+               <input type="text" name="Name" placeholder="Enter your full name" style="width: 100% !important; padding: 1.2rem !important; border: 1px solid #111111 !important;" required>
             </div>
 
             <div style="display: flex !important; flex-direction: column !important; gap: 0.5rem !important; width: 100% !important;">
                 <label style="font-size: 0.85rem !important; text-transform: uppercase !important; letter-spacing: 2px !important; color: #111111 !important;">Email Address</label>
-                <input type="email" placeholder="name@example.com" style="width: 100% !important; padding: 1.2rem !important; border: 1px solid #111111 !important; background-color: #ffffff !important; color: #111111 !important; font-size: 1rem !important; outline: none !important; box-sizing: border-box !important; border-radius: 0 !important;" required />
+                <input type="email" name="Email" placeholder="name@example.com" style="width: 100% !important; padding: 1.2rem !important; border: 1px solid #111111 !important;" required>
             </div>
 
             <div style="display: flex !important; flex-direction: column !important; gap: 0.5rem !important; width: 100% !important;">
                 <label style="font-size: 0.85rem !important; text-transform: uppercase !important; letter-spacing: 2px !important; color: #111111 !important;">Designated Event Venue / Intended City Location</label>
-                <input type="text" placeholder="e.g., Marzon Hotel, Kalibo or Destination Space" style="width: 100% !important; padding: 1.2rem !important; border: 1px solid #111111 !important; background-color: #ffffff !important; color: #111111 !important; font-size: 1rem !important; outline: none !important; box-sizing: border-box !important; border-radius: 0 !important;" required />
+                <input type="text" name="Venue" placeholder="e.g., Marzon Hotel, Kalibo or Destination Space" style="width: 100% !important; padding: 1.2rem !important; border: 1px solid #111111 !important;">
             </div>
 
             <div style="display: flex !important; flex-direction: column !important; gap: 1.5rem !important; width: 100% !important; display: grid !important; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
                 <div style="display: flex !important; flex-direction: column !important; gap: 0.5rem !important;">
                     <label style="font-size: 0.85rem !important; text-transform: uppercase !important; letter-spacing: 2px !important; color: #111111 !important;">Estimated Guest Count</label>
-                    <input type="text" placeholder="e.g., 150 Attendees" style="width: 100% !important; padding: 1.2rem !important; border: 1px solid #111111 !important; background-color: #ffffff !important; color: #111111 !important; font-size: 1rem !important; outline: none !important; box-sizing: border-box !important; border-radius: 0 !important;" required />
+                   <input type="text" name="Guest Count" placeholder="e.g., 150 Attendees" style="width: 100% !important; padding: 1.2rem !important; border: 1px solid #111111 !important;">
                 </div>
                 <div style="display: flex !important; flex-direction: column !important; gap: 0.5rem !important;">
                     <label style="font-size: 0.85rem !important; text-transform: uppercase !important; letter-spacing: 2px !important; color: #111111 !important;">Target Investment Budget</label>
-                    <input type="text" placeholder="Estimated allocation profile" style="width: 100% !important; padding: 1.2rem !important; border: 1px solid #111111 !important; background-color: #ffffff !important; color: #111111 !important; font-size: 1rem !important; outline: none !important; box-sizing: border-box !important; border-radius: 0 !important;" required />
+                    <input type="text" name="Budget" placeholder="Estimated allocation profile" style="width: 100% !important; padding: 1.2rem !important; border: 1px solid #111111 !important;">
                 </div>
             </div>
 
             <div style="display: flex !important; flex-direction: column !important; gap: 0.5rem !important; width: 100% !important;">
                 <label style="font-size: 0.85rem !important; text-transform: uppercase !important; letter-spacing: 2px !important; color: #111111 !important;">What Curated Collection Interests You?</label>
-                <select style="width: 100% !important; padding: 1.2rem !important; border: 1px solid #111111 !important; background-color: #ffffff !important; color: #111111 !important; font-size: 1rem !important; outline: none !important; box-sizing: border-box !important; border-radius: 0 !important;-webkit-appearance: none; -moz-appearance: none; appearance: none;">
+                <select name="Experience Type" style="width: 100% !important; padding: 1.2rem !important; border: 1px solid #111111 !important; background-color: #ffffff !important;">
                     <option>Bespoke Styling & Avant-Garde Decor</option>
                     <option>Full-Service Coordination Collection</option>
                     <option>The Absolute Turnkey Signature Experience</option>
@@ -75,7 +75,7 @@
 
             <div style="display: flex !important; flex-direction: column !important; gap: 0.5rem !important; width: 100% !important;">
                 <label style="font-size: 0.85rem !important; text-transform: uppercase !important; letter-spacing: 2px !important; color: #111111 !important;">Share Your Celebration Vision</label>
-                <textarea placeholder="Tell us about your structural theme, timelines, or unique elements..." rows="6" style="width: 100% !important; padding: 1.2rem !important; border: 1px solid #111111 !important; background-color: #ffffff !important; color: #111111 !important; font-size: 1rem !important; outline: none !important; box-sizing: border-box !important; resize: vertical !important; border-radius: 0 !important;" required></textarea>
+               <textarea name="Celebration Details" placeholder="Tell us about your structural theme, timelines, or unique elements..." rows="6" style="width: 100% !important; padding: 1.2rem !important; border: 1px solid #111111 !important;"></textarea>
             </div>
 
             <button type="submit" style="width: 100% !important; padding: 1.2rem !important; background-color: #111111 !important; color: #ffffff !important; border: 1px solid #111111 !important; font-size: 0.9rem !important; text-transform: uppercase !important; letter-spacing: 3px !important; cursor: pointer !important; margin-top: 1rem !important; box-sizing: border-box !important; border-radius: 0 !important;">
