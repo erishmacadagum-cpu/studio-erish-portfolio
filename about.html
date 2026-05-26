@@ -1,169 +1,811 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Legacy | Studio Erish — Luxury Masterpiece Vault</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <style>
-        @keyframes luxuryBreathe {
-            0% { transform: scale(1.00); filter: brightness(0.95) contrast(1.03); }
-            50% { transform: scale(1.03); filter: brightness(1.03) contrast(0.97); }
-            100% { transform: scale(1.00); filter: brightness(0.95) contrast(1.03); }
-        }
-        .cinematic-breathe {
-            animation: luxuryBreathe 14s ease-in-out infinite !important;
-            transform-origin: center center;
-        }
-        html, body {
-            overflow-x: hidden !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            width: 100% !important;
-        }
-        /* Minimalist Footer Grid Styles */
-        .luxury-footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-            border-top: 1px solid #eaeaea;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.8rem;
-            color: #666;
-        }
-        .footer-column h4 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
-            font-weight: 400;
-            color: #111;
-            letter-spacing: 1px;
-            margin: 0 0 1rem 0;
-            text-transform: uppercase;
-        }
-        #site-qr-code img {
-            margin: 0 auto;
-            border: 4px solid #fff;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-    </style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About — Erish Studio Events & Styling</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream:     #FAF7F2;
+      --warm:      #F2EDE4;
+      --gold:      #B8965A;
+      --gold-lt:   #D4B07A;
+      --dark:      #1C1610;
+      --charcoal:  #2E2620;
+      --brown:     #5C4A35;
+      --text:      #3A3028;
+      --muted:     #8A7A6A;
+      --border:    #DDD5C8;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ───────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      background: var(--dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 50%, rgba(184,150,90,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 80% 30%, rgba(255,255,255,0.03) 0%, transparent 60%);
+    }
+
+    /* grain texture */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    /* border frame */
+    .hero-frame {
+      position: absolute;
+      inset: 20px;
+      border: 0.5px solid rgba(255,255,255,0.06);
+      pointer-events: none;
+    }
+    .hero-frame::before {
+      content: '';
+      position: absolute;
+      inset: 12px;
+      border: 0.3px solid rgba(184,150,90,0.15);
+    }
+
+    /* corner accents */
+    .corner {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+    }
+    .corner::before, .corner::after {
+      content: '';
+      position: absolute;
+      background: var(--gold);
+      opacity: 0.5;
+    }
+    .corner::before { width: 100%; height: 0.8px; top: 0; left: 0; }
+    .corner::after  { width: 0.8px; height: 100%; top: 0; left: 0; }
+    .corner.tr { top: 32px; right: 32px; transform: rotate(90deg); }
+    .corner.bl { bottom: 32px; left: 32px; transform: rotate(270deg); }
+    .corner.br { bottom: 32px; right: 32px; transform: rotate(180deg); }
+    .corner.tl { top: 32px; left: 32px; }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 40px 24px;
+      animation: fadeUp 1.2s ease both;
+    }
+
+    .eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.8;
+      margin-bottom: 28px;
+    }
+
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(72px, 12vw, 130px);
+      font-weight: 300;
+      color: #FFFFFF;
+      line-height: 0.9;
+      letter-spacing: -2px;
+      margin-bottom: 8px;
+    }
+
+    .hero-name em {
+      font-style: italic;
+      color: var(--gold-lt);
+    }
+
+    .hero-studio {
+      font-family: 'Jost', sans-serif;
+      font-weight: 200;
+      font-size: 11px;
+      letter-spacing: 10px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 48px;
+    }
+
+    .hero-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .hero-divider .line {
+      width: 80px;
+      height: 0.5px;
+      background: linear-gradient(to right, transparent, var(--gold));
+    }
+    .hero-divider .line.r {
+      background: linear-gradient(to left, transparent, var(--gold));
+    }
+    .hero-divider .diamond {
+      width: 6px; height: 6px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      opacity: 0.8;
+    }
+
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 1px;
+    }
+
+    .scroll-cue {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: fadeUp 1.6s ease both;
+    }
+    .scroll-cue span {
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+    }
+    .scroll-cue .line-down {
+      width: 0.5px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      opacity: 0.5;
+      animation: pulse 2s ease infinite;
+    }
+
+    /* ── INTRO SECTION ──────────────────────────────── */
+    .intro {
+      background: var(--cream);
+      padding: 120px 24px;
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .section-label {
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 9.5px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 32px;
+      display: block;
+    }
+
+    .intro-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--dark);
+      margin-bottom: 48px;
+    }
+
+    .intro-quote em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .gold-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 0 auto 48px;
+    }
+    .gold-divider .gl {
+      width: 60px; height: 0.5px;
+      background: var(--gold);
+      opacity: 0.5;
+    }
+    .gold-divider .gd {
+      width: 5px; height: 5px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      opacity: 0.7;
+    }
+
+    .intro-body {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 2;
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    /* ── STORY SECTION ──────────────────────────────── */
+    .story {
+      background: var(--warm);
+      padding: 120px 24px;
+    }
+
+    .story-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .story-left {
+      position: sticky;
+      top: 100px;
+    }
+
+    .story-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 140px;
+      font-weight: 300;
+      color: transparent;
+      -webkit-text-stroke: 0.5px var(--gold);
+      opacity: 0.15;
+      line-height: 1;
+      margin-bottom: -20px;
+    }
+
+    .story-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 4vw, 52px);
+      font-weight: 400;
+      color: var(--dark);
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    .story-heading em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .story-sub {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    .story-line {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      margin-bottom: 32px;
+    }
+
+    .story-right p {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 2.1;
+      color: var(--brown);
+      margin-bottom: 28px;
+    }
+
+    .story-right p strong {
+      font-weight: 500;
+      color: var(--dark);
+    }
+
+    .story-right p.highlight {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--dark);
+      border-left: 2px solid var(--gold);
+      padding-left: 24px;
+      margin: 40px 0;
+    }
+
+    /* ── STATS ──────────────────────────────────────── */
+    .stats {
+      background: var(--dark);
+      padding: 80px 24px;
+    }
+
+    .stats-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .stat-item {
+      background: var(--dark);
+      padding: 60px 40px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 72px;
+      font-weight: 300;
+      color: var(--gold-lt);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .stat-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: rgba(255,255,255,0.2);
+      margin-top: 6px;
+    }
+
+    /* ── PHILOSOPHY ─────────────────────────────────── */
+    .philosophy {
+      background: var(--cream);
+      padding: 120px 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .phil-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .phil-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 4vw, 52px);
+      font-weight: 300;
+      color: var(--dark);
+      margin-bottom: 16px;
+    }
+
+    .phil-title em { font-style: italic; color: var(--gold); }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+    }
+
+    .pillar {
+      text-align: center;
+      padding: 40px 24px;
+      border: 0.5px solid var(--border);
+      position: relative;
+    }
+
+    .pillar::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 2px;
+      background: var(--gold);
+    }
+
+    .pillar-icon {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--gold);
+      opacity: 0.4;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .pillar-title {
+      font-family: 'Jost', sans-serif;
+      font-weight: 500;
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--dark);
+      margin-bottom: 16px;
+    }
+
+    .pillar-text {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--muted);
+    }
+
+    /* ── WHAT I DO ───────────────────────────────────── */
+    .services-strip {
+      background: var(--warm);
+      padding: 80px 24px;
+      border-top: 0.5px solid var(--border);
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .services-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      gap: 0;
+      align-items: stretch;
+    }
+
+    .service-col {
+      flex: 1;
+      padding: 48px 40px;
+      border-right: 0.5px solid var(--border);
+      text-align: center;
+    }
+
+    .service-col:last-child { border-right: none; }
+
+    .service-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--gold);
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .service-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+
+    .service-desc {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 13px;
+      line-height: 1.9;
+      color: var(--muted);
+    }
+
+    /* ── CLOSING CTA ─────────────────────────────────── */
+    .closing {
+      background: var(--dark);
+      padding: 140px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .closing::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(184,150,90,0.07) 0%, transparent 70%);
+    }
+
+    .closing-eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+      margin-bottom: 32px;
+    }
+
+    .closing-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 6vw, 72px);
+      font-weight: 300;
+      color: #FFFFFF;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    .closing-title em { font-style: italic; color: var(--gold-lt); }
+
+    .closing-body {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 2;
+      color: rgba(255,255,255,0.35);
+      max-width: 500px;
+      margin: 0 auto 56px;
+    }
+
+    .btn {
+      display: inline-block;
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--dark);
+      background: var(--gold-lt);
+      padding: 18px 48px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .btn:hover {
+      background: #FFFFFF;
+      letter-spacing: 6px;
+    }
+
+    /* ── ANIMATIONS ──────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50%       { opacity: 1; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 768px) {
+      .story-inner { grid-template-columns: 1fr; gap: 40px; }
+      .story-left { position: static; }
+      .story-number { font-size: 80px; }
+      .stats-inner { grid-template-columns: 1fr; }
+      .pillars { grid-template-columns: 1fr; gap: 24px; }
+      .services-inner { flex-direction: column; }
+      .service-col { border-right: none; border-bottom: 0.5px solid var(--border); }
+      .service-col:last-child { border-bottom: none; }
+    }
+  </style>
 </head>
-<body class="editorial-bg">
+<body>
 
-    <header class="site-header">
-        <div class="header-logo">
-            <a href="index.html" class="logo-brand">ERISH</a>
-            <span class="logo-sub">EST. 2007</span>
+  <!-- ── HERO ──────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-frame"></div>
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+
+    <div class="hero-content">
+      <p class="eyebrow">About the Founder</p>
+      <h1 class="hero-name"><em>Erish</em></h1>
+      <p class="hero-studio">Studio &nbsp;·&nbsp; Events &nbsp;&amp;&nbsp; Styling</p>
+
+      <div class="hero-divider">
+        <div class="line"></div>
+        <div class="diamond"></div>
+        <div class="line r"></div>
+      </div>
+
+      <p class="hero-tagline">"Where Every Detail Tells Your Story."</p>
+    </div>
+
+    <div class="scroll-cue">
+      <span>Scroll</span>
+      <div class="line-down"></div>
+    </div>
+  </section>
+
+  <!-- ── INTRO ─────────────────────────────────────── -->
+  <section class="intro">
+    <span class="section-label reveal">The Story</span>
+
+    <h2 class="intro-quote reveal">
+      Some people plan events.<br/>
+      <em>I craft the moments you will never forget.</em>
+    </h2>
+
+    <div class="gold-divider reveal">
+      <div class="gl"></div>
+      <div class="gd"></div>
+      <div class="gl"></div>
+    </div>
+
+    <p class="intro-body reveal">
+      For nearly two decades, I have dedicated my life to one purpose — making sure that on the most important days of your life, every single detail is exactly as it should be. Not just beautiful. Not just organized. But deeply, meaningfully <em>yours.</em>
+    </p>
+  </section>
+
+  <!-- ── STORY ─────────────────────────────────────── -->
+  <section class="story">
+    <div class="story-inner">
+
+      <div class="story-left reveal">
+        <div class="story-number">18</div>
+        <p class="story-sub">Years of Excellence</p>
+        <h2 class="story-heading">A Journey<br/>Built on <em>Love,</em><br/>Craft &amp; Devotion.</h2>
+        <div class="story-line"></div>
+        <p style="font-family:'Jost',sans-serif; font-weight:300; font-size:13px; color:var(--muted); line-height:2; letter-spacing:0.3px;">
+          Est. 2007 &nbsp;·&nbsp; Davao City, Philippines
+        </p>
+      </div>
+
+      <div class="story-right reveal">
+        <p>
+          My name is <strong>Erish</strong> — and I have been living and breathing events since <strong>2007</strong>, when I stepped into the world of weddings as a coordinator and planner with nothing but a deep passion for creating order out of emotion, and beauty out of vision.
+        </p>
+
+        <p class="highlight">
+          "I did not just stumble into this industry. I was called to it — and nearly two decades later, that calling has never wavered."
+        </p>
+
+        <p>
+          What began as a deep love for weddings grew into a full mastery of the craft. Over the years, I have had the privilege of being trusted with hundreds of couples' most sacred days — standing behind the scenes, ensuring that every flower, every timeline, every moment unfolded exactly as it was meant to.
+        </p>
+
+        <p>
+          I have seen the tears of a mother watching her daughter walk down the aisle. I have felt the quiet exhale of a groom when he finally sees his bride. I have held the hands of overwhelmed couples and turned their anxiety into anticipation. <strong>Those moments are why I do what I do.</strong>
+        </p>
+
+        <p>
+          Erish Studio was born from that experience — not just as a business, but as a <strong>commitment to excellence, intimacy, and artistry</strong> in every celebration I touch. Whether it is an intimate ceremony for 50 or a grand affair for 300, I bring the same level of dedication, precision, and heart to every single event.
+        </p>
+
+        <p>
+          Because to me, your wedding is not just another event on my calendar. <strong>It is the most important day of your life — and I treat it exactly that way.</strong>
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── STATS ─────────────────────────────────────── -->
+  <section class="stats">
+    <div class="stats-inner">
+      <div class="stat-item reveal">
+        <div class="stat-num">18+</div>
+        <p class="stat-label">Years in the Industry</p>
+        <p class="stat-sub">Since 2007</p>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num">∞</div>
+        <p class="stat-label">Details Perfected</p>
+        <p class="stat-sub">In every celebration</p>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num">1</div>
+        <p class="stat-label">Promise to Every Client</p>
+        <p class="stat-sub">Your day, flawlessly executed</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PHILOSOPHY ─────────────────────────────────── -->
+  <section style="background:var(--cream); padding: 120px 24px;">
+    <div style="max-width:900px; margin:0 auto;">
+      <div class="phil-header reveal">
+        <span class="section-label">My Philosophy</span>
+        <h2 class="phil-title">The Three Pillars of<br/><em>Erish Studio</em></h2>
+      </div>
+
+      <div class="pillars">
+        <div class="pillar reveal">
+          <span class="pillar-icon">I.</span>
+          <p class="pillar-title">Intentionality</p>
+          <p class="pillar-text">Nothing I do is accidental. Every flower, every layout, every timeline is chosen with deep purpose — because the details are what make a celebration truly unforgettable.</p>
         </div>
-        <button class="menu-toggle" aria-label="Toggle Navigation">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <nav class="main-nav">
-            <a href="index.html" class="nav-link">The Journal</a>
-            <a href="about.html" class="nav-link active">The Legacy</a>
-            <a href="services.html" class="nav-link">Curated Services</a>
-            <a href="showcases.html" class="nav-link">Showcases</a>
-            <a href="inquire.html" class="nav-link">Inquire</a>
-        </nav>
-    </header>
-
-    <main style="padding: 6rem 0 0 0 !important; width: 100vw !important; display: block;">
-        
-        <section style="max-width: 850px; margin: 0 auto 6rem auto; padding: 0 2rem; text-align: center;">
-            <span style="letter-spacing: 5px; font-size: 0.8rem; color: #8c8c8c; text-transform: uppercase; display: block; margin-bottom: 1.5rem;">THE PROFILE</span>
-            <h1 class="serif-title" style="font-size: 3.2rem; font-weight: 300; letter-spacing: 1px; margin-bottom: 2.5rem; line-height: 1.2;">The Architecture of Extraordinary Moments.</h1>
-            
-            <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; color: #222; line-height: 1.8; text-align: justify; display: flex; flex-direction: column; gap: 1.5rem;">
-                <p>
-                    Studio Erish represents a definitive standard in high-end event planning and aesthetic art direction. Built on an 18-year legacy of refined execution, the studio approaches celebrations not merely as logistics to be managed, but as temporary, elusive environments to be architected. From sweeping grand ballroom transformations to bespoke destination milestones, our work honors structural balance, lightscapes, and intentional spatial design.
-                </p>
-                <p>
-                    Rooted deeply in the landscapes of the Davao Region—from the pristine coastlines of Samal Island to elite downtown venues—Studio Erish seamlessly connects world-class local vendor frameworks with uncompromising creative visions. We engineer sensory environments where elite dining partnerships, tailor-made botanical installations, and high-fidelity atmospheres co-exist under a singular, perfectly calibrated banner.
-                </p>
-            </div>
-        </section>
-
-        <div style="display: flex; flex-direction: column; gap: 8rem; width: 100vw !important; margin: 0 !important; padding: 0 !important;">
-
-            <div style="width: 100vw !important; position: relative !important; left: 50% !important; right: 50% !important; margin-left: -50vw !important; margin-right: -50vw !important; overflow: hidden !important;">
-                <div style="width: 100vw; height: 75vh; overflow: hidden; background-color: #000;">
-                    <img src="images/profile.jpg" class="cinematic-breathe" style="width: 100%; height: 100%; object-fit: cover; display: block;" alt="Ballroom and Indoor Receptions Gallery" />
-                </div>
-                <div style="max-width: 1200px; margin: 2rem auto 0 auto; padding: 0 3rem;">
-                    <h2 class="serif-sub" style="font-size: 2.2rem; font-weight: 300; letter-spacing: 1px; color: #111; margin: 0;">Ballroom &amp; Indoor Receptions</h2>
-                    <span style="display: block; letter-spacing: 3px; text-transform: uppercase; font-size: 0.75rem; color: #8c8c8c; margin-top: 0.5rem;">Curated Grand Spaces</span>
-                </div>
-            </div>
-
-            <div style="width: 100vw !important; position: relative !important; left: 50% !important; right: 50% !important; margin-left: -50vw !important; margin-right: -50vw !important; overflow: hidden !important;">
-                <div style="width: 100vw; height: 75vh; overflow: hidden; background-color: #000;">
-                    <img src="images/project1.jpg" class="cinematic-breathe" style="width: 100%; height: 100%; object-fit: cover; display: block;" alt="Ceremonial and Church Sites Gallery" />
-                </div>
-                <div style="max-width: 1200px; margin: 2rem auto 0 auto; padding: 0 3rem;">
-                    <h2 class="serif-sub" style="font-size: 2.2rem; font-weight: 300; letter-spacing: 1px; color: #111; margin: 0;">Ceremonial and Church Sites</h2>
-                    <span style="display: block; letter-spacing: 3px; text-transform: uppercase; font-size: 0.75rem; color: #8c8c8c; margin-top: 0.5rem;">Sacred Production Frameworks</span>
-                </div>
-            </div>
-
-            <div style="width: 100vw !important; position: relative !important; left: 50% !important; right: 50% !important; margin-left: -50vw !important; margin-right: -50vw !important; overflow: hidden !important;">
-                <div style="width: 100vw; height: 75vh; overflow: hidden; background-color: #000;">
-                    <img src="images/project2.jpg" class="cinematic-breathe" style="width: 100%; height: 100%; object-fit: cover; display: block;" alt="Beach and Outdoor Ceremony Gallery" />
-                </div>
-                <div style="max-width: 1200px; margin: 2rem auto 0 auto; padding: 0 3rem;">
-                    <h2 class="serif-sub" style="font-size: 2.2rem; font-weight: 300; letter-spacing: 1px; color: #111; margin: 0;">Beach &amp; Outdoor Ceremony</h2>
-                    <span style="display: block; letter-spacing: 3px; text-transform: uppercase; font-size: 0.75rem; color: #8c8c8c; margin-top: 0.5rem;">Coastal Horizon Styling</span>
-                </div>
-            </div>
-
-            <div style="width: 100vw !important; position: relative !important; left: 50% !important; right: 50% !important; margin-left: -50vw !important; margin-right: -50vw !important; overflow: hidden !important;">
-                <div style="width: 100vw; height: 75vh; overflow: hidden; background-color: #000;">
-                    <img src="images/project3.jpg" class="cinematic-breathe" style="width: 100%; height: 100%; object-fit: cover; display: block;" alt="Bespoke Floral Bouquets Gallery" />
-                </div>
-                <div style="max-width: 1200px; margin: 2rem auto 0 auto; padding: 0 3rem; margin-bottom: 6rem;">
-                    <h2 class="serif-sub" style="font-size: 2.2rem; font-weight: 300; letter-spacing: 1px; color: #111; margin: 0;">Bespoke Floral Bouquets</h2>
-                    <span style="display: block; letter-spacing: 3px; text-transform: uppercase; font-size: 0.75rem; color: #8c8c8c; margin-top: 0.5rem;">Structural Botany Design</span>
-                </div>
-            </div>
-
+        <div class="pillar reveal">
+          <span class="pillar-icon">II.</span>
+          <p class="pillar-title">Intimacy</p>
+          <p class="pillar-text">I take the time to understand who you are as a couple — your story, your love, your vision. Your wedding should feel like you, not like a template.</p>
         </div>
-    </main>
-
-    <footer style="background-color: #fafafa; margin-top: 0; padding: 2rem 0 4rem 0;">
-        <div class="luxury-footer-grid">
-            <div class="footer-column" style="display: flex; flex-direction: column; justify-content: space-between;">
-                <div>
-                    <h4>Studio Erish</h4>
-                    <p style="line-height: 1.6; margin: 0;">Bespoke Styling &amp; High-End Production Management frameworks.</p>
-                </div>
-                <p style="margin-top: 2rem; font-size: 0.75rem; color: #999;">&copy; 2026 All Rights Reserved.</p>
-            </div>
-            <div class="footer-column" style="text-align: center;">
-                <h4>Studio Metrics</h4>
-                <div style="margin-bottom: 1.5rem;">
-                    <span style="display: block; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 0.25rem;">Local Time</span>
-                    <div id="studio-timeclock" style="font-family: 'Montserrat', sans-serif; font-size: 1.3rem; font-weight: 300; color: #222; letter-spacing: 1px;">00:00:00 AM</div>
-                </div>
-                <div>
-                    <span style="display: block; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: #999; margin-bottom: 0.5rem;">Total Ledger Visits</span>
-                    <img src="https://counter.vone.me/counter/page?id=studio-erish-production" alt="Visitor Counter" style="height: 22px; filter: grayscale(100%) contrast(120%);" />
-                </div>
-            </div>
-            <div class="footer-column" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
-                <h4>Digital Access</h4>
-                <div id="site-qr-code" style="display: inline-block; padding: 0.25rem;"></div>
-                <span style="display: block; font-size: 0.65rem; color: #999; margin-top: 0.75rem; letter-spacing: 1px;">SCAN TO SHARE PORTFOLIO</span>
-            </div>
+        <div class="pillar reveal">
+          <span class="pillar-icon">III.</span>
+          <p class="pillar-title">Excellence</p>
+          <p class="pillar-text">With over 18 years of experience, I bring a standard of quality that is non-negotiable. From the first consultation to the last dance, excellence is not an option — it is the baseline.</p>
         </div>
-    </footer>
+      </div>
+    </div>
+  </section>
 
-    <script src="js/script.js"></script>
+  <!-- ── SERVICES STRIP ─────────────────────────────── -->
+  <section class="services-strip">
+    <div class="services-inner">
+      <div class="service-col reveal">
+        <span class="service-num">01</span>
+        <h3 class="service-title">Wedding Coordination</h3>
+        <p class="service-desc">Full on-the-day coordination and management — so you can be present in every moment, while I handle every detail.</p>
+      </div>
+      <div class="service-col reveal">
+        <span class="service-num">02</span>
+        <h3 class="service-title">Events Styling</h3>
+        <p class="service-desc">Curated decor, trusses, drapery, and florals that transform any venue into a breathtaking visual story.</p>
+      </div>
+      <div class="service-col reveal">
+        <span class="service-num">03</span>
+        <h3 class="service-title">Full Event Planning</h3>
+        <p class="service-desc">From concept to execution — supplier sourcing, budgeting, timelines, and everything in between.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CLOSING ─────────────────────────────────────── -->
+  <section class="closing">
+    <p class="closing-eyebrow reveal">Let's Begin</p>
+    <h2 class="closing-title reveal">
+      Your Story Deserves<br/>
+      to Be <em>Beautifully Told.</em>
+    </h2>
+    <p class="closing-body reveal">
+      I would be honoured to be part of your celebration. Let us sit down, talk about your vision, and create something that is entirely, beautifully yours.
+    </p>
+    <a href="#contact" class="btn reveal">Get In Touch</a>
+  </section>
+
+  <script>
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+  </script>
+
 </body>
 </html>
