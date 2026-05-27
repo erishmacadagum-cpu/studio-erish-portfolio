@@ -7,18 +7,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
 :root {
-  --cream:   #FAF7F2;
-  --warm:    #F2EDE4;
-  --gold:    #B8965A;
+  --cream:    #FAF7F2;
+  --warm:     #F2EDE4;
+  --gold:     #B8965A;
   --gold-lt: #D4B07A;
   --gold-dk: #8B6C38;
-  --dark:    #1C1610;
+  --dark:     #1C1610;
   --charcoal:#2E2620;
-  --brown:   #5C4A35;
-  --text:    #3A3028;
-  --muted:   #8A7A6A;
-  --border:  #DDD5C8;
-  --white:   #FFFFFF;
+  --brown:    #5C4A35;
+  --text:     #3A3028;
+  --muted:    #8A7A6A;
+  --border:   #DDD5C8;
+  --white:    #FFFFFF;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
@@ -112,7 +112,7 @@ nav{
 .cat-btn:hover,.cat-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
 
 /* ── SECTION WRAPPER ── */
-.showcase-section{padding:100px 24px;}
+.showcase-section{padding:100px 24px; position: relative;}
 .showcase-section:nth-child(even){background:var(--warm);}
 
 .sec-header{text-align:center;margin-bottom:72px;}
@@ -132,7 +132,7 @@ nav{
 .gb-dia{width:4px;height:4px;background:var(--gold);transform:rotate(45deg);opacity:0.7;}
 
 /* ── GRIDS ── */
-.grid-hero{max-width:1200px;margin:0 auto;display:grid;gap:4px;}
+.grid-hero{max-width:1200px;margin:0 auto;display:grid;gap:15px;width:100%;}
 
 /* Reception - asymmetric 3-col */
 .grid-reception{grid-template-columns:1.4fr 1fr 1fr;grid-template-rows:380px 280px;}
@@ -143,7 +143,7 @@ nav{
 .grid-reception .g5{grid-column:3;grid-row:2;}
 
 /* Ceremony - 2 tall + 1 wide bottom */
-.grid-ceremony{grid-template-columns:1fr 1fr;grid-template-rows:420px 260px;}
+.grid-ceremony{grid-template-columns:1fr 1fr;grid-template-rows:420px 260px;margin-top:40px;}
 .grid-ceremony .g1{grid-column:1;grid-row:1;}
 .grid-ceremony .g2{grid-column:2;grid-row:1;}
 .grid-ceremony .g3{grid-column:1/3;grid-row:2;}
@@ -169,11 +169,15 @@ nav{
 .img-card{
   position:relative;overflow:hidden;
   cursor:pointer;
-}.img-card img {
+  width:100%;
+  height:100%;
+}
+.img-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.6s ease;
+  display: block;
 }
 
 .img-card:hover img {
@@ -183,12 +187,19 @@ nav{
   content:'';position:absolute;inset:0;
   background:linear-gradient(to top,rgba(28,22,16,0.55) 0%,transparent 50%);
   opacity:0;transition:opacity 0.4s;
+  pointer-events: none;
 }
 .img-card:hover::after{opacity:1;}
 
 .img-placeholder{
-  width:100%;height:100%;
- 
+  width:100%;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+}
 
 /* Each category gets its own palette */
 .reception-1{background:linear-gradient(135deg,#2C2018 0%,#3D2E1A 40%,#2A1E12 100%);}
@@ -418,7 +429,6 @@ footer{
 </head>
 <body>
 
-<!-- ── NAV ── -->
 <nav>
   <div class="nav-logo"><em>Erish</em> Studio</div>
   <div class="nav-links">
@@ -429,7 +439,6 @@ footer{
   </div>
 </nav>
 
-<!-- ── HERO ── -->
 <section class="hero">
   <div class="hero-frame"></div>
   <div class="corner tl"></div><div class="corner tr"></div>
@@ -447,7 +456,6 @@ footer{
   </div>
 </section>
 
-<!-- ── CATEGORY NAV ── -->
 <div class="cat-nav" id="showcase">
   <div class="cat-nav-inner">
     <button class="cat-btn active" onclick="scrollTo('reception')">Reception</button>
@@ -459,9 +467,6 @@ footer{
   </div>
 </div>
 
-<!-- ════════════════════════════════════════════ -->
-<!-- ── RECEPTION ── -->
-<!-- ════════════════════════════════════════════ -->
 <section class="showcase-section" id="reception">
   <div class="sec-header reveal">
     <span class="sec-label">Category 01</span>
@@ -473,53 +478,61 @@ footer{
   </div>
 
   <div class="grid-hero grid-reception reveal">
- 
-    <div class="img-card g1" style="height:100%;">
-      <img src="images/reception/reception-1.jpg" alt="Reception Detail" style="width: 100%; height: 100%; object-fit: cover;">
-     
+    <div class="img-card g1">
+      <img src="images/reception/reception-1.jpg" alt="Reception Detail">
       <div class="card-overlay">
         <div class="card-overlay-title">Grand Ballroom Reception</div>
         <div class="card-overlay-sub">Full Styling · Trusses · Florals</div>
       </div>
     </div>
-    <div class="img-card g2" style="height:100%;">
-      <img src="images/reception/reception-2.jpg" alt="Reception Detail" style="width: 100%; height: 100%; object-fit: cover;">
-      
+    
+    <div class="img-card g2">
+      <img src="images/reception/reception-2.jpg" alt="Reception Detail">
       <div class="card-overlay">
         <div class="card-overlay-title">Sweetheart Table Styling</div>
         <div class="card-overlay-sub">Intimate · Elegant</div>
       </div>
     </div>
-    <div class="img-card g3" style="height:100%;">
-      <img src="images/reception/reception-3.jpg" alt="Reception Detail" style="width: 100%; height: 100%; object-fit: cover;">
-     
+    
+    <div class="img-card g3">
+      <img src="images/reception/reception-3.jpg" alt="Reception Detail">
       <div class="card-overlay">
         <div class="card-overlay-title">Trusses & Ceiling Drapery</div>
         <div class="card-overlay-sub">Premium · Full Install</div>
       </div>
     </div>
-    <div class="img-card g4" style="height:100%;">
-      <img src="images/reception/reception-4.jpg" alt="Reception Detail" style="width: 100%; height: 100%; object-fit: cover;">
     
+    <div class="img-card g4">
+      <img src="images/reception/reception-4.jpg" alt="Reception Detail">
       <div class="card-overlay">
         <div class="card-overlay-title">Table Setting</div>
         <div class="card-overlay-sub">Curated · Styled</div>
       </div>
     </div>
-    <div class="img-card g5" style="height:100%;">
-      <img src="images/reception/reception-5.jpg" alt="Reception Detail" style="width: 100%; height: 100%; object-fit: cover;">
     
+    <div class="img-card g5">
+      <img src="images/reception/reception-5.jpg" alt="Reception Detail">
       <div class="card-overlay">
         <div class="card-overlay-title">Entrance & Welcome Area</div>
         <div class="card-overlay-sub">First Impressions · Memorable</div>
       </div>
     </div>
   </div>
+</section>
+
+<section class="showcase-section" id="ceremony">
+  <div class="sec-header reveal">
+    <span class="sec-label">Category 02</span>
+    <h2 class="sec-title">Wedding <em>Ceremony</em></h2>
+    <p class="sec-desc">
+      The moment where forever begins. Whether held in a historic cathedral or a sun-drenched garden, we style sacred spaces that frame your vows with timeless romance.
+    </p>
+    <div class="gold-bar"><div class="gb-line"></div><div class="gb-dia"></div><div class="gb-line"></div></div>
   </div>
 
   <div class="grid-hero grid-ceremony reveal">
     <div class="img-card g1">
-      <div class="img-placeholder ceremony-1" style="height:420px;">
+      <div class="img-placeholder ceremony-1">
         <div class="card-icon">Altar<br/>Design</div>
         <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
       </div>
@@ -529,8 +542,9 @@ footer{
         <div class="card-overlay-sub">Sacred · Breathtaking</div>
       </div>
     </div>
+    
     <div class="img-card g2">
-      <div class="img-placeholder ceremony-2" style="height:420px;">
+      <div class="img-placeholder ceremony-2">
         <div class="card-icon">Aisle<br/>Décor</div>
         <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
       </div>
@@ -540,8 +554,9 @@ footer{
         <div class="card-overlay-sub">Florals · Ribbons · Elegance</div>
       </div>
     </div>
+    
     <div class="img-card g3">
-      <div class="img-placeholder ceremony-3" style="height:260px;">
+      <div class="img-placeholder ceremony-3">
         <div class="card-icon">Garden Ceremony Setup</div>
         <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
       </div>
@@ -554,9 +569,6 @@ footer{
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════ -->
-<!-- ── BESPOKE BOUQUET ── -->
-<!-- ════════════════════════════════════════════ -->
 <section class="showcase-section" id="bouquet">
   <div class="sec-header reveal">
     <span class="sec-label">Category 03</span>
@@ -568,8 +580,8 @@ footer{
   </div>
 
   <div class="grid-hero grid-bouquet reveal">
-    <div class="img-card g1" style="height:600px;">
-      <div class="img-placeholder bouquet-1" style="height:100%;">
+    <div class="img-card g1">
+      <div class="img-placeholder bouquet-1">
         <div class="card-icon">Bridal<br/>Bouquet</div>
         <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
       </div>
@@ -579,8 +591,9 @@ footer{
         <div class="card-overlay-sub">Hand-tied · Bespoke · Luxe</div>
       </div>
     </div>
-    <div class="img-card g2" style="height:300px;">
-      <div class="img-placeholder bouquet-2" style="height:100%;">
+    
+    <div class="img-card g2">
+      <div class="img-placeholder bouquet-2">
         <div class="card-icon">Bridesmaid<br/>Blooms</div>
         <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
       </div>
@@ -590,8 +603,9 @@ footer{
         <div class="card-overlay-sub">Complementary · Curated</div>
       </div>
     </div>
-    <div class="img-card g3" style="height:300px;">
-      <div class="img-placeholder bouquet-3" style="height:100%;">
+    
+    <div class="img-card g3">
+      <div class="img-placeholder bouquet-3">
         <div class="card-icon">Boutonniere<br/>& Corsage</div>
         <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
       </div>
@@ -601,8 +615,9 @@ footer{
         <div class="card-overlay-sub">Entourage · Finished Detail</div>
       </div>
     </div>
-    <div class="img-card g4" style="height:300px;">
-      <div class="img-placeholder bouquet-4" style="height:100%;">
+    
+    <div class="img-card g4">
+      <div class="img-placeholder bouquet-4">
         <div class="card-icon">Flower Crown · Petal Toss · Flower Girl</div>
         <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
       </div>
@@ -615,9 +630,6 @@ footer{
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════ -->
-<!-- ── DEBUT ── -->
-<!-- ════════════════════════════════════════════ -->
 <section class="showcase-section" id="debut">
   <div class="sec-header reveal">
     <span class="sec-label">Category 04</span>
@@ -629,8 +641,8 @@ footer{
   </div>
 
   <div class="grid-hero grid-debut reveal">
-    <div class="img-card g1" style="height:320px;">
-      <div class="img-placeholder debut-1" style="height:100%;">
+    <div class="img-card g1">
+      <div class="img-placeholder debut-1">
         <div class="card-icon">Grand<br/>Entrance</div>
         <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
       </div>
@@ -640,8 +652,9 @@ footer{
         <div class="card-overlay-sub">Dramatic · Statement · Unforgettable</div>
       </div>
     </div>
-    <div class="img-card g2" style="height:320px;">
-      <div class="img-placeholder debut-2" style="height:100%;">
+    
+    <div class="img-card g2">
+      <div class="img-placeholder debut-2">
         <div class="card-icon">Cotillion<br/>Stage</div>
         <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
       </div>
@@ -651,8 +664,9 @@ footer{
         <div class="card-overlay-sub">Elegant · Styled · Curated</div>
       </div>
     </div>
-    <div class="img-card g3" style="height:320px;">
-      <div class="img-placeholder debut-3" style="height:100%;">
+    
+    <div class="img-card g3">
+      <div class="img-placeholder debut-3">
         <div class="card-icon">Debut<br/>Tablescape</div>
         <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
       </div>
@@ -662,8 +676,9 @@ footer{
         <div class="card-overlay-sub">Feminine · Lush · Refined</div>
       </div>
     </div>
-    <div class="img-card g4" style="height:320px;">
-      <div class="img-placeholder debut-4" style="height:100%;">
+    
+    <div class="img-card g4">
+      <div class="img-placeholder debut-4">
         <div class="card-icon">Photo<br/>Backdrop</div>
         <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
       </div>
@@ -676,9 +691,6 @@ footer{
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════ -->
-<!-- ── BIRTHDAY ── -->
-<!-- ════════════════════════════════════════════ -->
 <section class="showcase-section" id="birthday">
   <div class="sec-header reveal">
     <span class="sec-label">Category 05</span>
@@ -690,8 +702,8 @@ footer{
   </div>
 
   <div class="grid-hero grid-birthday reveal">
-    <div class="img-card g1" style="height:280px;">
-      <div class="img-placeholder bday-1" style="height:100%;">
+    <div class="img-card g1">
+      <div class="img-placeholder bday-1">
         <div class="card-icon">Party<br/>Styling</div>
         <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
       </div>
@@ -701,8 +713,9 @@ footer{
         <div class="card-overlay-sub">Creative · Bold · Personalized</div>
       </div>
     </div>
-    <div class="img-card g2" style="height:280px;">
-      <div class="img-placeholder bday-2" style="height:100%;">
+    
+    <div class="img-card g2">
+      <div class="img-placeholder bday-2">
         <div class="card-icon">Dessert<br/>Table</div>
         <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
       </div>
@@ -712,8 +725,9 @@ footer{
         <div class="card-overlay-sub">Styled · Curated · Delicious</div>
       </div>
     </div>
-    <div class="img-card g3" style="height:560px;">
-      <div class="img-placeholder bday-3" style="height:100%;">
+    
+    <div class="img-card g3">
+      <div class="img-placeholder bday-3">
         <div class="card-icon">Grand<br/>Backdrop</div>
         <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
       </div>
@@ -723,8 +737,9 @@ footer{
         <div class="card-overlay-sub">Dramatic · Custom · Stunning</div>
       </div>
     </div>
-    <div class="img-card g4" style="height:280px;">
-      <div class="img-placeholder bday-4" style="height:100%;">
+    
+    <div class="img-card g4">
+      <div class="img-placeholder bday-4">
         <div class="card-icon">Intimate Birthday Dinner Styling</div>
         <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
       </div>
@@ -737,12 +752,8 @@ footer{
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════ -->
-<!-- ── INQUIRY FORM ── -->
-<!-- ════════════════════════════════════════════ -->
 <section class="inquiry" id="inquiry">
   <div class="inquiry-inner">
-
     <div class="inquiry-left reveal">
       <span class="inq-label">Start Here</span>
       <h2 class="inq-title">Let's Create<br/>Something <em>Beautiful</em><br/>Together.</h2>
@@ -762,192 +773,127 @@ footer{
           <div class="inq-detail-dot"></div>
           <div class="inq-detail-text"><strong>Limited bookings per month</strong> — we give every client our full, undivided attention.</div>
         </div>
-        <div class="inq-detail-item">
-          <div class="inq-detail-dot"></div>
-          <div class="inq-detail-text"><strong>Free initial consultation</strong> — let's talk before you commit to anything.</div>
-        </div>
       </div>
     </div>
 
     <div class="form-wrap reveal">
-      <div id="formContent">
-        <p class="form-title">"Where Every Detail Tells Your Story."</p>
-
+      <h3 class="form-title">Consultation Request</h3>
+      <form id="inquiryForm" onsubmit="handleInquiry(event)">
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label">First Name *</label>
-            <input class="form-input" type="text" placeholder="Your first name"/>
+            <label class="form-label">Your Name</label>
+            <input type="text" class="form-input" required placeholder="E.g., Maria Santos"/>
           </div>
           <div class="form-group">
-            <label class="form-label">Last Name *</label>
-            <input class="form-input" type="text" placeholder="Your last name"/>
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-input" required placeholder="name@example.com"/>
           </div>
         </div>
-
+        
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label">Email Address *</label>
-            <input class="form-input" type="email" placeholder="your@email.com"/>
+            <label class="form-label">Event Date</label>
+            <input type="date" class="form-input" required/>
           </div>
           <div class="form-group">
-            <label class="form-label">Contact Number *</label>
-            <input class="form-input" type="tel" placeholder="+63 9XX XXX XXXX"/>
-          </div>
-        </div>
-
-        <div class="form-divider"></div>
-
-        <div class="form-group">
-          <label class="form-label">Type of Event *</label>
-          <select class="form-select form-input">
-            <option value="" disabled selected>Select event type</option>
-            <option>Wedding — Full Coordination</option>
-            <option>Wedding — Styling Only</option>
-            <option>Debut Celebration</option>
-            <option>Birthday Party</option>
-            <option>Corporate Event</option>
-            <option>Other</option>
-          </select>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Event Date *</label>
-            <input class="form-input" type="date"/>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Estimated Guest Count</label>
-            <select class="form-select form-input">
-              <option value="" disabled selected>Select range</option>
-              <option>Below 50 guests</option>
-              <option>50 – 100 guests</option>
-              <option>100 – 150 guests</option>
-              <option>150 – 200 guests</option>
-              <option>200 – 300 guests</option>
-              <option>300+ guests</option>
+            <label class="form-label">Event Type</label>
+            <select class="form-select" required>
+              <option value="" disabled selected>Select an option</option>
+              <option value="wedding">Wedding (Full Styling)</option>
+              <option value="reception">Reception Only</option>
+              <option value="ceremony">Ceremony Only</option>
+              <option value="debut">Debut Celebration</option>
+              <option value="birthday">Birthday Milestone</option>
+              <option value="other">Other Special Event</option>
             </select>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="form-label">Event Location / Venue</label>
-          <input class="form-input" type="text" placeholder="Venue name or city (e.g. Malalag, Davao del Sur)"/>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Budget Range</label>
-          <select class="form-select form-input">
-            <option value="" disabled selected>Select budget range</option>
-            <option>Below P80,000</option>
-            <option>P80,000 – P150,000</option>
-            <option>P150,000 – P250,000</option>
-            <option>P250,000 – P400,000</option>
-            <option>P400,000 – P600,000</option>
-            <option>Above P600,000</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Services Interested In</label>
+          <label class="form-label">Desired Services</label>
           <div class="form-check-group">
-            <label class="form-check"><input type="checkbox"/><span class="form-check-label">Decor & Styling</span></label>
-            <label class="form-check"><input type="checkbox"/><span class="form-check-label">Trusses & Drapery</span></label>
-            <label class="form-check"><input type="checkbox"/><span class="form-check-label">Florals & Bouquets</span></label>
-            <label class="form-check"><input type="checkbox"/><span class="form-check-label">On-the-Day Coordination</span></label>
-            <label class="form-check"><input type="checkbox"/><span class="form-check-label">Full Event Planning</span></label>
-            <label class="form-check"><input type="checkbox"/><span class="form-check-label">Not Sure Yet</span></label>
+            <label class="form-check">
+              <input type="checkbox" value="styling"/>
+              <span class="form-check-label">Event Styling & Concept</span>
+            </label>
+            <label class="form-check">
+              <input type="checkbox" value="florals"/>
+              <span class="form-check-label">Bespoke Florals & Bouquets</span>
+            </label>
+            <label class="form-check">
+              <input type="checkbox" value="lighting"/>
+              <span class="form-check-label">Trusses, Lights & Drapery</span>
+            </label>
           </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Tell Us About Your Vision</label>
+          <textarea class="form-textarea" placeholder="Share your colors, theme ideas, or specific layout requests..."></textarea>
         </div>
 
         <div class="form-divider"></div>
 
-        <div class="form-group">
-          <label class="form-label">Tell Us About Your Vision</label>
-          <textarea class="form-textarea" placeholder="Share your theme, color palette, inspiration, or anything you'd like us to know about your dream celebration..."></textarea>
-        </div>
+        <button type="submit" class="btn-submit">Send Invitation</button>
+        <p class="form-note">By clicking submit, you agree to our 24-hour response framework.</p>
+      </form>
 
-        <div class="form-group">
-          <label class="form-label">How Did You Hear About Us?</label>
-          <select class="form-select form-input">
-            <option value="" disabled selected>Select one</option>
-            <option>Referral from a friend or family</option>
-            <option>Instagram</option>
-            <option>Facebook</option>
-            <option>Google Search</option>
-            <option>I attended an event you styled</option>
-            <option>Other</option>
-          </select>
-        </div>
-
-        <button class="btn-submit" onclick="submitForm()">Send My Inquiry →</button>
-        <p class="form-note">
-          We respect your privacy. Your information will never be shared.<br/>
-          We respond to all inquiries within 24 hours.
-        </p>
-      </div>
-
-      <div class="form-success" id="formSuccess">
-        <span class="success-icon">✦</span>
-        <h3 class="success-title">Thank You for Reaching Out.</h3>
-        <p class="success-msg">
-          Your inquiry has been received. We are already looking forward to hearing more about your celebration.<br/><br/>
-          Erish will be in touch with you within <strong style="color:var(--gold-lt);">24 hours.</strong><br/><br/>
-          <em style="opacity:0.6;">"Where Every Detail Tells Your Story."</em>
-        </p>
+      <div class="form-success" id="successBlock">
+        <span class="success-icon">Thank you</span>
+        <h4 class="success-title">Message Received Perfectly</h4>
+        <p class="success-msg">Your vision is safe with us. Our design coordinator will review your parameters and connect within 24 hours.</p>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
 <footer>
   <div class="foot-logo"><em>Erish</em> Studio</div>
-  <div class="foot-note">© 2026 Erish Studio Events & Styling · Davao City, Philippines</div>
+  <div class="foot-note">&copy; 2026 Erish Studio Events. All Rights Reserved.</div>
 </footer>
 
 <script>
-// Category nav scroll
-function scrollTo(id){
-  const el = document.getElementById(id);
-  if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
-  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
-  event.target.classList.add('active');
+function scrollTo(id) {
+  const element = document.getElementById(id);
+  if (element) {
+    const offset = 120;
+    const bodyRect = document.body.getBoundingClientRect().top;
+    const elementRect = element.getBoundingClientRect().top;
+    const elementPosition = elementRect - bodyRect;
+    const offsetPosition = elementPosition - offset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    });
+
+    // Update active class on buttons
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+      btn.classList.remove('active');
+      if (btn.getAttribute('onclick').includes(id)) {
+        btn.classList.add('active');
+      }
+    });
+  }
 }
 
-// Active cat nav on scroll
-const sections = ['reception','ceremony','bouquet','debut','birthday','inquiry'];
-const catBtns = document.querySelectorAll('.cat-btn');
-window.addEventListener('scroll',()=>{
-  let current='';
-  sections.forEach(id=>{
-    const el=document.getElementById(id);
-    if(el && window.scrollY >= el.offsetTop - 200) current=id;
-  });
-  catBtns.forEach((btn,i)=>{
-    btn.classList.toggle('active', sections[i]===current);
-  });
-});
+function handleInquiry(e) {
+  e.preventDefault();
+  document.getElementById('inquiryForm').style.display = 'none';
+  document.getElementById('successBlock').classList.add('show');
+}
 
-// Scroll reveal
-const reveals = document.querySelectorAll('.reveal');
-const obs = new IntersectionObserver((entries)=>{
-  entries.forEach((e,i)=>{
-    if(e.isIntersecting){
-      setTimeout(()=>e.target.classList.add('visible'), i*60);
-      obs.unobserve(e.target);
+// Simple reveal animation observer
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
     }
   });
-},{threshold:0.08});
-reveals.forEach(r=>obs.observe(r));
+}, { threshold: 0.1 });
 
-// Form submit
-function submitForm(){
-  document.getElementById('formContent').style.display='none';
-  const s=document.getElementById('formSuccess');
-  s.style.display='block';
-  s.classList.add('show');
-}
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
+
 </body>
 </html>
