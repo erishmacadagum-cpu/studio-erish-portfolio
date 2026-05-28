@@ -183,9 +183,7 @@ nav{
   flex-direction:column;gap:12px;
   transition:transform 0.6s ease;
 }
-.img-card img { transition: transform 0.6s ease; }
-.img-card:hover img { transform: scale(1.04); }
-.img-card:hover .img-placeholder { transform: scale(1.04); }
+.img-card:hover .img-placeholder{transform:scale(1.04);}
 
 /* Each category gets its own palette */
 .reception-1{background:linear-gradient(135deg,#2C2018 0%,#3D2E1A 40%,#2A1E12 100%);}
@@ -194,9 +192,9 @@ nav{
 .reception-4{background:linear-gradient(150deg,#20180C 0%,#302214 100%);}
 .reception-5{background:linear-gradient(140deg,#1E1610 0%,#2A2010 100%);}
 
-.ceremony-1 { background-image: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../images/ceremony/ceremony-1.jpg'); background-size: cover; background-position: center; }
-.ceremony-2 { background-image: linear-gradient(160deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../images/ceremony/ceremony-2.jpg'); background-size: cover; background-position: center; }
-.ceremony-3 { background-image: linear-gradient(120deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../images/ceremony/ceremony-3.jpg'); background-size: cover; background-position: center; }
+.ceremony-1{background:linear-gradient(135deg,#1E1A18 0%,#2E2824 100%);}
+.ceremony-2{background:linear-gradient(160deg,#18181A 0%,#28242C 100%);}
+.ceremony-3{background:linear-gradient(120deg,#1A1C1E 0%,#242830 100%);}
 
 .bouquet-1{background:linear-gradient(135deg,#1A1818 0%,#2E2426 100%);}
 .bouquet-2{background:linear-gradient(160deg,#1E1416 0%,#2C2022 100%);}
@@ -471,41 +469,63 @@ footer{
 
   <div class="grid-hero grid-reception reveal">
     <div class="img-card g1" style="height:100%;">
-      <img src="images/reception/reception-1.jpg" alt="Grand Ballroom Reception" style="width:100%;height:100%;object-fit:cover;">
+      <div class="img-placeholder reception-1">
+        <div class="card-icon">Reception<br/>Styling</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
       <div class="card-overlay">
         <div class="card-overlay-title">Grand Ballroom Reception</div>
         <div class="card-overlay-sub">Full Styling · Trusses · Florals</div>
       </div>
     </div>
     <div class="img-card g2" style="height:100%;">
-      <img src="images/reception/reception-2.jpg" alt="Sweetheart Table Styling" style="width:100%;height:100%;object-fit:cover;">
+      <div class="img-placeholder reception-2">
+        <div class="card-icon">Head<br/>Table</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
       <div class="card-overlay">
         <div class="card-overlay-title">Sweetheart Table Styling</div>
         <div class="card-overlay-sub">Intimate · Elegant</div>
       </div>
     </div>
     <div class="img-card g3" style="height:100%;">
-      <img src="images/reception/reception-3.jpg" alt="Trusses & Ceiling Drapery" style="width:100%;height:100%;object-fit:cover;">
+      <div class="img-placeholder reception-3">
+        <div class="card-icon">Ceiling<br/>Draping</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
       <div class="card-overlay">
         <div class="card-overlay-title">Trusses & Ceiling Drapery</div>
         <div class="card-overlay-sub">Premium · Full Install</div>
       </div>
     </div>
     <div class="img-card g4" style="height:100%;">
-      <img src="images/reception/reception-4.jpg" alt="Centerpiece & Table Design" style="width:100%;height:100%;object-fit:cover;">
+      <div class="img-placeholder reception-4">
+        <div class="card-icon">Table<br/>Setting</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
       <div class="card-overlay">
         <div class="card-overlay-title">Centerpiece & Table Design</div>
         <div class="card-overlay-sub">Curated · Styled</div>
       </div>
     </div>
     <div class="img-card g5" style="height:100%;">
-      <img src="images/reception/reception-5.jpg" alt="Entrance & Welcome Area" style="width:100%;height:100%;object-fit:cover;">
+      <div class="img-placeholder reception-5">
+        <div class="card-icon">Entrance<br/>Styling</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
       <div class="card-overlay">
         <div class="card-overlay-title">Entrance & Welcome Area</div>
         <div class="card-overlay-sub">First Impressions · Memorable</div>
       </div>
     </div>
   </div>
+</section>
+
 <!-- ════════════════════════════════════════════ -->
 <!-- ── CEREMONY ── -->
 <!-- ════════════════════════════════════════════ -->
@@ -540,31 +560,10 @@ footer{
       <div class="card-overlay">
         <div class="card-overlay-title">Aisle & Pew Styling</div>
         <div class="card-overlay-sub">Florals · Ribbons · Elegance</div>
-<div class="grid-hero grid-ceremony reveal">
-    <div class="img-card g1">
-     <div class="img-placeholder ceremony-1" style="background-image:url('images/ceremony/ceremony-1.jpg'); background-size:cover; background-position:center;">
-        <div class="card-icon">Altar<br/>Design</div>
-        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
-      </div>
-      <div class="photo-badge">Add Photo</div>
-      <div class="card-overlay">
-        <div class="card-overlay-title">Altar & Arch Styling</div>
-        <div class="card-overlay-sub">Sacred · Breathtaking</div>
-      </div>
-    </div>
-    <div class="img-card g2">
-      <div class="img-placeholder ceremony-2" style="background-image:url('images/ceremony/ceremony-2.jpg'); background-size:cover; background-position:center;">
-        <div class="card-icon">Aisle<br/>Décor</div>
-        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
-      </div>
-      <div class="photo-badge">Add Photo</div>
-      <div class="card-overlay">
-        <div class="card-overlay-title">Aisle & Pew Styling</div>
-        <div class="card-overlay-sub">Florals · Ribbons · Elegance</div>
       </div>
     </div>
     <div class="img-card g3">
-      <div class="img-placeholder ceremony-3" style="background-image:url('images/ceremony/ceremony-3.jpg'); background-size:cover; background-position:center;">
+      <div class="img-placeholder ceremony-3" style="height:260px;">
         <div class="card-icon">Garden Ceremony Setup</div>
         <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
       </div>
@@ -575,7 +574,69 @@ footer{
       </div>
     </div>
   </div>
-</div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- ── BESPOKE BOUQUET ── -->
+<!-- ════════════════════════════════════════════ -->
+<section class="showcase-section" id="bouquet">
+  <div class="sec-header reveal">
+    <span class="sec-label">Category 03</span>
+    <h2 class="sec-title">Bespoke <em>Bouquet</em></h2>
+    <p class="sec-desc">
+      A bouquet is not merely flowers — it is the last thing you hold before you walk into forever. Each one we create is entirely one-of-a-kind, hand-crafted to reflect your personality, palette, and the love you carry.
+    </p>
+    <div class="gold-bar"><div class="gb-line"></div><div class="gb-dia"></div><div class="gb-line"></div></div>
+  </div>
+
+  <div class="grid-hero grid-bouquet reveal">
+    <div class="img-card g1" style="height:600px;">
+      <div class="img-placeholder bouquet-1" style="height:100%;">
+        <div class="card-icon">Bridal<br/>Bouquet</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Signature Bridal Bouquet</div>
+        <div class="card-overlay-sub">Hand-tied · Bespoke · Luxe</div>
+      </div>
+    </div>
+    <div class="img-card g2" style="height:300px;">
+      <div class="img-placeholder bouquet-2" style="height:100%;">
+        <div class="card-icon">Bridesmaid<br/>Blooms</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Bridesmaid Bouquets</div>
+        <div class="card-overlay-sub">Complementary · Curated</div>
+      </div>
+    </div>
+    <div class="img-card g3" style="height:300px;">
+      <div class="img-placeholder bouquet-3" style="height:100%;">
+        <div class="card-icon">Boutonniere<br/>& Corsage</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Boutonnieres & Corsages</div>
+        <div class="card-overlay-sub">Entourage · Finished Detail</div>
+      </div>
+    </div>
+    <div class="img-card g4" style="height:300px;">
+      <div class="img-placeholder bouquet-4" style="height:100%;">
+        <div class="card-icon">Flower Crown · Petal Toss · Flower Girl</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="photo-badge">Add Photo</div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Floral Accessories</div>
+        <div class="card-overlay-sub">Crowns · Petals · Girl Baskets</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ════════════════════════════════════════════ -->
 <!-- ── DEBUT ── -->
 <!-- ════════════════════════════════════════════ -->
