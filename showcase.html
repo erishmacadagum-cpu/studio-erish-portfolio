@@ -156,7 +156,13 @@ nav{
 .card-overlay-title{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:400;font-style:italic;color:#fff;letter-spacing:1px;}
 .card-overlay-sub{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-lt);margin-top:4px;opacity:0.8;}
 
-/* ── INQUIRY & FOOTER (Styles remain the same) ── */
+/* ── PHOTO BADGE ── */
+.photo-badge{position:absolute;top:14px;right:14px;background:rgba(184,150,90,0.15);border:0.5px solid rgba(184,150,90,0.3);padding:6px 12px;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-lt);opacity:0;transition:opacity 0.3s;backdrop-filter:blur(4px);z-index:3;}
+.img-card:hover .photo-badge{opacity:1;}
+
+/* ── REVEAL & FORM STYLES ── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
 .inquiry{background:var(--dark);padding:120px 24px;position:relative;overflow:hidden;}
 .inquiry::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 30%,rgba(184,150,90,0.06) 0%,transparent 70%);}
 .inquiry-inner{max-width:920px;margin:0 auto;display:grid;grid-template-columns:1fr 1.6fr;gap:80px;align-items:start;position:relative;z-index:2;}
@@ -179,8 +185,6 @@ nav{
 footer{background:var(--dark);border-top:0.5px solid rgba(255,255,255,0.06);padding:40px 48px;display:flex;align-items:center;justify-content:space-between;}
 .foot-logo{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:rgba(255,255,255,0.3);letter-spacing:2px;}
 .foot-note{font-size:9.5px;letter-spacing:2px;color:rgba(255,255,255,0.15);}
-.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease;}
-.reveal.visible{opacity:1;transform:translateY(0);}
 @media(max-width:900px){.nav-links{display:none;}.grid-reception,.grid-bouquet,.grid-birthday{grid-template-columns:1fr 1fr;grid-template-rows:auto;}.grid-ceremony{grid-template-columns:1fr;}.img-card{height:240px !important;}.inquiry-inner{grid-template-columns:1fr;gap:48px;}}
 </style>
 </head>
@@ -275,8 +279,99 @@ footer{background:var(--dark);border-top:0.5px solid rgba(255,255,255,0.06);padd
   </div>
 </section>
 
+<section class="showcase-section" id="debut">
+  <div class="sec-header reveal">
+    <span class="sec-label">Category 04</span>
+    <h2 class="sec-title">Debut <em>Celebrations</em></h2>
+    <p class="sec-desc">
+      A coming of age is a milestone that deserves a grand celebration. We create elegant, immersive environments that honor the debutante's journey and style.
+    </p>
+    <div class="gold-bar"><div class="gb-line"></div><div class="gb-dia"></div><div class="gb-line"></div></div>
+  </div>
+  <div class="grid-hero grid-debut reveal">
+    <div class="img-card"><div class="photo-badge">Add Photo</div><div class="card-overlay"><div class="card-overlay-title">Debut Photo Backdrop</div><div class="card-overlay-sub">Instagrammable · Custom · Styled</div></div></div>
+  </div>
+</section>
+
+<section class="showcase-section" id="birthday">
+  <div class="sec-header reveal">
+    <span class="sec-label">Category 05</span>
+    <h2 class="sec-title">Birthday <em>Events</em></h2>
+    <p class="sec-desc">
+      Birthdays are a celebration of life — and life deserves to be celebrated beautifully. From intimate gatherings to lavish parties, we style every birthday as a reflection of the person at the center of it all.
+    </p>
+    <div class="gold-bar"><div class="gb-line"></div><div class="gb-dia"></div><div class="gb-line"></div></div>
+  </div>
+  <div class="grid-hero grid-birthday reveal">
+    <div class="img-card g1"><div class="photo-badge">Add Photo</div><div class="card-overlay"><div class="card-overlay-title">Themed Birthday Styling</div><div class="card-overlay-sub">Creative · Bold · Personalized</div></div></div>
+    <div class="img-card g2"><div class="photo-badge">Add Photo</div><div class="card-overlay"><div class="card-overlay-title">Dessert & Cake Table</div><div class="card-overlay-sub">Styled · Curated · Delicious</div></div></div>
+    <div class="img-card g3"><div class="photo-badge">Add Photo</div><div class="card-overlay"><div class="card-overlay-title">Statement Backdrop & Balloon Art</div><div class="card-overlay-sub">Dramatic · Custom · Stunning</div></div></div>
+    <div class="img-card g4"><div class="photo-badge">Add Photo</div><div class="card-overlay"><div class="card-overlay-title">Intimate Dinner Celebration</div><div class="card-overlay-sub">Refined · Warm · Personal</div></div></div>
+  </div>
+</section>
+
+<section class="inquiry" id="inquiry">
+  <div class="inquiry-inner">
+    <div class="inquiry-left reveal">
+      <span class="inq-label">Start Here</span>
+      <h2 class="inq-title">Let's Create<br/>Something <em>Beautiful</em><br/>Together.</h2>
+      <p class="inq-desc">
+        Tell us about your vision and we will craft an experience that is entirely, uniquely yours. We respond to all inquiries within 24 hours.
+      </p>
+      <div class="inq-detail">
+        <div class="inq-detail-item"><div class="inq-detail-dot"></div><div class="inq-detail-text"><strong>Based in Davao City</strong> — serving Mindanao and beyond, including out-of-town events.</div></div>
+        <div class="inq-detail-item"><div class="inq-detail-dot"></div><div class="inq-detail-text"><strong>18+ Years of Experience</strong> — your celebration is in the most trusted hands.</div></div>
+        <div class="inq-detail-item"><div class="inq-detail-dot"></div><div class="inq-detail-text"><strong>Limited bookings per month</strong> — we give every client our full, undivided attention.</div></div>
+      </div>
+    </div>
+    <div class="form-wrap reveal">
+      <h3 class="form-title">Consultation Request</h3>
+      <form id="inquiryForm" onsubmit="handleInquiry(event)">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Your Name</label><input type="text" class="form-input" required placeholder="E.g., Maria Santos"/></div>
+          <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" required placeholder="name@example.com"/></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Event Date</label><input type="date" class="form-input" required/></div>
+          <div class="form-group"><label class="form-label">Event Type</label>
+            <select class="form-select" required>
+              <option value="" disabled selected>Select an option</option>
+              <option value="wedding">Wedding (Full Styling)</option>
+              <option value="reception">Reception Only</option>
+              <option value="ceremony">Ceremony Only</option>
+              <option value="debut">Debut Celebration</option>
+              <option value="birthday">Birthday Milestone</option>
+              <option value="other">Other Special Event</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><label class="form-label">Desired Services</label>
+          <div class="form-check-group">
+            <label class="form-check"><input type="checkbox" value="styling"/><span class="form-check-label">Event Styling & Concept</span></label>
+            <label class="form-check"><input type="checkbox" value="florals"/><span class="form-check-label">Bespoke Florals & Bouquets</span></label>
+            <label class="form-check"><input type="checkbox" value="lighting"/><span class="form-check-label">Trusses, Lights & Drapery</span></label>
+          </div>
+        </div>
+        <div class="form-group"><label class="form-label">Tell Us About Your Vision</label><textarea class="form-textarea" placeholder="Share your colors, theme ideas, or specific layout requests..."></textarea></div>
+        <div class="form-divider"></div>
+        <button type="submit" class="btn-submit">Send Invitation</button>
+        <p class="form-note">By clicking submit, you agree to our 24-hour response framework.</p>
+      </form>
+      <div class="form-success" id="successBlock">
+        <span class="success-icon">Thank you</span>
+        <h4 class="success-title">Message Received Perfectly</h4>
+        <p class="success-msg">Your vision is safe with us. Our design coordinator will review your parameters and connect within 24 hours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-logo"><em>Erish</em> Studio</div>
+  <div class="foot-note">&copy; 2026 Erish Studio Events. All Rights Reserved.</div>
+</footer>
+
 <script>
-// Keep existing scripts
 function scrollTo(id) {
   const element = document.getElementById(id);
   if (element) {
@@ -287,6 +382,11 @@ function scrollTo(id) {
       if (btn.innerText.toLowerCase().includes(id)) btn.classList.add('active');
     });
   }
+}
+function handleInquiry(e) {
+  e.preventDefault();
+  document.getElementById('inquiryForm').style.display = 'none';
+  document.getElementById('successBlock').classList.add('show');
 }
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
