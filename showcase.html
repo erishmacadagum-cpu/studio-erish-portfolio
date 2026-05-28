@@ -24,7 +24,7 @@
 html{scroll-behavior:smooth;}
 body{background:var(--cream);color:var(--text);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;}
 
-/* ── NAV ── */
+/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:rgba(250,247,242,0.92);backdrop-filter:blur(12px);border-bottom:0.5px solid var(--border);}
 .nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--dark);letter-spacing:2px;}
 .nav-logo em{font-style:italic;color:var(--gold);}
@@ -32,81 +32,34 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .nav-links a{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.3s;}
 .nav-links a:hover{color:var(--gold);}
 
-/* ── HERO ── */
+/* HERO */
 .hero{min-height:90vh;background:var(--dark);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding-top:80px;}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 30% 60%,rgba(184,150,90,0.07) 0%,transparent 70%),radial-gradient(ellipse 50% 40% at 80% 20%,rgba(255,255,255,0.02) 0%,transparent 60%);}
-.hero-frame{position:absolute;inset:20px;border:0.5px solid rgba(255,255,255,0.05);pointer-events:none;}
-.hero-frame::before{content:'';position:absolute;inset:12px;border:0.3px solid rgba(184,150,90,0.12);}
-.corner{position:absolute;width:32px;height:32px;}
-.corner::before,.corner::after{content:'';position:absolute;background:var(--gold);opacity:0.45;}
-.corner::before{width:100%;height:0.7px;top:0;left:0;}.corner::after{width:0.7px;height:100%;top:0;left:0;}
-.corner.tr{top:32px;right:32px;transform:rotate(90deg);}.corner.bl{bottom:32px;left:32px;transform:rotate(270deg);}
-.corner.br{bottom:32px;right:32px;transform:rotate(180deg);}.corner.tl{top:32px;left:32px;}
 .hero-content{position:relative;z-index:2;text-align:center;padding:40px 24px;}
 .eyebrow{font-size:9.5px;letter-spacing:7px;text-transform:uppercase;color:var(--gold);opacity:0.75;margin-bottom:24px;display:block;}
-.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,9vw,110px);font-weight:300;color:#fff;line-height:0.95;letter-spacing:-1px;margin-bottom:12px;}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,9vw,110px);font-weight:300;color:#fff;line-height:0.95;margin-bottom:12px;}
 .hero-title em{font-style:italic;color:var(--gold-lt);}
 .hero-sub{font-size:10px;letter-spacing:9px;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:48px;}
-.hero-divider{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:28px;}
-.hd-line{width:72px;height:0.5px;background:linear-gradient(to right,transparent,var(--gold));}
-.hd-line.r{background:linear-gradient(to left,transparent,var(--gold));}
-.hd-dia{width:5px;height:5px;background:var(--gold);transform:rotate(45deg);opacity:0.8;}
 .hero-desc{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;font-weight:300;color:rgba(255,255,255,0.4);max-width:520px;margin:0 auto;line-height:1.8;}
 
-/* ── CATEGORY NAV ── */
+/* CATEGORY NAV */
 .cat-nav{background:var(--white);border-bottom:0.5px solid var(--border);position:sticky;top:61px;z-index:90;}
 .cat-nav-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:0;overflow-x:auto;}
-.cat-btn{padding:22px 32px;font-size:9.5px;letter-spacing:4px;text-transform:uppercase;color:var(--muted);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.3s;white-space:nowrap;font-family:'Jost',sans-serif;}
+.cat-btn{padding:22px 32px;font-size:9.5px;letter-spacing:4px;text-transform:uppercase;color:var(--muted);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;}
 .cat-btn:hover,.cat-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
 
-/* ── SECTION WRAPPER ── */
-.showcase-section{padding:100px 24px; position: relative;}
-.showcase-section:nth-child(even){background:var(--warm);}
+/* SECTIONS */
+.showcase-section{padding:100px 24px;}
 .sec-header{text-align:center;margin-bottom:72px;}
 .sec-label{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:block;}
-.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,58px);font-weight:300;color:var(--dark);margin-bottom:16px;line-height:1.1;}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,58px);font-weight:300;color:var(--dark);margin-bottom:16px;}
 .sec-title em{font-style:italic;color:var(--gold);}
 .sec-desc{font-size:15px;line-height:1.9;color:var(--muted);max-width:560px;margin:0 auto 32px;}
-.gold-bar{display:flex;align-items:center;justify-content:center;gap:10px;margin:0 auto;}
-.gb-line{width:48px;height:0.5px;background:var(--gold);opacity:0.5;}
-.gb-dia{width:4px;height:4px;background:var(--gold);transform:rotate(45deg);opacity:0.7;}
 
-/* ── GRIDS ── */
+/* GRIDS */
 .grid-hero{max-width:1200px;margin:0 auto;display:grid;gap:15px;width:100%;}
-.grid-reception{grid-template-columns:1.4fr 1fr 1fr;grid-template-rows:380px 280px;}
-.grid-reception .g1{grid-column:1;grid-row:1/3;}
-.grid-ceremony{grid-template-columns:1fr 1fr;grid-template-rows:420px 260px;margin-top:40px;}
-.grid-ceremony .g3{grid-column:1/3;}
-.grid-bouquet{grid-template-columns:1fr 1fr 1fr;grid-template-rows:300px 300px;}
-.grid-bouquet .g1{grid-column:1;grid-row:1/3;}.grid-bouquet .g4{grid-column:2/4;}
-.grid-debut{grid-template-columns:1fr 1fr;grid-template-rows:320px 320px;}
-.grid-birthday{grid-template-columns:1fr 1fr 1.2fr;grid-template-rows:280px 280px;}
-.grid-birthday .g3{grid-column:3;grid-row:1/3;}.grid-birthday .g4{grid-column:1/3;}
-
-/* ── IMAGE CARDS ── */
-.img-card{position:relative;overflow:hidden;cursor:pointer;width:100%;height:100%;}
+.img-card{position:relative;overflow:hidden;width:100%;height:100%;}
 .img-card img {width: 100%;height: 100%;object-fit: cover;transition: transform 0.6s ease;display: block;}
-.img-card:hover img {transform: scale(1.04);}
-.img-card::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(28,22,16,0.55) 0%,transparent 50%);opacity:0;transition:opacity 0.4s;pointer-events: none;}
-.img-card:hover::after{opacity:1;}
-.img-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;}
-.card-overlay{position:absolute;bottom:0;left:0;right:0;padding:20px 20px 18px;opacity:0;transform:translateY(8px);transition:all 0.4s ease;z-index:2;}
-.img-card:hover .card-overlay{opacity:1;transform:translateY(0);}
-.card-overlay-title{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:400;font-style:italic;color:#fff;letter-spacing:1px;}
-.card-overlay-sub{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-lt);margin-top:4px;opacity:0.8;}
-
-/* ── DEBUT & BIRTHDAY PLACEHOLDERS ── */
-.debut-1{background:linear-gradient(135deg,#1A1A22 0%,#28283A 100%);}
-.debut-2{background:linear-gradient(160deg,#1C1A24 0%,#2A2838 100%);}
-.bday-1{background:linear-gradient(135deg,#1A1218 0%,#2C1E28 100%);}
-.bday-2{background:linear-gradient(160deg,#1C1220 0%,#2E2032 100%);}
-.bday-3{background:linear-gradient(120deg,#18101E 0%,#2A1C30 100%);}
-.bday-4{background:linear-gradient(150deg,#1E1422 0%,#30222C 100%);}
-.card-icon{font-family:'Cormorant Garamond',serif;font-size:38px;font-style:italic;font-weight:300;color:rgba(255,255,255,0.06);letter-spacing:2px;text-align:center;line-height:1.2;user-select:none;}
-.card-ornament{display:flex;align-items:center;gap:8px;opacity:0.2;}
-.card-ornament .ol{width:28px;height:0.5px;background:var(--gold-lt);}.card-ornament .od{width:3px;height:3px;background:var(--gold-lt);transform:rotate(45deg);}
-.photo-badge{position:absolute;top:14px;right:14px;background:rgba(184,150,90,0.15);border:0.5px solid rgba(184,150,90,0.3);padding:6px 12px;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-lt);opacity:0;transition:opacity 0.3s;backdrop-filter:blur(4px);z-index:3;}
-.img-card:hover .photo-badge{opacity:1;}
+.photo-badge{position:absolute;top:14px;right:14px;background:rgba(184,150,90,0.15);padding:6px 12px;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-lt);backdrop-filter:blur(4px);}
 </style>
 </head>
 <body>
@@ -119,14 +72,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 </nav>
 
 <section class="hero">
-  <div class="hero-frame"></div>
-  <div class="corner tl"></div><div class="corner tr"></div>
-  <div class="corner bl"></div><div class="corner br"></div>
   <div class="hero-content">
     <span class="eyebrow">Erish Studio — Portfolio</span>
     <h1 class="hero-title">Our <em>Work</em><br/>Speaks.</h1>
     <p class="hero-sub">Events &nbsp;·&nbsp; Styling &nbsp;·&nbsp; Florals</p>
-    <div class="hero-divider"><div class="hd-line"></div><div class="hd-dia"></div><div class="hd-line r"></div></div>
     <p class="hero-desc">Every event we touch is a canvas — and every canvas tells a story that is entirely, beautifully yours.</p>
   </div>
 </section>
@@ -141,16 +90,57 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
   </div>
 </div>
 
+<section class="showcase-section" id="reception">
+  <div class="sec-header">
+    <span class="sec-label">Category 01</span>
+    <h2 class="sec-title">Wedding <em>Reception</em></h2>
+    <p class="sec-desc">From intimate dinners to grand ballroom affairs, our reception styling transforms any space into an immersive world of beauty — where every table, every light, and every floral whispers the couple's love story.</p>
+  </div>
+  <div class="grid-hero" style="grid-template-columns:1.4fr 1fr 1fr;grid-template-rows:380px 280px;">
+    <div class="img-card"><img src="images/reception/reception-1.jpg" alt="Reception Detail"></div>
+    <div class="img-card"><img src="images/reception/reception-2.jpg" alt="Reception Detail"></div>
+    <div class="img-card"><img src="images/reception/reception-3.jpg" alt="Reception Detail"></div>
+    <div class="img-card"><img src="images/reception/reception-4.jpg" alt="Reception Detail"></div>
+    <div class="img-card"><img src="images/reception/reception-5.jpg" alt="Reception Detail"></div>
+  </div>
+</section>
+
+<section class="showcase-section" id="ceremony">
+  <div class="sec-header">
+    <span class="sec-label">Category 02</span>
+    <h2 class="sec-title">Wedding <em>Ceremony</em></h2>
+    <p class="sec-desc">The moment where forever begins. Whether held in a historic cathedral or a sun-drenched garden, we style sacred spaces that frame your vows with timeless romance.</p>
+  </div>
+  <div class="grid-hero" style="grid-template-columns:1fr 1fr;grid-template-rows:420px 260px;">
+    <div class="img-card"><img src="images/ceremony/ceremony-1.jpg" alt="Altar"></div>
+    <div class="img-card"><img src="images/ceremony/ceremony-2.jpg" alt="Aisle"></div>
+    <div class="img-card" style="grid-column:1/3;"><img src="images/ceremony/ceremony-3.jpg" alt="Garden"></div>
+  </div>
+</section>
+
+<section class="showcase-section" id="bouquet">
+  <div class="sec-header">
+    <span class="sec-label">Category 03</span>
+    <h2 class="sec-title">Bespoke <em>Bouquet</em></h2>
+    <p class="sec-desc">A bouquet is not merely flowers — it is the last thing you hold before you walk into forever. Each one we create is entirely one-of-a-kind, hand-crafted to reflect your personality, palette, and the love you carry.</p>
+  </div>
+  <div class="grid-hero" style="grid-template-columns:1fr 1fr 1fr;grid-template-rows:300px 300px;">
+    <div class="img-card"><img src="images/bouquet/bouquet-1.jpg" alt="Bouquet"></div>
+    <div class="img-card"><img src="images/bouquet/bouquet-2.jpg" alt="Bouquet"></div>
+    <div class="img-card"><img src="images/bouquet/bouquet-3.jpg" alt="Bouquet"></div>
+    <div class="img-card" style="grid-column:2/4;"><img src="images/bouquet/bouquet-4.jpg" alt="Bouquet"></div>
+  </div>
+</section>
+
 <section class="showcase-section" id="debut">
   <div class="sec-header">
     <span class="sec-label">Category 04</span>
     <h2 class="sec-title">Debut <em>Celebrations</em></h2>
     <p class="sec-desc">A coming of age is a milestone that deserves a grand celebration. We create elegant, immersive environments that honor the debutante's journey and style.</p>
-    <div class="gold-bar"><div class="gb-line"></div><div class="gb-dia"></div><div class="gb-line"></div></div>
   </div>
-  <div class="grid-hero grid-debut">
-    <div class="img-card"><div class="img-placeholder debut-1"><div class="card-icon">Grand<br/>Debut</div><div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div></div><div class="photo-badge">Add Photo</div><div class="card-overlay"><div class="card-overlay-title">Debut Photo Backdrop</div><div class="card-overlay-sub">Instagrammable · Custom · Styled</div></div></div>
-    <div class="img-card"><div class="img-placeholder debut-2"><div class="card-icon">Elegant<br/>Venue</div><div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div></div><div class="photo-badge">Add Photo</div><div class="card-overlay"><div class="card-overlay-title">Grand Entrance</div><div class="card-overlay-sub">Dramatic · Themed</div></div></div>
+  <div class="grid-hero" style="grid-template-columns:1fr 1fr;grid-template-rows:320px 320px;">
+    <div class="img-card"><div class="photo-badge">Add Photo</div></div>
+    <div class="img-card"><div class="photo-badge">Add Photo</div></div>
   </div>
 </section>
 
@@ -159,25 +149,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
     <span class="sec-label">Category 05</span>
     <h2 class="sec-title">Birthday <em>Events</em></h2>
     <p class="sec-desc">Birthdays are a celebration of life — and life deserves to be celebrated beautifully. From intimate gatherings to lavish parties, we style every birthday as a reflection of the person at the center of it all.</p>
-    <div class="gold-bar"><div class="gb-line"></div><div class="gb-dia"></div><div class="gb-line"></div></div>
   </div>
-  <div class="grid-hero grid-birthday">
-    <div class="img-card g1"><div class="img-placeholder bday-1"><div class="card-icon">Party<br/>Styling</div><div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div></div><div class="photo-badge">Add Photo</div><div class="card-overlay"><div class="card-overlay-title">Themed Birthday Styling</div><div class="card-overlay-sub">Creative · Bold · Personalized</div></div></div>
-    <div class="img-card g2"><div class="img-placeholder bday-2"><div class="card-icon">Dessert<br/>Table</div><div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div></div><div class="photo-badge">Add Photo</div><div class="card-overlay"><div class="card-overlay-title">Dessert & Cake Table</div><div class="card-overlay-sub">Styled · Curated · Delicious</div></div></div>
-    <div class="img-card g3"><div class="img-placeholder bday-3"><div class="card-icon">Grand<br/>Backdrop</div><div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div></div><div class="photo-badge">Add Photo</div><div class="card-overlay"><div class="card-overlay-title">Statement Backdrop & Balloon Art</div><div class="card-overlay-sub">Dramatic · Custom · Stunning</div></div></div>
-    <div class="img-card g4"><div class="img-placeholder bday-4"><div class="card-icon">Intimate Birthday</div><div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div></div><div class="photo-badge">Add Photo</div><div class="card-overlay"><div class="card-overlay-title">Intimate Dinner Celebration</div><div class="card-overlay-sub">Refined · Warm · Personal</div></div></div>
+  <div class="grid-hero" style="grid-template-columns:1fr 1fr 1.2fr;grid-template-rows:280px 280px;">
+    <div class="img-card"><div class="photo-badge">Add Photo</div></div>
+    <div class="img-card"><div class="photo-badge">Add Photo</div></div>
+    <div class="img-card"><div class="photo-badge">Add Photo</div></div>
+    <div class="img-card"><div class="photo-badge">Add Photo</div></div>
   </div>
 </section>
 
 <script>
-function scrollTo(id) {
-  const element = document.getElementById(id);
-  if (element) {
-    window.scrollTo({ top: element.offsetTop - 100, behavior: 'smooth' });
-    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-    event.target.classList.add('active');
-  }
-}
+function scrollTo(id) { document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); }
 </script>
 </body>
 </html>
