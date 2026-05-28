@@ -7,18 +7,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
 :root {
-  --cream:    #FAF7F2;
-  --warm:     #F2EDE4;
-  --gold:     #B8965A;
-  --gold-lt: #D4B07A;
-  --gold-dk: #8B6C38;
-  --dark:     #1C1610;
-  --charcoal:#2E2620;
-  --brown:    #5C4A35;
-  --text:     #3A3028;
-  --muted:    #8A7A6A;
-  --border:   #DDD5C8;
-  --white:    #FFFFFF;
+  --cream: #FAF7F2; --warm: #F2EDE4; --gold: #B8965A; --gold-lt: #D4B07A; 
+  --dark: #1C1610; --text: #3A3028; --muted: #8A7A6A; --border: #DDD5C8; --white: #FFFFFF;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
@@ -29,36 +19,34 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--dark);letter-spacing:2px;}
 .nav-logo em{font-style:italic;color:var(--gold);}
 .nav-links{display:flex;gap:36px;}
-.nav-links a{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.3s;}
-.nav-links a:hover{color:var(--gold);}
+.nav-links a{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--muted);text-decoration:none;}
 
 /* HERO */
-.hero{min-height:90vh;background:var(--dark);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding-top:80px;}
-.hero-content{position:relative;z-index:2;text-align:center;padding:40px 24px;}
-.eyebrow{font-size:9.5px;letter-spacing:7px;text-transform:uppercase;color:var(--gold);opacity:0.75;margin-bottom:24px;display:block;}
+.hero{min-height:90vh;background:var(--dark);display:flex;align-items:center;justify-content:center;position:relative;padding-top:80px;text-align:center;}
+.hero-content{padding:40px 24px;}
+.eyebrow{font-size:9.5px;letter-spacing:7px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:block;}
 .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,9vw,110px);font-weight:300;color:#fff;line-height:0.95;margin-bottom:12px;}
 .hero-title em{font-style:italic;color:var(--gold-lt);}
 .hero-sub{font-size:10px;letter-spacing:9px;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:48px;}
-.hero-desc{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;font-weight:300;color:rgba(255,255,255,0.4);max-width:520px;margin:0 auto;line-height:1.8;}
 
 /* CATEGORY NAV */
 .cat-nav{background:var(--white);border-bottom:0.5px solid var(--border);position:sticky;top:61px;z-index:90;}
-.cat-nav-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:0;overflow-x:auto;}
+.cat-nav-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:center;overflow-x:auto;}
 .cat-btn{padding:22px 32px;font-size:9.5px;letter-spacing:4px;text-transform:uppercase;color:var(--muted);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;}
-.cat-btn:hover,.cat-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
+.cat-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
 
 /* SECTIONS */
 .showcase-section{padding:100px 24px;}
 .sec-header{text-align:center;margin-bottom:72px;}
 .sec-label{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:block;}
-.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,58px);font-weight:300;color:var(--dark);margin-bottom:16px;}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,58px);font-weight:300;margin-bottom:16px;}
 .sec-title em{font-style:italic;color:var(--gold);}
 .sec-desc{font-size:15px;line-height:1.9;color:var(--muted);max-width:560px;margin:0 auto 32px;}
 
 /* GRIDS */
 .grid-hero{max-width:1200px;margin:0 auto;display:grid;gap:15px;width:100%;}
-.img-card{position:relative;overflow:hidden;width:100%;height:100%;}
-.img-card img {width: 100%;height: 100%;object-fit: cover;transition: transform 0.6s ease;display: block;}
+.img-card{position:relative;overflow:hidden;width:100%;height:100%;background:#e8e4de;}
+.img-card img{width:100%;height:100%;object-fit:cover;}
 .photo-badge{position:absolute;top:14px;right:14px;background:rgba(184,150,90,0.15);padding:6px 12px;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-lt);backdrop-filter:blur(4px);}
 </style>
 </head>
@@ -76,17 +64,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
     <span class="eyebrow">Erish Studio — Portfolio</span>
     <h1 class="hero-title">Our <em>Work</em><br/>Speaks.</h1>
     <p class="hero-sub">Events &nbsp;·&nbsp; Styling &nbsp;·&nbsp; Florals</p>
-    <p class="hero-desc">Every event we touch is a canvas — and every canvas tells a story that is entirely, beautifully yours.</p>
   </div>
 </section>
 
 <div class="cat-nav" id="showcase">
   <div class="cat-nav-inner">
-    <button class="cat-btn active" onclick="scrollTo('reception')">Reception</button>
-    <button class="cat-btn" onclick="scrollTo('ceremony')">Ceremony</button>
-    <button class="cat-btn" onclick="scrollTo('bouquet')">Bespoke Bouquet</button>
-    <button class="cat-btn" onclick="scrollTo('debut')">Debut</button>
-    <button class="cat-btn" onclick="scrollTo('birthday')">Birthday</button>
+    <button class="cat-btn active" onclick="document.getElementById('reception').scrollIntoView()">Reception</button>
+    <button class="cat-btn" onclick="document.getElementById('ceremony').scrollIntoView()">Ceremony</button>
+    <button class="cat-btn" onclick="document.getElementById('bouquet').scrollIntoView()">Bespoke Bouquet</button>
+    <button class="cat-btn" onclick="document.getElementById('debut').scrollIntoView()">Debut</button>
+    <button class="cat-btn" onclick="document.getElementById('birthday').scrollIntoView()">Birthday</button>
   </div>
 </div>
 
@@ -158,8 +145,5 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
   </div>
 </section>
 
-<script>
-function scrollTo(id) { document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); }
-</script>
 </body>
 </html>
