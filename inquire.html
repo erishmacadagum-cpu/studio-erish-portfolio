@@ -7,22 +7,661 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+
+    /* ════════════════════════════════════════════
+       RESET & BASE — matches your editorial-bg
+    ════════════════════════════════════════════ */
+    .inq-page * { box-sizing: border-box; }
+
+    /* ════════════════════════════════════════════
+       HERO SECTION
+    ════════════════════════════════════════════ */
+    .inq-hero {
+        position: relative;
+        min-height: 100vh;
+        background: #111111;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        padding-top: 80px;
+    }
+
+    /* Radial glow */
+    .inq-hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+            radial-gradient(ellipse 70% 60% at 50% 60%, rgba(184,150,90,0.07) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    /* Frame lines */
+    .inq-hero-frame {
+        position: absolute;
+        inset: 24px;
+        border: 0.5px solid rgba(255,255,255,0.04);
+        pointer-events: none;
+    }
+    .inq-hero-frame::before {
+        content: '';
+        position: absolute;
+        inset: 14px;
+        border: 0.3px solid rgba(184,150,90,0.08);
+    }
+
+    /* Corner ornaments */
+    .inq-corner {
+        position: absolute;
+        width: 36px;
+        height: 36px;
+    }
+    .inq-corner::before,
+    .inq-corner::after {
+        content: '';
+        position: absolute;
+        background: #B8965A;
+        opacity: 0.3;
+    }
+    .inq-corner::before { width: 100%; height: 0.7px; top: 0; left: 0; }
+    .inq-corner::after  { width: 0.7px; height: 100%; top: 0; left: 0; }
+    .inq-corner.tl { top: 32px; left: 32px; }
+    .inq-corner.tr { top: 32px; right: 32px; transform: rotate(90deg); }
+    .inq-corner.bl { bottom: 32px; left: 32px; transform: rotate(270deg); }
+    .inq-corner.br { bottom: 32px; right: 32px; transform: rotate(180deg); }
+
+    /* Watermark */
+    .inq-wm {
+        position: absolute;
+        font-family: 'Cormorant Garamond', serif;
+        font-size: clamp(160px, 28vw, 320px);
+        font-weight: 300;
+        font-style: italic;
+        color: rgba(255,255,255,0.018);
+        line-height: 1;
+        user-select: none;
+        pointer-events: none;
+        right: -20px;
+        bottom: -40px;
+        letter-spacing: -6px;
+    }
+
+    /* Hero inner content */
+    .inq-hero-inner {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        padding: 60px 24px 80px;
+        max-width: 760px;
+        margin: 0 auto;
+        animation: inqFadeUp 1.2s ease both;
+    }
+
+    /* Badge */
+    .inq-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        border: 0.5px solid rgba(184,150,90,0.22);
+        padding: 10px 28px;
+        margin-bottom: 44px;
+    }
+    .inq-badge span {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.6rem;
+        letter-spacing: 6px;
+        text-transform: uppercase;
+        color: #B8965A;
+        opacity: 0.8;
+    }
+    .inq-badge .bdot {
+        width: 3px; height: 3px;
+        background: #B8965A;
+        transform: rotate(45deg);
+        opacity: 0.5;
+    }
+
+    /* Main heading */
+    .inq-h1 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: clamp(3rem, 10vw, 7.5rem);
+        font-weight: 300;
+        color: #ffffff;
+        line-height: 0.9;
+        letter-spacing: -2px;
+        margin-bottom: 20px;
+    }
+    .inq-h1 em {
+        font-style: italic;
+        color: #D4B07A;
+    }
+    .inq-h1 .dim {
+        color: rgba(255,255,255,0.22);
+        font-weight: 200;
+    }
+
+    /* Divider ornament */
+    .inq-hero-div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        margin: 32px auto;
+    }
+    .inq-hero-div .hl { width: 70px; height: 0.5px; background: linear-gradient(to right, transparent, #B8965A); }
+    .inq-hero-div .hl.r { background: linear-gradient(to left, transparent, #B8965A); }
+    .inq-hero-div .hd { width: 5px; height: 5px; background: #B8965A; transform: rotate(45deg); opacity: 0.7; }
+
+    /* Hero description */
+    .inq-hero-desc {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: clamp(1rem, 2.2vw, 1.25rem);
+        font-style: italic;
+        font-weight: 300;
+        color: rgba(255,255,255,0.35);
+        line-height: 1.85;
+        max-width: 520px;
+        margin: 0 auto 52px;
+        letter-spacing: 0.3px;
+    }
+
+    /* Hero CTA button */
+    .inq-hero-btn {
+        display: inline-block;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.68rem;
+        font-weight: 500;
+        letter-spacing: 6px;
+        text-transform: uppercase;
+        color: #111111;
+        background: #D4B07A;
+        padding: 1.25rem 3.5rem;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    .inq-hero-btn::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(255,255,255,0);
+        transition: background 0.3s;
+    }
+    .inq-hero-btn:hover::before { background: rgba(255,255,255,0.12); }
+    .inq-hero-btn:hover {
+        background: #ffffff;
+        letter-spacing: 7px;
+        color: #111111;
+    }
+    .inq-hero-btn:active { transform: scale(0.97); }
+
+    .inq-hero-btn-note {
+        display: block;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.58rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.15);
+        margin-top: 14px;
+    }
+
+    /* Scroll cue */
+    .inq-scroll {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        z-index: 2;
+    }
+    .inq-scroll span {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.5rem;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.12);
+    }
+    .inq-scroll-line {
+        width: 1px;
+        height: 44px;
+        background: linear-gradient(to bottom, #B8965A, transparent);
+        opacity: 0.35;
+        animation: inqScrollPulse 2s ease infinite;
+    }
+
+    /* ════════════════════════════════════════════
+       TRUST STRIP
+    ════════════════════════════════════════════ */
+    .inq-trust {
+        background: #111111;
+        border-top: 0.5px solid rgba(184,150,90,0.12);
+        border-bottom: 0.5px solid rgba(184,150,90,0.12);
+    }
+    .inq-trust-inner {
+        max-width: 960px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        background: rgba(255,255,255,0.04);
+    }
+    .inq-ts {
+        background: #111111;
+        padding: 2.2rem 1.5rem;
+        text-align: center;
+    }
+    .inq-ts-icon {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.1rem;
+        font-style: italic;
+        color: #B8965A;
+        opacity: 0.45;
+        margin-bottom: 8px;
+        display: block;
+    }
+    .inq-ts-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.58rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.28);
+        margin-bottom: 4px;
+    }
+    .inq-ts-val {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 0.88rem;
+        font-style: italic;
+        color: rgba(255,255,255,0.16);
+    }
+
+    /* ════════════════════════════════════════════
+       MAIN BODY — light editorial
+    ════════════════════════════════════════════ */
+    .inq-body {
+        background: #faf7f2;
+        padding: 7rem 1.5rem;
+    }
+    .inq-body-inner {
+        max-width: 960px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1.3fr;
+        gap: 70px;
+        align-items: start;
+    }
+
+    /* Left column */
+    .inq-left {}
+    .inq-left-label {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.6rem;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        color: #B8965A;
+        margin-bottom: 1.2rem;
+        display: block;
+    }
+    .inq-left-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 400;
+        color: #111111;
+        line-height: 1.1;
+        margin-bottom: 0.8rem;
+    }
+    .inq-left-title em { font-style: italic; color: #B8965A; }
+    .inq-left-rule {
+        width: 28px; height: 1px;
+        background: #B8965A;
+        margin-bottom: 1.8rem;
+        opacity: 0.5;
+    }
+    .inq-left-body {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.78rem;
+        line-height: 2.1;
+        color: #777777;
+        margin-bottom: 2.2rem;
+    }
+    .inq-left-body strong { color: #111111; font-weight: 500; }
+    .inq-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 2.5rem;
+    }
+    .inq-list-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .inq-list-dot {
+        width: 4px; height: 4px;
+        background: #B8965A;
+        transform: rotate(45deg);
+        margin-top: 7px;
+        flex-shrink: 0;
+        opacity: 0.7;
+    }
+    .inq-list-text {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.75rem;
+        line-height: 1.9;
+        color: #888888;
+    }
+    .inq-list-text strong { color: #111111; font-weight: 500; }
+    .inq-left-divider { height: 0.5px; background: #ddd5c8; margin: 1.8rem 0; }
+    .inq-left-tagline {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1rem;
+        font-style: italic;
+        font-weight: 300;
+        color: #B8965A;
+        opacity: 0.75;
+        line-height: 1.7;
+    }
+
+    /* Right column — CTA card */
+    .inq-card {
+        background: #111111;
+        padding: 3rem 2.5rem;
+        position: relative;
+    }
+    .inq-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 50%;
+        transform: translateX(-50%);
+        width: 36px; height: 2px;
+        background: #B8965A;
+    }
+    .inq-card::after {
+        content: '';
+        position: absolute;
+        inset: 14px;
+        border: 0.3px solid rgba(184,150,90,0.07);
+        pointer-events: none;
+    }
+    .inq-card-eyebrow {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.58rem;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        color: #B8965A;
+        opacity: 0.7;
+        margin-bottom: 1.2rem;
+        display: block;
+    }
+    .inq-card-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 2rem;
+        font-weight: 300;
+        color: #ffffff;
+        line-height: 1.15;
+        margin-bottom: 0.4rem;
+    }
+    .inq-card-title em { font-style: italic; color: #D4B07A; }
+    .inq-card-sub {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 0.88rem;
+        font-style: italic;
+        color: rgba(255,255,255,0.2);
+        margin-bottom: 2rem;
+        letter-spacing: 0.3px;
+    }
+    .inq-card-divider { height: 0.5px; background: rgba(255,255,255,0.07); margin-bottom: 2rem; }
+
+    /* Steps */
+    .inq-steps {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 2.5rem;
+    }
+    .inq-step {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+    }
+    .inq-step-n {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 0.85rem;
+        font-style: italic;
+        color: #B8965A;
+        opacity: 0.5;
+        flex-shrink: 0;
+        width: 22px;
+        line-height: 1.8;
+    }
+    .inq-step-t {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.72rem;
+        line-height: 1.85;
+        color: rgba(255,255,255,0.28);
+    }
+    .inq-step-t strong { color: rgba(255,255,255,0.55); font-weight: 500; }
+
+    /* THE BUTTON */
+    .inq-main-btn {
+        display: block;
+        width: 100%;
+        padding: 1.3rem 2rem;
+        background: #B8965A;
+        color: #111111;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.68rem;
+        font-weight: 500;
+        letter-spacing: 6px;
+        text-transform: uppercase;
+        text-decoration: none;
+        text-align: center;
+        border: none;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s ease;
+    }
+    .inq-main-btn::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(255,255,255,0);
+        transition: background 0.3s;
+    }
+    .inq-main-btn:hover::before { background: rgba(255,255,255,0.12); }
+    .inq-main-btn:hover {
+        background: #D4B07A;
+        letter-spacing: 7px;
+        color: #111111;
+    }
+    .inq-main-btn:active { transform: scale(0.98); }
+
+    .inq-btn-note {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.58rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.15);
+        text-align: center;
+        margin-top: 1rem;
+        line-height: 2;
+    }
+
+    /* Share row */
+    .inq-share {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 0.5px solid rgba(255,255,255,0.06);
+    }
+    .inq-share-lbl {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.55rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.2);
+        margin-bottom: 0.8rem;
+        display: block;
+    }
+    .inq-share-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(255,255,255,0.03);
+        border: 0.5px solid rgba(255,255,255,0.07);
+        padding: 0.8rem 1rem;
+    }
+    .inq-share-url {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.62rem;
+        color: rgba(255,255,255,0.2);
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .inq-copy-btn {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.55rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #111111;
+        background: #B8965A;
+        padding: 7px 14px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    .inq-copy-btn:hover { background: #D4B07A; }
+    .inq-copy-btn.copied { background: #2A6B3C; color: #ffffff; }
+
+    /* ════════════════════════════════════════════
+       CLOSING — dark
+    ════════════════════════════════════════════ */
+    .inq-closing {
+        background: #111111;
+        padding: 7rem 1.5rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    .inq-closing::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(184,150,90,0.06) 0%, transparent 70%);
+    }
+    .inq-closing-frame {
+        position: absolute;
+        inset: 24px;
+        border: 0.5px solid rgba(255,255,255,0.04);
+        pointer-events: none;
+    }
+    .inq-closing-frame::before {
+        content: '';
+        position: absolute;
+        inset: 14px;
+        border: 0.3px solid rgba(184,150,90,0.07);
+    }
+    .inq-cl-inner {
+        position: relative;
+        z-index: 2;
+        max-width: 560px;
+        margin: 0 auto;
+    }
+    .inq-cl-label {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.58rem;
+        letter-spacing: 6px;
+        text-transform: uppercase;
+        color: #B8965A;
+        opacity: 0.6;
+        margin-bottom: 1.8rem;
+        display: block;
+    }
+    .inq-cl-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: clamp(2.2rem, 6vw, 4rem);
+        font-weight: 300;
+        color: #ffffff;
+        line-height: 1;
+        margin-bottom: 1.2rem;
+        letter-spacing: -1px;
+    }
+    .inq-cl-title em { font-style: italic; color: #D4B07A; }
+    .inq-cl-body {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.72rem;
+        line-height: 2.1;
+        color: rgba(255,255,255,0.22);
+        max-width: 420px;
+        margin: 0 auto 2.5rem;
+    }
+    .inq-cl-note {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.58rem;
+        letter-spacing: 2px;
+        color: rgba(255,255,255,0.1);
+        line-height: 2.2;
+        text-transform: uppercase;
+    }
+
+    /* ════════════════════════════════════════════
+       ANIMATIONS
+    ════════════════════════════════════════════ */
+    @keyframes inqFadeUp {
+        from { opacity: 0; transform: translateY(28px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes inqScrollPulse {
+        0%   { transform: scaleY(0); transform-origin: top; }
+        50%  { transform: scaleY(1); transform-origin: top; }
+        51%  { transform-origin: bottom; }
+        100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* Reveal on scroll */
+    .inq-reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .inq-reveal.left  { transform: translateX(-24px); }
+    .inq-reveal.right { transform: translateX(24px); }
+    .inq-reveal.visible { opacity: 1; transform: translate(0); }
+
+    /* ════════════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+        .inq-trust-inner { grid-template-columns: 1fr 1fr; }
+        .inq-body-inner  { grid-template-columns: 1fr; gap: 40px; }
+        .inq-hero-inner  { padding: 60px 20px 80px; }
+        .inq-body        { padding: 4rem 1.2rem; }
+    }
+    </style>
 </head>
 <body class="editorial-bg">
 
+    <!-- EXISTING SITE HEADER — unchanged -->
     <header class="site-header">
         <div class="header-logo">
             <a href="index.html" class="logo-brand">ERISH</a>
             <span class="logo-sub">EST. 2007</span>
         </div>
-        
         <button class="menu-toggle" aria-label="Toggle Navigation">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span>
         </button>
-
         <nav class="main-nav">
             <a href="index.html" class="nav-link">The Journal</a>
             <a href="about.html" class="nav-link">The Legacy</a>
@@ -32,104 +671,227 @@
         </nav>
     </header>
 
-   <main style="padding: 6rem 1.5rem; max-width: 650px; margin: 0 auto !important; min-height: 80vh !important; text-align: center !important; display: block !important;">
-    <h1 class="serif-title" style="font-size: 3rem !important; margin-bottom: 1rem !important; letter-spacing: 2px !important;">INQUIRE</h1>
-    <p style="color: #555 !important; margin-bottom: 4rem !important; font-size: 1rem !important; letter-spacing: 1px !important; line-height: 1.5;">Let's curate your milestone experience. Please complete our intake profile below.</p>
+    <!-- ── HERO ───────────────────────────────── -->
+    <section class="inq-hero">
+        <div class="inq-hero-frame"></div>
+        <div class="inq-corner tl"></div>
+        <div class="inq-corner tr"></div>
+        <div class="inq-corner bl"></div>
+        <div class="inq-corner br"></div>
+        <div class="inq-wm">2007</div>
 
-   <form action="https://formsubmit.co/petals_accent@yahoo.com" method="POST">
-       <input type="hidden" name="_subject" value="New Inquiry from Erish Studio">
-        <div style="display: flex !important; flex-direction: column !important; gap: 0.5rem !important; width: 100% !important;">
-            <label style="font-size: 0.85rem !important; text-transform: uppercase !important; letter-spacing: 2px !important; color: #111111 !important;">Full Name *</label>
-            <input type="text" name="Name" placeholder="Enter your full name" style="width: 100% !important; padding: 1.2rem !important; border: 1px solid #111111 !important;" required>
+        <div class="inq-hero-inner">
+            <div class="inq-badge">
+                <div class="bdot"></div>
+                <span>Studio Erish &nbsp;·&nbsp; Begin Your Experience</span>
+                <div class="bdot"></div>
+            </div>
+
+            <h1 class="inq-h1">
+                Let's Create<br/>
+                <em>Something</em><br/>
+                <span class="dim">Beautiful.</span>
+            </h1>
+
+            <div class="inq-hero-div">
+                <div class="hl"></div>
+                <div class="hd"></div>
+                <div class="hl r"></div>
+            </div>
+
+            <p class="inq-hero-desc">
+                Tell us about your celebration and we will craft<br/>
+                an experience that is entirely, uniquely,<br/>
+                beautifully yours.
+            </p>
+
+            <a href="https://forms.gle/yC3A5qJ3miViXM7K9"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="inq-hero-btn">
+                ✦ &nbsp;&nbsp; Send My Inquiry &nbsp;&nbsp; ✦
+            </a>
+            <span class="inq-hero-btn-note">
+                Opens in a new tab &nbsp;·&nbsp; Takes less than 3 minutes
+            </span>
         </div>
 
-        <div style="display: flex !important; flex-direction: column !important; gap: 0.5rem !important; width: 100% !important;">
-            <label style="font-size: 0.85rem !important; text-transform: uppercase !important; letter-spacing: 2px !important; color: #111111 !important;">Email Address *</label>
-            <input type="email" name="Email" placeholder="name@example.com" style="width: 100% !important; padding: 1.2rem !important; border: 1px solid #111111 !important;" required>
+        <div class="inq-scroll">
+            <span>Discover</span>
+            <div class="inq-scroll-line"></div>
         </div>
+    </section>
 
-        <div style="display: flex !important; flex-direction: column !important; gap: 0.5rem !important; width: 100% !important;">
-            <label style="font-size: 0.85rem !important; text-transform: uppercase !important; letter-spacing: 2px !important; color: #111111 !important;">Event Venue</label>
-            <input type="text" name="Venue" placeholder="e.g., Marzon Hotel, Kalibo or Destination Space" style="width: 100% !important; padding: 1.2rem !important; border: 1px solid #111111 !important;">
+    <!-- ── TRUST STRIP ────────────────────────── -->
+    <div class="inq-trust">
+        <div class="inq-trust-inner">
+            <div class="inq-ts">
+                <span class="inq-ts-icon">I</span>
+                <div class="inq-ts-title">Response Time</div>
+                <div class="inq-ts-val">Within 24 hours</div>
+            </div>
+            <div class="inq-ts">
+                <span class="inq-ts-icon">II</span>
+                <div class="inq-ts-title">Experience</div>
+                <div class="inq-ts-val">18+ Years · Est. 2007</div>
+            </div>
+            <div class="inq-ts">
+                <span class="inq-ts-icon">III</span>
+                <div class="inq-ts-title">Coverage</div>
+                <div class="inq-ts-val">Davao City & Beyond</div>
+            </div>
+            <div class="inq-ts">
+                <span class="inq-ts-icon">IV</span>
+                <div class="inq-ts-title">Consultation</div>
+                <div class="inq-ts-val">Free Initial Call</div>
+            </div>
         </div>
-
-        <div style="display: flex !important; flex-direction: column !important; gap: 0.5rem !important; width: 100% !important;">
-            <label style="font-size: 0.85rem !important; text-transform: uppercase !important; letter-spacing: 2px !important; color: #111111 !important;">Guest Count</label>
-            <input type="text" name="Guest_Count" placeholder="e.g., 150 Attendees" style="width: 100% !important; padding: 1.2rem !important; border: 1px solid #111111 !important;">
-        </div>
-
-        <div style="display: flex !important; flex-direction: column !important; gap: 0.5rem !important; width: 100% !important;">
-            <label style="font-size: 0.85rem !important; text-transform: uppercase !important; letter-spacing: 2px !important; color: #111111 !important;">Budget Profile</label>
-            <input type="text" name="Budget" placeholder="Estimated allocation profile" style="width: 100% !important; padding: 1.2rem !important; border: 1px solid #111111 !important;">
-        </div>
-
-        <div style="display: flex !important; flex-direction: column !important; gap: 0.5rem !important; width: 100% !important;">
-            <label style="font-size: 0.85rem !important; text-transform: uppercase !important; letter-spacing: 2px !important; color: #111111 !important;">Experience Type</label>
-            <select name="Experience_Type" style="width: 100% !important; padding: 1.2rem !important; border: 1px solid #111111 !important; background-color: #ffffff !important;">
-                <option>Bespoke Styling & Avant-Garde Decor</option>
-                <option>Full-Service Coordination Collection</option>
-                <option>The Absolute Turnkey Signature Experience</option>
-            </select>
-        </div>
-
-        <div style="display: flex !important; flex-direction: column !important; gap: 0.5rem !important; width: 100% !important;">
-            <label style="font-size: 0.85rem !important; text-transform: uppercase !important; letter-spacing: 2px !important; color: #111111 !important;">Celebration Details</label>
-            <textarea name="Celebration_Details" placeholder="Tell us about your structural theme, timelines, or unique elements..." rows="6" style="width: 100% !important; padding: 1.2rem !important; border: 1px solid #111111 !important;"></textarea>
-        </div>
-
-        <button type="submit" style="width: 100% !important; padding: 1.2rem !important; background-color: #111111 !important; color: #ffffff !important; border: none !important; text-transform: uppercase !important; letter-spacing: 2px !important; font-weight: bold !important; cursor: pointer !important;">Submit Inquiry</button>
-    </form>
-
-    <div id="form-status" style="display: none; text-align: center; padding: 40px 20px; font-family: 'Cormorant Garamond', serif;">
-        <h3 style="font-size: 2.2rem; color: #111111; margin-bottom: 15px;">Thank You for Reaching Out.</h3>
-        <p style="font-size: 1.2rem; color: #555555; margin-bottom: 25px; line-height: 1.6;">
-            Your inquiry has been received. We are already looking forward to hearing more about your celebration.<br>
-            <span style="font-style: italic; color: #ccaa66;">Erish will be in touch with you within 24 hours.</span>
-        </p>
-        <p style="font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; color: #111111; font-weight: bold; margin-top: 40px;">
-            "Where Every Detail Tells Your Story."
-        </p>
     </div>
-</main>
 
-<footer class="site-footer">
-    <p>&copy; 2026 Studio Erish. All Rights Reserved.</p>
-</footer>
+    <!-- ── MAIN BODY ──────────────────────────── -->
+    <section class="inq-body">
+        <div class="inq-body-inner">
 
-<script src="js/script.js"></script>
+            <!-- LEFT INFO -->
+            <div class="inq-left inq-reveal left">
+                <span class="inq-left-label">Why Studio Erish</span>
+                <h2 class="inq-left-title">
+                    Your Story Starts<br/>
+                    With <em>One Message.</em>
+                </h2>
+                <div class="inq-left-rule"></div>
+                <p class="inq-left-body">
+                    We treat every inquiry as if it is the most important message we have ever received — because to us, <strong>it is.</strong> Fill out our form and Erish will personally reach out within 24 hours.
+                </p>
+                <div class="inq-list">
+                    <div class="inq-list-item">
+                        <div class="inq-list-dot"></div>
+                        <div class="inq-list-text"><strong>Based in Davao City</strong> — serving Mindanao and beyond, including out-of-town and destination events.</div>
+                    </div>
+                    <div class="inq-list-item">
+                        <div class="inq-list-dot"></div>
+                        <div class="inq-list-text"><strong>18+ years of mastery</strong> — your celebration is in the most trusted hands since 2007.</div>
+                    </div>
+                    <div class="inq-list-item">
+                        <div class="inq-list-dot"></div>
+                        <div class="inq-list-text"><strong>Limited bookings per month</strong> — every client receives full, undivided attention and care.</div>
+                    </div>
+                    <div class="inq-list-item">
+                        <div class="inq-list-dot"></div>
+                        <div class="inq-list-text"><strong>Free initial consultation</strong> — let us talk before you commit to anything.</div>
+                    </div>
+                    <div class="inq-list-item">
+                        <div class="inq-list-dot"></div>
+                        <div class="inq-list-text"><strong>International clients welcome</strong> — fully equipped for remote and Australia-based coordination.</div>
+                    </div>
+                </div>
+                <div class="inq-left-divider"></div>
+                <p class="inq-left-tagline">
+                    "Where Every Detail<br/>Tells Your Story."
+                </p>
+            </div>
 
-</script>-->
-  var form = document.getElementById("my-form");
-  
-  async function handleSubmit(event) {
-    event.preventDefault();
-    var status = document.getElementById("form-status");
-    var data = new FormData(event.target);
-    fetch(event.target.action, {
-      method: form.method,
-      body: data,
-      headers: {
-          'Accept': 'application/json'
-      }
-    }).then(response => {
-      if (response.ok) {
-        form.style.display = "none";
-        status.style.display = "block";
-        form.reset();
-      } else {
-        response.json().then(data => {
-          if (Object.hasOwn(data, 'errors')) {
-            alert(data["errors"].map(error => error["message"]).join(", "));
-          } else {
-            alert("Oops! There was a problem submitting your form");
-          }
-        })
-      }
-    }).catch(error => {
-      alert("Oops! There was a problem submitting your form");
-    });
-  }
-  form.addEventListener("submit", handleSubmit);
-</script>-->
+            <!-- RIGHT CTA CARD -->
+            <div class="inq-card inq-reveal right">
+                <span class="inq-card-eyebrow">Send Your Inquiry</span>
+                <h3 class="inq-card-title">
+                    Ready to Begin<br/>
+                    Your <em>Experience?</em>
+                </h3>
+                <p class="inq-card-sub">Our intake form takes less than 3 minutes.</p>
+                <div class="inq-card-divider"></div>
+
+                <div class="inq-steps">
+                    <div class="inq-step">
+                        <span class="inq-step-n">01</span>
+                        <div class="inq-step-t"><strong>Click the button below</strong> — our curated inquiry form opens in a new tab.</div>
+                    </div>
+                    <div class="inq-step">
+                        <span class="inq-step-n">02</span>
+                        <div class="inq-step-t"><strong>Fill in your celebration details</strong> — vision, date, guest count, and budget.</div>
+                    </div>
+                    <div class="inq-step">
+                        <span class="inq-step-n">03</span>
+                        <div class="inq-step-t"><strong>Erish personally responds</strong> — within 24 hours with a tailored proposal just for you.</div>
+                    </div>
+                </div>
+
+                <a href="https://forms.gle/yC3A5qJ3miViXM7K9"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="inq-main-btn">
+                    ✦ &nbsp;&nbsp; Send My Inquiry &nbsp;&nbsp; ✦
+                </a>
+                <p class="inq-btn-note">
+                    Opens in a new tab &nbsp;·&nbsp; Takes less than 3 minutes<br/>
+                    We respond within 24 hours
+                </p>
+
+                <div class="inq-share">
+                    <span class="inq-share-lbl">Share This Form Directly</span>
+                    <div class="inq-share-row">
+                        <span class="inq-share-url">forms.gle/yC3A5qJ3miViXM7K9</span>
+                        <button class="inq-copy-btn" id="copyBtn" onclick="copyLink()">Copy Link</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ── CLOSING ────────────────────────────── -->
+    <div class="inq-closing">
+        <div class="inq-closing-frame"></div>
+        <div class="inq-cl-inner">
+            <span class="inq-cl-label inq-reveal">Studio Erish · Est. 2007</span>
+            <h2 class="inq-cl-title inq-reveal">
+                We Cannot Wait<br/>
+                to Hear <em>Your</em><br/>
+                Story.
+            </h2>
+            <p class="inq-cl-body inq-reveal">
+                Every great celebration begins with a conversation. You have taken the first step — and we promise to honour it with everything we have.
+            </p>
+            <p class="inq-cl-note inq-reveal">
+                Davao City, Philippines &nbsp;·&nbsp; Events & Styling<br/>
+                Est. 2007 &nbsp;·&nbsp; 18+ Years of Excellence<br/>
+                "Where Every Detail Tells Your Story."
+            </p>
+        </div>
+    </div>
+
+    <!-- EXISTING SITE FOOTER — unchanged -->
+    <footer class="site-footer">
+        <p>&copy; 2026 Studio Erish. All Rights Reserved.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Copy share link
+        function copyLink(){
+            navigator.clipboard.writeText('https://forms.gle/yC3A5qJ3miViXM7K9').then(()=>{
+                const btn = document.getElementById('copyBtn');
+                btn.textContent = 'Copied ✓';
+                btn.classList.add('copied');
+                setTimeout(()=>{
+                    btn.textContent = 'Copy Link';
+                    btn.classList.remove('copied');
+                }, 2500);
+            });
+        }
+
+        // Scroll reveal
+        const revs = document.querySelectorAll('.inq-reveal');
+        const obs = new IntersectionObserver((entries)=>{
+            entries.forEach((e,i)=>{
+                if(e.isIntersecting){
+                    setTimeout(()=>e.target.classList.add('visible'), i*90);
+                    obs.unobserve(e.target);
+                }
+            });
+        },{ threshold: 0.1 });
+        revs.forEach(r => obs.observe(r));
+    </script>
 </body>
 </html>
+
