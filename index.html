@@ -614,17 +614,37 @@ reveals.forEach(r => observer.observe(r));
 
 </body>
 <script>
-   <script>
-  const btn = document.getElementById('exp-btn');
-  // Using the file you uploaded to your repo: opening.mp3
-  const sound = new Audio('opening.mp3'); 
+  // 1. Define your sounds
+  const openingSound = new Audio('opening.mp3');
+  const clickSound = new Audio('velvet-snap.mp3');
 
-  if (btn) {
-    btn.addEventListener('click', () => {
-      sound.play().catch(e => console.log("Audio play blocked until interaction"));
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+  // 2. Preloader logic
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('preloader').classList.add('hidden');
+    }, 1800);
+  });
+
+  // 3. Handle the "Start Experience" button
+  const startBtn = document.getElementById('exp-btn');
+  if (startBtn) {
+    startBtn.addEventListener('click', () => {
+      openingSound.play().catch(e => console.log("Opening sound blocked"));
     });
   }
+
+  // 4. Handle all other clicks (the "velvet-snap" effect)
+  document.querySelectorAll('a, button').forEach(el => {
+    if (el.id !== 'exp-btn') { 
+      el.addEventListener('click', () => {
+        clickSound.play().catch(e => console.log("Click sound blocked"));
+      });
+    }
+  });
+
+  // 5. Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 100);
+  });
 </script>
-</script>
-</html>
