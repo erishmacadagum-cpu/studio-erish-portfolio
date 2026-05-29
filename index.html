@@ -649,19 +649,3 @@ reveals.forEach(r => observer.observe(r));
     nav.classList.toggle('scrolled', window.scrollY > 100);
   });
 </script>
-
-  // 4. Handle all other clicks (the "velvet-snap" effect)
-  document.querySelectorAll('a, button').forEach(el => {
-    if (el.id !== 'exp-btn') { 
-      el.addEventListener('click', () => {
-        clickSound.play().catch(e => console.log("Click sound blocked"));
-      });
-    }
-  });
-
-  // 5. Nav scroll effect
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 100);
-  });
-</script>
