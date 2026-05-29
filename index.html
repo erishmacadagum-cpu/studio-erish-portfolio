@@ -621,7 +621,8 @@ reveals.forEach(r => observer.observe(r));
   // 2. Preloader logic
   window.addEventListener('load', () => {
     setTimeout(() => {
-      document.getElementById('preloader').classList.add('hidden');
+      const preloader = document.getElementById('preloader');
+      if (preloader) preloader.classList.add('hidden');
     }, 1800);
   });
 
@@ -637,7 +638,7 @@ reveals.forEach(r => observer.observe(r));
   document.querySelectorAll('a, button').forEach(el => {
     if (el.id !== 'exp-btn') {
       el.addEventListener('click', () => {
-        clickSound.currentTime = 0; 
+        clickSound.currentTime = 0;
         clickSound.play().catch(e => console.log("Click sound blocked"));
       });
     }
@@ -646,6 +647,6 @@ reveals.forEach(r => observer.observe(r));
   // 5. Nav scroll effect
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 100);
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 100);
   });
 </script>
