@@ -614,13 +614,17 @@ reveals.forEach(r => observer.observe(r));
 
 </body>
 <script>
-    const btn = document.getElementById('exp-btn');
-    const sound = new Audio('velvet-snap.mp3'); 
-    if (btn) {
-        btn.addEventListener('click', () => {
-            sound.play().catch(e => console.log("Audio play blocked until interaction"));
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    }
+   <script>
+  const btn = document.getElementById('exp-btn');
+  // Using the file you uploaded to your repo: opening.mp3
+  const sound = new Audio('opening.mp3'); 
+
+  if (btn) {
+    btn.addEventListener('click', () => {
+      sound.play().catch(e => console.log("Audio play blocked until interaction"));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+</script>
 </script>
 </html>
