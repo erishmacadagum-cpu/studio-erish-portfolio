@@ -631,31 +631,24 @@ startBtn.addEventListener('click', function(e) {
         // 1. Ensure audio resets and plays
         openingSound.currentTime = 0;
         openingSound.play().then(() => {
+          // 1. Play the audio
+        openingSound.currentTime = 0;
+        openingSound.play().then(() => {
             console.log("Audio playing successfully");
         }).catch(err => console.log("Audio play blocked, but we will proceed:", err));
 
-        // 2. Set the navigation to trigger when audio ends
-        openingSound.onended = function() {
+        // 2. WAIT FOR THE AUDIO TO FINISH COMPLETELY
+        openingSound.addEventListener('ended', function() {
             window.location.href = 'about.html';
-        };
+        }, { once: true });
         
         // 3. THE "FORCE-FIX": 
-        // If the audio is too short, or fails to trigger 'onended', 
-        // we set a timer based on the audio duration.
-        // Let's assume your mp3 is about 4 seconds (4000ms).
+        // If audio fails to trigger 'ended', navigate after 4 seconds (4000ms)
         setTimeout(() => {
             if (window.location.pathname.includes('index.html')) {
                 window.location.href = 'about.html';
             }
-        }, 4000); // <-- Adjust this number (in milliseconds) to match your mp3 length
-    });
-        
-        // Safety: If audio takes too long or fails, navigate after 5 seconds
-        setTimeout(() => {
-            if (window.location.href.includes('index.html')) {
-                window.location.href = 'about.html';
-            }
-        }, 5000); 
+        }, 4000);
     });
   
   console.log("✓ Click listener attached to START BUTTON");
