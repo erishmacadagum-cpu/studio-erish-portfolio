@@ -633,13 +633,9 @@ reveals.forEach(r => observer.observe(r));
     startBtn.style.position = 'relative';
     startBtn.style.zIndex = '1000';
     
-   startBtn.addEventListener('click', (e) => {
-      // Remove e.preventDefault() if the button is supposed to link to another page
-      openingSound.play().then(() => {
-          console.log("Audio started");
-      }).catch(e => {
-          console.error("Audio blocked, trying again", e);
-      });
+  startBtn.addEventListener('click', () => {
+      openingSound.play().catch(e => console.log("Opening sound blocked"));
+    });
     });
   }
 
