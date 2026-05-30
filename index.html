@@ -661,18 +661,14 @@ allClickables.forEach((el, index) => {
   }
   
   el.addEventListener('click', function(e) {
-    // 1. Play the sound
+    // Play click sound (don't prevent default navigation)
     clickSound.currentTime = 0;
-    clickSound.play().catch(err => console.log("Sound block ignored"));
-
-    // 2. If it's a link, delay the navigation slightly so the sound can play
-    if (el.tagName === 'A' && el.href && !el.getAttribute('target')) {
-      e.preventDefault(); // Pause the jump
-      setTimeout(() => {
-        window.location.href = el.href; // Navigate after sound starts
-      }, 250); // 250ms is enough for the snap to be heard
-    }
-  });
+    clickSound.play()
+      .then(() => {
+        console.log(`🔊 Click sound played for: ${el.textContent.trim().substring(0, 30)}`);
+      })
+      .catch(err => {
+        console.log(`⚠️ Click sound blocked: ${err.message}`);
       });
   });
 });
