@@ -624,17 +624,24 @@ if (startBtn) {
   console.log("   └─ Pointer-events: auto");
   
   // ATTACH CLICK LISTENER - OPENING SOUND
-  startBtn.addEventListener('click', function(e) {
-        console.log("♫ START BUTTON CLICKED!");
+ startBtn.addEventListener('click', function(e) {
+        console.log("♫ START BUTTON CLICKED - Waiting for audio to finish...");
         
         // 1. Play the audio
         openingSound.currentTime = 0;
         openingSound.play().catch(err => console.log("Audio play blocked", err));
 
-        // 2. Wait 800ms to let the sound play, then redirect
+        // 2. WAIT FOR THE AUDIO TO FINISH COMPLETELY
+        openingSound.onended = function() {
+            window.location.href = 'about.html';
+        };
+        
+        // Safety: If audio takes too long or fails, navigate after 5 seconds
         setTimeout(() => {
-            window.location.href = 'about.html'; 
-        }, 800); 
+            if (window.location.href.includes('index.html')) {
+                window.location.href = 'about.html';
+            }
+        }, 5000); 
     });
   
   console.log("✓ Click listener attached to START BUTTON");
