@@ -625,22 +625,17 @@ if (startBtn) {
   
   // ATTACH CLICK LISTENER - OPENING SOUND
   startBtn.addEventListener('click', function(e) {
-    console.log("🎬 START BUTTON CLICKED!");
-    e.preventDefault();
-    e.stopPropagation();
-    
-    // Play opening sound
-    openingSound.currentTime = 0;
-    openingSound.play()
-      .then(() => {
-        console.log("✅ Opening sound PLAYING");
-      })
-      .catch(err => {
-        console.warn("⚠️ Opening sound blocked by browser autoplay policy");
-        console.warn("   Reason: ", err.message);
-        console.info("   Fix: User may need to interact with page first, or check audio file path");
-      });
-  });
+        console.log("♫ START BUTTON CLICKED!");
+        
+        // 1. Play the audio
+        openingSound.currentTime = 0;
+        openingSound.play().catch(err => console.log("Audio play blocked", err));
+
+        // 2. Wait 800ms to let the sound play, then redirect
+        setTimeout(() => {
+            window.location.href = 'about.html'; 
+        }, 800); 
+    });
   
   console.log("✓ Click listener attached to START BUTTON");
 } else {
