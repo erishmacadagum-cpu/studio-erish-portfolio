@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,14 +11,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
 
-    /* ════════════════════════════════════════════
-       RESET & BASE — matches your editorial-bg
-    ════════════════════════════════════════════ */
-    .inq-page * { box-sizing: border-box; }
+    /* ── BASE ── */
+    *, *::before, *::after { box-sizing: border-box; }
 
-    /* ════════════════════════════════════════════
-       HERO SECTION
-    ════════════════════════════════════════════ */
+    /* ── HERO ── */
     .inq-hero {
         position: relative;
         min-height: 100vh;
@@ -28,18 +25,13 @@
         overflow: hidden;
         padding-top: 80px;
     }
-
-    /* Radial glow */
     .inq-hero::before {
         content: '';
         position: absolute;
         inset: 0;
-        background:
-            radial-gradient(ellipse 70% 60% at 50% 60%, rgba(184,150,90,0.07) 0%, transparent 70%);
+        background: radial-gradient(ellipse 70% 60% at 50% 60%, rgba(184,150,90,0.07) 0%, transparent 70%);
         pointer-events: none;
     }
-
-    /* Frame lines */
     .inq-hero-frame {
         position: absolute;
         inset: 24px;
@@ -52,12 +44,10 @@
         inset: 14px;
         border: 0.3px solid rgba(184,150,90,0.08);
     }
-
-    /* Corner ornaments */
     .inq-corner {
         position: absolute;
-        width: 36px;
-        height: 36px;
+        width: 32px;
+        height: 32px;
     }
     .inq-corner::before,
     .inq-corner::after {
@@ -72,113 +62,142 @@
     .inq-corner.tr { top: 32px; right: 32px; transform: rotate(90deg); }
     .inq-corner.bl { bottom: 32px; left: 32px; transform: rotate(270deg); }
     .inq-corner.br { bottom: 32px; right: 32px; transform: rotate(180deg); }
-
-    /* Watermark */
     .inq-wm {
         position: absolute;
         font-family: 'Cormorant Garamond', serif;
-        font-size: clamp(160px, 28vw, 320px);
+        font-size: 280px;
         font-weight: 300;
         font-style: italic;
         color: rgba(255,255,255,0.018);
         line-height: 1;
         user-select: none;
         pointer-events: none;
-        right: -20px;
-        bottom: -40px;
-        letter-spacing: -6px;
+        right: -10px;
+        bottom: -30px;
+        letter-spacing: -4px;
     }
 
-    /* Hero inner content */
+    /* ── HERO INNER ── */
     .inq-hero-inner {
         position: relative;
         z-index: 2;
         text-align: center;
-        padding: 60px 24px 80px;
-        max-width: 760px;
+        padding: 60px 40px 100px;
+        max-width: 800px;
         margin: 0 auto;
+        width: 100%;
         animation: inqFadeUp 1.2s ease both;
     }
 
-    /* Badge */
+    /* ── BADGE ── */
     .inq-badge {
         display: inline-flex;
         align-items: center;
-        gap: 14px;
+        gap: 12px;
         border: 0.5px solid rgba(184,150,90,0.22);
-        padding: 10px 28px;
-        margin-bottom: 44px;
+        padding: 9px 24px;
+        margin-bottom: 40px;
     }
     .inq-badge span {
         font-family: 'Montserrat', sans-serif;
-        font-size: 0.6rem;
-        letter-spacing: 6px;
+        font-size: 0.58rem;
+        letter-spacing: 5px;
         text-transform: uppercase;
         color: #B8965A;
         opacity: 0.8;
     }
     .inq-badge .bdot {
-        width: 3px; height: 3px;
+        width: 3px;
+        height: 3px;
         background: #B8965A;
         transform: rotate(45deg);
         opacity: 0.5;
+        flex-shrink: 0;
     }
 
-    /* Main heading */
+    /* ── HERO HEADING — FIXED ── */
     .inq-h1 {
         font-family: 'Cormorant Garamond', serif;
-        font-size: clamp(3rem, 10vw, 7.5rem);
         font-weight: 300;
         color: #ffffff;
-        line-height: 0.9;
-        letter-spacing: -2px;
-        margin-bottom: 20px;
+        line-height: 1.05;
+        letter-spacing: 1px;
+        margin: 0 auto 24px;
+        padding: 0;
+        /* Safe fluid size — visible on all screens */
+        font-size: 4rem;
     }
     .inq-h1 em {
         font-style: italic;
         color: #D4B07A;
+        display: inline;
     }
     .inq-h1 .dim {
-        color: rgba(255,255,255,0.22);
+        color: rgba(255,255,255,0.35);
         font-weight: 200;
+        display: inline;
     }
 
-    /* Divider ornament */
+    /* Desktop — larger */
+    @media (min-width: 768px) {
+        .inq-h1 { font-size: 5.5rem; letter-spacing: 0px; }
+    }
+    @media (min-width: 1200px) {
+        .inq-h1 { font-size: 7rem; }
+    }
+
+    /* ── DIVIDER ── */
     .inq-hero-div {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 14px;
-        margin: 32px auto;
+        gap: 12px;
+        margin: 28px auto;
     }
-    .inq-hero-div .hl { width: 70px; height: 0.5px; background: linear-gradient(to right, transparent, #B8965A); }
-    .inq-hero-div .hl.r { background: linear-gradient(to left, transparent, #B8965A); }
-    .inq-hero-div .hd { width: 5px; height: 5px; background: #B8965A; transform: rotate(45deg); opacity: 0.7; }
+    .inq-hero-div .hl {
+        width: 60px;
+        height: 0.5px;
+        background: linear-gradient(to right, transparent, #B8965A);
+    }
+    .inq-hero-div .hl.r {
+        background: linear-gradient(to left, transparent, #B8965A);
+    }
+    .inq-hero-div .hd {
+        width: 5px;
+        height: 5px;
+        background: #B8965A;
+        transform: rotate(45deg);
+        opacity: 0.7;
+        flex-shrink: 0;
+    }
 
-    /* Hero description */
+    /* ── HERO DESC ── */
     .inq-hero-desc {
         font-family: 'Cormorant Garamond', serif;
-        font-size: clamp(1rem, 2.2vw, 1.25rem);
+        font-size: 1.1rem;
         font-style: italic;
         font-weight: 300;
-        color: rgba(255,255,255,0.35);
-        line-height: 1.85;
-        max-width: 520px;
-        margin: 0 auto 52px;
+        color: rgba(255,255,255,0.4);
+        line-height: 1.9;
+        max-width: 480px;
+        margin: 0 auto 48px;
         letter-spacing: 0.3px;
     }
+    @media (min-width: 768px) {
+        .inq-hero-desc { font-size: 1.2rem; }
+    }
 
-    /* Hero CTA button */
+    /* ── HERO BUTTON ── */
     .inq-hero-btn {
         display: inline-block;
         font-family: 'Montserrat', sans-serif;
-        font-size: 0.68rem;
+        font-size: 0.65rem;
         font-weight: 500;
-        letter-spacing: 6px;
+        letter-spacing: 5px;
         text-transform: uppercase;
         color: #111111;
         background: #D4B07A;
-        padding: 1.25rem 3.5rem;
+        padding: 1.2rem 3rem;
         text-decoration: none;
         border: none;
         cursor: pointer;
@@ -196,25 +215,24 @@
     .inq-hero-btn:hover::before { background: rgba(255,255,255,0.12); }
     .inq-hero-btn:hover {
         background: #ffffff;
-        letter-spacing: 7px;
+        letter-spacing: 6px;
         color: #111111;
     }
     .inq-hero-btn:active { transform: scale(0.97); }
-
     .inq-hero-btn-note {
         display: block;
         font-family: 'Montserrat', sans-serif;
-        font-size: 0.58rem;
+        font-size: 0.55rem;
         letter-spacing: 3px;
         text-transform: uppercase;
         color: rgba(255,255,255,0.15);
         margin-top: 14px;
     }
 
-    /* Scroll cue */
+    /* ── SCROLL CUE ── */
     .inq-scroll {
         position: absolute;
-        bottom: 40px;
+        bottom: 36px;
         left: 50%;
         transform: translateX(-50%);
         display: flex;
@@ -225,22 +243,20 @@
     }
     .inq-scroll span {
         font-family: 'Montserrat', sans-serif;
-        font-size: 0.5rem;
+        font-size: 0.48rem;
         letter-spacing: 5px;
         text-transform: uppercase;
         color: rgba(255,255,255,0.12);
     }
     .inq-scroll-line {
         width: 1px;
-        height: 44px;
+        height: 40px;
         background: linear-gradient(to bottom, #B8965A, transparent);
         opacity: 0.35;
         animation: inqScrollPulse 2s ease infinite;
     }
 
-    /* ════════════════════════════════════════════
-       TRUST STRIP
-    ════════════════════════════════════════════ */
+    /* ── TRUST STRIP ── */
     .inq-trust {
         background: #111111;
         border-top: 0.5px solid rgba(184,150,90,0.12);
@@ -256,21 +272,21 @@
     }
     .inq-ts {
         background: #111111;
-        padding: 2.2rem 1.5rem;
+        padding: 2rem 1.2rem;
         text-align: center;
     }
     .inq-ts-icon {
         font-family: 'Cormorant Garamond', serif;
-        font-size: 1.1rem;
+        font-size: 1rem;
         font-style: italic;
         color: #B8965A;
         opacity: 0.45;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
         display: block;
     }
     .inq-ts-title {
         font-family: 'Montserrat', sans-serif;
-        font-size: 0.58rem;
+        font-size: 0.56rem;
         letter-spacing: 3px;
         text-transform: uppercase;
         color: rgba(255,255,255,0.28);
@@ -278,32 +294,27 @@
     }
     .inq-ts-val {
         font-family: 'Cormorant Garamond', serif;
-        font-size: 0.88rem;
+        font-size: 0.85rem;
         font-style: italic;
-        color: rgba(255,255,255,0.16);
+        color: rgba(255,255,255,0.18);
     }
 
-    /* ════════════════════════════════════════════
-       MAIN BODY — light editorial
-    ════════════════════════════════════════════ */
+    /* ── MAIN BODY ── */
     .inq-body {
         background: #faf7f2;
-        padding: 7rem 1.5rem;
+        padding: 6rem 1.5rem;
     }
     .inq-body-inner {
         max-width: 960px;
         margin: 0 auto;
         display: grid;
         grid-template-columns: 1fr 1.3fr;
-        gap: 70px;
+        gap: 60px;
         align-items: start;
     }
-
-    /* Left column */
-    .inq-left {}
     .inq-left-label {
         font-family: 'Montserrat', sans-serif;
-        font-size: 0.6rem;
+        font-size: 0.58rem;
         letter-spacing: 5px;
         text-transform: uppercase;
         color: #B8965A;
@@ -312,32 +323,32 @@
     }
     .inq-left-title {
         font-family: 'Cormorant Garamond', serif;
-        font-size: clamp(2rem, 4vw, 3rem);
+        font-size: 2.4rem;
         font-weight: 400;
         color: #111111;
-        line-height: 1.1;
+        line-height: 1.15;
         margin-bottom: 0.8rem;
     }
     .inq-left-title em { font-style: italic; color: #B8965A; }
     .inq-left-rule {
         width: 28px; height: 1px;
         background: #B8965A;
-        margin-bottom: 1.8rem;
+        margin-bottom: 1.6rem;
         opacity: 0.5;
     }
     .inq-left-body {
         font-family: 'Montserrat', sans-serif;
-        font-size: 0.78rem;
+        font-size: 0.76rem;
         line-height: 2.1;
         color: #777777;
-        margin-bottom: 2.2rem;
+        margin-bottom: 2rem;
     }
     .inq-left-body strong { color: #111111; font-weight: 500; }
     .inq-list {
         display: flex;
         flex-direction: column;
-        gap: 16px;
-        margin-bottom: 2.5rem;
+        gap: 14px;
+        margin-bottom: 2.2rem;
     }
     .inq-list-item {
         display: flex;
@@ -354,12 +365,12 @@
     }
     .inq-list-text {
         font-family: 'Montserrat', sans-serif;
-        font-size: 0.75rem;
+        font-size: 0.73rem;
         line-height: 1.9;
         color: #888888;
     }
     .inq-list-text strong { color: #111111; font-weight: 500; }
-    .inq-left-divider { height: 0.5px; background: #ddd5c8; margin: 1.8rem 0; }
+    .inq-left-divider { height: 0.5px; background: #ddd5c8; margin: 1.6rem 0; }
     .inq-left-tagline {
         font-family: 'Cormorant Garamond', serif;
         font-size: 1rem;
@@ -370,10 +381,10 @@
         line-height: 1.7;
     }
 
-    /* Right column — CTA card */
+    /* ── CTA CARD ── */
     .inq-card {
         background: #111111;
-        padding: 3rem 2.5rem;
+        padding: 2.8rem 2.2rem;
         position: relative;
     }
     .inq-card::before {
@@ -393,101 +404,85 @@
     }
     .inq-card-eyebrow {
         font-family: 'Montserrat', sans-serif;
-        font-size: 0.58rem;
+        font-size: 0.56rem;
         letter-spacing: 5px;
         text-transform: uppercase;
         color: #B8965A;
         opacity: 0.7;
-        margin-bottom: 1.2rem;
+        margin-bottom: 1rem;
         display: block;
     }
     .inq-card-title {
         font-family: 'Cormorant Garamond', serif;
-        font-size: 2rem;
+        font-size: 1.9rem;
         font-weight: 300;
         color: #ffffff;
-        line-height: 1.15;
+        line-height: 1.2;
         margin-bottom: 0.4rem;
     }
     .inq-card-title em { font-style: italic; color: #D4B07A; }
     .inq-card-sub {
         font-family: 'Cormorant Garamond', serif;
-        font-size: 0.88rem;
+        font-size: 0.85rem;
         font-style: italic;
         color: rgba(255,255,255,0.2);
-        margin-bottom: 2rem;
-        letter-spacing: 0.3px;
+        margin-bottom: 1.8rem;
     }
-    .inq-card-divider { height: 0.5px; background: rgba(255,255,255,0.07); margin-bottom: 2rem; }
-
-    /* Steps */
+    .inq-card-divider {
+        height: 0.5px;
+        background: rgba(255,255,255,0.07);
+        margin-bottom: 1.8rem;
+    }
     .inq-steps {
         display: flex;
         flex-direction: column;
-        gap: 16px;
-        margin-bottom: 2.5rem;
-    }
-    .inq-step {
-        display: flex;
-        align-items: flex-start;
         gap: 14px;
+        margin-bottom: 2.2rem;
     }
+    .inq-step { display: flex; align-items: flex-start; gap: 12px; }
     .inq-step-n {
         font-family: 'Cormorant Garamond', serif;
-        font-size: 0.85rem;
+        font-size: 0.82rem;
         font-style: italic;
         color: #B8965A;
         opacity: 0.5;
         flex-shrink: 0;
-        width: 22px;
+        width: 20px;
         line-height: 1.8;
     }
     .inq-step-t {
         font-family: 'Montserrat', sans-serif;
-        font-size: 0.72rem;
+        font-size: 0.7rem;
         line-height: 1.85;
         color: rgba(255,255,255,0.28);
     }
     .inq-step-t strong { color: rgba(255,255,255,0.55); font-weight: 500; }
 
-    /* THE BUTTON */
+    /* ── MAIN BUTTON ── */
     .inq-main-btn {
         display: block;
         width: 100%;
-        padding: 1.3rem 2rem;
+        padding: 1.2rem 2rem;
         background: #B8965A;
         color: #111111;
         font-family: 'Montserrat', sans-serif;
-        font-size: 0.68rem;
+        font-size: 0.65rem;
         font-weight: 500;
-        letter-spacing: 6px;
+        letter-spacing: 5px;
         text-transform: uppercase;
         text-decoration: none;
         text-align: center;
         border: none;
         cursor: pointer;
+        transition: all 0.4s ease;
         position: relative;
         overflow: hidden;
-        transition: all 0.4s ease;
     }
-    .inq-main-btn::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: rgba(255,255,255,0);
-        transition: background 0.3s;
-    }
-    .inq-main-btn:hover::before { background: rgba(255,255,255,0.12); }
-    .inq-main-btn:hover {
-        background: #D4B07A;
-        letter-spacing: 7px;
-        color: #111111;
-    }
+    .inq-main-btn:hover { background: #D4B07A; letter-spacing: 6px; color: #111111; }
     .inq-main-btn:active { transform: scale(0.98); }
-
     .inq-btn-note {
         font-family: 'Montserrat', sans-serif;
-        font-size: 0.58rem;
+        font-size: 0.55rem;
         letter-spacing: 2px;
         text-transform: uppercase;
         color: rgba(255,255,255,0.15);
@@ -495,16 +490,10 @@
         margin-top: 1rem;
         line-height: 2;
     }
-
-    /* Share row */
-    .inq-share {
-        margin-top: 2rem;
-        padding-top: 1.5rem;
-        border-top: 0.5px solid rgba(255,255,255,0.06);
-    }
+    .inq-share { margin-top: 1.8rem; padding-top: 1.4rem; border-top: 0.5px solid rgba(255,255,255,0.06); }
     .inq-share-lbl {
         font-family: 'Montserrat', sans-serif;
-        font-size: 0.55rem;
+        font-size: 0.54rem;
         letter-spacing: 3px;
         text-transform: uppercase;
         color: rgba(255,255,255,0.2);
@@ -517,11 +506,11 @@
         gap: 10px;
         background: rgba(255,255,255,0.03);
         border: 0.5px solid rgba(255,255,255,0.07);
-        padding: 0.8rem 1rem;
+        padding: 0.75rem 1rem;
     }
     .inq-share-url {
         font-family: 'Montserrat', sans-serif;
-        font-size: 0.62rem;
+        font-size: 0.6rem;
         color: rgba(255,255,255,0.2);
         flex: 1;
         overflow: hidden;
@@ -530,12 +519,12 @@
     }
     .inq-copy-btn {
         font-family: 'Montserrat', sans-serif;
-        font-size: 0.55rem;
+        font-size: 0.54rem;
         letter-spacing: 3px;
         text-transform: uppercase;
         color: #111111;
         background: #B8965A;
-        padding: 7px 14px;
+        padding: 7px 13px;
         border: none;
         cursor: pointer;
         transition: all 0.3s;
@@ -545,12 +534,10 @@
     .inq-copy-btn:hover { background: #D4B07A; }
     .inq-copy-btn.copied { background: #2A6B3C; color: #ffffff; }
 
-    /* ════════════════════════════════════════════
-       CLOSING — dark
-    ════════════════════════════════════════════ */
+    /* ── CLOSING ── */
     .inq-closing {
         background: #111111;
-        padding: 7rem 1.5rem;
+        padding: 6rem 1.5rem;
         text-align: center;
         position: relative;
         overflow: hidden;
@@ -576,51 +563,48 @@
     .inq-cl-inner {
         position: relative;
         z-index: 2;
-        max-width: 560px;
+        max-width: 520px;
         margin: 0 auto;
     }
     .inq-cl-label {
         font-family: 'Montserrat', sans-serif;
-        font-size: 0.58rem;
-        letter-spacing: 6px;
+        font-size: 0.56rem;
+        letter-spacing: 5px;
         text-transform: uppercase;
         color: #B8965A;
         opacity: 0.6;
-        margin-bottom: 1.8rem;
+        margin-bottom: 1.6rem;
         display: block;
     }
     .inq-cl-title {
         font-family: 'Cormorant Garamond', serif;
-        font-size: clamp(2.2rem, 6vw, 4rem);
+        font-size: 2.8rem;
         font-weight: 300;
         color: #ffffff;
-        line-height: 1;
+        line-height: 1.1;
         margin-bottom: 1.2rem;
-        letter-spacing: -1px;
     }
     .inq-cl-title em { font-style: italic; color: #D4B07A; }
     .inq-cl-body {
         font-family: 'Montserrat', sans-serif;
-        font-size: 0.72rem;
+        font-size: 0.7rem;
         line-height: 2.1;
         color: rgba(255,255,255,0.22);
-        max-width: 420px;
-        margin: 0 auto 2.5rem;
+        max-width: 400px;
+        margin: 0 auto 2rem;
     }
     .inq-cl-note {
         font-family: 'Montserrat', sans-serif;
-        font-size: 0.58rem;
+        font-size: 0.56rem;
         letter-spacing: 2px;
         color: rgba(255,255,255,0.1);
         line-height: 2.2;
         text-transform: uppercase;
     }
 
-    /* ════════════════════════════════════════════
-       ANIMATIONS
-    ════════════════════════════════════════════ */
+    /* ── ANIMATIONS ── */
     @keyframes inqFadeUp {
-        from { opacity: 0; transform: translateY(28px); }
+        from { opacity: 0; transform: translateY(24px); }
         to   { opacity: 1; transform: translateY(0); }
     }
     @keyframes inqScrollPulse {
@@ -629,31 +613,29 @@
         51%  { transform-origin: bottom; }
         100% { transform: scaleY(0); transform-origin: bottom; }
     }
-
-    /* Reveal on scroll */
     .inq-reveal {
         opacity: 0;
         transform: translateY(20px);
         transition: opacity 0.8s ease, transform 0.8s ease;
     }
-    .inq-reveal.left  { transform: translateX(-24px); }
-    .inq-reveal.right { transform: translateX(24px); }
+    .inq-reveal.left  { transform: translateX(-22px); }
+    .inq-reveal.right { transform: translateX(22px); }
     .inq-reveal.visible { opacity: 1; transform: translate(0); }
 
-    /* ════════════════════════════════════════════
-       RESPONSIVE
-    ════════════════════════════════════════════ */
+    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
+        .inq-wm { display: none; }
         .inq-trust-inner { grid-template-columns: 1fr 1fr; }
-        .inq-body-inner  { grid-template-columns: 1fr; gap: 40px; }
-        .inq-hero-inner  { padding: 60px 20px 80px; }
+        .inq-body-inner  { grid-template-columns: 1fr; gap: 36px; }
         .inq-body        { padding: 4rem 1.2rem; }
+        .inq-hero-inner  { padding: 60px 20px 90px; }
+        .inq-h1          { font-size: 2.8rem; letter-spacing: 0; }
+        .inq-card        { padding: 2.2rem 1.6rem; }
     }
     </style>
 </head>
 <body class="editorial-bg">
 
-    <!-- EXISTING SITE HEADER — unchanged -->
     <header class="site-header">
         <div class="header-logo">
             <a href="index.html" class="logo-brand">ERISH</a>
@@ -671,7 +653,7 @@
         </nav>
     </header>
 
-    <!-- ── HERO ───────────────────────────────── -->
+    <!-- HERO -->
     <section class="inq-hero">
         <div class="inq-hero-frame"></div>
         <div class="inq-corner tl"></div>
@@ -700,16 +682,14 @@
             </div>
 
             <p class="inq-hero-desc">
-                Tell us about your celebration and we will craft<br/>
-                an experience that is entirely, uniquely,<br/>
-                beautifully yours.
+                Tell us about your celebration and we will craft an experience that is entirely, uniquely, beautifully yours.
             </p>
 
             <a href="https://forms.gle/yC3A5qJ3miViXM7K9"
                target="_blank"
                rel="noopener noreferrer"
                class="inq-hero-btn">
-                ✦ &nbsp;&nbsp; Send My Inquiry &nbsp;&nbsp; ✦
+                ✦ &nbsp; Send My Inquiry &nbsp; ✦
             </a>
             <span class="inq-hero-btn-note">
                 Opens in a new tab &nbsp;·&nbsp; Takes less than 3 minutes
@@ -722,7 +702,7 @@
         </div>
     </section>
 
-    <!-- ── TRUST STRIP ────────────────────────── -->
+    <!-- TRUST STRIP -->
     <div class="inq-trust">
         <div class="inq-trust-inner">
             <div class="inq-ts">
@@ -748,21 +728,15 @@
         </div>
     </div>
 
-    <!-- ── MAIN BODY ──────────────────────────── -->
+    <!-- MAIN BODY -->
     <section class="inq-body">
         <div class="inq-body-inner">
 
-            <!-- LEFT INFO -->
             <div class="inq-left inq-reveal left">
                 <span class="inq-left-label">Why Studio Erish</span>
-                <h2 class="inq-left-title">
-                    Your Story Starts<br/>
-                    With <em>One Message.</em>
-                </h2>
+                <h2 class="inq-left-title">Your Story Starts<br/>With <em>One Message.</em></h2>
                 <div class="inq-left-rule"></div>
-                <p class="inq-left-body">
-                    We treat every inquiry as if it is the most important message we have ever received — because to us, <strong>it is.</strong> Fill out our form and Erish will personally reach out within 24 hours.
-                </p>
+                <p class="inq-left-body">We treat every inquiry as if it is the most important message we have ever received — because to us, <strong>it is.</strong> Fill out our form and Erish will personally reach out within 24 hours.</p>
                 <div class="inq-list">
                     <div class="inq-list-item">
                         <div class="inq-list-dot"></div>
@@ -786,21 +760,14 @@
                     </div>
                 </div>
                 <div class="inq-left-divider"></div>
-                <p class="inq-left-tagline">
-                    "Where Every Detail<br/>Tells Your Story."
-                </p>
+                <p class="inq-left-tagline">"Where Every Detail<br/>Tells Your Story."</p>
             </div>
 
-            <!-- RIGHT CTA CARD -->
             <div class="inq-card inq-reveal right">
                 <span class="inq-card-eyebrow">Send Your Inquiry</span>
-                <h3 class="inq-card-title">
-                    Ready to Begin<br/>
-                    Your <em>Experience?</em>
-                </h3>
+                <h3 class="inq-card-title">Ready to Begin<br/>Your <em>Experience?</em></h3>
                 <p class="inq-card-sub">Our intake form takes less than 3 minutes.</p>
                 <div class="inq-card-divider"></div>
-
                 <div class="inq-steps">
                     <div class="inq-step">
                         <span class="inq-step-n">01</span>
@@ -815,18 +782,16 @@
                         <div class="inq-step-t"><strong>Erish personally responds</strong> — within 24 hours with a tailored proposal just for you.</div>
                     </div>
                 </div>
-
                 <a href="https://forms.gle/yC3A5qJ3miViXM7K9"
                    target="_blank"
                    rel="noopener noreferrer"
                    class="inq-main-btn">
-                    ✦ &nbsp;&nbsp; Send My Inquiry &nbsp;&nbsp; ✦
+                    ✦ &nbsp; Send My Inquiry &nbsp; ✦
                 </a>
                 <p class="inq-btn-note">
                     Opens in a new tab &nbsp;·&nbsp; Takes less than 3 minutes<br/>
                     We respond within 24 hours
                 </p>
-
                 <div class="inq-share">
                     <span class="inq-share-lbl">Share This Form Directly</span>
                     <div class="inq-share-row">
@@ -839,19 +804,13 @@
         </div>
     </section>
 
-    <!-- ── CLOSING ────────────────────────────── -->
+    <!-- CLOSING -->
     <div class="inq-closing">
         <div class="inq-closing-frame"></div>
         <div class="inq-cl-inner">
             <span class="inq-cl-label inq-reveal">Studio Erish · Est. 2007</span>
-            <h2 class="inq-cl-title inq-reveal">
-                We Cannot Wait<br/>
-                to Hear <em>Your</em><br/>
-                Story.
-            </h2>
-            <p class="inq-cl-body inq-reveal">
-                Every great celebration begins with a conversation. You have taken the first step — and we promise to honour it with everything we have.
-            </p>
+            <h2 class="inq-cl-title inq-reveal">We Cannot Wait<br/>to Hear <em>Your</em><br/>Story.</h2>
+            <p class="inq-cl-body inq-reveal">Every great celebration begins with a conversation. You have taken the first step — and we promise to honour it with everything we have.</p>
             <p class="inq-cl-note inq-reveal">
                 Davao City, Philippines &nbsp;·&nbsp; Events & Styling<br/>
                 Est. 2007 &nbsp;·&nbsp; 18+ Years of Excellence<br/>
@@ -860,27 +819,20 @@
         </div>
     </div>
 
-    <!-- EXISTING SITE FOOTER — unchanged -->
     <footer class="site-footer">
         <p>&copy; 2026 Studio Erish. All Rights Reserved.</p>
     </footer>
 
     <script src="js/script.js"></script>
     <script>
-        // Copy share link
         function copyLink(){
             navigator.clipboard.writeText('https://forms.gle/yC3A5qJ3miViXM7K9').then(()=>{
                 const btn = document.getElementById('copyBtn');
                 btn.textContent = 'Copied ✓';
                 btn.classList.add('copied');
-                setTimeout(()=>{
-                    btn.textContent = 'Copy Link';
-                    btn.classList.remove('copied');
-                }, 2500);
+                setTimeout(()=>{ btn.textContent='Copy Link'; btn.classList.remove('copied'); }, 2500);
             });
         }
-
-        // Scroll reveal
         const revs = document.querySelectorAll('.inq-reveal');
         const obs = new IntersectionObserver((entries)=>{
             entries.forEach((e,i)=>{
