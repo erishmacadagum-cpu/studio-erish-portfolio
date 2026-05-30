@@ -629,12 +629,21 @@ reveals.forEach(r => observer.observe(r));
   // 3. Handle the "Start Experience" button
   const startBtn = document.getElementById('exp-btn');
   if (startBtn) {
-    startBtn.addEventListener('click', () => {
-      openingSound.play().catch(e => console.log("Opening sound blocked"));
+    // Ensure the button is clickable
+    startBtn.style.position = 'relative';
+    startBtn.style.zIndex = '1000';
+    
+   startBtn.addEventListener('click', (e) => {
+      // Remove e.preventDefault() if the button is supposed to link to another page
+      openingSound.play().then(() => {
+          console.log("Audio started");
+      }).catch(e => {
+          console.error("Audio blocked, trying again", e);
+      });
     });
   }
 
-  // 4. Handle all other clicks (velvet-snap effect)
+  // 4. Handle all other clicks
   document.querySelectorAll('a, button').forEach(el => {
     if (el.id !== 'exp-btn') {
       el.addEventListener('click', () => {
