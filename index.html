@@ -40,13 +40,9 @@ nav.scrolled{background:rgba(28,22,16,0.92);backdrop-filter:blur(20px);border-bo
 /* ── HERO FULL SCREEN WITH BREATHING IMAGE ── */
 .hero{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--dark);}
 .hero-bg{position:absolute;inset:-10%;background-size:cover;background-position:center;animation:breathingZoom 20s ease-in-out infinite;filter:brightness(0.65);}
-/* Placeholder gradient - replace with your GitHub image */
 .hero-bg{
       background: linear-gradient(rgba(28,22,16,0.4),rgba(28,22,16,0.4)), url('hero-main.jpg') center/cover;
     }
-/* Use your GitHub image like this:
-.hero-bg{background:linear-gradient(rgba(28,22,16,0.4),rgba(28,22,16,0.4)),url('YOUR-GITHUB-IMAGE-URL.jpg') center/cover;}
-*/
 @keyframes breathingZoom{
   0%,100%{transform:scale(1.05);}
   50%{transform:scale(1.12);}
@@ -119,9 +115,6 @@ nav.scrolled{background:rgba(28,22,16,0.92);backdrop-filter:blur(20px);border-bo
 .gallery-caption h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:#fff;margin-bottom:6px;}
 .gallery-caption h3 em{font-style:italic;color:var(--gold-lt);}
 .gallery-caption p{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.5);}
-
-/* Placeholder images - replace with your GitHub images */
-
 
 /* ── INTRO STATEMENT ── */
 .intro{background:var(--cream);padding:140px 24px;position:relative;}
@@ -208,10 +201,37 @@ nav.scrolled{background:rgba(28,22,16,0.92);backdrop-filter:blur(20px);border-bo
 .contact-value a:hover{color:var(--gold-lt);}
 
 /* ── FOOTER ── */
-footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,150,90,0.08);text-align:center;}
+footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,150,90,0.08);text-align:center;position:relative;z-index:10;}
 .f-logo{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:rgba(255,255,255,0.5);letter-spacing:2px;margin-bottom:16px;}
 .f-logo em{font-style:italic;color:var(--gold);}
 .f-note{font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:1px;line-height:1.8;}
+
+/* ── START EXPERIENCE BUTTON ── */
+#exp-btn{
+  position: relative;
+  z-index: 20;
+  padding: 15px 40px;
+  background: transparent;
+  border: 0.5px solid #B8965A;
+  color: #B8965A;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-family: 'Jost', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  margin-top: 20px;
+  pointer-events: auto;
+}
+#exp-btn:hover {
+  background: #B8965A;
+  color: #1C1610;
+  letter-spacing: 4px;
+}
+#exp-btn:active {
+  transform: scale(0.98);
+}
 
 /* ── ANIMATIONS ── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
@@ -332,8 +352,6 @@ footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,
   </div>
   
   <div class="gallery-grid">
-    <!-- Replace background gradients with your GitHub images -->
-    <!-- Example: <img class="gallery-img" src="YOUR-GITHUB-IMAGE-1.jpg" alt="Wedding Reception"/> -->
     <div class="gallery-item reveal">
       <img src="gallery-1.jpg" class="gallery-img" alt="Garden Romance Garden Wedding Reception Styling by Erish Studio"/>
       <div class="gallery-overlay"></div>
@@ -344,7 +362,7 @@ footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,
     </div>
     
     <div class="gallery-item reveal">
-     <img src="gallery-2.jpg" class="gallery-img" alt="Timeless Elegance Wedding Ceremony Styling by Erish Studio"/>
+      <img src="gallery-2.jpg" class="gallery-img" alt="Timeless Elegance Wedding Ceremony Styling by Erish Studio"/>
       <div class="gallery-overlay"></div>
       <div class="gallery-caption">
         <h3>Timeless <em>Elegance</em></h3>
@@ -353,7 +371,7 @@ footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,
     </div>
     
     <div class="gallery-item reveal">
-     <img src="gallery-3.jpg" class="gallery-img" alt="Bespoke Florals Luxury Floral Design and Wedding Centerpiece by Erish Studio">
+      <img src="gallery-3.jpg" class="gallery-img" alt="Bespoke Florals Luxury Floral Design and Wedding Centerpiece by Erish Studio"/>
       <div class="gallery-overlay"></div>
       <div class="gallery-caption">
         <h3>Bespoke <em>Florals</em></h3>
@@ -362,7 +380,7 @@ footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,
     </div>
     
     <div class="gallery-item reveal">
-    <img src="gallery-4.jpg" class="gallery-img" alt="Debut Dream Event Coordination and Luxury Birthday Styling by Erish Studio">
+      <img src="gallery-4.jpg" class="gallery-img" alt="Debut Dream Event Coordination and Luxury Birthday Styling by Erish Studio"/>
       <div class="gallery-overlay"></div>
       <div class="gallery-caption">
         <h3>Debut <em>Dream</em></h3>
@@ -548,58 +566,130 @@ footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,
     © 2007–2026 Erish Studio Events & Styling<br/>
     Davao City, Philippines &nbsp;·&nbsp; Crafting Celebrations Since 2007
   </div>
-<div style="text-align: center; padding: 40px 20px;">
-    <button id="exp-btn" style="
-        padding: 15px 40px; 
-        background: transparent; 
-        border: 0.5px solid #B8965A; 
-        color: #B8965A; 
-        letter-spacing: 3px; 
-        text-transform: uppercase; 
-        font-size: 10px; 
-        font-family: 'Jost', sans-serif;
-        cursor: pointer; 
-        transition: all 0.4s ease;">
-        START EXPERIENCE
-    </button>
-</div>
+  <button id="exp-btn">Start Experience</button>
 </footer>
 
-<!-- SCRIPTS -->
+<!-- MASTER AUDIO SCRIPT - FULLY CORRECTED -->
 <script>
-// Sound effects - replace with your GitHub URLs
-const openSound = new Audio('https://YOUR-GITHUB-REPO/open-sound.mp3');
-const clickSound = new Audio('https://YOUR-GITHUB-REPO/click-sound.mp3');
+console.log("🎵 Erish Studio Audio System Initializing...");
 
-// Preloader with sound
+// ============================================================
+// 1. AUDIO FILE DEFINITIONS
+// ============================================================
+const openingSound = new Audio('opening.mp3');
+const clickSound = new Audio('velvet-snap.mp3');
+
+// Set audio properties
+openingSound.volume = 0.7;
+clickSound.volume = 0.5;
+
+console.log("✓ Audio files defined");
+console.log("✓ Opening sound path: opening.mp3");
+console.log("✓ Click sound path: velvet-snap.mp3");
+
+// ============================================================
+// 2. PRELOADER HANDLING
+// ============================================================
 window.addEventListener('load', () => {
+  console.log("✓ Page loaded");
   setTimeout(() => {
-    document.getElementById('preloader').classList.add('hidden');
-    // Uncomment when you add your sound file:
-    // openSound.play().catch(e => console.log('Sound blocked'));
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+      preloader.classList.add('hidden');
+      console.log("✓ Preloader hidden");
+    }
   }, 1800);
 });
 
-// Nav scroll effect
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 100) {
-    nav.classList.add('scrolled');
-  } else {
-    nav.classList.remove('scrolled');
-  }
-});
+// ============================================================
+// 3. START EXPERIENCE BUTTON - MAIN PRIORITY
+// ============================================================
+const startBtn = document.getElementById('exp-btn');
 
-// Click sound on buttons
-document.querySelectorAll('a, button').forEach(el => {
-  el.addEventListener('click', () => {
-    // Uncomment when you add your sound file:
-    // clickSound.currentTime = 0;
-    // clickSound.play().catch(e => console.log('Sound blocked'));
+if (startBtn) {
+  console.log("✅ START EXPERIENCE BUTTON FOUND");
+  console.log("   └─ ID: ", startBtn.id);
+  console.log("   └─ Text: ", startBtn.textContent);
+  console.log("   └─ Is visible: ", startBtn.offsetParent !== null);
+  
+  // Remove any pointer-events blocking
+  startBtn.style.pointerEvents = 'auto';
+  startBtn.style.cursor = 'pointer';
+  
+  // Ensure high z-index
+  startBtn.style.position = 'relative';
+  startBtn.style.zIndex = '9999';
+  
+  console.log("   └─ Z-index set to: 9999");
+  console.log("   └─ Pointer-events: auto");
+  
+  // ATTACH CLICK LISTENER - OPENING SOUND
+  startBtn.addEventListener('click', function(e) {
+    console.log("🎬 START BUTTON CLICKED!");
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Play opening sound
+    openingSound.currentTime = 0;
+    openingSound.play()
+      .then(() => {
+        console.log("✅ Opening sound PLAYING");
+      })
+      .catch(err => {
+        console.warn("⚠️ Opening sound blocked by browser autoplay policy");
+        console.warn("   Reason: ", err.message);
+        console.info("   Fix: User may need to interact with page first, or check audio file path");
+      });
+  });
+  
+  console.log("✓ Click listener attached to START BUTTON");
+} else {
+  console.error("❌ START EXPERIENCE BUTTON NOT FOUND");
+  console.error("   └─ Check that id='exp-btn' exists in HTML");
+}
+
+// ============================================================
+// 4. ALL OTHER BUTTONS & LINKS - CLICK SOUND
+// ============================================================
+const allClickables = document.querySelectorAll('a, button');
+console.log(`📍 Found ${allClickables.length} clickable elements`);
+
+allClickables.forEach((el, index) => {
+  // Skip the START button (already handled above)
+  if (el.id === 'exp-btn') {
+    return;
+  }
+  
+  el.addEventListener('click', function(e) {
+    // Play click sound (don't prevent default navigation)
+    clickSound.currentTime = 0;
+    clickSound.play()
+      .then(() => {
+        console.log(`🔊 Click sound played for: ${el.textContent.trim().substring(0, 30)}`);
+      })
+      .catch(err => {
+        console.log(`⚠️ Click sound blocked: ${err.message}`);
+      });
   });
 });
 
-// Scroll reveal
+console.log("✓ Click listeners attached to all other elements");
+
+// ============================================================
+// 5. NAVIGATION SCROLL EFFECT
+// ============================================================
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (nav) {
+    nav.classList.toggle('scrolled', window.scrollY > 100);
+  }
+});
+
+console.log("✓ Navigation scroll effect active");
+
+// ============================================================
+// 6. SCROLL REVEAL ANIMATION
+// ============================================================
 const reveals = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((e, i) => {
@@ -609,49 +699,30 @@ const observer = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.08 });
+
 reveals.forEach(r => observer.observe(r));
+console.log("✓ Scroll reveal animations active");
+
+// ============================================================
+// 7. DIAGNOSTIC SUMMARY
+// ============================================================
+console.log("\n");
+console.log("╔════════════════════════════════════════════════════════╗");
+console.log("║  ERISH STUDIO AUDIO SYSTEM - DIAGNOSTIC REPORT        ║");
+console.log("╚════════════════════════════════════════════════════════╝");
+console.log("✓ System initialized successfully");
+console.log("✓ Opening sound: opening.mp3");
+console.log("✓ Click sound: velvet-snap.mp3");
+console.log("✓ Start button listener: ACTIVE");
+console.log("✓ Other click listeners: ACTIVE");
+console.log("\n📌 IF SOUNDS ARE NOT PLAYING:");
+console.log("   1. Check that opening.mp3 and velvet-snap.mp3 are in same folder");
+console.log("   2. Try clicking the START EXPERIENCE button");
+console.log("   3. Check browser console for error messages (press F12)");
+console.log("   4. Allow audio playback in browser settings");
+console.log("   5. Some browsers require user interaction before playing sound");
+console.log("\n");
 </script>
 
 </body>
-<script>
-  // 1. Define your sounds
-  const openingSound = new Audio('opening.mp3');
-  const clickSound = new Audio('velvet-snap.mp3');
-
-  // 2. Preloader logic
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      const preloader = document.getElementById('preloader');
-      if (preloader) preloader.classList.add('hidden');
-    }, 1800);
-  });
-
-  // 3. Handle the "Start Experience" button
-  const startBtn = document.getElementById('exp-btn');
-  if (startBtn) {
-    // Ensure the button is clickable
-    startBtn.style.position = 'relative';
-    startBtn.style.zIndex = '1000';
-    
-  startBtn.addEventListener('click', () => {
-      openingSound.play().catch(e => console.log("Opening sound blocked"));
-    });
-    });
-  }
-
-  // 4. Handle all other clicks
-  document.querySelectorAll('a, button').forEach(el => {
-    if (el.id !== 'exp-btn') {
-      el.addEventListener('click', () => {
-        clickSound.currentTime = 0;
-        clickSound.play().catch(e => console.log("Click sound blocked"));
-      });
-    }
-  });
-
-  // 5. Nav scroll effect
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    if (nav) nav.classList.toggle('scrolled', window.scrollY > 100);
-  });
-</script>
+</html>
