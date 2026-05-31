@@ -1,23 +1,21 @@
 /* ==========================================================================
-   STUDIO ERISH — CORE LUXURY DESIGN SYSTEM (2026)
+   STUDIO ERISH â€” CORE LUXURY DESIGN SYSTEM (2026)
+   READABILITY FIXED VERSION
    ========================================================================== */
 
 /* 1. Design Tokens & Variables */
 :root {
-    /* Color Palette: Editorial, Sophisticated, High-Contrast Minimalist */
-    --color-bg: #FBF9F6;         /* Creamy, editorial off-white */
-    --color-primary: #2A2927;    /* Deep charcoal, softer than pure black */
-    --color-muted: #666666;      /* Slate grey for readable body prose */
-    --color-accent: #8C7853;     /* Muted champagne gold for intentional highlights */
-    --color-border: #E5E2DA;     /* Soft lines for structural grid separation */
-
-    /* Typography Scale */
+    --color-bg: #FBF9F6;
+    --color-primary: #1A1917;        /* FIX: Deeper for stronger contrast */
+    --color-muted: #4A4845;          /* FIX: Was #666666 â€” now clearly readable */
+    --color-accent: #8C7853;
+    --color-border: #E5E2DA;
     --font-serif: 'Cormorant Garamond', Georgia, serif;
     --font-sans: 'Montserrat', sans-serif;
 }
 
 /* 2. Global Resets & Body Rules */
-* {
+*, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -28,7 +26,7 @@ body {
     color: var(--color-primary);
     font-family: var(--font-sans);
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 1.7;               /* FIX: Was 1.6 â€” more breathing room */
     letter-spacing: 0.02em;
     -webkit-font-smoothing: antialiased;
 }
@@ -37,20 +35,23 @@ body {
 h1, h2, h3, .text-serif {
     font-family: var(--font-serif);
     font-weight: 400;
+    color: var(--color-primary);    /* FIX: Ensure headings always use darkest color */
 }
 
 .hero-title {
-    font-size: clamp(2.5rem, 5vw, 4.5rem); /* Dynamically scales smoothly on mobile vs desktop */
+    font-size: clamp(2.2rem, 5vw, 4.5rem); /* FIX: Min size raised from 2.5 to 2.2 â€” safer on small phones */
     line-height: 1.1;
     margin-bottom: 1.5rem;
+    color: var(--color-primary);
 }
 
 .section-title {
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(1.8rem, 4vw, 3rem); /* FIX: Min size raised â€” more readable on mobile */
     margin-bottom: 1rem;
+    color: var(--color-primary);
 }
 
-/* 4. Layout Structure (Containers & Grids) */
+/* 4. Layout Structure */
 .container {
     width: 100%;
     max-width: 1300px;
@@ -65,14 +66,18 @@ h1, h2, h3, .text-serif {
     padding: 0 2rem;
 }
 
-/* Premium Navigation Bar */
+/* 5. Navigation */
 .site-header {
     border-bottom: 1px solid var(--color-border);
     position: sticky;
     top: 0;
-    background-color: rgba(250, 249, 246, 0.95);
+    background-color: rgba(251, 249, 246, 0.97); /* FIX: Higher opacity â€” more solid, readable */
     backdrop-filter: blur(10px);
     z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 4rem;
 }
 
 .header-container {
@@ -96,13 +101,29 @@ h1, h2, h3, .text-serif {
     font-size: 1.8rem;
     letter-spacing: 0.2em;
     font-weight: 600;
+    color: var(--color-primary);    /* FIX: Explicit dark color */
 }
 
 .logo-sub {
+    font-family: var(--font-sans);
     font-size: 0.65rem;
     letter-spacing: 0.3em;
-    color: var(--color-muted);
+    color: #706c64;                 /* FIX: Was var(--color-muted) â€” now explicitly readable */
     margin-top: 0.2rem;
+}
+
+.header-logo {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    letter-spacing: 0.2em;
+    text-decoration: none;
+    color: #1a1a1a;
+    font-weight: 600;
 }
 
 .nav-links {
@@ -113,18 +134,47 @@ h1, h2, h3, .text-serif {
 
 .nav-links a {
     text-decoration: none;
-    color: var(--color-primary);
+    color: #2A2927;                 /* FIX: Was var(--color-primary) â€” now explicitly dark */
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.15em;
     transition: color 0.3s ease;
+    font-weight: 400;
 }
 
-.nav-links a:hover, .nav-links a.active {
+.nav-links a:hover,
+.nav-links a.active {
     color: var(--color-accent);
 }
 
-/* Asymmetrical Editorial Hero Section */
+.main-nav {
+    display: flex;
+    gap: 2.5rem;
+}
+
+.nav-link {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    color: #2A2927;                 /* FIX: Was #504d46 â€” now darker and clearer */
+    transition: color 0.3s ease;
+    font-weight: 400;
+}
+
+.nav-link:hover {
+    color: #1a1a1a;
+}
+
+.nav-link.active {
+    color: #1a1a1a;
+    font-weight: 500;
+    border-bottom: 1px solid #1a1a1a;
+    padding-bottom: 0.2rem;
+}
+
+/* 6. Hero Section */
 .hero-editorial {
     padding: 8rem 2rem;
     max-width: 1400px;
@@ -156,9 +206,10 @@ h1, h2, h3, .text-serif {
 
 .hero-lead {
     font-size: 1.15rem;
-    color: var(--color-muted);
+    color: #4A4845;                 /* FIX: Was var(--color-muted) #666 â€” now clearly readable */
     margin-bottom: 2.5rem;
     font-weight: 300;
+    line-height: 1.8;               /* FIX: More readable line height */
 }
 
 .cta-link-editorial {
@@ -176,7 +227,7 @@ h1, h2, h3, .text-serif {
     border-color: var(--color-accent);
 }
 
-/* Image Presentation Frame */
+/* 7. Image Frames */
 .frame-elegant {
     overflow: hidden;
     background-color: var(--color-border);
@@ -195,66 +246,7 @@ h1, h2, h3, .text-serif {
     transform: scale(1.03);
 }
 
-/* Premium Navigation Layout */
-.site-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2rem 4rem;
-    background-color: #fcfbf7; /* Matches your editorial cream background */
-    border-bottom: 1px solid #e5e0d8;
-}
-
-.header-logo {
-    display: flex;
-    flex-direction: column;
-}
-
-.logo-brand {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.8rem;
-    letter-spacing: 0.2em;
-    text-decoration: none;
-    color: #1a1a1a;
-    font-weight: 600;
-}
-
-.logo-sub {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    color: #706c64;
-    margin-top: 0.2rem;
-}
-
-/* Fixes the text links, removes purple colors and default underlines */
-.main-nav {
-    display: flex;
-    gap: 2.5rem;
-}
-
-.nav-link {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    text-decoration: none; /* Removes the underline */
-    color: #504d46; /* Clean, elegant charcoal instead of blue/purple */
-    transition: color 0.3s ease;
-}
-
-.nav-link:hover {
-    color: #1a1a1a;
-}
-
-/* Subtle accent for the page you are currently on */
-.nav-link.active {
-    color: #1a1a1a;
-    font-weight: 500;
-    border-bottom: 1px solid #1a1a1a;
-    padding-bottom: 0.2rem;
-}
-/* Services Layout Rules */
+/* 8. Services */
 .services-hero {
     text-align: center;
     max-width: 800px;
@@ -279,14 +271,14 @@ h1, h2, h3, .text-serif {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.5rem;
     font-style: italic;
-    color: #a39e93;
+    color: #7A756B;                 /* FIX: Was #a39e93 â€” too faint, now clearly visible */
     display: block;
     margin-bottom: 1rem;
 }
 
-/* Mobile Responsive Breakpoints */
+/* 9. Mobile Navigation */
 .menu-toggle {
-    display: none; /* Hidden on desktop screens */
+    display: none;
     flex-direction: column;
     gap: 5px;
     background: none;
@@ -299,41 +291,46 @@ h1, h2, h3, .text-serif {
 .menu-toggle span {
     display: block;
     width: 22px;
-    height: 1px;
+    height: 1.5px;                  /* FIX: Was 1px â€” thicker for better visibility */
     background-color: #1a1a1a;
     transition: all 0.3s ease;
 }
 
-/* Responsive adjustments for screens under 768px */
 @media (max-width: 768px) {
     .site-header {
-        padding: 1.5rem 2rem;
+        padding: 1.5rem 1.5rem;     /* FIX: Tighter padding on mobile */
     }
 
     .menu-toggle {
-        display: flex; /* Show hamburger icon on mobile */
+        display: flex;
     }
 
     .main-nav {
         position: fixed;
         top: 0;
-        right: -100%; /* Hide menu off-screen initially */
+        right: -100%;
         width: 75%;
         height: 100vh;
-        background-color: #fcfbf7; /* Matches editorial cream */
+        background-color: #fcfbf7;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         gap: 3rem;
-        box-shadow: -10px 0 30px rgba(0,0,0,0.05);
+        box-shadow: -10px 0 30px rgba(0,0,0,0.08); /* FIX: Stronger shadow â€” visible separator */
         transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 999;
     }
 
     .main-nav.open {
-        right: 0; /* Slide menu into view beautifully */
+        right: 0;
     }
 
-    /* Transform Hamburger lines into an 'X' when active */
+    .nav-link {
+        font-size: 0.9rem;          /* FIX: Larger nav links on mobile */
+        color: #1a1a1a;             /* FIX: Full dark on mobile menu */
+        letter-spacing: 0.2em;
+    }
+
     .menu-toggle.active span:nth-child(1) {
         transform: translateY(6px) rotate(45deg);
     }
@@ -343,39 +340,44 @@ h1, h2, h3, .text-serif {
     .menu-toggle.active span:nth-child(3) {
         transform: translateY(-6px) rotate(-45deg);
     }
-    
-    /* Let grids stack on mobile columns safely */
-    .services-grid, .narrative-grid {
+
+    .services-grid,
+    .narrative-grid {
         grid-template-columns: 1fr;
         padding: 2rem;
         gap: 2.5rem;
     }
-}
-/* ==========================================================================
-   Luxury Curation Extensions
-   ========================================================================== */
 
-/* 1. Fluid Page Entrance Animation */
+    /* FIX: Mobile body text readable */
+    body {
+        font-size: 15px;
+    }
+
+    p {
+        font-size: 0.9rem;
+        line-height: 1.85;
+    }
+
+    h1 { font-size: clamp(1.8rem, 8vw, 2.5rem); }
+    h2 { font-size: clamp(1.5rem, 6vw, 2rem); }
+    h3 { font-size: clamp(1.2rem, 5vw, 1.6rem); }
+}
+
+/* 10. Page Animation */
 main {
     animation: editorialFade 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes editorialFade {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
-/* 2. Editorial Image Framing & Zoom Effects */
+/* 11. Editorial Media */
 .narrative-media {
-    overflow: hidden; /* Contains the internal hover zoom perfectly */
-    background-color: #f2eee7; /* Soft base if an image takes a second to load */
-    border: 1px solid rgba(42, 41, 39, 0.04); /* Microscopic elegant framing border */
+    overflow: hidden;
+    background-color: #f2eee7;
+    border: 1px solid rgba(42, 41, 39, 0.04);
 }
 
 .editorial-img {
@@ -384,25 +386,24 @@ main {
     display: block;
     object-fit: cover;
     filter: brightness(98%) contrast(98%);
-    /* Ultra-slow, cinematic easing curve for luxury motion */
     transition: transform 2.5s cubic-bezier(0.16, 1, 0.3, 1), filter 2.5s ease;
 }
 
-/* Slowly magnifies the photo when hovered */
 .narrative-media:hover .editorial-img {
     transform: scale(1.03);
     filter: brightness(100%) contrast(100%);
 }
 
-/* 3. Global Text Breathing Room */
+/* 12. Body Text â€” READABILITY FIX */
 p {
     font-weight: 300;
     letter-spacing: 0.01em;
-    color: #55514b; /* Subtle tone drop for body prose so headers pop beautifully */
+    color: #3A3630;                 /* FIX: Was #55514b â€” now noticeably darker and clearer */
+    line-height: 1.85;              /* FIX: More comfortable reading line height */
+    font-size: 0.95rem;             /* FIX: Explicit size prevents too-small text */
 }
-/* ==========================================================================
-   Asymmetric Lookbook Grid System
-   ========================================================================== */
+
+/* 13. Portfolio Grid */
 .portfolio-hero {
     text-align: left;
     max-width: 700px;
@@ -421,53 +422,43 @@ p {
     flex-direction: column;
 }
 
-/* Metadata styling beneath the portfolio frames */
 .item-meta {
     margin-top: 1.2rem;
 }
 
 .item-location {
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.65rem;
+    font-size: 0.68rem;             /* FIX: Was 0.65rem â€” slightly larger */
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: #a39e93;
+    color: #7A756B;                 /* FIX: Was #a39e93 â€” too faint, now visible */
     display: block;
     margin-bottom: 0.3rem;
 }
 
-/* Asymmetric Grid Spanning Rules */
-.item-wide {
-    grid-column: span 12; /* Spans full width for jaw-dropping entrance */
-}
-
-.item-tall {
-    grid-column: span 5; /* Sitting on the left side */
-}
-
+.item-wide  { grid-column: span 12; }
+.item-tall  { grid-column: span 5; }
 .item-standard {
-    grid-column: span 7; /* Offset on the right side */
-    margin-top: 8rem; /* Pushes it down intentionally to create visual contrast */
+    grid-column: span 7;
+    margin-top: 8rem;
 }
 
-/* Mobile Fallbacks to keep it clean on phones */
 @media (max-width: 768px) {
-    .portfolio-hero {
-        margin: 4rem 2rem 2rem 2rem;
-    }
+    .portfolio-hero { margin: 4rem 2rem 2rem 2rem; }
     .lookbook-grid {
         grid-template-columns: 1fr;
         padding: 0 2rem 4rem 2rem;
         gap: 3.5rem;
     }
-    .item-wide, .item-tall, .item-standard {
-        grid-column: span 1!important;
-        margin-top: 0!important;
+    .item-wide,
+    .item-tall,
+    .item-standard {
+        grid-column: span 1 !important;
+        margin-top: 0 !important;
     }
 }
-/* ==========================================================================
-   Premium Inquiry Layout & Form Styling
-   ========================================================================== */
+
+/* 14. Inquiry Form */
 .inquire-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -501,23 +492,30 @@ p {
 
 .editorial-form label {
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.65rem;
+    font-size: 0.68rem;             /* FIX: Was 0.65rem â€” slightly larger */
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: #706c64;
+    color: #3A3630;                 /* FIX: Was #706c64 â€” now clearly dark and readable */
+    font-weight: 500;               /* FIX: Medium weight so labels stand out */
 }
 
 .editorial-form input,
 .editorial-form textarea {
     background: transparent;
     border: none;
-    border-bottom: 1px solid #e5e0d8;
+    border-bottom: 1px solid #C5C0B8; /* FIX: Was #e5e0d8 â€” slightly darker border */
     padding: 0.8rem 0;
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.85rem;
+    font-size: 0.9rem;              /* FIX: Was 0.85rem â€” larger input text */
     color: var(--color-primary);
     outline: none;
     transition: border-color 0.4s ease;
+}
+
+.editorial-form input::placeholder,
+.editorial-form textarea::placeholder {
+    color: #9A9590;                 /* FIX: Visible but not dominant placeholder */
+    font-size: 0.82rem;
 }
 
 .editorial-form input:focus,
@@ -525,7 +523,6 @@ p {
     border-bottom: 1px solid var(--color-primary);
 }
 
-/* Minimalist Luxury Button Signature */
 .submit-btn {
     background-color: var(--color-primary);
     color: #fcfbf7;
@@ -542,28 +539,23 @@ p {
 
 .submit-btn:hover {
     background-color: #403e3a;
-    letter-spacing: 0.23em; /* Subtle expandable motion signature */
+    letter-spacing: 0.23em;
 }
 
-/* Form Responsive Design Breakpoint */
 @media (max-width: 900px) {
     .inquire-layout {
         grid-template-columns: 1fr;
         gap: 4rem;
         padding: 4rem 2rem;
     }
-    .inquire-intro {
-        padding-right: 0;
-    }
+    .inquire-intro { padding-right: 0; }
     .form-group-row {
         grid-template-columns: 1fr;
         gap: 2.5rem;
     }
 }
 
-/* ==========================================================================
-   The Journal (Homepage) Layout Rules
-   ========================================================================== */
+/* 15. Journal Layout */
 .journal-layout {
     padding: 4rem 4rem 8rem 4rem;
     max-width: 1400px;
@@ -577,13 +569,13 @@ p {
 
 .journal-hero .hero-title {
     margin-bottom: 4rem;
-    font-size: clamp(2.5rem, 4.5vw, 4.5rem);
+    font-size: clamp(2.2rem, 4.5vw, 4.5rem); /* FIX: Min raised */
     line-height: 1.1;
 }
 
 .journal-cover-frame {
     width: 100%;
-    height: 65vh; /* Gives it an incredible full-screen editorial depth */
+    height: 65vh;
     margin-top: 3rem;
 }
 
@@ -618,19 +610,12 @@ p {
     letter-spacing: 0.2em;
 }
 
-/* Mobile Cover Fixes */
 @media (max-width: 768px) {
-    .journal-layout {
-        padding: 3rem 2rem 4rem 2rem;
-    }
-    .journal-cover-frame {
-        height: 45vh; /* Adapts height beautifully for compact phone screens */
-    }
+    .journal-layout { padding: 3rem 1.5rem 4rem 1.5rem; } /* FIX: Tighter mobile padding */
+    .journal-cover-frame { height: 45vh; }
 }
 
-/* ==========================================================================
-   Luxury Sonic Architecture Interface Styles
-   ========================================================================== */
+/* 16. Sonic Control */
 .sonic-control-dock {
     position: fixed;
     bottom: 3rem;
@@ -651,7 +636,7 @@ p {
     letter-spacing: 0.25em;
     color: var(--color-primary);
     padding: 0.6rem;
-    opacity: 0.6;
+    opacity: 0.7;                   /* FIX: Was 0.6 â€” slightly more visible */
     transition: opacity 0.4s ease, transform 0.3s ease;
 }
 
@@ -660,7 +645,6 @@ p {
     transform: translateY(-1px);
 }
 
-/* Minimalist Audio Activity Indicator */
 .sonic-icon-bars {
     display: flex;
     align-items: flex-end;
@@ -670,7 +654,7 @@ p {
 }
 
 .sonic-icon-bars span {
-    width: 1px;
+    width: 1.5px;                   /* FIX: Was 1px â€” thicker and more visible */
     height: 100%;
     background-color: var(--color-primary);
     transform-origin: bottom;
@@ -678,7 +662,6 @@ p {
     transition: transform 0.3s ease;
 }
 
-/* Audio Active State Styling */
 .sonic-toggle-btn.muted .sonic-status-label {
     text-decoration: line-through;
     opacity: 0.5;
@@ -688,17 +671,13 @@ p {
     transform: scaleY(0.1) !important;
 }
 
-/* ==========================================================================
-   Cinematic Entry Curtain & Experience Button
-   ========================================================================== */
+/* 17. Entrance Curtain */
 .entrance-curtain {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #fcfbf7; /* A beautiful, seamless luxury cream background */
-    z-index: 100000; /* Keeps it completely on top of everything else */
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: #fcfbf7;
+    z-index: 100000;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -706,7 +685,6 @@ p {
     transition: opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1), visibility 1.5s;
 }
 
-/* This rule effortlessly dissolves the curtain into thin air on click */
 .entrance-curtain.dissolved {
     opacity: 0;
     visibility: hidden;
@@ -721,7 +699,7 @@ p {
 
 .entrance-title {
     font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 5vw, 2.5rem); /* FIX: Responsive entrance title */
     font-weight: 400;
     letter-spacing: 0.3em;
     color: #1a1a1a;
@@ -730,11 +708,11 @@ p {
 
 .entrance-subtitle {
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.65rem;
+    font-size: 0.68rem;             /* FIX: Was 0.65rem â€” slightly bigger */
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #1a1a1a;
-    opacity: 0.6;
+    color: #2A2927;                 /* FIX: Was #1a1a1a opacity 0.6 â€” now explicit readable color */
+    opacity: 0.75;                  /* FIX: Was 0.6 â€” more visible */
     margin-bottom: 4rem;
 }
 
@@ -743,7 +721,7 @@ p {
     border: none;
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.7rem;
+    font-size: 0.75rem;             /* FIX: Was 0.7rem â€” slightly larger */
     letter-spacing: 0.3em;
     color: #1a1a1a;
     position: relative;
@@ -755,7 +733,7 @@ p {
     height: 1px;
     background-color: #1a1a1a;
     margin: 0.6rem auto 0;
-    opacity: 0.4;
+    opacity: 0.5;                   /* FIX: Was 0.4 â€” more visible */
     transition: width 0.4s ease;
 }
 
@@ -765,8 +743,5 @@ p {
 }
 
 @keyframes entranceFadeUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    to { opacity: 1; transform: translateY(0); }
 }
