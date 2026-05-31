@@ -624,31 +624,24 @@ if (startBtn) {
   console.log("   └─ Pointer-events: auto");
   
   // ATTACH CLICK LISTENER - OPENING SOUND
-startBtn.addEventListener('click', function(e) {
-        e.preventDefault(); // Prevents instant page reload
-        console.log("♫ START BUTTON CLICKED - Playing audio...");
+ startBtn.addEventListener('click', function(e) {
+        console.log("♫ START BUTTON CLICKED - Waiting for audio to finish...");
         
-        // 1. Ensure audio resets and plays
+        // 1. Play the audio
         openingSound.currentTime = 0;
-        openingSound.play().then(() => {
-          // 1. Play the audio
-        openingSound.currentTime = 0;
-        openingSound.play().then(() => {
-            console.log("Audio playing successfully");
-        }).catch(err => console.log("Audio play blocked, but we will proceed:", err));
+        openingSound.play().catch(err => console.log("Audio play blocked", err));
 
         // 2. WAIT FOR THE AUDIO TO FINISH COMPLETELY
-        openingSound.addEventListener('ended', function() {
+        openingSound.onended = function() {
             window.location.href = 'about.html';
-        }, { once: true });
+        };
         
-        // 3. THE "FORCE-FIX": 
-        // If audio fails to trigger 'ended', navigate after 4 seconds (4000ms)
+        // Safety: If audio takes too long or fails, navigate after 5 seconds
         setTimeout(() => {
-            if (window.location.pathname.includes('index.html')) {
+            if (window.location.href.includes('index.html')) {
                 window.location.href = 'about.html';
             }
-        }, 4000);
+        }, 5000); 
     });
   
   console.log("✓ Click listener attached to START BUTTON");
