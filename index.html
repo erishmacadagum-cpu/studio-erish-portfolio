@@ -306,13 +306,13 @@ footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,
       Bespoke styling, florals, and coordination that tells your story beautifully.
     </p>
     
-  <div class="hero-ctas">
+ <div class="hero-ctas">
   <!-- Primary Entry Point -->
-  <a href="javascript:void(0);" id="start-experience" class="btn-primary"><span>Start Experience</span></a>
+  <a href="javascript:void(0);" id="start-experience" class="btn-primary nav-btn"><span>Start Experience</span></a>
   
   <!-- Secondary Paths -->
-  <a href="inquire.html" class="btn-ghost">Begin Your Inquiry</a>
-  <a href="highlights.html" class="btn-ghost">View Our Masterpieces</a>
+  <a href="inquire.html" class="btn-ghost nav-btn">Begin Your Inquiry</a>
+  <a href="highlights.html" class="btn-ghost nav-btn">View Our Masterpieces</a>
 </div>
   
   <div class="scroll-indicator">
@@ -729,6 +729,26 @@ console.log("   4. Allow audio playback in browser settings");
 console.log("   5. Some browsers require user interaction before playing sound");
 console.log("\n");
 </script>
-<script src="js/audio-manager.js"></script>
+
+<script>
+  // Audio Definitions
+  const openingSound = new Audio('opening.mp3');
+  const clickSound = new Audio('velvet-snap.mp3');
+  clickSound.volume = 0.5;
+
+  // Logic for Start Experience
+  document.getElementById('start-experience').addEventListener('click', function() {
+    openingSound.play();
+    // Smooth scroll to the section below the hero
+    document.querySelector('.trust-strip').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  // Logic for Secondary Buttons (Velvet Snap)
+  document.querySelectorAll('.btn-ghost').forEach(button => {
+    button.addEventListener('click', function() {
+      clickSound.play();
+    });
+  });
+</script>
 </body>
 </html>
