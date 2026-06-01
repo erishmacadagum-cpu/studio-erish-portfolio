@@ -1,6 +1,6 @@
 // js/audio-manager.js
 document.addEventListener('DOMContentLoaded', () => {
-  const snapSound = new Audio('velvet-snap.mp3');
+  const snapSound = new Audio('/velvet-snap.mp3');
   snapSound.volume = 0.5;
 
   const selectors = [
