@@ -4,9 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
   snapSound.volume = 0.5;
 
   const selectors = [
-    'a', 
+  'a', 
     'button', 
     '.btn-primary', 
+    '.btn-ghost', 
     '.cta-btns a', 
     'a[href^="mailto:"]', 
     'a[href^="tel:"]'
