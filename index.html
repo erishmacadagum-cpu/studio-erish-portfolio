@@ -41,8 +41,8 @@ nav.scrolled{background:rgba(28,22,16,0.92);backdrop-filter:blur(20px);border-bo
 .hero{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--dark);}
 .hero-bg{position:absolute;inset:-10%;background-size:cover;background-position:center;animation:breathingZoom 20s ease-in-out infinite;filter:brightness(0.65);}
 .hero-bg{
-      background: linear-gradient(rgba(28,22,16,0.4),rgba(28,22,16,0.4)), url('hero-main.jpg') center/cover;
-    }
+  background: linear-gradient(rgba(28,22,16,0.4),rgba(28,22,16,0.4)), url('hero-main.jpg') center/cover;
+}
 @keyframes breathingZoom{
   0%,100%{transform:scale(1.05);}
   50%{transform:scale(1.12);}
@@ -72,15 +72,103 @@ nav.scrolled{background:rgba(28,22,16,0.92);backdrop-filter:blur(20px);border-bo
 .hdl.r{background:linear-gradient(to left,transparent,var(--gold));}
 .hdd{width:7px;height:7px;background:var(--gold);transform:rotate(45deg);opacity:0.75;}
 .hero-desc{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2.8vw,24px);font-style:italic;font-weight:300;color:rgba(255,255,255,0.4);line-height:1.7;max-width:680px;margin:0 auto 56px;animation:fadeUp 1s 0.45s ease both;}
-.hero-ctas{display:flex;gap:20px;align-items:center;justify-content:center;flex-wrap:wrap;animation:fadeUp 1s 0.6s ease both;}
-.btn-primary,.btn-ghost{font-size:9.5px;letter-spacing:5px;text-transform:uppercase;padding:18px 42px;text-decoration:none;transition:all 0.4s ease;display:inline-block;position:relative;overflow:hidden;}
-.btn-primary{background:var(--gold-lt);color:var(--dark);font-weight:500;}
-.btn-primary::before{content:'';position:absolute;inset:0;background:#fff;transform:scaleX(0);transform-origin:left;transition:transform 0.4s ease;}
+
+/* ── FLAGSHIP START BUTTON (MAIN HERO CTA) ── */
+.hero-flagship{
+  animation:fadeUp 1s 0.6s ease both;
+  margin-bottom:48px;
+}
+.btn-flagship{
+  padding:28px 64px;
+  background:var(--gold-lt);
+  color:var(--dark);
+  border:none;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(18px,2.5vw,28px);
+  font-weight:400;
+  font-style:italic;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  cursor:pointer;
+  text-decoration:none;
+  display:inline-block;
+  position:relative;
+  overflow:hidden;
+  transition:all 0.4s ease;
+  box-shadow:0 8px 32px rgba(184,150,90,0.25);
+  z-index:20;
+  pointer-events:auto;
+}
+.btn-flagship::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:var(--gold);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform 0.4s ease;
+}
+.btn-flagship:hover::before{transform:scaleX(1);}
+.btn-flagship span{position:relative;z-index:1;}
+.btn-flagship:hover{
+  letter-spacing:5px;
+  box-shadow:0 12px 48px rgba(184,150,90,0.4);
+  transform:translateY(-2px);
+}
+.btn-flagship:active{transform:scale(0.98);}
+
+/* ── SECONDARY CTA BUTTONS ── */
+.hero-ctas{
+  display:flex;
+  gap:20px;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  animation:fadeUp 1s 0.75s ease both;
+}
+.btn-primary,.btn-ghost{
+  font-size:10px;
+  letter-spacing:5px;
+  text-transform:uppercase;
+  padding:16px 40px;
+  text-decoration:none;
+  transition:all 0.4s ease;
+  display:inline-block;
+  position:relative;
+  overflow:hidden;
+  font-family:'Jost',sans-serif;
+  font-weight:500;
+}
+.btn-primary{
+  background:var(--gold);
+  color:var(--dark);
+  border:none;
+  cursor:pointer;
+}
+.btn-primary::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:#fff;
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform 0.4s ease;
+}
 .btn-primary:hover::before{transform:scaleX(1);}
 .btn-primary span{position:relative;z-index:1;}
 .btn-primary:hover{letter-spacing:6px;}
-.btn-ghost{border:0.5px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.75);}
-.btn-ghost:hover{border-color:var(--gold);color:var(--gold);letter-spacing:6px;}
+
+.btn-ghost{
+  border:0.5px solid rgba(255,255,255,0.25);
+  color:rgba(255,255,255,0.75);
+  background:transparent;
+  cursor:pointer;
+}
+.btn-ghost:hover{
+  border-color:var(--gold);
+  color:var(--gold);
+  letter-spacing:6px;
+}
 
 .scroll-indicator{position:absolute;bottom:56px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;animation:fadeUp 1s 1s ease both;}
 .scroll-indicator span{font-size:8.5px;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.18);}
@@ -206,33 +294,6 @@ footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,
 .f-logo em{font-style:italic;color:var(--gold);}
 .f-note{font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:1px;line-height:1.8;}
 
-/* ── START EXPERIENCE BUTTON ── */
-#exp-btn{
-  position: relative;
-  z-index: 20;
-  padding: 15px 40px;
-  background: transparent;
-  border: 0.5px solid #B8965A;
-  color: #B8965A;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  font-size: 10px;
-  font-family: 'Jost', sans-serif;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.4s ease;
-  margin-top: 20px;
-  pointer-events: auto;
-}
-#exp-btn:hover {
-  background: #B8965A;
-  color: #1C1610;
-  letter-spacing: 4px;
-}
-#exp-btn:active {
-  transform: scale(0.98);
-}
-
 /* ── ANIMATIONS ── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
 .reveal{opacity:0;transform:translateY(32px);transition:opacity 1s ease,transform 1s ease;}
@@ -249,6 +310,7 @@ footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,
   .service-card:last-child{border-bottom:none;}
   .hero-ctas{flex-direction:column;width:100%;}
   .btn-primary,.btn-ghost{width:100%;max-width:320px;}
+  .btn-flagship{padding:24px 48px;}
 }
 </style>
 </head>
@@ -264,13 +326,12 @@ footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,
 <!-- NAVIGATION -->
 <nav id="nav">
   <a href="index.html" class="nav-logo"><em>Erish</em> Studio</a>
- <div class="nav-links">
-  <a href="highlights.html">Highlights</a>
-  <a href="showcase.html">Showcase</a>
-  <a href="about.html">About</a>
-  <a href="inquire.html">Inquire</a>  <!-- Updated here -->
-  <a href="#contact">Contact</a>
-</div>
+  <div class="nav-links">
+    <a href="highlights.html">Highlights</a>
+    <a href="showcase.html">Showcase</a>
+    <a href="about.html">About</a>
+    <a href="#contact">Contact</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -305,16 +366,20 @@ footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,
       18+ years of crafting unforgettable weddings and events in Davao City.<br/>
       Bespoke styling, florals, and coordination that tells your story beautifully.
     </p>
+
+    <!-- ── FLAGSHIP START EXPERIENCE BUTTON ── -->
+    <div class="hero-flagship">
+      <button id="start-exp-btn" class="btn-flagship">
+        <span>✦ Start Your Experience ✦</span>
+      </button>
+    </div>
     
- <div class="hero-ctas">
-  <!-- Primary Entry Point -->
-
-<button id="start-experience" class="btn-primary nav-btn"><span>Start Experience</span></button>
-
-<!-- Secondary Paths -->
-<a href="inquire.html" class="btn-ghost nav-btn">Begin Your Inquiry</a>
-<a href="highlights.html" class="btn-ghost nav-btn">View Our Masterpieces</a>
-</div>
+    <!-- ── SECONDARY CTA BUTTONS ── -->
+    <div class="hero-ctas">
+      <a href="showcase.html#inquiry" class="btn-primary"><span>Begin Your Inquiry</span></a>
+      <a href="highlights.html" class="btn-ghost">View Our Masterpieces</a>
+    </div>
+  </div>
   
   <div class="scroll-indicator">
     <span>Discover</span>
@@ -433,7 +498,7 @@ footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,
         <li>Bespoke floral arrangements</li>
         <li>Lighting & ambiance design</li>
       </ul>
-      <a href="inquire.html" class="service-link">Request Details →</a>
+      <a href="showcase.html#inquiry" class="service-link">Request Details →</a>
     </div>
     
     <div class="service-card reveal">
@@ -446,7 +511,7 @@ footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,
         <li>Setup supervision</li>
         <li>Emergency troubleshooting</li>
       </ul>
-     <a href="inquire.html" class="service-link">Request Details →</a>
+      <a href="showcase.html#inquiry" class="service-link">Request Details →</a>
     </div>
     
     <div class="service-card reveal">
@@ -459,7 +524,7 @@ footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,
         <li>Reception centerpieces</li>
         <li>Floral installations</li>
       </ul>
-      <a href="inquire.html" class="service-link">Request Details →</a>
+      <a href="showcase.html#inquiry" class="service-link">Request Details →</a>
     </div>
   </div>
 </section>
@@ -524,10 +589,10 @@ footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,
     <p class="cta-desc reveal">
       Every great celebration begins with a conversation. Let's sit down, discuss your vision, and start crafting the most unforgettable day of your life. <strong>Limited bookings available each month.</strong>
     </p>
-   <div class="cta-btns reveal">
-  <a href="inquire.html" class="btn-primary"><span>Send Your Inquiry</span></a> <!-- Updated here -->
-  <a href="highlights.html" class="btn-ghost">View Our Work</a>
-</div>
+    <div class="cta-btns reveal">
+      <a href="showcase.html#inquiry" class="btn-primary"><span>Send Your Inquiry</span></a>
+      <a href="highlights.html" class="btn-ghost">View Our Work</a>
+    </div>
     <p class="cta-note reveal">
       Free initial consultation &nbsp;·&nbsp; Custom packages available &nbsp;·&nbsp; Serving Davao City & beyond<br/>
       <em>"Where Every Detail Tells Your Story."</em>
@@ -571,30 +636,24 @@ footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,
     © 2007–2026 Erish Studio Events & Styling<br/>
     Davao City, Philippines &nbsp;·&nbsp; Crafting Celebrations Since 2007
   </div>
- 
 </footer>
 
-<!-- MASTER AUDIO SCRIPT - FULLY CORRECTED -->
+<!-- ════════════════════════════════════════════ -->
+<!-- MASTER AUDIO SCRIPT ── -->
+<!-- ════════════════════════════════════════════ -->
 <script>
 console.log("🎵 Erish Studio Audio System Initializing...");
 
-// ============================================================
-// 1. AUDIO FILE DEFINITIONS
-// ============================================================
+// ════ AUDIO FILE DEFINITIONS ════
 const openingSound = new Audio('opening.mp3');
-const clickSound = new Audio('velvet-snap.mp3');
+const velvetSnap = new Audio('velvet-snap.mp3');
 
-// Set audio properties
 openingSound.volume = 0.7;
-clickSound.volume = 0.5;
+velvetSnap.volume = 0.5;
 
 console.log("✓ Audio files defined");
-console.log("✓ Opening sound path: opening.mp3");
-console.log("✓ Click sound path: velvet-snap.mp3");
 
-// ============================================================
-// 2. PRELOADER HANDLING
-// ============================================================
+// ════ PRELOADER HANDLING ════
 window.addEventListener('load', () => {
   console.log("✓ Page loaded");
   setTimeout(() => {
@@ -606,85 +665,64 @@ window.addEventListener('load', () => {
   }, 1800);
 });
 
-// ============================================================
-// 3. START EXPERIENCE BUTTON - MAIN PRIORITY
-// ============================================================
-const startBtn = document.getElementById('exp-btn');
+// ════ START EXPERIENCE BUTTON (OPENING SOUND) ════
+const startBtn = document.getElementById('start-exp-btn');
 
 if (startBtn) {
   console.log("✅ START EXPERIENCE BUTTON FOUND");
-  console.log("   └─ ID: ", startBtn.id);
-  console.log("   └─ Text: ", startBtn.textContent);
-  console.log("   └─ Is visible: ", startBtn.offsetParent !== null);
+  console.log("   └─ This button plays: opening.mp3");
   
-  // Remove any pointer-events blocking
   startBtn.style.pointerEvents = 'auto';
   startBtn.style.cursor = 'pointer';
-  
-  // Ensure high z-index
   startBtn.style.position = 'relative';
-  startBtn.style.zIndex = '9999';
+  startBtn.style.zIndex = '20';
   
-  console.log("   └─ Z-index set to: 9999");
-  console.log("   └─ Pointer-events: auto");
+  startBtn.addEventListener('click', function(e) {
+    console.log("🎬 START EXPERIENCE BUTTON CLICKED!");
+    e.preventDefault();
+    e.stopPropagation();
+    
+    openingSound.currentTime = 0;
+    openingSound.play()
+      .then(() => {
+        console.log("✅ Opening sound PLAYING");
+      })
+      .catch(err => {
+        console.warn("⚠️ Opening sound blocked by browser autoplay policy");
+        console.warn("   Reason: ", err.message);
+      });
+  });
   
-  // ATTACH CLICK LISTENER - OPENING SOUND
- startBtn.addEventListener('click', function(e) {
-        console.log("♫ START BUTTON CLICKED - Waiting for audio to finish...");
-        
-        // 1. Play the audio
-        openingSound.currentTime = 0;
-        openingSound.play().catch(err => console.log("Audio play blocked", err));
-
-        // 2. WAIT FOR THE AUDIO TO FINISH COMPLETELY
-        openingSound.onended = function() {
-            window.location.href = 'about.html';
-        };
-        
-        // Safety: If audio takes too long or fails, navigate after 5 seconds
-        setTimeout(() => {
-            if (window.location.href.includes('index.html')) {
-                window.location.href = 'about.html';
-            }
-        }, 5000); 
-    });
-  
-  console.log("✓ Click listener attached to START BUTTON");
+  console.log("✓ Click listener attached to START EXPERIENCE BUTTON");
 } else {
   console.error("❌ START EXPERIENCE BUTTON NOT FOUND");
-  console.error("   └─ Check that id='exp-btn' exists in HTML");
 }
 
-// ============================================================
-// 4. ALL OTHER BUTTONS & LINKS - CLICK SOUND
-// ============================================================
-const allClickables = document.querySelectorAll('a, button');
+// ════ ALL OTHER BUTTONS & LINKS (VELVET SNAP SOUND) ════
+const allClickables = document.querySelectorAll('a, button, .cat-btn');
 console.log(`📍 Found ${allClickables.length} clickable elements`);
 
-allClickables.forEach((el, index) => {
+allClickables.forEach((el) => {
   // Skip the START button (already handled above)
-  if (el.id === 'exp-btn') {
+  if (el.id === 'start-exp-btn') {
     return;
   }
   
   el.addEventListener('click', function(e) {
-    // Play click sound (don't prevent default navigation)
-    clickSound.currentTime = 0;
-    clickSound.play()
+    velvetSnap.currentTime = 0;
+    velvetSnap.play()
       .then(() => {
-        console.log(`🔊 Click sound played for: ${el.textContent.trim().substring(0, 30)}`);
+        console.log(`🔊 Velvet snap played for: ${el.textContent.trim().substring(0, 40)}`);
       })
       .catch(err => {
-        console.log(`⚠️ Click sound blocked: ${err.message}`);
+        console.log(`⚠️ Velvet snap blocked: ${err.message}`);
       });
   });
 });
 
 console.log("✓ Click listeners attached to all other elements");
 
-// ============================================================
-// 5. NAVIGATION SCROLL EFFECT
-// ============================================================
+// ════ NAV SCROLL EFFECT ════
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   if (nav) {
@@ -694,9 +732,7 @@ window.addEventListener('scroll', () => {
 
 console.log("✓ Navigation scroll effect active");
 
-// ============================================================
-// 6. SCROLL REVEAL ANIMATION
-// ============================================================
+// ════ SCROLL REVEAL ANIMATION ════
 const reveals = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((e, i) => {
@@ -710,46 +746,14 @@ const observer = new IntersectionObserver((entries) => {
 reveals.forEach(r => observer.observe(r));
 console.log("✓ Scroll reveal animations active");
 
-// ============================================================
-// 7. DIAGNOSTIC SUMMARY
-// ============================================================
-console.log("\n");
-console.log("╔════════════════════════════════════════════════════════╗");
-console.log("║  ERISH STUDIO AUDIO SYSTEM - DIAGNOSTIC REPORT        ║");
+// ════ DIAGNOSTIC SUMMARY ════
+console.log("\n╔════════════════════════════════════════════════════════╗");
+console.log("║  ERISH STUDIO AUDIO SYSTEM - READY                   ║");
 console.log("╚════════════════════════════════════════════════════════╝");
-console.log("✓ System initialized successfully");
-console.log("✓ Opening sound: opening.mp3");
-console.log("✓ Click sound: velvet-snap.mp3");
-console.log("✓ Start button listener: ACTIVE");
-console.log("✓ Other click listeners: ACTIVE");
-console.log("\n📌 IF SOUNDS ARE NOT PLAYING:");
-console.log("   1. Check that opening.mp3 and velvet-snap.mp3 are in same folder");
-console.log("   2. Try clicking the START EXPERIENCE button");
-console.log("   3. Check browser console for error messages (press F12)");
-console.log("   4. Allow audio playback in browser settings");
-console.log("   5. Some browsers require user interaction before playing sound");
-console.log("\n");
+console.log("✓ START EXPERIENCE button: plays opening.mp3");
+console.log("✓ All other buttons & links: play velvet-snap.mp3");
+console.log("✓ System initialized successfully\n");
 </script>
 
-<script>
-  // Audio Definitions
-  const openingSound = new Audio('opening.mp3');
-  const clickSound = new Audio('velvet-snap.mp3');
-  clickSound.volume = 0.5;
-
-  // Logic for Start Experience
-  document.getElementById('start-experience').addEventListener('click', function() {
-    openingSound.play();
-    // Smooth scroll to the section below the hero
-    document.querySelector('.trust-strip').scrollIntoView({ behavior: 'smooth' });
-  });
-
-  // Logic for Secondary Buttons (Velvet Snap)
-  document.querySelectorAll('.btn-ghost').forEach(button => {
-    button.addEventListener('click', function() {
-      clickSound.play();
-    });
-  });
-</script>
 </body>
 </html>
