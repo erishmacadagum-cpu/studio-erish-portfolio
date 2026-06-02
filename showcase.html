@@ -856,25 +856,40 @@ footer{
     el.addEventListener('click', playSnap);
   });
 
- // 4. Fixed Lightbox Logic
+  // 4. Fixed Lightbox Logic
   const lightbox = document.querySelector('.lightbox');
   const lightboxImg = document.querySelector('.lightbox-img');
 
   document.querySelectorAll('.img-card').forEach(card => {
     card.addEventListener('click', () => {
-      const img = card.querySelector('img');
-      if (img) {
-        lightboxImg.src = img.src;
-        lightbox.classList.add('active');
+      // Find the placeholder which contains the background image
+      const placeholder = card.querySelector('.img-placeholder');
+      if (placeholder) {
+        // Correctly extract the URL from computed CSS
+        const bg = window.getComputedStyle(placeholder).backgroundImage;
+        // Clean up the string to get just the URL
+        const url = bg.replace(/url\(['"]?(.*?)['"]?\)/, '$1');
+        
+        if (url && url !== 'none') {
+          lightboxImg.src = url;
+          lightbox.classList.add('active');
+        }
       }
     });
   });
 
- // Close Lightbox
-  document.querySelector('.lightbox-close').addEventListener('click', () => lightbox.classList.remove('active'));
-  lightbox.addEventListener('click', (e) => { 
-    if (e.target === lightbox) lightbox.classList.remove('active'); 
-  });
+  // Close Lightbox
+  const closeBtn = document.querySelector('.lightbox-close');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      lightbox.classList.remove('active');
+    });
+  }
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) {
+      lightbox.classList.remove('active');
+    }
   });
 </script>
 </body>
