@@ -843,43 +843,53 @@ footer{
   // 2. Play Audio Function
   function playSnap() {
     const audio = new Audio('velvet-snap.mp3');
-    audio.play().catch(e => console.log("Audio requires interaction"));
+    audio.play().catch(e => console.log("Audio waiting for user interaction"));
   }
 
-  // 3. Attach Audio to ALL specified elements
+  // 3. Attach Audio to EVERYTHING
+  // This targets all buttons, links, headers, and image cards
   const interactiveElements = document.querySelectorAll(
-    'a, button, .btn-inquiry, .btn-ghost, .hero-title, .sec-title, .inq-title, .img-card'
+    'a, button, .btn-inquiry, .btn-ghost, .hero-title, .sec-title, .inq-title, .img-card, h1, h2, h3'
   );
   
   interactiveElements.forEach(el => {
+    el.style.cursor = 'pointer'; // Visual feedback that headers are clickable
     el.addEventListener('click', playSnap);
   });
 
-  // 4. Enhanced Lightbox Logic (Enlarging Images)
+  // 4. Fixed Lightbox Logic
   const lightbox = document.querySelector('.lightbox');
   const lightboxImg = document.querySelector('.lightbox-img');
-  
+
   document.querySelectorAll('.img-card').forEach(card => {
     card.addEventListener('click', () => {
-      // Get background image from the clicked card
-      const bgStyle = card.querySelector('.img-placeholder').style.backgroundImage;
-      const url = bgStyle.replace('url("', '').replace('")', '').replace('url(', '').replace(')', '');
+      playSnap(); // Ensure sound plays
       
-      if (lightboxImg) {
-        lightboxImg.src = url; // Set the image source
-        lightbox.classList.add('active'); // Show lightbox
+      // Find the element with the actual image
+      const placeholder = card.querySelector('.img-placeholder');
+      if (placeholder) {
+        // Get the computed background-image URL correctly
+        const bg = window.getComputedStyle(placeholder).backgroundImage;
+        const url = bg.replace(/url\(['"]?(.*?)['"]?\)/, '$1');
+        
+        if (url && url !== 'none') {
+          lightboxImg.src = url;
+          lightbox.classList.add('active');
+        }
       }
     });
   });
 
   // Close Lightbox
-  if (lightbox) {
-    lightbox.addEventListener('click', (e) => {
-      if (e.target !== lightboxImg) {
-        lightbox.classList.remove('active');
-      }
-    });
-  }
+  document.querySelector('.lightbox-close').addEventListener('click', () => {
+    lightbox.classList.remove('active');
+  });
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) {
+      lightbox.classList.remove('active');
+    }
+  });
 </script>
 </body>
 </html>
