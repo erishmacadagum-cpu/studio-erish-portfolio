@@ -755,7 +755,6 @@ footer{
 
 <!-- ════════════════════════════════════════════ -->
 <!-- ── INQUIRY SECTION ── -->
-<!-- ════════════════════════════════════════════ -->
 <section class="inquiry" id="inquiry">
   <div class="inquiry-inner">
     <span class="inq-label reveal">Start Here</span>
@@ -784,8 +783,12 @@ footer{
     </div>
 
     <div class="inquiry-cta reveal">
-      <a href="inquire.html" class="btn-inquiry"><span>✦ Begin Your Inquiry ✦</span></a>
-      <a href="[https://studio-erish.pages.dev/#contact](https://studio-erish.pages.dev/#contact)" class="btn-ghost">View Contact Information</a>
+      <a href="inquire.html" class="btn-inquiry" onclick="new Audio('velvet-snap.mp3').play()">
+        <span>Begin Your Inquiry</span>
+      </a>
+      <a href="index.html#contact" class="btn-ghost" onclick="new Audio('velvet-snap.mp3').play()">
+        View Contact Information
+      </a>
     </div>
 
     <p class="inquiry-note reveal">
@@ -798,185 +801,17 @@ footer{
 <!-- ── FOOTER ── -->
 <footer>
   <div class="foot-logo"><em>Erish</em> Studio</div>
-  <div class="foot-note">© 2007–2026 Erish Studio Events & Styling · Davao City, Philippines</div>
+  <div class="foot-note">&copy; 2007–2026 Erish Studio Events & Styling · Davao City, Philippines</div>
 </footer>
 
-<!-- ════════════════════════════════════════════ -->
-<!-- SCRIPTS ── -->
-<!-- ════════════════════════════════════════════ -->
 <script>
-// ════ Update Active Button on Scroll ════
-const catBtns = document.querySelectorAll('.cat-btn');
-const sections = ['reception','ceremony','bouquet','debut','birthday','inquiry'];
-
-window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(id => {
-    const el = document.getElementById(id);
-    if(el && window.scrollY >= el.offsetTop - 200) {
-      current = id;
-    }
-  });
-  
-  catBtns.forEach(btn => {
-    btn.classList.remove('active');
-    if(btn.getAttribute('href') === '#' + current) {
-      btn.classList.add('active');
-    }
-  });
-});
-
-// ════ Scroll Reveal Animation ════
-const reveals = document.querySelectorAll('.reveal');
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach((e, i) => {
-    if(e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('visible'), i * 60);
-      obs.unobserve(e.target);
-    }
-  });
-}, {threshold: 0.08});
-
-reveals.forEach(r => obs.observe(r));
-
-// ════ Audio Effects (Velvet Snap) ════
-const velvetSnap = new Audio('velvet-snap.mp3');
-velvetSnap.volume = 0.5;
-
-// Apply click sound to all links and buttons
-document.querySelectorAll('a, button, .cat-btn').forEach(el => {
-  el.addEventListener('click', function() {
-    velvetSnap.currentTime = 0;
-    velvetSnap.play().catch(err => {
-      console.log('Audio unavailable');
+  // Reveal animation on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
     });
   });
-});
-
-// ════ LIGHTBOX FUNCTIONALITY ════
-let currentImageIndex = 0;
-let currentGalleryImages = [];
-
-// Get all gallery items and add click functionality
-const galleryItems = document.querySelectorAll('.img-card');
-
-galleryItems.forEach((item, index) => {
-  item.addEventListener('click', function(e) {
-    // Get all images in the same section as the clicked image
-    const section = item.closest('.showcase-section');
-    currentGalleryImages = Array.from(section.querySelectorAll('.img-card'));
-    currentImageIndex = currentGalleryImages.indexOf(item);
-    
-    // Get background image URL from placeholder
-    const bgImage = window.getComputedStyle(item.querySelector('.img-placeholder')).backgroundImage;
-    openLightbox(bgImage);
-  });
-});
-
-function openLightbox(bgImageUrl) {
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightbox-img');
-  
-  // Extract URL from background-image property
-  let imageUrl = bgImageUrl.match(/url\(["']?([^"'()]+)["']?\)/);
-  if (imageUrl) {
-    imageUrl = imageUrl[1];
-    // Remove gradient if present
-    if (imageUrl.includes('linear-gradient')) {
-      // Get the actual image URL (second url in the property)
-      imageUrl = bgImageUrl.match(/url\(["']([^"'()]+)["']\).*url\(["']?([^"'()]+)["']?\)/)[2];
-    }
-  }
-  
-  lightboxImg.src = imageUrl || '';
-  lightbox.classList.add('active');
-  updateImageCounter();
-  document.body.style.overflow = 'hidden';
-}
-
-function closeLightbox() {
-  const lightbox = document.getElementById('lightbox');
-  lightbox.classList.remove('active');
-  document.body.style.overflow = 'auto';
-}
-
-function nextImage() {
-  currentImageIndex = (currentImageIndex + 1) % currentGalleryImages.length;
-  const nextItem = currentGalleryImages[currentImageIndex];
-  const bgImage = window.getComputedStyle(nextItem.querySelector('.img-placeholder')).backgroundImage;
-  
-  let imageUrl = bgImage.match(/url\(["']?([^"'()]+)["']?\)/);
-  if (imageUrl) {
-    imageUrl = imageUrl[1];
-    if (imageUrl.includes('linear-gradient')) {
-      imageUrl = bgImage.match(/url\(["']([^"'()]+)["']\).*url\(["']?([^"'()]+)["']?\)/)[2];
-    }
-  }
-  
-  document.getElementById('lightbox-img').src = imageUrl || '';
-  updateImageCounter();
-}
-
-function prevImage() {
-  currentImageIndex = (currentImageIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
-  const prevItem = currentGalleryImages[currentImageIndex];
-  const bgImage = window.getComputedStyle(prevItem.querySelector('.img-placeholder')).backgroundImage;
-  
-  let imageUrl = bgImage.match(/url\(["']?([^"'()]+)["']?\)/);
-  if (imageUrl) {
-    imageUrl = imageUrl[1];
-    if (imageUrl.includes('linear-gradient')) {
-      imageUrl = bgImage.match(/url\(["']([^"'()]+)["']\).*url\(["']?([^"'()]+)["']?\)/)[2];
-    }
-  }
-  
-  document.getElementById('lightbox-img').src = imageUrl || '';
-  updateImageCounter();
-}
-
-function updateImageCounter() {
-  const total = currentGalleryImages.length;
-  document.getElementById('image-counter').textContent = `${currentImageIndex + 1} / ${total}`;
-}
-
-// Close lightbox on background click
-document.getElementById('lightbox').addEventListener('click', (e) => {
-  if (e.target.id === 'lightbox') {
-    closeLightbox();
-  }
-});
-
-// Keyboard navigation for lightbox
-document.addEventListener('keydown', (e) => {
-  const lightbox = document.getElementById('lightbox');
-  if (lightbox.classList.contains('active')) {
-    if (e.key === 'ArrowRight') nextImage();
-    if (e.key === 'ArrowLeft') prevImage();
-    if (e.key === 'Escape') closeLightbox();
-  }
-});
-
-console.log('✓ Gallery system enhanced with lightbox');
-console.log('✓ Click images to view full-size');
-console.log('✓ Keyboard navigation: Arrow keys + Escape');
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
-
-<!-- ════════════════════════════════════════════ -->
-<!-- LIGHTBOX FOR IMAGE GALLERIES ── -->
-<!-- ════════════════════════════════════════════ -->
-<div class="lightbox" id="lightbox">
-  <div class="lightbox-content">
-    <img id="lightbox-img" src="" alt="" class="lightbox-img"/>
-    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-    <div class="lightbox-nav">
-      <button class="lightbox-prev" onclick="prevImage()">❮</button>
-      <button class="lightbox-next" onclick="nextImage()">❯</button>
-    </div>
-    <div class="lightbox-info">
-      <span id="image-counter">1 / 5</span>
-    </div>
-  </div>
-</div>
-
 </body>
 </html>
