@@ -826,7 +826,7 @@ footer{
 </footer>
 
 <script>
-  // Reveal animation on scroll
+  // 1. Reveal animation on scroll
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -834,25 +834,28 @@ footer{
   });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // Audio and Lightbox Trigger for all Gallery Cards
-  document.querySelectorAll('.img-card').forEach(card => {
-    card.addEventListener('click', () => {
-      // Play sound
-      const snap = new Audio('velvet-snap.mp3');
-      snap.play().catch(e => console.log("Audio awaiting user interaction"));
+  // 2. Global Unified Click Handler
+  document.addEventListener('click', (e) => {
+    // Check if the click target is one of our interactive elements
+    const interactive = e.target.closest('a, .btn-inquiry, .btn-ghost, .hero-title, .sec-title, .inq-title, .img-card');
+    
+    if (interactive) {
+      // Play sound for ALL interactive clicks
+      new Audio('velvet-snap.mp3').play().catch(e => console.log("Audio awaiting user interaction"));
       
-      // Trigger enlargement (Lightbox)
-      const lightbox = document.querySelector('.lightbox');
-      if (lightbox) {
-        lightbox.classList.add('active');
+      // Only trigger Lightbox enlargement if an image card was clicked
+      if (interactive.classList.contains('img-card')) {
+        const lightbox = document.querySelector('.lightbox');
+        if (lightbox) lightbox.classList.add('active');
       }
-    });
+    }
   });
 
-  // Lightbox Close functionality
+  // 3. Lightbox Close functionality
   const lightbox = document.querySelector('.lightbox');
   if (lightbox) {
     lightbox.addEventListener('click', function(e) {
+      // Close if clicking the background, not the image itself
       if (e.target !== document.querySelector('.lightbox-img')) {
         this.classList.remove('active');
       }
