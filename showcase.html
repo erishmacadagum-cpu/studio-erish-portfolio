@@ -824,9 +824,15 @@ footer{
   <div class="foot-logo"><em>Erish</em> Studio</div>
   <div class="foot-note">&copy; 2007–2026 Erish Studio Events & Styling · Davao City, Philippines</div>
 </footer>
+  <div class="lightbox">
+  <button class="lightbox-close">&times;</button>
+  <div class="lightbox-content">
+    <img src="" class="lightbox-img" alt="Enlarged View">
+  </div>
+</div>
 
 <script>
-  // 1. Reveal animation on scroll
+  // 1. Reveal Animation
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -834,30 +840,43 @@ footer{
   });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // 2. Global Unified Click Handler
-  document.addEventListener('click', (e) => {
-    // Check if the click target is one of our interactive elements
-    const interactive = e.target.closest('a, .btn-inquiry, .btn-ghost, .hero-title, .sec-title, .inq-title, .img-card');
-    
-    if (interactive) {
-      // Play sound for ALL interactive clicks
-      new Audio('velvet-snap.mp3').play().catch(e => console.log("Audio awaiting user interaction"));
-      
-      // Only trigger Lightbox enlargement if an image card was clicked
-      if (interactive.classList.contains('img-card')) {
-        const lightbox = document.querySelector('.lightbox');
-        if (lightbox) lightbox.classList.add('active');
-      }
-    }
+  // 2. Play Audio Function
+  function playSnap() {
+    const audio = new Audio('velvet-snap.mp3');
+    audio.play().catch(e => console.log("Audio requires interaction"));
+  }
+
+  // 3. Attach Audio to ALL specified elements
+  const interactiveElements = document.querySelectorAll(
+    'a, button, .btn-inquiry, .btn-ghost, .hero-title, .sec-title, .inq-title, .img-card'
+  );
+  
+  interactiveElements.forEach(el => {
+    el.addEventListener('click', playSnap);
   });
 
-  // 3. Lightbox Close functionality
+  // 4. Enhanced Lightbox Logic (Enlarging Images)
   const lightbox = document.querySelector('.lightbox');
+  const lightboxImg = document.querySelector('.lightbox-img');
+  
+  document.querySelectorAll('.img-card').forEach(card => {
+    card.addEventListener('click', () => {
+      // Get background image from the clicked card
+      const bgStyle = card.querySelector('.img-placeholder').style.backgroundImage;
+      const url = bgStyle.replace('url("', '').replace('")', '').replace('url(', '').replace(')', '');
+      
+      if (lightboxImg) {
+        lightboxImg.src = url; // Set the image source
+        lightbox.classList.add('active'); // Show lightbox
+      }
+    });
+  });
+
+  // Close Lightbox
   if (lightbox) {
-    lightbox.addEventListener('click', function(e) {
-      // Close if clicking the background, not the image itself
-      if (e.target !== document.querySelector('.lightbox-img')) {
-        this.classList.remove('active');
+    lightbox.addEventListener('click', (e) => {
+      if (e.target !== lightboxImg) {
+        lightbox.classList.remove('active');
       }
     });
   }
