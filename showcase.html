@@ -833,6 +833,31 @@ footer{
     });
   });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Audio and Lightbox Trigger for all Gallery Cards
+  document.querySelectorAll('.img-card').forEach(card => {
+    card.addEventListener('click', () => {
+      // Play sound
+      const snap = new Audio('velvet-snap.mp3');
+      snap.play().catch(e => console.log("Audio awaiting user interaction"));
+      
+      // Trigger enlargement (Lightbox)
+      const lightbox = document.querySelector('.lightbox');
+      if (lightbox) {
+        lightbox.classList.add('active');
+      }
+    });
+  });
+
+  // Lightbox Close functionality
+  const lightbox = document.querySelector('.lightbox');
+  if (lightbox) {
+    lightbox.addEventListener('click', function(e) {
+      if (e.target !== document.querySelector('.lightbox-img')) {
+        this.classList.remove('active');
+      }
+    });
+  }
 </script>
 </body>
 </html>
