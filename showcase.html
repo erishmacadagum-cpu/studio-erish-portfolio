@@ -847,13 +847,12 @@ footer{
   }
 
   // 3. Attach Audio to EVERYTHING
-  // This targets all buttons, links, headers, and image cards
   const interactiveElements = document.querySelectorAll(
     'a, button, .btn-inquiry, .btn-ghost, .hero-title, .sec-title, .inq-title, .img-card, h1, h2, h3'
   );
   
   interactiveElements.forEach(el => {
-    el.style.cursor = 'pointer'; // Visual feedback that headers are clickable
+    el.style.cursor = 'pointer'; 
     el.addEventListener('click', playSnap);
   });
 
@@ -863,13 +862,12 @@ footer{
 
   document.querySelectorAll('.img-card').forEach(card => {
     card.addEventListener('click', () => {
-      playSnap(); // Ensure sound plays
-      
-      // Find the element with the actual image
+      // Find the placeholder which contains the background image
       const placeholder = card.querySelector('.img-placeholder');
       if (placeholder) {
-        // Get the computed background-image URL correctly
+        // Correctly extract the URL from computed CSS
         const bg = window.getComputedStyle(placeholder).backgroundImage;
+        // Clean up the string to get just the URL
         const url = bg.replace(/url\(['"]?(.*?)['"]?\)/, '$1');
         
         if (url && url !== 'none') {
@@ -881,9 +879,12 @@ footer{
   });
 
   // Close Lightbox
-  document.querySelector('.lightbox-close').addEventListener('click', () => {
-    lightbox.classList.remove('active');
-  });
+  const closeBtn = document.querySelector('.lightbox-close');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      lightbox.classList.remove('active');
+    });
+  }
 
   lightbox.addEventListener('click', (e) => {
     if (e.target === lightbox) {
