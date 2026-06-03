@@ -4,24 +4,17 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Showcase — Erish Studio Events & Styling</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
-  :root { --cream: #FAF7F2; --dark: #1C1610; }
-  body { background: var(--cream); font-family: sans-serif; margin: 0; }
+  :root { --cream: #FAF7F2; --warm: #F2EDE4; --gold: #B8965A; --gold-lt: #D4B07A; --dark: #1C1610; --muted: #8A7A6A; --border: #DDD5C8; --white: #FFFFFF; }
+  body { background: var(--cream); color: var(--dark); font-family: 'Jost', sans-serif; margin: 0; }
   .showcase-section { padding: 80px 24px; }
-  .grid-hero { max-width: 1280px; margin: 0 auto; display: grid; gap: 5px; }
-  
-  /* Grid settings based on your specific counts */
-  .grid-reception { grid-template-columns: repeat(5, 1fr); }
-  .grid-ceremony { grid-template-columns: repeat(4, 1fr); }
-  .grid-bouquet { grid-template-columns: repeat(3, 1fr); }
-  .grid-debut { grid-template-columns: repeat(4, 1fr); }
-  .grid-birthday { grid-template-columns: repeat(4, 1fr); }
-  
-  .grid-hero { grid-auto-rows: 240px; }
-  .img-card { height: 100%; background: #ccc; }
-  .img-placeholder { width: 100%; height: 100%; background-size: cover; background-position: center; }
+  .grid-hero { display: grid; gap: 5px; max-width: 1280px; margin: 0 auto; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); grid-auto-rows: 240px; }
+  .img-card { position: relative; overflow: hidden; cursor: pointer; height: 100%; border-radius: 2px; background: var(--dark); }
+  .img-placeholder { width: 100%; height: 100%; background-size: cover; background-position: center; transition: transform 0.5s ease; }
+  .img-card:hover .img-placeholder { transform: scale(1.05); }
 
-  /* Image Path Mappings */
+  /* Mappings for 41 images */
   .reception-1 { background-image: url('../images/reception/reception-1.jpg'); }
   .reception-2 { background-image: url('../images/reception/reception-2.jpg'); }
   .reception-3 { background-image: url('../images/reception/reception-3.jpg'); }
@@ -71,8 +64,9 @@
 </head>
 <body>
 
+<!-- RECEPTION -->
 <section class="showcase-section" id="reception">
-  <div class="grid-hero grid-reception">
+  <div class="grid-hero">
     <div class="img-card"><div class="img-placeholder reception-1"></div></div>
     <div class="img-card"><div class="img-placeholder reception-2"></div></div>
     <div class="img-card"><div class="img-placeholder reception-3"></div></div>
@@ -86,8 +80,9 @@
   </div>
 </section>
 
+<!-- CEREMONY -->
 <section class="showcase-section" id="ceremony">
-  <div class="grid-hero grid-ceremony">
+  <div class="grid-hero">
     <div class="img-card"><div class="img-placeholder ceremony-1"></div></div>
     <div class="img-card"><div class="img-placeholder ceremony-2"></div></div>
     <div class="img-card"><div class="img-placeholder ceremony-3"></div></div>
@@ -99,8 +94,9 @@
   </div>
 </section>
 
+<!-- BOUQUET -->
 <section class="showcase-section" id="bouquet">
-  <div class="grid-hero grid-bouquet">
+  <div class="grid-hero">
     <div class="img-card"><div class="img-placeholder bouquet-1"></div></div>
     <div class="img-card"><div class="img-placeholder bouquet-2"></div></div>
     <div class="img-card"><div class="img-placeholder bouquet-3"></div></div>
@@ -113,8 +109,9 @@
   </div>
 </section>
 
+<!-- DEBUT -->
 <section class="showcase-section" id="debut">
-  <div class="grid-hero grid-debut">
+  <div class="grid-hero">
     <div class="img-card"><div class="img-placeholder debut-1"></div></div>
     <div class="img-card"><div class="img-placeholder debut-2"></div></div>
     <div class="img-card"><div class="img-placeholder debut-3"></div></div>
@@ -125,8 +122,9 @@
   </div>
 </section>
 
+<!-- BIRTHDAY -->
 <section class="showcase-section" id="birthday">
-  <div class="grid-hero grid-birthday">
+  <div class="grid-hero">
     <div class="img-card"><div class="img-placeholder bday-1"></div></div>
     <div class="img-card"><div class="img-placeholder bday-2"></div></div>
     <div class="img-card"><div class="img-placeholder bday-3"></div></div>
@@ -136,6 +134,18 @@
     <div class="img-card"><div class="img-placeholder bday-10"></div></div>
   </div>
 </section>
+
+<!-- AUDIO & SCRIPT -->
+<audio id="shutter-audio" src="audio/shutter-snap.mp3" preload="auto"></audio>
+<script>
+  document.querySelectorAll('.img-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const audio = document.getElementById('shutter-audio');
+      audio.currentTime = 0;
+      audio.play();
+    });
+  });
+</script>
 
 </body>
 </html>
