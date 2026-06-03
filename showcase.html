@@ -6,145 +6,467 @@
 <title>Showcase — Erish Studio Events & Styling</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
-  :root { --cream: #FAF7F2; --warm: #F2EDE4; --gold: #B8965A; --gold-lt: #D4B07A; --dark: #1C1610; --muted: #8A7A6A; --border: #DDD5C8; --white: #FFFFFF; }
-  body { background: var(--cream); color: var(--dark); font-family: 'Jost', sans-serif; margin: 0; }
-  .showcase-section { padding: 80px 24px; }
-  .grid-hero { display: grid; gap: 5px; max-width: 1280px; margin: 0 auto; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); grid-auto-rows: 240px; }
-  .img-card { position: relative; overflow: hidden; cursor: pointer; height: 100%; border-radius: 2px; background: var(--dark); }
-  .img-placeholder { width: 100%; height: 100%; background-size: cover; background-position: center; transition: transform 0.5s ease; }
-  .img-card:hover .img-placeholder { transform: scale(1.05); }
+:root {
+  --cream:   #FAF7F2;
+  --warm:    #F2EDE4;
+  --gold:    #B8965A;
+  --gold-lt: #D4B07A;
+  --gold-dk: #8B6C38;
+  --dark:    #1C1610;
+  --charcoal:#2E2620;
+  --brown:   #5C4A35;
+  --text:    #3A3028;
+  --muted:   #8A7A6A;
+  --border:  #DDD5C8;
+  --white:   #FFFFFF;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--text);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;}
 
-  /* Mappings for 41 images */
-  .reception-1 { background-image: url('../images/reception/reception-1.jpg'); }
-  .reception-2 { background-image: url('../images/reception/reception-2.jpg'); }
-  .reception-3 { background-image: url('../images/reception/reception-3.jpg'); }
-  .reception-4 { background-image: url('../images/reception/reception-4.jpg'); }
-  .reception-5 { background-image: url('../images/reception/reception-5.jpg'); }
-  .reception-11 { background-image: url('../images/reception/reception-11.jpg'); }
-  .reception-12 { background-image: url('../images/reception/reception-12.jpg'); }
-  .reception-13 { background-image: url('../images/reception/reception-13.jpg'); }
-  .reception-14 { background-image: url('../images/reception/reception-14.jpg'); }
-  .reception-15 { background-image: url('../images/reception/reception-15.jpg'); }
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:rgba(250,247,242,0.95);backdrop-filter:blur(12px);border-bottom:0.5px solid var(--border);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--dark);letter-spacing:2px;text-decoration:none;cursor:pointer;}
+.nav-logo em{font-style:italic;color:var(--gold);}
+.nav-links{display:flex;gap:36px;}
+.nav-links a{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.3s;position:relative;cursor:pointer;}
+.nav-links a:hover{color:var(--gold);}
 
-  .ceremony-1 { background-image: url('../images/ceremony/ceremony-1.jpg'); }
-  .ceremony-2 { background-image: url('../images/ceremony/ceremony-2.jpg'); }
-  .ceremony-3 { background-image: url('../images/ceremony/ceremony-3.jpg'); }
-  .ceremony-9 { background-image: url('../images/ceremony/ceremony-9.jpg'); }
-  .ceremony-10 { background-image: url('../images/ceremony/ceremony-10.jpg'); }
-  .ceremony-11 { background-image: url('../images/ceremony/ceremony-11.jpg'); }
-  .ceremony-12 { background-image: url('../images/ceremony/ceremony-12.jpg'); }
-  .ceremony-13 { background-image: url('../images/ceremony/ceremony-13.jpg'); }
+.hero{min-height:90vh;background:var(--dark);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding-top:80px;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 30% 60%,rgba(184,150,90,0.07) 0%,transparent 70%),radial-gradient(ellipse 50% 40% at 80% 20%,rgba(255,255,255,0.02) 0%,transparent 60%);}
+.hero-frame{position:absolute;inset:20px;border:0.5px solid rgba(255,255,255,0.05);pointer-events:none;}
+.hero-frame::before{content:'';position:absolute;inset:12px;border:0.3px solid rgba(184,150,90,0.12);}
 
-  .bouquet-1 { background-image: url('../images/bouquet/bouquet-1.jpg'); }
-  .bouquet-2 { background-image: url('../images/bouquet/bouquet-2.jpg'); }
-  .bouquet-3 { background-image: url('../images/bouquet/bouquet-3.jpg'); }
-  .bouquet-4 { background-image: url('../images/bouquet/bouquet-4.jpg'); }
-  .bouquet-10 { background-image: url('../images/bouquet/bouquet-10.jpg'); }
-  .bouquet-11 { background-image: url('../images/bouquet/bouquet-11.jpg'); }
-  .bouquet-12 { background-image: url('../images/bouquet/bouquet-12.jpg'); }
-  .bouquet-13 { background-image: url('../images/bouquet/bouquet-13.jpg'); }
-  .bouquet-14 { background-image: url('../images/bouquet/bouquet-14.jpg'); }
+.corner{position:absolute;width:32px;height:32px;}
+.corner::before,.corner::after{content:'';position:absolute;background:var(--gold);opacity:0.45;}
+.corner::before{width:100%;height:0.7px;top:0;left:0;}
+.corner::after{width:0.7px;height:100%;top:0;left:0;}
+.corner.tr{top:32px;right:32px;transform:rotate(90deg);}
+.corner.bl{bottom:32px;left:32px;transform:rotate(270deg);}
+.corner.br{bottom:32px;right:32px;transform:rotate(180deg);}
+.corner.tl{top:32px;left:32px;}
 
-  .debut-1 { background-image: url('images/debut-1.jpg'); }
-  .debut-2 { background-image: url('images/debut-2.jpg'); }
-  .debut-3 { background-image: url('images/debut-3.jpg'); }
-  .debut-4 { background-image: url('images/debut-4.jpg'); }
-  .debut-8 { background-image: url('images/debut-8.jpg'); }
-  .debut-9 { background-image: url('images/debut-9.jpg'); }
-  .debut-10 { background-image: url('images/debut-10.jpg'); }
+.hero-content{position:relative;z-index:2;text-align:center;padding:40px 24px;animation:fadeUp 1.2s ease both;}
+.eyebrow{font-size:9.5px;letter-spacing:7px;text-transform:uppercase;color:var(--gold);opacity:0.75;margin-bottom:24px;display:block;cursor:pointer;}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,9vw,110px);font-weight:300;color:#fff;line-height:0.95;letter-spacing:-1px;margin-bottom:12px;cursor:pointer;}
+.hero-title em{font-style:italic;color:var(--gold-lt);}
+.hero-sub{font-size:10px;letter-spacing:9px;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:48px;cursor:pointer;}
+.hero-divider{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:28px;}
+.hd-line{width:72px;height:0.5px;background:linear-gradient(to right,transparent,var(--gold));}
+.hd-line.r{background:linear-gradient(to left,transparent,var(--gold));}
+.hd-dia{width:5px;height:5px;background:var(--gold);transform:rotate(45deg);opacity:0.8;}
+.hero-desc{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;font-weight:300;color:rgba(255,255,255,0.4);max-width:520px;margin:0 auto;line-height:1.8;cursor:pointer;}
 
-  .bday-1 { background-image: url('images/bday-1.jpg'); }
-  .bday-2 { background-image: url('images/bday-2.jpg'); }
-  .bday-3 { background-image: url('images/bday-3.jpg'); }
-  .bday-4 { background-image: url('images/bday-4.jpg'); }
-  .bday-8 { background-image: url('images/bday-8.jpg'); }
-  .bday-9 { background-image: url('images/bday-9.jpg'); }
-  .bday-10 { background-image: url('images/bday-10.jpg'); }
+.cat-nav{background:var(--white);border-bottom:0.5px solid var(--border);position:sticky;top:61px;z-index:90;}
+.cat-nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:0;overflow-x:auto;padding:0 24px;}
+.cat-btn{padding:20px 28px;font-size:9.5px;letter-spacing:4px;text-transform:uppercase;color:var(--muted);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.3s;white-space:nowrap;font-family:'Jost',sans-serif;}
+.cat-btn:hover,.cat-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
+
+.showcase-section{padding:120px 24px;}
+.showcase-section:nth-child(even){background:var(--warm);}
+.sec-header{text-align:center;margin-bottom:80px;}
+.sec-label{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:block;cursor:pointer;}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,58px);font-weight:300;color:var(--dark);margin-bottom:16px;line-height:1.1;cursor:pointer;}
+.sec-title em{font-style:italic;color:var(--gold);}
+.sec-desc{font-size:15px;line-height:1.9;color:var(--muted);max-width:600px;margin:0 auto 32px;cursor:pointer;}
+.gold-bar{display:flex;align-items:center;justify-content:center;gap:10px;margin:0 auto;}
+.gb-line{width:48px;height:0.5px;background:var(--gold);opacity:0.5;}
+.gb-dia{width:4px;height:4px;background:var(--gold);transform:rotate(45deg);opacity:0.7;}
+
+.grid-hero{max-width:1280px;margin:0 auto;display:grid;gap:5px;}
+.grid-reception{grid-template-columns:repeat(5,1fr);grid-auto-rows:240px;}
+.grid-ceremony{grid-template-columns:repeat(4,1fr);grid-auto-rows:240px;}
+.grid-bouquet{grid-template-columns:repeat(3,1fr);grid-auto-rows:240px;}
+.grid-debut{grid-template-columns:repeat(4,1fr);grid-auto-rows:240px;}
+.grid-birthday{grid-template-columns:repeat(4,1fr);grid-auto-rows:240px;}
+
+.img-card{position:relative;overflow:hidden;cursor:pointer;height:100%;border-radius:2px;}
+.img-card::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(28,22,16,0.7) 0%,transparent 60%);opacity:0;transition:opacity 0.4s ease;z-index:1;}
+.img-card:hover::after{opacity:1;}
+
+.img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;background-size:cover;background-position:center;background-color:var(--charcoal);transition:transform 1.2s cubic-bezier(0.16,1,0.3,1),filter 0.8s ease;filter:grayscale(0.2) brightness(0.9);will-change:transform,filter;}
+.img-card:hover .img-placeholder{transform:scale(1.12) translateZ(0);filter:grayscale(0) brightness(1);animation:breatheZoom 3s ease-in-out infinite;}
+
+@keyframes breatheZoom{0%,100%{transform:scale(1.12);}50%{transform:scale(1.16);}}
+
+.reception-1{background-image:linear-gradient(135deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('../images/reception/reception-1.jpg');background-size:cover;background-position:center;}
+.reception-2{background-image:linear-gradient(160deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('../images/reception/reception-2.jpg');background-size:cover;background-position:center;}
+.reception-3{background-image:linear-gradient(120deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('../images/reception/reception-3.jpg');background-size:cover;background-position:center;}
+.reception-4{background-image:linear-gradient(150deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('../images/reception/reception-4.jpg');background-size:cover;background-position:center;}
+.reception-5{background-image:linear-gradient(140deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('../images/reception/reception-5.jpg');background-size:cover;background-position:center;}
+.reception-6{background:linear-gradient(135deg,#4A3626 0%,#3A2E28 100%);}
+.reception-7{background:linear-gradient(160deg,#2C2018 0%,#4D3A28 100%);}
+.reception-8{background:linear-gradient(120deg,#5C4A35 0%,#3A2E28 100%);}
+.reception-9{background:linear-gradient(150deg,#3A2E28 0%,#4A3626 100%);}
+.reception-10{background:linear-gradient(140deg,#2E2620 0%,#5C4A35 100%);}
+
+.ceremony-1{background-image:linear-gradient(135deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('../images/ceremony/ceremony-1.jpg');background-size:cover;background-position:center;}
+.ceremony-2{background-image:linear-gradient(160deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('../images/ceremony/ceremony-2.jpg');background-size:cover;background-position:center;}
+.ceremony-3{background-image:linear-gradient(120deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('../images/ceremony/ceremony-3.jpg');background-size:cover;background-position:center;}
+.ceremony-4{background:linear-gradient(135deg,#4A3626 0%,#3A2E28 100%);}
+.ceremony-5{background:linear-gradient(160deg,#2C2018 0%,#4D3A28 100%);}
+.ceremony-6{background:linear-gradient(120deg,#5C4A35 0%,#3A2E28 100%);}
+.ceremony-7{background:linear-gradient(150deg,#3A2E28 0%,#4A3626 100%);}
+.ceremony-8{background:linear-gradient(140deg,#2E2620 0%,#5C4A35 100%);}
+
+.bouquet-1{background-image:linear-gradient(135deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('../images/bouquet/bouquet-1.jpg');background-size:cover;background-position:center;}
+.bouquet-2{background-image:linear-gradient(160deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('../images/bouquet/bouquet-2.jpg');background-size:cover;background-position:center;}
+.bouquet-3{background-image:linear-gradient(120deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('../images/bouquet/bouquet-3.jpg');background-size:cover;background-position:center;}
+.bouquet-4{background-image:linear-gradient(150deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('../images/bouquet/bouquet-4.jpg');background-size:cover;background-position:center;}
+.bouquet-5{background:linear-gradient(135deg,#4A3626 0%,#3A2E28 100%);}
+.bouquet-6{background:linear-gradient(160deg,#2C2018 0%,#4D3A28 100%);}
+.bouquet-7{background:linear-gradient(120deg,#5C4A35 0%,#3A2E28 100%);}
+.bouquet-8{background:linear-gradient(150deg,#3A2E28 0%,#4A3626 100%);}
+.bouquet-9{background:linear-gradient(140deg,#2E2620 0%,#5C4A35 100%);}
+
+.debut-1{background-image:linear-gradient(135deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('images/debut-1.jpg');background-size:cover;background-position:center;}
+.debut-2{background-image:linear-gradient(160deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('images/debut-2.jpg');background-size:cover;background-position:center;}
+.debut-3{background-image:linear-gradient(120deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('images/debut-3.jpg');background-size:cover;background-position:center;}
+.debut-4{background-image:linear-gradient(150deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('images/debut-4.jpg');background-size:cover;background-position:center;}
+.debut-5{background:linear-gradient(135deg,#4A3626 0%,#3A2E28 100%);}
+.debut-6{background:linear-gradient(160deg,#2C2018 0%,#4D3A28 100%);}
+.debut-7{background:linear-gradient(120deg,#5C4A35 0%,#3A2E28 100%);}
+
+.bday-1{background-image:linear-gradient(135deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('images/bday-1.jpg');background-size:cover;background-position:center;}
+.bday-2{background-image:linear-gradient(160deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('images/bday-2.jpg');background-size:cover;background-position:center;}
+.bday-3{background-image:linear-gradient(120deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('images/bday-3.jpg');background-size:cover;background-position:center;}
+.bday-4{background-image:linear-gradient(150deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('images/bday-4.jpg');background-size:cover;background-position:center;}
+.bday-5{background:linear-gradient(135deg,#4A3626 0%,#3A2E28 100%);}
+.bday-6{background:linear-gradient(160deg,#2C2018 0%,#4D3A28 100%);}
+.bday-7{background:linear-gradient(120deg,#5C4A35 0%,#3A2E28 100%);}
+
+.card-overlay{position:absolute;bottom:0;left:0;right:0;padding:24px;background:linear-gradient(to top,rgba(28,22,16,0.95),transparent);opacity:0;transform:translateY(20px);transition:all 0.5s cubic-bezier(0.16,1,0.3,1);z-index:2;}
+.img-card:hover .card-overlay{opacity:1;transform:translateY(0);}
+.card-overlay-title{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:400;font-style:italic;color:#fff;letter-spacing:0.5px;margin-bottom:4px;}
+.card-overlay-sub{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-lt);opacity:0.85;}
+
+.lightbox{display:none;position:fixed;inset:0;background:rgba(28,22,16,0.98);z-index:1000;animation:fadeIn 0.3s ease;backdrop-filter:blur(10px);align-items:center;justify-content:center;overflow:hidden;}
+.lightbox.active{display:flex;}
+.lightbox-content{position:relative;max-width:90vw;max-height:90vh;display:flex;align-items:center;justify-content:center;animation:slideUp 0.4s ease;}
+.lightbox-img{max-width:100%;max-height:100%;object-fit:contain;border-radius:2px;box-shadow:0 20px 60px rgba(0,0,0,0.5);}
+.lightbox-placeholder{width:300px;height:400px;background:linear-gradient(135deg,#4A3626 0%,#3A2E28 100%);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:12px;color:rgba(255,255,255,0.2);}
+.lightbox-close{position:absolute;top:30px;right:40px;width:40px;height:40px;background:none;border:1px solid rgba(255,255,255,0.3);color:#fff;font-size:28px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.3s;z-index:10;border-radius:4px;font-weight:300;}
+.lightbox-close:hover{border-color:var(--gold-lt);color:var(--gold-lt);}
+.lightbox-nav{position:absolute;left:30px;right:30px;top:50%;transform:translateY(-50%);display:flex;justify-content:space-between;width:100%;pointer-events:none;z-index:5;}
+.lightbox-prev,.lightbox-next{width:50px;height:50px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.3s;pointer-events:auto;border-radius:4px;}
+.lightbox-prev:hover,.lightbox-next:hover{background:rgba(255,255,255,0.15);border-color:var(--gold-lt);color:var(--gold-lt);}
+.lightbox-info{position:absolute;bottom:30px;left:30px;color:rgba(255,255,255,0.5);font-size:13px;letter-spacing:1px;}
+
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes slideUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+.inquiry{background:var(--dark);padding:140px 24px;position:relative;overflow:hidden;}
+.inquiry::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 30%,rgba(184,150,90,0.06) 0%,transparent 70%);}
+.inquiry-inner{max-width:920px;margin:0 auto;position:relative;z-index:2;}
+.inq-label{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);opacity:0.8;margin-bottom:20px;display:block;text-align:center;cursor:pointer;}
+.inq-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,52px);font-weight:300;color:#fff;line-height:1.2;margin-bottom:24px;text-align:center;cursor:pointer;}
+.inq-title em{font-style:italic;color:var(--gold-lt);}
+.inq-desc{font-size:14px;line-height:2;color:rgba(255,255,255,0.3);margin-bottom:48px;text-align:center;max-width:600px;margin-left:auto;margin-right:auto;cursor:pointer;}
+
+.inq-detail{display:flex;flex-direction:column;gap:16px;margin-bottom:48px;max-width:600px;margin-left:auto;margin-right:auto;}
+.inq-detail-item{display:flex;align-items:flex-start;gap:14px;}
+.inq-detail-dot{width:5px;height:5px;background:var(--gold);transform:rotate(45deg);margin-top:6px;flex-shrink:0;opacity:0.7;}
+.inq-detail-text{font-size:13px;line-height:1.8;color:rgba(255,255,255,0.25);}
+.inq-detail-text strong{color:rgba(255,255,255,0.5);font-weight:400;}
+
+.inquiry-cta{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:40px;}
+.btn-inquiry{padding:18px 48px;background:var(--gold);color:var(--dark);text-decoration:none;font-family:'Jost',sans-serif;font-size:10px;letter-spacing:5px;text-transform:uppercase;font-weight:500;cursor:pointer;border:none;transition:all 0.3s ease;display:inline-block;position:relative;overflow:hidden;border-radius:2px;}
+.btn-inquiry::before{content:'';position:absolute;inset:0;background:#fff;transform:scaleX(0);transform-origin:left;transition:transform 0.3s ease;}
+.btn-inquiry:hover::before{transform:scaleX(1);}
+.btn-inquiry span{position:relative;z-index:1;}
+.btn-inquiry:hover{letter-spacing:6px;}
+
+.btn-ghost{padding:18px 48px;border:0.5px solid rgba(255,255,255,0.3);color:rgba(255,255,255,0.6);text-decoration:none;font-family:'Jost',sans-serif;font-size:10px;letter-spacing:5px;text-transform:uppercase;font-weight:400;cursor:pointer;background:transparent;transition:all 0.3s ease;display:inline-block;border-radius:2px;}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);letter-spacing:6px;}
+
+.inquiry-note{font-size:11px;color:rgba(255,255,255,0.15);text-align:center;line-height:1.8;letter-spacing:0.3px;}
+
+footer{background:var(--dark);border-top:0.5px solid rgba(255,255,255,0.06);padding:40px 48px;display:flex;align-items:center;justify-content:space-between;text-align:center;}
+.foot-logo{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:rgba(255,255,255,0.3);letter-spacing:2px;cursor:pointer;}
+.foot-logo em{font-style:italic;color:var(--gold);opacity:0.6;}
+.foot-note{font-size:9.5px;letter-spacing:2px;color:rgba(255,255,255,0.15);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+
+@media(max-width:1024px){
+  .showcase-section{padding:100px 20px;}
+  .grid-hero{gap:4px;}
+  .grid-reception{grid-template-columns:repeat(5,1fr);}
+  .grid-ceremony{grid-template-columns:repeat(4,1fr);}
+  .grid-bouquet{grid-template-columns:repeat(3,1fr);}
+  .grid-debut{grid-template-columns:repeat(3,1fr);}
+  .grid-birthday{grid-template-columns:repeat(3,1fr);}
+  .card-overlay-title{font-size:14px;}
+  .card-overlay-sub{font-size:8.5px;}
+}
+
+@media(max-width:768px){
+  nav{padding:16px 24px;}
+  .nav-links{display:none;}
+  .sec-title{font-size:clamp(32px,5vw,44px);}
+  .showcase-section{padding:80px 16px;}
+  .grid-reception{grid-template-columns:repeat(3,1fr);}
+  .grid-ceremony{grid-template-columns:repeat(3,1fr);}
+  .grid-bouquet{grid-template-columns:repeat(3,1fr);}
+  .grid-debut{grid-template-columns:repeat(3,1fr);}
+  .grid-birthday{grid-template-columns:repeat(3,1fr);}
+  .grid-hero{gap:3px;}
+  .grid-reception,.grid-ceremony,.grid-bouquet,.grid-debut,.grid-birthday{grid-auto-rows:200px;}
+  .card-overlay{padding:16px;}
+  .card-overlay-title{font-size:13px;}
+  .card-overlay-sub{font-size:8px;}
+  .lightbox-nav{left:12px;right:12px;}
+  .lightbox-prev,.lightbox-next{width:44px;height:44px;font-size:18px;}
+  .lightbox-close{top:20px;right:20px;width:36px;height:36px;font-size:24px;}
+  .inquiry{padding:100px 16px;}
+  .btn-inquiry,.btn-ghost{padding:16px 40px;font-size:9px;}
+  footer{flex-direction:column;gap:16px;padding:32px 24px;}
+}
+
+@media(max-width:600px){
+  nav{padding:12px 16px;}
+  .nav-logo{font-size:18px;}
+  .hero-title{font-size:clamp(36px,7vw,48px);}
+  .sec-title{font-size:clamp(28px,5vw,36px);}
+  .sec-desc{font-size:14px;max-width:100%;}
+  .showcase-section{padding:60px 12px;}
+  .sec-header{margin-bottom:60px;}
+  .grid-reception{grid-template-columns:repeat(2,1fr);}
+  .grid-ceremony{grid-template-columns:repeat(2,1fr);}
+  .grid-bouquet{grid-template-columns:repeat(2,1fr);}
+  .grid-debut{grid-template-columns:repeat(2,1fr);}
+  .grid-birthday{grid-template-columns:repeat(2,1fr);}
+  .grid-hero{gap:2px;}
+  .grid-reception,.grid-ceremony,.grid-bouquet,.grid-debut,.grid-birthday{grid-auto-rows:160px;}
+  .img-card:hover .img-placeholder{animation:none;transform:scale(1.08);}
+  .card-overlay{padding:12px;bottom:0;}
+  .card-overlay-title{font-size:12px;margin-bottom:2px;}
+  .card-overlay-sub{font-size:7px;}
+  .lightbox-content{max-width:100%;max-height:100%;}
+  .lightbox-img{border-radius:0;}
+  .lightbox-close{top:16px;right:16px;width:32px;height:32px;font-size:20px;}
+  .lightbox-nav{left:8px;right:8px;}
+  .lightbox-prev,.lightbox-next{width:40px;height:40px;font-size:16px;}
+  .lightbox-info{bottom:16px;left:16px;font-size:10px;}
+  @keyframes breatheZoom{0%,100%{transform:scale(1.08);}50%{transform:scale(1.12);}}
+  .inquiry{padding:80px 12px;}
+  .inq-title{font-size:clamp(28px,4vw,40px);}
+  .inq-desc{font-size:13px;}
+  .inq-detail{gap:12px;}
+  .inquiry-cta{flex-direction:column;}
+  .btn-inquiry,.btn-ghost{width:100%;max-width:100%;padding:16px 24px;font-size:9px;}
+  footer{padding:24px 16px;}
+  .foot-logo{font-size:16px;}
+  .foot-note{font-size:8px;}
+}
+
+@media(max-width:400px){
+  nav{padding:10px 12px;}
+  .nav-logo{font-size:16px;letter-spacing:1px;}
+  .hero{padding-top:60px;}
+  .hero-title{font-size:clamp(32px,6vw,42px);}
+  .eyebrow{font-size:8px;}
+  .grid-reception{grid-template-columns:1fr;}
+  .grid-ceremony{grid-template-columns:1fr;}
+  .grid-bouquet{grid-template-columns:1fr;}
+  .grid-debut{grid-template-columns:1fr;}
+  .grid-birthday{grid-template-columns:1fr;}
+  .grid-reception,.grid-ceremony,.grid-bouquet,.grid-debut,.grid-birthday{grid-auto-rows:140px;}
+}
 </style>
 </head>
 <body>
 
-<!-- RECEPTION -->
+<nav>
+  <a href="index.html" class="nav-logo"><em>Erish</em> Studio</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="showcase.html">Showcase</a>
+    <a href="showcase.html#inquiry">Inquire</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-frame"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+  <div class="hero-content">
+    <span class="eyebrow">Erish Studio — Portfolio</span>
+    <h1 class="hero-title">Our <em>Work</em><br/>Speaks.</h1>
+    <p class="hero-sub">Events &nbsp;·&nbsp; Styling &nbsp;·&nbsp; Florals</p>
+    <div class="hero-divider">
+      <div class="hd-line"></div><div class="hd-dia"></div><div class="hd-line r"></div>
+    </div>
+    <p class="hero-desc">
+      Every event we touch is a canvas — and every canvas tells a story that is entirely, beautifully yours.
+    </p>
+  </div>
+</section>
+
+<div class="cat-nav">
+  <div class="cat-nav-inner">
+    <a href="#reception" class="cat-btn active">Reception</a>
+    <a href="#ceremony" class="cat-btn">Ceremony</a>
+    <a href="#bouquet" class="cat-btn">Bespoke Bouquet</a>
+    <a href="#debut" class="cat-btn">Debut</a>
+    <a href="#birthday" class="cat-btn">Birthday</a>
+    <a href="#inquiry" class="cat-btn">Inquire</a>
+  </div>
+</div>
+
 <section class="showcase-section" id="reception">
-  <div class="grid-hero">
-    <div class="img-card"><div class="img-placeholder reception-1"></div></div>
-    <div class="img-card"><div class="img-placeholder reception-2"></div></div>
-    <div class="img-card"><div class="img-placeholder reception-3"></div></div>
-    <div class="img-card"><div class="img-placeholder reception-4"></div></div>
-    <div class="img-card"><div class="img-placeholder reception-5"></div></div>
-    <div class="img-card"><div class="img-placeholder reception-11"></div></div>
-    <div class="img-card"><div class="img-placeholder reception-12"></div></div>
-    <div class="img-card"><div class="img-placeholder reception-13"></div></div>
-    <div class="img-card"><div class="img-placeholder reception-14"></div></div>
-    <div class="img-card"><div class="img-placeholder reception-15"></div></div>
+  <div class="sec-header reveal">
+    <span class="sec-label">Category 01</span>
+    <h2 class="sec-title">Wedding <em>Reception</em></h2>
+    <p class="sec-desc">From intimate dinners to grand ballroom affairs, our reception styling transforms any space into an immersive world of beauty — where every table, every light, and every floral whispers the couple's love story.</p>
+    <div class="gold-bar"><div class="gb-line"></div><div class="gb-dia"></div><div class="gb-line"></div></div>
+  </div>
+  <div class="grid-hero grid-reception reveal">
+    <div class="img-card" data-category="reception" data-index="1"><div class="img-placeholder reception-1"></div><div class="card-overlay"><div class="card-overlay-title">Grand Ballroom Reception</div><div class="card-overlay-sub">Full Styling · Trusses · Florals</div></div></div>
+    <div class="img-card" data-category="reception" data-index="2"><div class="img-placeholder reception-2"></div><div class="card-overlay"><div class="card-overlay-title">Sweetheart Table Styling</div><div class="card-overlay-sub">Intimate · Elegant</div></div></div>
+    <div class="img-card" data-category="reception" data-index="3"><div class="img-placeholder reception-3"></div><div class="card-overlay"><div class="card-overlay-title">Trusses & Ceiling Drapery</div><div class="card-overlay-sub">Premium · Full Install</div></div></div>
+    <div class="img-card" data-category="reception" data-index="4"><div class="img-placeholder reception-4"></div><div class="card-overlay"><div class="card-overlay-title">Centerpiece & Table Design</div><div class="card-overlay-sub">Curated · Styled</div></div></div>
+    <div class="img-card" data-category="reception" data-index="5"><div class="img-placeholder reception-5"></div><div class="card-overlay"><div class="card-overlay-title">Entrance & Welcome Area</div><div class="card-overlay-sub">First Impressions · Memorable</div></div></div>
+    <div class="img-card" data-category="reception" data-index="6"><div class="img-placeholder reception-6"></div><div class="card-overlay"><div class="card-overlay-title">Reception Image 6</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
+    <div class="img-card" data-category="reception" data-index="7"><div class="img-placeholder reception-7"></div><div class="card-overlay"><div class="card-overlay-title">Reception Image 7</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
+    <div class="img-card" data-category="reception" data-index="8"><div class="img-placeholder reception-8"></div><div class="card-overlay"><div class="card-overlay-title">Reception Image 8</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
+    <div class="img-card" data-category="reception" data-index="9"><div class="img-placeholder reception-9"></div><div class="card-overlay"><div class="card-overlay-title">Reception Image 9</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
+    <div class="img-card" data-category="reception" data-index="10"><div class="img-placeholder reception-10"></div><div class="card-overlay"><div class="card-overlay-title">Reception Image 10</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
   </div>
 </section>
 
-<!-- CEREMONY -->
 <section class="showcase-section" id="ceremony">
-  <div class="grid-hero">
-    <div class="img-card"><div class="img-placeholder ceremony-1"></div></div>
-    <div class="img-card"><div class="img-placeholder ceremony-2"></div></div>
-    <div class="img-card"><div class="img-placeholder ceremony-3"></div></div>
-    <div class="img-card"><div class="img-placeholder ceremony-9"></div></div>
-    <div class="img-card"><div class="img-placeholder ceremony-10"></div></div>
-    <div class="img-card"><div class="img-placeholder ceremony-11"></div></div>
-    <div class="img-card"><div class="img-placeholder ceremony-12"></div></div>
-    <div class="img-card"><div class="img-placeholder ceremony-13"></div></div>
+  <div class="sec-header reveal">
+    <span class="sec-label">Category 02</span>
+    <h2 class="sec-title">Wedding <em>Ceremony</em></h2>
+    <p class="sec-desc">The ceremony is where two lives become one — and it deserves a setting that takes your breath away. We craft sacred, stunning ceremony spaces that honour the weight and beauty of the moment.</p>
+    <div class="gold-bar"><div class="gb-line"></div><div class="gb-dia"></div><div class="gb-line"></div></div>
+  </div>
+  <div class="grid-hero grid-ceremony reveal">
+    <div class="img-card" data-category="ceremony" data-index="1"><div class="img-placeholder ceremony-1"></div><div class="card-overlay"><div class="card-overlay-title">Altar & Arch Styling</div><div class="card-overlay-sub">Sacred · Breathtaking</div></div></div>
+    <div class="img-card" data-category="ceremony" data-index="2"><div class="img-placeholder ceremony-2"></div><div class="card-overlay"><div class="card-overlay-title">Aisle & Pew Styling</div><div class="card-overlay-sub">Florals · Ribbons · Elegance</div></div></div>
+    <div class="img-card" data-category="ceremony" data-index="3"><div class="img-placeholder ceremony-3"></div><div class="card-overlay"><div class="card-overlay-title">Outdoor Garden Ceremony</div><div class="card-overlay-sub">Al Fresco · Natural · Romantic</div></div></div>
+    <div class="img-card" data-category="ceremony" data-index="4"><div class="img-placeholder ceremony-4"></div><div class="card-overlay"><div class="card-overlay-title">Ceremony Image 4</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
+    <div class="img-card" data-category="ceremony" data-index="5"><div class="img-placeholder ceremony-5"></div><div class="card-overlay"><div class="card-overlay-title">Ceremony Image 5</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
+    <div class="img-card" data-category="ceremony" data-index="6"><div class="img-placeholder ceremony-6"></div><div class="card-overlay"><div class="card-overlay-title">Ceremony Image 6</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
+    <div class="img-card" data-category="ceremony" data-index="7"><div class="img-placeholder ceremony-7"></div><div class="card-overlay"><div class="card-overlay-title">Ceremony Image 7</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
+    <div class="img-card" data-category="ceremony" data-index="8"><div class="img-placeholder ceremony-8"></div><div class="card-overlay"><div class="card-overlay-title">Ceremony Image 8</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
   </div>
 </section>
 
-<!-- BOUQUET -->
 <section class="showcase-section" id="bouquet">
-  <div class="grid-hero">
-    <div class="img-card"><div class="img-placeholder bouquet-1"></div></div>
-    <div class="img-card"><div class="img-placeholder bouquet-2"></div></div>
-    <div class="img-card"><div class="img-placeholder bouquet-3"></div></div>
-    <div class="img-card"><div class="img-placeholder bouquet-4"></div></div>
-    <div class="img-card"><div class="img-placeholder bouquet-10"></div></div>
-    <div class="img-card"><div class="img-placeholder bouquet-11"></div></div>
-    <div class="img-card"><div class="img-placeholder bouquet-12"></div></div>
-    <div class="img-card"><div class="img-placeholder bouquet-13"></div></div>
-    <div class="img-card"><div class="img-placeholder bouquet-14"></div></div>
+  <div class="sec-header reveal">
+    <span class="sec-label">Category 03</span>
+    <h2 class="sec-title">Bespoke <em>Bouquet</em></h2>
+    <p class="sec-desc">A bouquet is not merely flowers — it is the last thing you hold before you walk into forever. Each one we create is entirely one-of-a-kind, hand-crafted to reflect your personality, palette, and the love you carry.</p>
+    <div class="gold-bar"><div class="gb-line"></div><div class="gb-dia"></div><div class="gb-line"></div></div>
+  </div>
+  <div class="grid-hero grid-bouquet reveal">
+    <div class="img-card" data-category="bouquet" data-index="1"><div class="img-placeholder bouquet-1"></div><div class="card-overlay"><div class="card-overlay-title">Signature Bridal Bouquet</div><div class="card-overlay-sub">Hand-tied · Bespoke · Luxe</div></div></div>
+    <div class="img-card" data-category="bouquet" data-index="2"><div class="img-placeholder bouquet-2"></div><div class="card-overlay"><div class="card-overlay-title">Bridesmaid Bouquets</div><div class="card-overlay-sub">Complementary · Curated</div></div></div>
+    <div class="img-card" data-category="bouquet" data-index="3"><div class="img-placeholder bouquet-3"></div><div class="card-overlay"><div class="card-overlay-title">Boutonnieres & Corsages</div><div class="card-overlay-sub">Entourage · Finished Detail</div></div></div>
+    <div class="img-card" data-category="bouquet" data-index="4"><div class="img-placeholder bouquet-4"></div><div class="card-overlay"><div class="card-overlay-title">Floral Accessories</div><div class="card-overlay-sub">Crowns · Petals · Baskets</div></div></div>
+    <div class="img-card" data-category="bouquet" data-index="5"><div class="img-placeholder bouquet-5"></div><div class="card-overlay"><div class="card-overlay-title">Bouquet Image 5</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
+    <div class="img-card" data-category="bouquet" data-index="6"><div class="img-placeholder bouquet-6"></div><div class="card-overlay"><div class="card-overlay-title">Bouquet Image 6</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
+    <div class="img-card" data-category="bouquet" data-index="7"><div class="img-placeholder bouquet-7"></div><div class="card-overlay"><div class="card-overlay-title">Bouquet Image 7</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
+    <div class="img-card" data-category="bouquet" data-index="8"><div class="img-placeholder bouquet-8"></div><div class="card-overlay"><div class="card-overlay-title">Bouquet Image 8</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
+    <div class="img-card" data-category="bouquet" data-index="9"><div class="img-placeholder bouquet-9"></div><div class="card-overlay"><div class="card-overlay-title">Bouquet Image 9</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
   </div>
 </section>
 
-<!-- DEBUT -->
 <section class="showcase-section" id="debut">
-  <div class="grid-hero">
-    <div class="img-card"><div class="img-placeholder debut-1"></div></div>
-    <div class="img-card"><div class="img-placeholder debut-2"></div></div>
-    <div class="img-card"><div class="img-placeholder debut-3"></div></div>
-    <div class="img-card"><div class="img-placeholder debut-4"></div></div>
-    <div class="img-card"><div class="img-placeholder debut-8"></div></div>
-    <div class="img-card"><div class="img-placeholder debut-9"></div></div>
-    <div class="img-card"><div class="img-placeholder debut-10"></div></div>
+  <div class="sec-header reveal">
+    <span class="sec-label">Category 04</span>
+    <h2 class="sec-title">Debut <em>Celebrations</em></h2>
+    <p class="sec-desc">A debut is more than a party — it is a young woman's first grand entrance into the world. We craft debut experiences that are as extraordinary, elegant, and memorable as the debutante herself.</p>
+    <div class="gold-bar"><div class="gb-line"></div><div class="gb-dia"></div><div class="gb-line"></div></div>
+  </div>
+  <div class="grid-hero grid-debut reveal">
+    <div class="img-card" data-category="debut" data-index="1"><div class="img-placeholder debut-1"></div><div class="card-overlay"><div class="card-overlay-title">Grand Entrance Setup</div><div class="card-overlay-sub">Dramatic · Statement · Unforgettable</div></div></div>
+    <div class="img-card" data-category="debut" data-index="2"><div class="img-placeholder debut-2"></div><div class="card-overlay"><div class="card-overlay-title">Stage & Cotillion Area</div><div class="card-overlay-sub">Elegant · Styled · Curated</div></div></div>
+    <div class="img-card" data-category="debut" data-index="3"><div class="img-placeholder debut-3"></div><div class="card-overlay"><div class="card-overlay-title">Reception & Table Styling</div><div class="card-overlay-sub">Feminine · Lush · Refined</div></div></div>
+    <div class="img-card" data-category="debut" data-index="4"><div class="img-placeholder debut-4"></div><div class="card-overlay"><div class="card-overlay-title">Debut Photo Backdrop</div><div class="card-overlay-sub">Instagrammable · Custom · Styled</div></div></div>
+    <div class="img-card" data-category="debut" data-index="5"><div class="img-placeholder debut-5"></div><div class="card-overlay"><div class="card-overlay-title">Debut Image 5</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
+    <div class="img-card" data-category="debut" data-index="6"><div class="img-placeholder debut-6"></div><div class="card-overlay"><div class="card-overlay-title">Debut Image 6</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
+    <div class="img-card" data-category="debut" data-index="7"><div class="img-placeholder debut-7"></div><div class="card-overlay"><div class="card-overlay-title">Debut Image 7</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
   </div>
 </section>
 
-<!-- BIRTHDAY -->
 <section class="showcase-section" id="birthday">
-  <div class="grid-hero">
-    <div class="img-card"><div class="img-placeholder bday-1"></div></div>
-    <div class="img-card"><div class="img-placeholder bday-2"></div></div>
-    <div class="img-card"><div class="img-placeholder bday-3"></div></div>
-    <div class="img-card"><div class="img-placeholder bday-4"></div></div>
-    <div class="img-card"><div class="img-placeholder bday-8"></div></div>
-    <div class="img-card"><div class="img-placeholder bday-9"></div></div>
-    <div class="img-card"><div class="img-placeholder bday-10"></div></div>
+  <div class="sec-header reveal">
+    <span class="sec-label">Category 05</span>
+    <h2 class="sec-title">Birthday <em>Events</em></h2>
+    <p class="sec-desc">Birthdays are a celebration of life — and life deserves to be celebrated beautifully. From intimate gatherings to lavish parties, we style every birthday as a reflection of the person at the center of it all.</p>
+    <div class="gold-bar"><div class="gb-line"></div><div class="gb-dia"></div><div class="gb-line"></div></div>
+  </div>
+  <div class="grid-hero grid-birthday reveal">
+    <div class="img-card" data-category="bday" data-index="1"><div class="img-placeholder bday-1"></div><div class="card-overlay"><div class="card-overlay-title">Themed Birthday Styling</div><div class="card-overlay-sub">Creative · Bold · Personalized</div></div></div>
+    <div class="img-card" data-category="bday" data-index="2"><div class="img-placeholder bday-2"></div><div class="card-overlay"><div class="card-overlay-title">Dessert & Cake Table</div><div class="card-overlay-sub">Styled · Curated · Delicious</div></div></div>
+    <div class="img-card" data-category="bday" data-index="3"><div class="img-placeholder bday-3"></div><div class="card-overlay"><div class="card-overlay-title">Statement Backdrop & Balloon Art</div><div class="card-overlay-sub">Dramatic · Custom · Stunning</div></div></div>
+    <div class="img-card" data-category="bday" data-index="4"><div class="img-placeholder bday-4"></div><div class="card-overlay"><div class="card-overlay-title">Intimate Dinner Celebration</div><div class="card-overlay-sub">Refined · Warm · Personal</div></div></div>
+    <div class="img-card" data-category="bday" data-index="5"><div class="img-placeholder bday-5"></div><div class="card-overlay"><div class="card-overlay-title">Birthday Image 5</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
+    <div class="img-card" data-category="bday" data-index="6"><div class="img-placeholder bday-6"></div><div class="card-overlay"><div class="card-overlay-title">Birthday Image 6</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
+    <div class="img-card" data-category="bday" data-index="7"><div class="img-placeholder bday-7"></div><div class="card-overlay"><div class="card-overlay-title">Birthday Image 7</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
   </div>
 </section>
 
-<!-- AUDIO & SCRIPT -->
-<audio id="shutter-audio" src="audio/shutter-snap.mp3" preload="auto"></audio>
+<section class="inquiry" id="inquiry">
+  <div class="inquiry-inner">
+    <span class="inq-label reveal">Start Here</span>
+    <h2 class="inq-title reveal">Let's Create<br/>Something <em>Beautiful</em><br/>Together.</h2>
+    <p class="inq-desc reveal">Tell us about your vision and we will craft an experience that is entirely, uniquely yours. We respond to all inquiries within 24 hours.</p>
+    <div class="inq-detail reveal">
+      <div class="inq-detail-item"><div class="inq-detail-dot"></div><div class="inq-detail-text"><strong>Based in Davao City</strong> — serving Mindanao and beyond, including out-of-town events.</div></div>
+      <div class="inq-detail-item"><div class="inq-detail-dot"></div><div class="inq-detail-text"><strong>18+ Years of Experience</strong> — your celebration is in the most trusted hands.</div></div>
+      <div class="inq-detail-item"><div class="inq-detail-dot"></div><div class="inq-detail-text"><strong>Limited bookings per month</strong> — we give every client our full, undivided attention.</div></div>
+      <div class="inq-detail-item"><div class="inq-detail-dot"></div><div class="inq-detail-text"><strong>Free initial consultation</strong> — let's talk before you commit to anything.</div></div>
+    </div>
+    <div class="inquiry-cta reveal">
+      <a href="inquire.html" class="btn-inquiry"><span>Begin Your Inquiry</span></a>
+      <a href="index.html#contact" class="btn-ghost">View Contact Information</a>
+    </div>
+    <p class="inquiry-note reveal">Fill out the form or click "Begin Your Inquiry" to proceed to our dedicated inquiry page.<br/>Complete packages and pricing available upon consultation.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-logo"><em>Erish</em> Studio</div>
+  <div class="foot-note">&copy; 2007–2026 Erish Studio Events & Styling · Davao City, Philippines</div>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightbox-close">✕</button>
+  <div class="lightbox-content" id="lightbox-content">
+    <img src="" class="lightbox-img" id="lightbox-img" alt="Enlarged View">
+    <div class="lightbox-placeholder" id="lightbox-placeholder" style="display:none;">Placeholder<br/>Click to enlarge</div>
+  </div>
+  <div class="lightbox-nav">
+    <button class="lightbox-prev" id="lightbox-prev">❮</button>
+    <button class="lightbox-next" id="lightbox-next">❯</button>
+  </div>
+  <div class="lightbox-info"><span id="lightbox-counter">1 / 5</span></div>
+</div>
+
 <script>
-  document.querySelectorAll('.img-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const audio = document.getElementById('shutter-audio');
-      audio.currentTime = 0;
-      audio.play();
-    });
-  });
+const velvetSnap=new Audio('velvet-snap.mp3');velvetSnap.volume=0.5;function playAudio(){velvetSnap.currentTime=0;velvetSnap.play().catch(e=>console.log('Audio'));}
+const allInteractive=document.querySelectorAll('h1,h2,h3,.hero-title,.hero-desc,.hero-sub,.eyebrow,.sec-title,.sec-label,.sec-desc,.inq-title,.inq-label,.inq-desc,.btn-inquiry,.btn-ghost,.cat-btn,.nav-logo,.nav-links a,.foot-logo,.card-overlay-title,.card-overlay-sub,.img-card,.inq-detail-text strong');
+allInteractive.forEach(el=>{el.addEventListener('click',playAudio);el.style.cursor='pointer';});
+const revealObserver=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible');});},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+let currentCategory='',currentIndex=0,categoryImages=[];
+const lightbox=document.getElementById('lightbox'),lightboxImg=document.getElementById('lightbox-img'),lightboxPlaceholder=document.getElementById('lightbox-placeholder'),lightboxCounter=document.getElementById('lightbox-counter'),lightboxClose=document.getElementById('lightbox-close'),lightboxPrev=document.getElementById('lightbox-prev'),lightboxNext=document.getElementById('lightbox-next');
+document.querySelectorAll('.img-card').forEach(card=>{card.addEventListener('click',function(){playAudio();const category=this.dataset.category,section=this.closest('.showcase-section');categoryImages=Array.from(section.querySelectorAll('.img-card'));currentCategory=category;currentIndex=categoryImages.indexOf(this);const placeholder=this.querySelector('.img-placeholder'),bgImage=window.getComputedStyle(placeholder).backgroundImage;let imageUrl='';if(bgImage&&bgImage!=='none'){const urlMatch=bgImage.match(/url\(['"]?([^'"()]+)['"]?\)/g);if(urlMatch&&urlMatch.length>0){const lastUrl=urlMatch[urlMatch.length-1];imageUrl=lastUrl.replace(/url\(['"]?([^'"()]+)['"]?\)/,'$1');}}if(imageUrl&&imageUrl.endsWith('.jpg')){lightboxImg.src=imageUrl;lightboxImg.style.display='block';lightboxPlaceholder.style.display='none';}else{lightboxImg.style.display='none';lightboxPlaceholder.style.display='flex';}updateLightboxCounter();lightbox.classList.add('active');document.body.style.overflow='hidden';});});
+function closeLightbox(){lightbox.classList.remove('active');document.body.style.overflow='auto';}
+lightboxClose.addEventListener('click',closeLightbox);lightbox.addEventListener('click',(e)=>{if(e.target===lightbox)closeLightbox();});
+function updateLightboxCounter(){const total=categoryImages.length;lightboxCounter.textContent=`${currentIndex+1} / ${total}`;}
+lightboxNext.addEventListener('click',()=>{playAudio();currentIndex=(currentIndex+1)%categoryImages.length;updateImage();updateLightboxCounter();});
+lightboxPrev.addEventListener('click',()=>{playAudio();currentIndex=(currentIndex-1+categoryImages.length)%categoryImages.length;updateImage();updateLightboxCounter();});
+function updateImage(){const card=categoryImages[currentIndex],placeholder=card.querySelector('.img-placeholder'),bgImage=window.getComputedStyle(placeholder).backgroundImage;let imageUrl='';if(bgImage&&bgImage!=='none'){const urlMatch=bgImage.match(/url\(['"]?([^'"()]+)['"]?\)/g);if(urlMatch&&urlMatch.length>0){const lastUrl=urlMatch[urlMatch.length-1];imageUrl=lastUrl.replace(/url\(['"]?([^'"()]+)['"]?\)/,'$1');}}if(imageUrl&&imageUrl.endsWith('.jpg')){lightboxImg.src=imageUrl;lightboxImg.style.display='block';lightboxPlaceholder.style.display='none';}else{lightboxImg.style.display='none';lightboxPlaceholder.style.display='flex';}}
+document.addEventListener('keydown',(e)=>{if(lightbox.classList.contains('active')){if(e.key==='ArrowRight')lightboxNext.click();if(e.key==='ArrowLeft')lightboxPrev.click();if(e.key==='Escape')closeLightbox();}});
+console.log('✓ Professional showcase loaded | 41 slots | All features enabled');
 </script>
 
 </body>
