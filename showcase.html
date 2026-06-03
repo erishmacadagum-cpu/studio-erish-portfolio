@@ -37,7 +37,6 @@ nav{
   font-family:'Cormorant Garamond',serif;
   font-size:22px;font-weight:400;
   color:var(--dark);letter-spacing:2px;text-decoration:none;
-  cursor:pointer;
 }
 .nav-logo em{font-style:italic;color:var(--gold);}
 .nav-links{display:flex;gap:36px;}
@@ -45,7 +44,6 @@ nav{
   font-size:10px;letter-spacing:4px;text-transform:uppercase;
   color:var(--muted);text-decoration:none;
   transition:color 0.3s;position:relative;
-  cursor:pointer;
 }
 .nav-links a:hover{color:var(--gold);}
 
@@ -74,16 +72,15 @@ nav{
 .corner.tl{top:32px;left:32px;}
 
 .hero-content{position:relative;z-index:2;text-align:center;padding:40px 24px;animation:fadeUp 1.2s ease both;}
-.eyebrow{font-size:9.5px;letter-spacing:7px;text-transform:uppercase;color:var(--gold);opacity:0.75;margin-bottom:24px;display:block;cursor:pointer;}
+.eyebrow{font-size:9.5px;letter-spacing:7px;text-transform:uppercase;color:var(--gold);opacity:0.75;margin-bottom:24px;display:block;}
 .hero-title{
   font-family:'Cormorant Garamond',serif;
   font-size:clamp(52px,9vw,110px);
   font-weight:300;color:#fff;line-height:0.95;
   letter-spacing:-1px;margin-bottom:12px;
-  cursor:pointer;
 }
 .hero-title em{font-style:italic;color:var(--gold-lt);}
-.hero-sub{font-size:10px;letter-spacing:9px;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:48px;cursor:pointer;}
+.hero-sub{font-size:10px;letter-spacing:9px;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:48px;}
 .hero-divider{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:28px;}
 .hd-line{width:72px;height:0.5px;background:linear-gradient(to right,transparent,var(--gold));}
 .hd-line.r{background:linear-gradient(to left,transparent,var(--gold));}
@@ -92,7 +89,6 @@ nav{
   font-family:'Cormorant Garamond',serif;
   font-size:18px;font-style:italic;font-weight:300;
   color:rgba(255,255,255,0.4);max-width:520px;margin:0 auto;line-height:1.8;
-  cursor:pointer;
 }
 
 /* ── CATEGORY NAV ── */
@@ -120,18 +116,16 @@ nav{
 .showcase-section:nth-child(even){background:var(--warm);}
 
 .sec-header{text-align:center;margin-bottom:72px;}
-.sec-label{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:block;cursor:pointer;}
+.sec-label{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:block;}
 .sec-title{
   font-family:'Cormorant Garamond',serif;
   font-size:clamp(36px,5vw,58px);font-weight:300;
   color:var(--dark);margin-bottom:16px;line-height:1.1;
-  cursor:pointer;
 }
 .sec-title em{font-style:italic;color:var(--gold);}
 .sec-desc{
   font-size:15px;line-height:1.9;color:var(--muted);
   max-width:560px;margin:0 auto 32px;
-  cursor:pointer;
 }
 .gold-bar{display:flex;align-items:center;justify-content:center;gap:10px;margin:0 auto;}
 .gb-line{width:48px;height:0.5px;background:var(--gold);opacity:0.5;}
@@ -140,32 +134,46 @@ nav{
 /* ── GRIDS ── */
 .grid-hero{max-width:1200px;margin:0 auto;display:grid;gap:4px;}
 
-/* Reception - 2x5 grid (10 images) */
-.grid-reception{grid-template-columns:repeat(5,1fr);grid-template-rows:auto auto;}
+/* Reception - asymmetric 3-col */
+.grid-reception{grid-template-columns:1.4fr 1fr 1fr;grid-template-rows:380px 280px;}
+.grid-reception .g1{grid-column:1;grid-row:1/3;}
+.grid-reception .g2{grid-column:2;grid-row:1;}
+.grid-reception .g3{grid-column:3;grid-row:1;}
+.grid-reception .g4{grid-column:2;grid-row:2;}
+.grid-reception .g5{grid-column:3;grid-row:2;}
 
-/* Ceremony - 2x4 grid (8 images) */
-.grid-ceremony{grid-template-columns:repeat(4,1fr);grid-template-rows:auto auto;}
+/* Ceremony - 2 tall + 1 wide bottom */
+.grid-ceremony{grid-template-columns:1fr 1fr;grid-template-rows:420px 260px;}
+.grid-ceremony .g1{grid-column:1;grid-row:1;}
+.grid-ceremony .g2{grid-column:2;grid-row:1;}
+.grid-ceremony .g3{grid-column:1/3;grid-row:2;}
 
-/* Bouquet - 3x3 grid (9 images) */
-.grid-bouquet{grid-template-columns:repeat(3,1fr);grid-template-rows:auto auto auto;}
+/* Bouquet - masonry feel */
+.grid-bouquet{grid-template-columns:1fr 1fr 1fr;grid-template-rows:300px 300px;}
+.grid-bouquet .g1{grid-column:1;grid-row:1/3;}
+.grid-bouquet .g2{grid-column:2;grid-row:1;}
+.grid-bouquet .g3{grid-column:3;grid-row:1;}
+.grid-bouquet .g4{grid-column:2/4;grid-row:2;}
 
-/* Debut - 2x4 grid (8 images) */
-.grid-debut{grid-template-columns:repeat(4,1fr);grid-template-rows:auto auto;}
+/* Debut - elegant 2+2 */
+.grid-debut{grid-template-columns:1fr 1fr;grid-template-rows:320px 320px;}
 
-/* Birthday - 2x4 grid (8 images) */
-.grid-birthday{grid-template-columns:repeat(4,1fr);grid-template-rows:auto auto;}
+/* Birthday - mix */
+.grid-birthday{grid-template-columns:1fr 1fr 1.2fr;grid-template-rows:280px 280px;}
+.grid-birthday .g1{grid-column:1;grid-row:1;}
+.grid-birthday .g2{grid-column:2;grid-row:1;}
+.grid-birthday .g3{grid-column:3;grid-row:1/3;}
+.grid-birthday .g4{grid-column:1/3;grid-row:2;}
 
-/* ── IMAGE CARDS ── ENHANCED WITH BREATHING ZOOM ── */
+/* ── IMAGE CARDS ── */
 .img-card{
   position:relative;overflow:hidden;
   cursor:pointer;
-  height:240px;
 }
 .img-card::after{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(28,22,16,0.7) 0%,transparent 60%);
-  opacity:0;transition:opacity 0.4s ease;
-  z-index:1;
+  background:linear-gradient(to top,rgba(28,22,16,0.55) 0%,transparent 50%);
+  opacity:0;transition:opacity 0.4s;
 }
 .img-card:hover::after{opacity:1;}
 
@@ -173,197 +181,65 @@ nav{
   width:100%;height:100%;
   display:flex;align-items:center;justify-content:center;
   flex-direction:column;gap:12px;
-  background-size:cover;
-  background-position:center;
-  background-color:var(--charcoal);
-  transition:transform 1.2s cubic-bezier(0.16,1,0.3,1),filter 0.8s ease;
-  filter:grayscale(0.2) brightness(0.9);
-  will-change:transform,filter;
+  transition:transform 0.6s ease;
 }
-.img-card:hover .img-placeholder{
-  transform:scale(1.12) translateZ(0);
-  filter:grayscale(0) brightness(1);
-  animation:breatheZoom 3s ease-in-out infinite;
+.img-card:hover .img-placeholder{transform:scale(1.04);}
+
+/* Category color placeholders */
+.reception-1 { background: linear-gradient(135deg, #4A3626 0%, #3A2E28 100%); }
+.reception-2 { background: linear-gradient(160deg, #2C2018 0%, #4D3A28 100%); }
+.reception-3 { background: linear-gradient(120deg, #5C4A35 0%, #3A2E28 100%); }
+.reception-4 { background: linear-gradient(150deg, #3A2E28 0%, #4A3626 100%); }
+.reception-5 { background: linear-gradient(140deg, #2E2620 0%, #5C4A35 100%); }
+
+.ceremony-1 { background: linear-gradient(135deg, #4A3626 0%, #3A2E28 100%); }
+.ceremony-2 { background: linear-gradient(160deg, #2C2018 0%, #4D3A28 100%); }
+.ceremony-3 { background: linear-gradient(120deg, #5C4A35 0%, #3A2E28 100%); }
+
+.bouquet-1 { background: linear-gradient(135deg, #4A3626 0%, #3A2E28 100%); }
+.bouquet-2 { background: linear-gradient(160deg, #2C2018 0%, #4D3A28 100%); }
+.bouquet-3 { background: linear-gradient(120deg, #5C4A35 0%, #3A2E28 100%); }
+.bouquet-4 { background: linear-gradient(150deg, #3A2E28 0%, #4A3626 100%); }
+
+.debut-1 { background: linear-gradient(135deg, #4A3626 0%, #3A2E28 100%); }
+.debut-2 { background: linear-gradient(160deg, #2C2018 0%, #4D3A28 100%); }
+.debut-3 { background: linear-gradient(120deg, #5C4A35 0%, #3A2E28 100%); }
+.debut-4 { background: linear-gradient(150deg, #3A2E28 0%, #4A3626 100%); }
+
+.bday-1 { background: linear-gradient(135deg, #4A3626 0%, #3A2E28 100%); }
+.bday-2 { background: linear-gradient(160deg, #2C2018 0%, #4D3A28 100%); }
+.bday-3 { background: linear-gradient(120deg, #5C4A35 0%, #3A2E28 100%); }
+.bday-4 { background: linear-gradient(150deg, #3A2E28 0%, #4A3626 100%); }
+
+.card-icon{
+  font-family:'Cormorant Garamond',serif;
+  font-size:38px;font-style:italic;font-weight:300;
+  color:rgba(255,255,255,0.06);letter-spacing:2px;
+  text-align:center;line-height:1.2;
+  user-select:none;
 }
-
-@keyframes breatheZoom{
-  0%,100%{transform:scale(1.12);}
-  50%{transform:scale(1.16);}
+.card-ornament{
+  display:flex;align-items:center;gap:8px;opacity:0.2;
 }
-
-/* ════ IMAGE CLASS DEFINITIONS ════ */
-
-/* RECEPTION (10 images) - PRESERVED + ADDED */
-.reception-1 { background-image: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../images/reception/reception-1.jpg'); background-size: cover; background-position: center; }
-.reception-2 { background-image: linear-gradient(160deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../images/reception/reception-2.jpg'); background-size: cover; background-position: center; }
-.reception-3 { background-image: linear-gradient(120deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../images/reception/reception-3.jpg'); background-size: cover; background-position: center; }
-.reception-4 { background-image: linear-gradient(150deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../images/reception/reception-4.jpg'); background-size: cover; background-position: center; }
-.reception-5 { background-image: linear-gradient(140deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../images/reception/reception-5.jpg'); background-size: cover; background-position: center; }
-.reception-6 { background:linear-gradient(135deg, #4A3626 0%, #3A2E28 100%); }
-.reception-7 { background:linear-gradient(160deg, #2C2018 0%, #4D3A28 100%); }
-.reception-8 { background:linear-gradient(120deg, #5C4A35 0%, #3A2E28 100%); }
-.reception-9 { background:linear-gradient(150deg, #3A2E28 0%, #4A3626 100%); }
-.reception-10 { background:linear-gradient(140deg, #2E2620 0%, #5C4A35 100%); }
-
-/* CEREMONY (8 images) - PRESERVED + ADDED */
-.ceremony-1 { background-image: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../images/ceremony/ceremony-1.jpg'); background-size: cover; background-position: center; }
-.ceremony-2 { background-image: linear-gradient(160deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../images/ceremony/ceremony-2.jpg'); background-size: cover; background-position: center; }
-.ceremony-3 { background-image: linear-gradient(120deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../images/ceremony/ceremony-3.jpg'); background-size: cover; background-position: center; }
-.ceremony-4 { background:linear-gradient(135deg, #4A3626 0%, #3A2E28 100%); }
-.ceremony-5 { background:linear-gradient(160deg, #2C2018 0%, #4D3A28 100%); }
-.ceremony-6 { background:linear-gradient(120deg, #5C4A35 0%, #3A2E28 100%); }
-.ceremony-7 { background:linear-gradient(150deg, #3A2E28 0%, #4A3626 100%); }
-.ceremony-8 { background:linear-gradient(140deg, #2E2620 0%, #5C4A35 100%); }
-
-/* BOUQUET (9 images) - PRESERVED + ADDED */
-.bouquet-1 { background-image: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../images/bouquet/bouquet-1.jpg'); background-size: cover; background-position: center; }
-.bouquet-2 { background-image: linear-gradient(160deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../images/bouquet/bouquet-2.jpg'); background-size: cover; background-position: center; }
-.bouquet-3 { background-image: linear-gradient(120deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../images/bouquet/bouquet-3.jpg'); background-size: cover; background-position: center; }
-.bouquet-4 { background-image: linear-gradient(150deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../images/bouquet/bouquet-4.jpg'); background-size: cover; background-position: center; }
-.bouquet-5 { background:linear-gradient(135deg, #4A3626 0%, #3A2E28 100%); }
-.bouquet-6 { background:linear-gradient(160deg, #2C2018 0%, #4D3A28 100%); }
-.bouquet-7 { background:linear-gradient(120deg, #5C4A35 0%, #3A2E28 100%); }
-.bouquet-8 { background:linear-gradient(150deg, #3A2E28 0%, #4A3626 100%); }
-.bouquet-9 { background:linear-gradient(140deg, #2E2620 0%, #5C4A35 100%); }
-
-/* DEBUT (7 images) - PRESERVED + ADDED */
-.debut-1 { background-image: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/debut-1.jpg'); background-size: cover; background-position: center; }
-.debut-2 { background-image: linear-gradient(160deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/debut-2.jpg'); background-size: cover; background-position: center; }
-.debut-3 { background-image: linear-gradient(120deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/debut-3.jpg'); background-size: cover; background-position: center; }
-.debut-4 { background-image: linear-gradient(150deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/debut-4.jpg'); background-size: cover; background-position: center; }
-.debut-5 { background:linear-gradient(135deg, #4A3626 0%, #3A2E28 100%); }
-.debut-6 { background:linear-gradient(160deg, #2C2018 0%, #4D3A28 100%); }
-.debut-7 { background:linear-gradient(120deg, #5C4A35 0%, #3A2E28 100%); }
-
-/* BIRTHDAY (7 images) - PRESERVED + ADDED */
-.bday-1 { background-image: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/bday-1.jpg'); background-size: cover; background-position: center; }
-.bday-2 { background-image: linear-gradient(160deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/bday-2.jpg'); background-size: cover; background-position: center; }
-.bday-3 { background-image: linear-gradient(120deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/bday-3.jpg'); background-size: cover; background-position: center; }
-.bday-4 { background-image: linear-gradient(150deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('images/bday-4.jpg'); background-size: cover; background-position: center; }
-.bday-5 { background:linear-gradient(135deg, #4A3626 0%, #3A2E28 100%); }
-.bday-6 { background:linear-gradient(160deg, #2C2018 0%, #4D3A28 100%); }
-.bday-7 { background:linear-gradient(120deg, #5C4A35 0%, #3A2E28 100%); }
-/* ── NEW IMAGES ADDED ── */
-.reception-11{background-image:linear-gradient(135deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('../images/reception/reception-11.jpg');background-size:cover;background-position:center;}
-.reception-12{background-image:linear-gradient(160deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('../images/reception/reception-12.jpg');background-size:cover;background-position:center;}
-.reception-13{background-image:linear-gradient(120deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('../images/reception/reception-13.jpg');background-size:cover;background-position:center;}
-.reception-14{background-image:linear-gradient(150deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('../images/reception/reception-14.jpg');background-size:cover;background-position:center;}
-.reception-15{background-image:linear-gradient(140deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('../images/reception/reception-15.jpg');background-size:cover;background-position:center;}
-
-.ceremony-9{background-image:linear-gradient(135deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('../images/ceremony/ceremony-9.jpg');background-size:cover;background-position:center;}
-.ceremony-10{background-image:linear-gradient(160deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('../images/ceremony/ceremony-10.jpg');background-size:cover;background-position:center;}
-.ceremony-11{background-image:linear-gradient(120deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('../images/ceremony/ceremony-11.jpg');background-size:cover;background-position:center;}
-.ceremony-12{background-image:linear-gradient(150deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('../images/ceremony/ceremony-12.jpg');background-size:cover;background-position:center;}
-.ceremony-13{background-image:linear-gradient(140deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('../images/ceremony/ceremony-13.jpg');background-size:cover;background-position:center;}
-
-.bouquet-10{background-image:linear-gradient(135deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('../images/bouquet/bouquet-10.jpg');background-size:cover;background-position:center;}
-.bouquet-11{background-image:linear-gradient(160deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('../images/bouquet/bouquet-11.jpg');background-size:cover;background-position:center;}
-.bouquet-12{background-image:linear-gradient(120deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('../images/bouquet/bouquet-12.jpg');background-size:cover;background-position:center;}
-.bouquet-13{background-image:linear-gradient(150deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('../images/bouquet/bouquet-13.jpg');background-size:cover;background-position:center;}
-.bouquet-14{background-image:linear-gradient(140deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('../images/bouquet/bouquet-14.jpg');background-size:cover;background-position:center;}
-
-.debut-8{background-image:linear-gradient(135deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('images/debut-8.jpg');background-size:cover;background-position:center;}
-.debut-9{background-image:linear-gradient(160deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('images/debut-9.jpg');background-size:cover;background-position:center;}
-.debut-10{background-image:linear-gradient(120deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('images/debut-10.jpg');background-size:cover;background-position:center;}
-
-.bday-8{background-image:linear-gradient(135deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('images/bday-8.jpg');background-size:cover;background-position:center;}
-.bday-9{background-image:linear-gradient(160deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('images/bday-9.jpg');background-size:cover;background-position:center;}
-.bday-10{background-image:linear-gradient(120deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('images/bday-10.jpg');background-size:cover;background-position:center;}
+.card-ornament .ol{width:28px;height:0.5px;background:var(--gold-lt);}
+.card-ornament .od{width:3px;height:3px;background:var(--gold-lt);transform:rotate(45deg);}
 
 .card-overlay{
   position:absolute;bottom:0;left:0;right:0;
-  padding:24px;
-  background:linear-gradient(to top,rgba(28,22,16,0.95),transparent);
-  opacity:0;transform:translateY(20px);
-  transition:all 0.5s cubic-bezier(0.16,1,0.3,1);
-  z-index:2;
+  padding:20px 20px 18px;
+  opacity:0;transform:translateY(8px);
+  transition:all 0.4s ease;z-index:2;
 }
 .img-card:hover .card-overlay{opacity:1;transform:translateY(0);}
 .card-overlay-title{
   font-family:'Cormorant Garamond',serif;
-  font-size:16px;font-weight:400;font-style:italic;
-  color:#fff;letter-spacing:0.5px;
-  margin-bottom:4px;
+  font-size:15px;font-weight:400;font-style:italic;
+  color:#fff;letter-spacing:1px;
 }
 .card-overlay-sub{
-  font-size:9px;letter-spacing:2px;text-transform:uppercase;
-  color:var(--gold-lt);opacity:0.85;
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold-lt);margin-top:4px;opacity:0.8;
 }
-
-/* ── LIGHTBOX ── */
-.lightbox{
-  display:none;position:fixed;inset:0;
-  background:rgba(28,22,16,0.98);z-index:1000;
-  animation:fadeIn 0.3s ease;
-  backdrop-filter:blur(10px);
-  align-items:center;justify-content:center;
-  overflow:hidden;
-}
-.lightbox.active{display:flex;}
-
-.lightbox-content{
-  position:relative;
-  max-width:90vw;max-height:90vh;
-  display:flex;align-items:center;justify-content:center;
-  animation:slideUp 0.4s ease;
-}
-
-.lightbox-img{
-  max-width:100%;max-height:100%;
-  object-fit:contain;
-  border-radius:2px;
-  box-shadow:0 20px 60px rgba(0,0,0,0.5);
-}
-
-.lightbox-placeholder{
-  width:300px;height:400px;
-  background:linear-gradient(135deg, #4A3626 0%, #3A2E28 100%);
-  border-radius:2px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:12px;color:rgba(255,255,255,0.2);
-}
-
-.lightbox-close{
-  position:absolute;top:30px;right:40px;
-  width:40px;height:40px;
-  background:none;border:1px solid rgba(255,255,255,0.3);
-  color:#fff;font-size:28px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  transition:all 0.3s;z-index:10;
-  border-radius:4px;
-  font-weight:300;
-}
-.lightbox-close:hover{border-color:var(--gold-lt);color:var(--gold-lt);}
-
-.lightbox-nav{
-  position:absolute;left:30px;right:30px;top:50%;
-  transform:translateY(-50%);
-  display:flex;justify-content:space-between;
-  width:100%;pointer-events:none;z-index:5;
-}
-
-.lightbox-prev,.lightbox-next{
-  width:50px;height:50px;
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.2);
-  color:#fff;font-size:20px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  transition:all 0.3s;pointer-events:auto;
-  border-radius:4px;
-}
-.lightbox-prev:hover,.lightbox-next:hover{
-  background:rgba(255,255,255,0.15);
-  border-color:var(--gold-lt);color:var(--gold-lt);
-}
-
-.lightbox-info{
-  position:absolute;bottom:30px;left:30px;
-  color:rgba(255,255,255,0.5);
-  font-size:13px;letter-spacing:1px;
-}
-
-@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-@keyframes slideUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
 
 /* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease;}
@@ -382,15 +258,14 @@ nav{
   max-width:920px;margin:0 auto;
   position:relative;z-index:2;
 }
-.inq-label{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);opacity:0.8;margin-bottom:20px;display:block;text-align:center;cursor:pointer;}
+.inq-label{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);opacity:0.8;margin-bottom:20px;display:block;text-align:center;}
 .inq-title{
   font-family:'Cormorant Garamond',serif;
   font-size:clamp(36px,4vw,52px);font-weight:300;
   color:#fff;line-height:1.2;margin-bottom:24px;text-align:center;
-  cursor:pointer;
 }
 .inq-title em{font-style:italic;color:var(--gold-lt);}
-.inq-desc{font-size:14px;line-height:2;color:rgba(255,255,255,0.3);margin-bottom:48px;text-align:center;max-width:600px;margin-left:auto;margin-right:auto;cursor:pointer;}
+.inq-desc{font-size:14px;line-height:2;color:rgba(255,255,255,0.3);margin-bottom:48px;text-align:center;max-width:600px;margin-left:auto;margin-right:auto;}
 
 .inq-detail{display:flex;flex-direction:column;gap:16px;margin-bottom:48px;max-width:600px;margin-left:auto;margin-right:auto;}
 .inq-detail-item{display:flex;align-items:flex-start;gap:14px;}
@@ -475,7 +350,6 @@ footer{
 .foot-logo{
   font-family:'Cormorant Garamond',serif;
   font-size:18px;font-weight:400;color:rgba(255,255,255,0.3);letter-spacing:2px;
-  cursor:pointer;
 }
 .foot-logo em{font-style:italic;color:var(--gold);opacity:0.6;}
 .foot-note{font-size:9.5px;letter-spacing:2px;color:rgba(255,255,255,0.15);}
@@ -487,42 +361,14 @@ footer{
 @media(max-width:900px){
   nav{padding:16px 24px;}
   .nav-links{display:none;}
-  .grid-reception,.grid-ceremony,.grid-bouquet,.grid-debut,.grid-birthday{grid-template-columns:repeat(2,1fr) !important;grid-template-rows:auto;}
-  .img-card{height:200px !important;}
+  .grid-reception,.grid-bouquet,.grid-birthday{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
+  .grid-reception .g1,.grid-bouquet .g1,.grid-birthday .g3,.grid-birthday .g4{grid-column:auto;grid-row:auto;}
+  .grid-ceremony{grid-template-columns:1fr;}
+  .grid-ceremony .g3{grid-column:auto;}
+  .img-card{height:240px !important;}
   .inquiry-cta{flex-direction:column;}
   .btn-inquiry,.btn-ghost{width:100%;max-width:320px;}
   footer{flex-direction:column;gap:12px;text-align:center;}
-  
-  /* Lightbox responsive */
-  .lightbox-nav{left:16px;right:16px;}
-  .lightbox-prev,.lightbox-next{width:44px;height:44px;font-size:18px;}
-  .lightbox-close{top:20px;right:20px;width:36px;height:36px;font-size:24px;}
-}
-
-@media(max-width:600px){
-  nav{padding:12px 16px;}
-  .hero-title{font-size:clamp(40px,7vw,52px);}
-  .sec-title{font-size:clamp(28px,5vw,36px);}
-  .img-card{height:160px !important;}
-  .grid-reception,.grid-ceremony,.grid-bouquet,.grid-debut,.grid-birthday{grid-template-columns:1fr !important;grid-template-rows:auto;}
-  .img-card:hover .img-placeholder{animation:none;transform:scale(1.08);}
-  .card-overlay{padding:16px;}
-  .card-overlay-title{font-size:14px;}
-  .card-overlay-sub{font-size:8px;}
-  
-  /* Lightbox mobile optimized */
-  .lightbox-content{max-width:100%;max-height:100%;}
-  .lightbox-img{border-radius:0;}
-  .lightbox-close{top:16px;right:16px;width:32px;height:32px;font-size:20px;}
-  .lightbox-nav{left:12px;right:12px;}
-  .lightbox-prev,.lightbox-next{width:40px;height:40px;font-size:16px;}
-  .lightbox-info{bottom:20px;left:20px;font-size:11px;}
-  
-  /* Breathing zoom less aggressive on mobile */
-  @keyframes breatheZoom{
-    0%,100%{transform:scale(1.08);}
-    50%{transform:scale(1.12);}
-  }
 }
 </style>
 </head>
@@ -558,19 +404,19 @@ footer{
 </section>
 
 <!-- ── CATEGORY NAV ── -->
-<div class="cat-nav">
+<div class="cat-nav" id="showcase">
   <div class="cat-nav-inner">
-    <a href="#reception" class="cat-btn active">Reception</a>
-    <a href="#ceremony" class="cat-btn">Ceremony</a>
-    <a href="#bouquet" class="cat-btn">Bespoke Bouquet</a>
-    <a href="#debut" class="cat-btn">Debut</a>
-    <a href="#birthday" class="cat-btn">Birthday</a>
-    <a href="#inquiry" class="cat-btn">Inquire</a>
+    <button class="cat-btn active" onclick="scrollTo('reception')">Reception</button>
+    <button class="cat-btn" onclick="scrollTo('ceremony')">Ceremony</button>
+    <button class="cat-btn" onclick="scrollTo('bouquet')">Bespoke Bouquet</button>
+    <button class="cat-btn" onclick="scrollTo('debut')">Debut</button>
+    <button class="cat-btn" onclick="scrollTo('birthday')">Birthday</button>
+    <button class="cat-btn" onclick="scrollTo('inquiry')">Inquire</button>
   </div>
 </div>
 
 <!-- ════════════════════════════════════════════ -->
-<!-- ── RECEPTION (10 images) ── -->
+<!-- ── RECEPTION ── -->
 <!-- ════════════════════════════════════════════ -->
 <section class="showcase-section" id="reception">
   <div class="sec-header reveal">
@@ -583,26 +429,61 @@ footer{
   </div>
 
   <div class="grid-hero grid-reception reveal">
-    <div class="img-card" data-category="reception" data-index="1"><div class="img-placeholder reception-1"></div><div class="card-overlay"><div class="card-overlay-title">Grand Ballroom Reception</div><div class="card-overlay-sub">Full Styling · Trusses · Florals</div></div></div>
-    <div class="img-card" data-category="reception" data-index="2"><div class="img-placeholder reception-2"></div><div class="card-overlay"><div class="card-overlay-title">Sweetheart Table Styling</div><div class="card-overlay-sub">Intimate · Elegant</div></div></div>
-    <div class="img-card" data-category="reception" data-index="3"><div class="img-placeholder reception-3"></div><div class="card-overlay"><div class="card-overlay-title">Trusses & Ceiling Drapery</div><div class="card-overlay-sub">Premium · Full Install</div></div></div>
-    <div class="img-card" data-category="reception" data-index="4"><div class="img-placeholder reception-4"></div><div class="card-overlay"><div class="card-overlay-title">Centerpiece & Table Design</div><div class="card-overlay-sub">Curated · Styled</div></div></div>
-    <div class="img-card" data-category="reception" data-index="5"><div class="img-placeholder reception-5"></div><div class="card-overlay"><div class="card-overlay-title">Entrance & Welcome Area</div><div class="card-overlay-sub">First Impressions · Memorable</div></div></div>
-    <div class="img-card" data-category="reception" data-index="6"><div class="img-placeholder reception-6"></div><div class="card-overlay"><div class="card-overlay-title">Reception Image 6</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
-    <div class="img-card" data-category="reception" data-index="7"><div class="img-placeholder reception-7"></div><div class="card-overlay"><div class="card-overlay-title">Reception Image 7</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
-    <div class="img-card" data-category="reception" data-index="8"><div class="img-placeholder reception-8"></div><div class="card-overlay"><div class="card-overlay-title">Reception Image 8</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
-    <div class="img-card" data-category="reception" data-index="9"><div class="img-placeholder reception-9"></div><div class="card-overlay"><div class="card-overlay-title">Reception Image 9</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
-    <div class="img-card" data-category="reception" data-index="10"><div class="img-placeholder reception-10"></div><div class="card-overlay"><div class="card-overlay-title">Reception Image 10</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
-    <div class="img-card" data-category="reception" data-index="11"><div class="img-placeholder reception-11"></div><div class="card-overlay"><div class="card-overlay-title">Reception Highlight</div><div class="card-overlay-sub">Erish Studio · Davao City</div></div></div>
-    <div class="img-card" data-category="reception" data-index="12"><div class="img-placeholder reception-12"></div><div class="card-overlay"><div class="card-overlay-title">Reception Highlight</div><div class="card-overlay-sub">Erish Studio · Davao City</div></div></div>
-    <div class="img-card" data-category="reception" data-index="13"><div class="img-placeholder reception-13"></div><div class="card-overlay"><div class="card-overlay-title">Reception Highlight</div><div class="card-overlay-sub">Erish Studio · Davao City</div></div></div>
-    <div class="img-card" data-category="reception" data-index="14"><div class="img-placeholder reception-14"></div><div class="card-overlay"><div class="card-overlay-title">Reception Highlight</div><div class="card-overlay-sub">Erish Studio · Davao City</div></div></div>
-    <div class="img-card" data-category="reception" data-index="15"><div class="img-placeholder reception-15"></div><div class="card-overlay"><div class="card-overlay-title">Reception Highlight</div><div class="card-overlay-sub">Erish Studio · Davao City</div></div></div>
+    <div class="img-card g1" style="height:100%;">
+      <div class="img-placeholder reception-1" style="height:100%;">
+        <div class="card-icon">Reception<br/>Styling</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Grand Ballroom Reception</div>
+        <div class="card-overlay-sub">Full Styling · Trusses · Florals</div>
+      </div>
+    </div>
+    <div class="img-card g2" style="height:100%;">
+      <div class="img-placeholder reception-2" style="height:100%;">
+        <div class="card-icon">Head<br/>Table</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Sweetheart Table Styling</div>
+        <div class="card-overlay-sub">Intimate · Elegant</div>
+      </div>
+    </div>
+    <div class="img-card g3" style="height:100%;">
+      <div class="img-placeholder reception-3" style="height:100%;">
+        <div class="card-icon">Ceiling<br/>Draping</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Trusses & Ceiling Drapery</div>
+        <div class="card-overlay-sub">Premium · Full Install</div>
+      </div>
+    </div>
+    <div class="img-card g4" style="height:100%;">
+      <div class="img-placeholder reception-4" style="height:100%;">
+        <div class="card-icon">Table<br/>Setting</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Centerpiece & Table Design</div>
+        <div class="card-overlay-sub">Curated · Styled</div>
+      </div>
+    </div>
+    <div class="img-card g5" style="height:100%;">
+      <div class="img-placeholder reception-5" style="height:100%;">
+        <div class="card-icon">Entrance<br/>Styling</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Entrance & Welcome Area</div>
+        <div class="card-overlay-sub">First Impressions · Memorable</div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ════════════════════════════════════════════ -->
-<!-- ── CEREMONY (8 images) ── -->
+<!-- ── CEREMONY ── -->
 <!-- ════════════════════════════════════════════ -->
 <section class="showcase-section" id="ceremony">
   <div class="sec-header reveal">
@@ -615,24 +496,41 @@ footer{
   </div>
 
   <div class="grid-hero grid-ceremony reveal">
-    <div class="img-card" data-category="ceremony" data-index="1"><div class="img-placeholder ceremony-1"></div><div class="card-overlay"><div class="card-overlay-title">Altar & Arch Styling</div><div class="card-overlay-sub">Sacred · Breathtaking</div></div></div>
-    <div class="img-card" data-category="ceremony" data-index="2"><div class="img-placeholder ceremony-2"></div><div class="card-overlay"><div class="card-overlay-title">Aisle & Pew Styling</div><div class="card-overlay-sub">Florals · Ribbons · Elegance</div></div></div>
-    <div class="img-card" data-category="ceremony" data-index="3"><div class="img-placeholder ceremony-3"></div><div class="card-overlay"><div class="card-overlay-title">Outdoor Garden Ceremony</div><div class="card-overlay-sub">Al Fresco · Natural · Romantic</div></div></div>
-    <div class="img-card" data-category="ceremony" data-index="4"><div class="img-placeholder ceremony-4"></div><div class="card-overlay"><div class="card-overlay-title">Ceremony Image 4</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
-    <div class="img-card" data-category="ceremony" data-index="5"><div class="img-placeholder ceremony-5"></div><div class="card-overlay"><div class="card-overlay-title">Ceremony Image 5</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
-    <div class="img-card" data-category="ceremony" data-index="6"><div class="img-placeholder ceremony-6"></div><div class="card-overlay"><div class="card-overlay-title">Ceremony Image 6</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
-    <div class="img-card" data-category="ceremony" data-index="7"><div class="img-placeholder ceremony-7"></div><div class="card-overlay"><div class="card-overlay-title">Ceremony Image 7</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
-    <div class="img-card" data-category="ceremony" data-index="8"><div class="img-placeholder ceremony-8"></div><div class="card-overlay"><div class="card-overlay-title">Ceremony Image 8</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
-    <div class="img-card" data-category="ceremony" data-index="9"><div class="img-placeholder ceremony-9"></div><div class="card-overlay"><div class="card-overlay-title">Ceremony Highlight</div><div class="card-overlay-sub">Erish Studio · Davao City</div></div></div>
-    <div class="img-card" data-category="ceremony" data-index="10"><div class="img-placeholder ceremony-10"></div><div class="card-overlay"><div class="card-overlay-title">Ceremony Highlight</div><div class="card-overlay-sub">Erish Studio · Davao City</div></div></div>
-    <div class="img-card" data-category="ceremony" data-index="11"><div class="img-placeholder ceremony-11"></div><div class="card-overlay"><div class="card-overlay-title">Ceremony Highlight</div><div class="card-overlay-sub">Erish Studio · Davao City</div></div></div>
-    <div class="img-card" data-category="ceremony" data-index="12"><div class="img-placeholder ceremony-12"></div><div class="card-overlay"><div class="card-overlay-title">Ceremony Highlight</div><div class="card-overlay-sub">Erish Studio · Davao City</div></div></div>
-    <div class="img-card" data-category="ceremony" data-index="13"><div class="img-placeholder ceremony-13"></div><div class="card-overlay"><div class="card-overlay-title">Ceremony Highlight</div><div class="card-overlay-sub">Erish Studio · Davao City</div></div></div>
+    <div class="img-card g1" style="height:420px;">
+      <div class="img-placeholder ceremony-1" style="height:100%;">
+        <div class="card-icon">Altar<br/>Design</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Altar & Arch Styling</div>
+        <div class="card-overlay-sub">Sacred · Breathtaking</div>
+      </div>
+    </div>
+    <div class="img-card g2" style="height:420px;">
+      <div class="img-placeholder ceremony-2" style="height:100%;">
+        <div class="card-icon">Aisle<br/>Décor</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Aisle & Pew Styling</div>
+        <div class="card-overlay-sub">Florals · Ribbons · Elegance</div>
+      </div>
+    </div>
+    <div class="img-card g3" style="height:260px;">
+      <div class="img-placeholder ceremony-3" style="height:100%;">
+        <div class="card-icon">Garden<br/>Ceremony</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Outdoor Garden Ceremony</div>
+        <div class="card-overlay-sub">Al Fresco · Natural · Romantic</div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ════════════════════════════════════════════ -->
-<!-- ── BESPOKE BOUQUET (9 images) ── -->
+<!-- ── BESPOKE BOUQUET ── -->
 <!-- ════════════════════════════════════════════ -->
 <section class="showcase-section" id="bouquet">
   <div class="sec-header reveal">
@@ -645,25 +543,51 @@ footer{
   </div>
 
   <div class="grid-hero grid-bouquet reveal">
-    <div class="img-card" data-category="bouquet" data-index="1"><div class="img-placeholder bouquet-1"></div><div class="card-overlay"><div class="card-overlay-title">Signature Bridal Bouquet</div><div class="card-overlay-sub">Hand-tied · Bespoke · Luxe</div></div></div>
-    <div class="img-card" data-category="bouquet" data-index="2"><div class="img-placeholder bouquet-2"></div><div class="card-overlay"><div class="card-overlay-title">Bridesmaid Bouquets</div><div class="card-overlay-sub">Complementary · Curated</div></div></div>
-    <div class="img-card" data-category="bouquet" data-index="3"><div class="img-placeholder bouquet-3"></div><div class="card-overlay"><div class="card-overlay-title">Boutonnieres & Corsages</div><div class="card-overlay-sub">Entourage · Finished Detail</div></div></div>
-    <div class="img-card" data-category="bouquet" data-index="4"><div class="img-placeholder bouquet-4"></div><div class="card-overlay"><div class="card-overlay-title">Floral Accessories</div><div class="card-overlay-sub">Crowns · Petals · Baskets</div></div></div>
-    <div class="img-card" data-category="bouquet" data-index="5"><div class="img-placeholder bouquet-5"></div><div class="card-overlay"><div class="card-overlay-title">Bouquet Image 5</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
-    <div class="img-card" data-category="bouquet" data-index="6"><div class="img-placeholder bouquet-6"></div><div class="card-overlay"><div class="card-overlay-title">Bouquet Image 6</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
-    <div class="img-card" data-category="bouquet" data-index="7"><div class="img-placeholder bouquet-7"></div><div class="card-overlay"><div class="card-overlay-title">Bouquet Image 7</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
-    <div class="img-card" data-category="bouquet" data-index="8"><div class="img-placeholder bouquet-8"></div><div class="card-overlay"><div class="card-overlay-title">Bouquet Image 8</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
-    <div class="img-card" data-category="bouquet" data-index="9"><div class="img-placeholder bouquet-9"></div><div class="card-overlay"><div class="card-overlay-title">Bouquet Image 9</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
-    <div class="img-card" data-category="bouquet" data-index="10"><div class="img-placeholder bouquet-10"></div><div class="card-overlay"><div class="card-overlay-title">Bouquet Highlight</div><div class="card-overlay-sub">Erish Studio · Davao City</div></div></div>
-    <div class="img-card" data-category="bouquet" data-index="11"><div class="img-placeholder bouquet-11"></div><div class="card-overlay"><div class="card-overlay-title">Bouquet Highlight</div><div class="card-overlay-sub">Erish Studio · Davao City</div></div></div>
-    <div class="img-card" data-category="bouquet" data-index="12"><div class="img-placeholder bouquet-12"></div><div class="card-overlay"><div class="card-overlay-title">Bouquet Highlight</div><div class="card-overlay-sub">Erish Studio · Davao City</div></div></div>
-    <div class="img-card" data-category="bouquet" data-index="13"><div class="img-placeholder bouquet-13"></div><div class="card-overlay"><div class="card-overlay-title">Bouquet Highlight</div><div class="card-overlay-sub">Erish Studio · Davao City</div></div></div>
-    <div class="img-card" data-category="bouquet" data-index="14"><div class="img-placeholder bouquet-14"></div><div class="card-overlay"><div class="card-overlay-title">Bouquet Highlight</div><div class="card-overlay-sub">Erish Studio · Davao City</div></div></div>
+    <div class="img-card g1" style="height:600px;">
+      <div class="img-placeholder bouquet-1" style="height:100%;">
+        <div class="card-icon">Bridal<br/>Bouquet</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Signature Bridal Bouquet</div>
+        <div class="card-overlay-sub">Hand-tied · Bespoke · Luxe</div>
+      </div>
+    </div>
+    <div class="img-card g2" style="height:300px;">
+      <div class="img-placeholder bouquet-2" style="height:100%;">
+        <div class="card-icon">Bridesmaid<br/>Blooms</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Bridesmaid Bouquets</div>
+        <div class="card-overlay-sub">Complementary · Curated</div>
+      </div>
+    </div>
+    <div class="img-card g3" style="height:300px;">
+      <div class="img-placeholder bouquet-3" style="height:100%;">
+        <div class="card-icon">Boutonniere<br/>& Corsage</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Boutonnieres & Corsages</div>
+        <div class="card-overlay-sub">Entourage · Finished Detail</div>
+      </div>
+    </div>
+    <div class="img-card g4" style="height:300px;">
+      <div class="img-placeholder bouquet-4" style="height:100%;">
+        <div class="card-icon">Floral<br/>Accessories</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Floral Accessories</div>
+        <div class="card-overlay-sub">Crowns · Petals · Baskets</div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ════════════════════════════════════════════ -->
-<!-- ── DEBUT (7 images) ── -->
+<!-- ── DEBUT ── -->
 <!-- ════════════════════════════════════════════ -->
 <section class="showcase-section" id="debut">
   <div class="sec-header reveal">
@@ -676,21 +600,51 @@ footer{
   </div>
 
   <div class="grid-hero grid-debut reveal">
-    <div class="img-card" data-category="debut" data-index="1"><div class="img-placeholder debut-1"></div><div class="card-overlay"><div class="card-overlay-title">Grand Entrance Setup</div><div class="card-overlay-sub">Dramatic · Statement · Unforgettable</div></div></div>
-    <div class="img-card" data-category="debut" data-index="2"><div class="img-placeholder debut-2"></div><div class="card-overlay"><div class="card-overlay-title">Stage & Cotillion Area</div><div class="card-overlay-sub">Elegant · Styled · Curated</div></div></div>
-    <div class="img-card" data-category="debut" data-index="3"><div class="img-placeholder debut-3"></div><div class="card-overlay"><div class="card-overlay-title">Reception & Table Styling</div><div class="card-overlay-sub">Feminine · Lush · Refined</div></div></div>
-    <div class="img-card" data-category="debut" data-index="4"><div class="img-placeholder debut-4"></div><div class="card-overlay"><div class="card-overlay-title">Debut Photo Backdrop</div><div class="card-overlay-sub">Instagrammable · Custom · Styled</div></div></div>
-    <div class="img-card" data-category="debut" data-index="5"><div class="img-placeholder debut-5"></div><div class="card-overlay"><div class="card-overlay-title">Debut Image 5</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
-    <div class="img-card" data-category="debut" data-index="6"><div class="img-placeholder debut-6"></div><div class="card-overlay"><div class="card-overlay-title">Debut Image 6</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
-    <div class="img-card" data-category="debut" data-index="7"><div class="img-placeholder debut-7"></div><div class="card-overlay"><div class="card-overlay-title">Debut Image 7</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
-    <div class="img-card" data-category="debut" data-index="8"><div class="img-placeholder debut-8"></div><div class="card-overlay"><div class="card-overlay-title">Debut Highlight</div><div class="card-overlay-sub">Erish Studio · Davao City</div></div></div>
-    <div class="img-card" data-category="debut" data-index="9"><div class="img-placeholder debut-9"></div><div class="card-overlay"><div class="card-overlay-title">Debut Highlight</div><div class="card-overlay-sub">Erish Studio · Davao City</div></div></div>
-    <div class="img-card" data-category="debut" data-index="10"><div class="img-placeholder debut-10"></div><div class="card-overlay"><div class="card-overlay-title">Debut Highlight</div><div class="card-overlay-sub">Erish Studio · Davao City</div></div></div>
+    <div class="img-card g1" style="height:320px;">
+      <div class="img-placeholder debut-1" style="height:100%;">
+        <div class="card-icon">Grand<br/>Entrance</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Grand Entrance Setup</div>
+        <div class="card-overlay-sub">Dramatic · Statement · Unforgettable</div>
+      </div>
+    </div>
+    <div class="img-card g2" style="height:320px;">
+      <div class="img-placeholder debut-2" style="height:100%;">
+        <div class="card-icon">Cotillion<br/>Stage</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Stage & Cotillion Area</div>
+        <div class="card-overlay-sub">Elegant · Styled · Curated</div>
+      </div>
+    </div>
+    <div class="img-card g3" style="height:320px;">
+      <div class="img-placeholder debut-3" style="height:100%;">
+        <div class="card-icon">Debut<br/>Tablescape</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Reception & Table Styling</div>
+        <div class="card-overlay-sub">Feminine · Lush · Refined</div>
+      </div>
+    </div>
+    <div class="img-card g4" style="height:320px;">
+      <div class="img-placeholder debut-4" style="height:100%;">
+        <div class="card-icon">Photo<br/>Backdrop</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Debut Photo Backdrop</div>
+        <div class="card-overlay-sub">Instagrammable · Custom · Styled</div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ════════════════════════════════════════════ -->
-<!-- ── BIRTHDAY (7 images) ── -->
+<!-- ── BIRTHDAY ── -->
 <!-- ════════════════════════════════════════════ -->
 <section class="showcase-section" id="birthday">
   <div class="sec-header reveal">
@@ -703,16 +657,46 @@ footer{
   </div>
 
   <div class="grid-hero grid-birthday reveal">
-    <div class="img-card" data-category="bday" data-index="1"><div class="img-placeholder bday-1"></div><div class="card-overlay"><div class="card-overlay-title">Themed Birthday Styling</div><div class="card-overlay-sub">Creative · Bold · Personalized</div></div></div>
-    <div class="img-card" data-category="bday" data-index="2"><div class="img-placeholder bday-2"></div><div class="card-overlay"><div class="card-overlay-title">Dessert & Cake Table</div><div class="card-overlay-sub">Styled · Curated · Delicious</div></div></div>
-    <div class="img-card" data-category="bday" data-index="3"><div class="img-placeholder bday-3"></div><div class="card-overlay"><div class="card-overlay-title">Statement Backdrop & Balloon Art</div><div class="card-overlay-sub">Dramatic · Custom · Stunning</div></div></div>
-    <div class="img-card" data-category="bday" data-index="4"><div class="img-placeholder bday-4"></div><div class="card-overlay"><div class="card-overlay-title">Intimate Dinner Celebration</div><div class="card-overlay-sub">Refined · Warm · Personal</div></div></div>
-    <div class="img-card" data-category="bday" data-index="5"><div class="img-placeholder bday-5"></div><div class="card-overlay"><div class="card-overlay-title">Birthday Image 5</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
-    <div class="img-card" data-category="bday" data-index="6"><div class="img-placeholder bday-6"></div><div class="card-overlay"><div class="card-overlay-title">Birthday Image 6</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
-    <div class="img-card" data-category="bday" data-index="7"><div class="img-placeholder bday-7"></div><div class="card-overlay"><div class="card-overlay-title">Birthday Image 7</div><div class="card-overlay-sub">Upload Your Photo Here</div></div></div>
-    <div class="img-card" data-category="bday" data-index="8"><div class="img-placeholder bday-8"></div><div class="card-overlay"><div class="card-overlay-title">Birthday Highlight</div><div class="card-overlay-sub">Erish Studio · Davao City</div></div></div>
-    <div class="img-card" data-category="bday" data-index="9"><div class="img-placeholder bday-9"></div><div class="card-overlay"><div class="card-overlay-title">Birthday Highlight</div><div class="card-overlay-sub">Erish Studio · Davao City</div></div></div>
-    <div class="img-card" data-category="bday" data-index="10"><div class="img-placeholder bday-10"></div><div class="card-overlay"><div class="card-overlay-title">Birthday Highlight</div><div class="card-overlay-sub">Erish Studio · Davao City</div></div></div>
+    <div class="img-card g1" style="height:280px;">
+      <div class="img-placeholder bday-1" style="height:100%;">
+        <div class="card-icon">Party<br/>Styling</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Themed Birthday Styling</div>
+        <div class="card-overlay-sub">Creative · Bold · Personalized</div>
+      </div>
+    </div>
+    <div class="img-card g2" style="height:280px;">
+      <div class="img-placeholder bday-2" style="height:100%;">
+        <div class="card-icon">Dessert<br/>Table</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Dessert & Cake Table</div>
+        <div class="card-overlay-sub">Styled · Curated · Delicious</div>
+      </div>
+    </div>
+    <div class="img-card g3" style="height:560px;">
+      <div class="img-placeholder bday-3" style="height:100%;">
+        <div class="card-icon">Grand<br/>Backdrop</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Statement Backdrop & Balloon Art</div>
+        <div class="card-overlay-sub">Dramatic · Custom · Stunning</div>
+      </div>
+    </div>
+    <div class="img-card g4" style="height:280px;">
+      <div class="img-placeholder bday-4" style="height:100%;">
+        <div class="card-icon">Intimate<br/>Dinner</div>
+        <div class="card-ornament"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+      </div>
+      <div class="card-overlay">
+        <div class="card-overlay-title">Intimate Dinner Celebration</div>
+        <div class="card-overlay-sub">Refined · Warm · Personal</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -747,8 +731,8 @@ footer{
     </div>
 
     <div class="inquiry-cta reveal">
-      <a href="inquire.html" class="btn-inquiry"><span>Begin Your Inquiry</span></a>
-      <a href="index.html#contact" class="btn-ghost">View Contact Information</a>
+      <a href="inquire.html" class="btn-inquiry"><span>✦ Begin Your Inquiry ✦</span></a>
+      <button class="btn-ghost" onclick="document.getElementById('inquiry').scrollIntoView({behavior:'smooth'});">View Details</button>
     </div>
 
     <p class="inquiry-note reveal">
@@ -761,197 +745,65 @@ footer{
 <!-- ── FOOTER ── -->
 <footer>
   <div class="foot-logo"><em>Erish</em> Studio</div>
-  <div class="foot-note">&copy; 2007–2026 Erish Studio Events & Styling · Davao City, Philippines</div>
+  <div class="foot-note">© 2007–2026 Erish Studio Events & Styling · Davao City, Philippines</div>
 </footer>
 
-<!-- ── LIGHTBOX ── -->
-<div class="lightbox" id="lightbox">
-  <button class="lightbox-close" id="lightbox-close">✕</button>
-  <div class="lightbox-content" id="lightbox-content">
-    <img src="" class="lightbox-img" id="lightbox-img" alt="Enlarged View">
-    <div class="lightbox-placeholder" id="lightbox-placeholder" style="display:none;">
-      Placeholder<br/>Click to enlarge
-    </div>
-  </div>
-  <div class="lightbox-nav">
-    <button class="lightbox-prev" id="lightbox-prev">❮</button>
-    <button class="lightbox-next" id="lightbox-next">❯</button>
-  </div>
-  <div class="lightbox-info">
-    <span id="lightbox-counter">1 / 5</span>
-  </div>
-</div>
-
+<!-- ════════════════════════════════════════════ -->
+<!-- SCRIPTS ── -->
+<!-- ════════════════════════════════════════════ -->
 <script>
-// ════ 1. UNIVERSAL AUDIO SETUP ════
+// ════ Category Navigation Scroll ════
+function scrollTo(id){
+  const el = document.getElementById(id);
+  if(el) {
+    el.scrollIntoView({behavior:'smooth', block:'start'});
+    document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+}
+
+// ════ Active Category Button on Scroll ════
+const sections = ['reception','ceremony','bouquet','debut','birthday','inquiry'];
+const catBtns = document.querySelectorAll('.cat-btn');
+window.addEventListener('scroll',()=>{
+  let current='';
+  sections.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el && window.scrollY >= el.offsetTop - 200) current=id;
+  });
+  catBtns.forEach((btn,i)=>{
+    btn.classList.toggle('active', sections[i]===current);
+  });
+});
+
+// ════ Scroll Reveal Animation ════
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('visible'), i*60);
+      obs.unobserve(e.target);
+    }
+  });
+},{threshold:0.08});
+reveals.forEach(r=>obs.observe(r));
+
+// ════ Audio Effects (Velvet Snap) ════
 const velvetSnap = new Audio('velvet-snap.mp3');
 velvetSnap.volume = 0.5;
 
-function playAudio() {
-  velvetSnap.currentTime = 0;
-  velvetSnap.play().catch(e => console.log('Audio interaction'));
-}
-
-// ════ 2. ATTACH AUDIO TO ALL INTERACTIVE ELEMENTS ════
-// Headers, subheaders, buttons, links, images, labels, text
-const allInteractive = document.querySelectorAll(
-  'h1, h2, h3, .hero-title, .hero-desc, .hero-sub, .eyebrow, ' +
-  '.sec-title, .sec-label, .sec-desc, ' +
-  '.inq-title, .inq-label, .inq-desc, ' +
-  '.btn-inquiry, .btn-ghost, ' +
-  '.cat-btn, .nav-logo, .nav-links a, ' +
-  '.foot-logo, ' +
-  '.card-overlay-title, .card-overlay-sub, ' +
-  '.img-card, ' +
-  '.inq-detail-text strong'
-);
-
-allInteractive.forEach(el => {
-  el.addEventListener('click', playAudio);
-  el.style.cursor = 'pointer';
-});
-
-// ════ 3. REVEAL ANIMATION ════
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, {threshold: 0.08});
-
-document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-// ════ 4. LIGHTBOX SYSTEM ════
-let currentCategory = '';
-let currentIndex = 0;
-let categoryImages = [];
-
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightbox-img');
-const lightboxPlaceholder = document.getElementById('lightbox-placeholder');
-const lightboxCounter = document.getElementById('lightbox-counter');
-const lightboxClose = document.getElementById('lightbox-close');
-const lightboxPrev = document.getElementById('lightbox-prev');
-const lightboxNext = document.getElementById('lightbox-next');
-
-// ── Open Lightbox
-document.querySelectorAll('.img-card').forEach(card => {
-  card.addEventListener('click', function() {
-    playAudio();
-    
-    const category = this.dataset.category;
-    const index = parseInt(this.dataset.index) - 1;
-    
-    // Get all cards in this category
-    const section = this.closest('.showcase-section');
-    categoryImages = Array.from(section.querySelectorAll('.img-card'));
-    currentCategory = category;
-    currentIndex = categoryImages.indexOf(this);
-    
-    // Get background image
-    const placeholder = this.querySelector('.img-placeholder');
-    const bgImage = window.getComputedStyle(placeholder).backgroundImage;
-    
-    // Extract URL from background-image
-    let imageUrl = '';
-    if (bgImage && bgImage !== 'none') {
-      // Match all URL patterns
-      const urlMatch = bgImage.match(/url\(['"]?([^'"()]+)['"]?\)/g);
-      if (urlMatch && urlMatch.length > 0) {
-        // Get the last URL (the actual image, not the gradient)
-        const lastUrl = urlMatch[urlMatch.length - 1];
-        imageUrl = lastUrl.replace(/url\(['"]?([^'"()]+)['"]?\)/, '$1');
-      }
-    }
-    
-    // Display image if real photo, otherwise show placeholder
-    if (imageUrl && imageUrl.endsWith('.jpg')) {
-      lightboxImg.src = imageUrl;
-      lightboxImg.style.display = 'block';
-      lightboxPlaceholder.style.display = 'none';
-    } else {
-      lightboxImg.style.display = 'none';
-      lightboxPlaceholder.style.display = 'flex';
-    }
-    
-    updateLightboxCounter();
-    lightbox.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  });
-});
-
-// ── Close Lightbox
-function closeLightbox() {
-  lightbox.classList.remove('active');
-  document.body.style.overflow = 'auto';
-}
-
-lightboxClose.addEventListener('click', closeLightbox);
-lightbox.addEventListener('click', (e) => {
-  if (e.target === lightbox) closeLightbox();
-});
-
-// ── Navigation
-function updateLightboxCounter() {
-  const total = categoryImages.length;
-  lightboxCounter.textContent = `${currentIndex + 1} / ${total}`;
-}
-
-lightboxNext.addEventListener('click', () => {
-  playAudio();
-  currentIndex = (currentIndex + 1) % categoryImages.length;
-  updateImage();
-  updateLightboxCounter();
-});
-
-lightboxPrev.addEventListener('click', () => {
-  playAudio();
-  currentIndex = (currentIndex - 1 + categoryImages.length) % categoryImages.length;
-  updateImage();
-  updateLightboxCounter();
-});
-
-function updateImage() {
-  const card = categoryImages[currentIndex];
-  const placeholder = card.querySelector('.img-placeholder');
-  const bgImage = window.getComputedStyle(placeholder).backgroundImage;
-  
-  let imageUrl = '';
-  if (bgImage && bgImage !== 'none') {
-    const urlMatch = bgImage.match(/url\(['"]?([^'"()]+)['"]?\)/g);
-    if (urlMatch && urlMatch.length > 0) {
-      const lastUrl = urlMatch[urlMatch.length - 1];
-      imageUrl = lastUrl.replace(/url\(['"]?([^'"()]+)['"]?\)/, '$1');
-    }
-  }
-  
-  if (imageUrl && imageUrl.endsWith('.jpg')) {
-    lightboxImg.src = imageUrl;
-    lightboxImg.style.display = 'block';
-    lightboxPlaceholder.style.display = 'none';
-  } else {
-    lightboxImg.style.display = 'none';
-    lightboxPlaceholder.style.display = 'flex';
-  }
-}
-
-// ── Keyboard Navigation
-document.addEventListener('keydown', (e) => {
-  if (lightbox.classList.contains('active')) {
-    if (e.key === 'ArrowRight') lightboxNext.click();
-    if (e.key === 'ArrowLeft') lightboxPrev.click();
-    if (e.key === 'Escape') closeLightbox();
+// Apply click sound to all interactive elements
+const clickableElements = document.querySelectorAll('a, button, .cat-btn');
+clickableElements.forEach(el => {
+  if(el.id !== 'exp-btn') {  // Skip start button if it exists
+    el.addEventListener('click', function() {
+      velvetSnap.currentTime = 0;
+      velvetSnap.play().catch(err => {
+        console.log('Audio unavailable');
+      });
+    });
   }
 });
-
-// ════ 5. STATUS LOG ════
-console.log('✓ Gold standard showcase.html loaded');
-console.log('✓ Audio plays on ALL interactive elements');
-console.log('✓ Images have hover/breathe/zoom effects');
-console.log('✓ Lightbox with navigation working');
-console.log('✓ 5 categories with 10+8+9+7+7 = 41 total image slots');
-console.log('✓ Keyboard navigation: Arrows + ESC');
 </script>
 
 </body>
