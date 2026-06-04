@@ -288,14 +288,226 @@ nav.scrolled{background:rgba(28,22,16,0.92);backdrop-filter:blur(20px);border-bo
 .contact-value a{color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.3s;}
 .contact-value a:hover{color:var(--gold-lt);}
 
+/* ── QR CODE CONTACT ITEM ── */
+.contact-qr-item {
+  padding: 24px;
+}
+
+.contact-qr-icon {
+  font-size: 28px;
+  color: var(--gold);
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+
+.contact-qr-label {
+  font-size: 9px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  margin-bottom: 16px;
+}
+
+.contact-qr-image {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(184, 150, 90, 0.2);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.contact-qr-image:hover {
+  border-color: rgba(184, 150, 90, 0.5);
+  background: rgba(184, 150, 90, 0.05);
+}
+
+.contact-qr-image img {
+  width: 100%;
+  max-width: 180px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.contact-qr-desc {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.6;
+}
+
 /* ── FOOTER ── */
 footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,150,90,0.08);text-align:center;position:relative;z-index:10;}
 .f-logo{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:rgba(255,255,255,0.5);letter-spacing:2px;margin-bottom:16px;}
 .f-logo em{font-style:italic;color:var(--gold);}
 .f-note{font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:1px;line-height:1.8;}
 
+/* ===== FLOATING QR CODE CSS ===== */
+.floating-qr-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 999;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 2px solid var(--gold-lt);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(28, 22, 16, 0.15);
+  transition: all 0.3s ease;
+  font-size: 24px;
+  color: #fff;
+}
+
+.floating-qr-btn:hover {
+  background: var(--gold-lt);
+  transform: scale(1.08);
+}
+
+.floating-qr-btn:active {
+  transform: scale(0.95);
+}
+
+.qr-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(28, 22, 16, 0.95);
+  z-index: 1001;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  animation: fadeIn 0.3s ease;
+}
+
+.qr-modal.active {
+  display: flex;
+}
+
+.qr-modal-content {
+  background: var(--cream);
+  border-radius: 8px;
+  padding: 2.5rem;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  animation: slideUp 0.4s ease;
+  position: relative;
+}
+
+.qr-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--dark);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+.qr-modal-close:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.qr-modal-header {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--dark);
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.qr-modal-subtext {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 24px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.qr-modal-image {
+  background: linear-gradient(135deg, var(--warm) 0%, #fff 100%);
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.qr-modal-image img {
+  width: 100%;
+  max-width: 240px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.qr-modal-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.qr-btn {
+  padding: 12px 24px;
+  background: var(--gold);
+  color: var(--dark);
+  border: none;
+  border-radius: 4px;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Jost', sans-serif;
+}
+
+.qr-btn:hover {
+  background: var(--gold-lt);
+  letter-spacing: 4px;
+}
+
+.qr-btn-secondary {
+  padding: 12px 24px;
+  background: transparent;
+  color: var(--dark);
+  border: 0.5px solid var(--gold);
+  border-radius: 4px;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Jost', sans-serif;
+}
+
+.qr-btn-secondary:hover {
+  background: var(--gold);
+  color: var(--dark);
+  letter-spacing: 4px;
+}
+
 /* ── ANIMATIONS ── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes slideUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
+
 .reveal{opacity:0;transform:translateY(32px);transition:opacity 1s ease,transform 1s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 
@@ -311,6 +523,28 @@ footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,
   .hero-ctas{flex-direction:column;width:100%;}
   .btn-primary,.btn-ghost{width:100%;max-width:320px;}
   .btn-flagship{padding:24px 48px;}
+
+  .floating-qr-btn {
+    width: 48px;
+    height: 48px;
+    bottom: 20px;
+    right: 16px;
+    font-size: 20px;
+    box-shadow: 0 2px 8px rgba(28, 22, 16, 0.1);
+  }
+
+  .qr-modal-content {
+    padding: 2rem;
+  }
+
+  .qr-modal-header {
+    font-size: 20px;
+  }
+
+  .qr-btn, .qr-btn-secondary {
+    padding: 10px 20px;
+    font-size: 9px;
+  }
 }
 </style>
 </head>
@@ -626,6 +860,16 @@ footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,
       <div class="contact-label">Availability</div>
       <div class="contact-value">9:00 AM – 10:00 PM<br/><small style="opacity:0.6;">Philippine Time (GMT+8)</small></div>
     </div>
+
+    <!-- NEW: Google Form QR Code Contact Item -->
+    <div class="contact-item contact-qr-item reveal">
+      <div class="contact-qr-icon">📱</div>
+      <div class="contact-qr-label">Quick Inquiry</div>
+      <div class="contact-qr-image" id="googleFormQRImage" title="Click to enlarge or scan">
+        <img src="images/google-form-qr.png" alt="Google Form QR Code" />
+      </div>
+      <div class="contact-qr-desc">Scan to open inquiry form</div>
+    </div>
   </div>
 </section>
 
@@ -637,6 +881,25 @@ footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,
     Davao City, Philippines &nbsp;·&nbsp; Crafting Celebrations Since 2007
   </div>
 </footer>
+
+<!-- Floating QR Button -->
+<button class="floating-qr-btn" id="floatingQRBtn" title="Scan QR Code">●</button>
+
+<!-- QR Modal -->
+<div class="qr-modal" id="qrModal">
+  <div class="qr-modal-content">
+    <button class="qr-modal-close" id="qrModalClose">✕</button>
+    <h3 class="qr-modal-header">Scan to Visit</h3>
+    <p class="qr-modal-subtext">Studio-Erish.Pages.Dev</p>
+    <div class="qr-modal-image">
+      <img src="images/studio-erish.png" alt="Erish Studio QR Code" />
+    </div>
+    <div class="qr-modal-buttons">
+      <button class="qr-btn" id="qrDownloadBtn">Download</button>
+      <button class="qr-btn-secondary" id="qrCloseBtn">Close</button>
+    </div>
+  </div>
+</div>
 
 <!-- ════════════════════════════════════════════ -->
 <!-- MASTER AUDIO SCRIPT ── -->
@@ -746,12 +1009,58 @@ const observer = new IntersectionObserver((entries) => {
 reveals.forEach(r => observer.observe(r));
 console.log("✓ Scroll reveal animations active");
 
+/* ===== FLOATING QR CODE JAVASCRIPT ===== */
+const floatingQRBtn = document.getElementById('floatingQRBtn');
+const qrModal = document.getElementById('qrModal');
+const qrModalClose = document.getElementById('qrModalClose');
+const qrCloseBtn = document.getElementById('qrCloseBtn');
+const qrDownloadBtn = document.getElementById('qrDownloadBtn');
+
+floatingQRBtn.addEventListener('click', () => {
+  velvetSnap.currentTime = 0;
+  velvetSnap.play().catch(err => console.log('Audio blocked'));
+  qrModal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+});
+
+function closeQRModal() {
+  qrModal.classList.remove('active');
+  document.body.style.overflow = 'auto';
+}
+
+qrModalClose.addEventListener('click', closeQRModal);
+qrCloseBtn.addEventListener('click', closeQRModal);
+
+qrModal.addEventListener('click', (e) => {
+  if (e.target === qrModal) {
+    closeQRModal();
+  }
+});
+
+qrDownloadBtn.addEventListener('click', () => {
+  velvetSnap.currentTime = 0;
+  velvetSnap.play().catch(err => console.log('Audio blocked'));
+  const link = document.createElement('a');
+  link.href = 'images/studio-erish.png';
+  link.download = 'Erish-Studio-QR.png';
+  link.click();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (qrModal.classList.contains('active') && e.key === 'Escape') {
+    closeQRModal();
+  }
+});
+
+console.log('✓ Floating QR Code System Loaded');
+
 // ════ DIAGNOSTIC SUMMARY ════
 console.log("\n╔════════════════════════════════════════════════════════╗");
 console.log("║  ERISH STUDIO AUDIO SYSTEM - READY                   ║");
 console.log("╚════════════════════════════════════════════════════════╝");
 console.log("✓ START EXPERIENCE button: plays opening.mp3");
 console.log("✓ All other buttons & links: play velvet-snap.mp3");
+console.log("✓ Floating QR button: active & functional");
 console.log("✓ System initialized successfully\n");
 </script>
 
