@@ -311,15 +311,6 @@ footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,
   .hero-ctas{flex-direction:column;width:100%;}
   .btn-primary,.btn-ghost{width:100%;max-width:320px;}
   .btn-flagship{padding:24px 48px;}
-/* Floating QR Button */
-.floating-qr-btn{position:fixed;bottom:30px;right:30px;width:55px;height:55px;background:var(--gold);color:var(--dark);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:9999;box-shadow:0 4px 15px rgba(0,0,0,0.3);transition:transform 0.3s ease;font-weight:600;font-size:12px;text-transform:uppercase;}
-.floating-qr-btn:hover{transform:scale(1.1);}
-.qr-modal{display:none;position:fixed;inset:0;background:rgba(28,22,16,0.95);z-index:10000;align-items:center;justify-content:center;flex-direction:column;opacity:0;transition:opacity 0.3s ease;padding:20px;text-align:center;}
-.qr-modal.active{display:flex;opacity:1;}
-.qr-modal img{max-width:250px;border:5px solid #fff;margin-bottom:20px;}
-.qr-close-btn,.qr-download-btn{margin:5px;padding:10px 20px;cursor:pointer;font-family:inherit;border:none;}
-.qr-download-btn{background:var(--gold);color:var(--dark);font-weight:600;}
-.qr-close-btn{background:transparent;border:1px solid #fff;color:#fff;}
 }
 </style>
 </head>
@@ -762,41 +753,7 @@ console.log("╚═════════════════════�
 console.log("✓ START EXPERIENCE button: plays opening.mp3");
 console.log("✓ All other buttons & links: play velvet-snap.mp3");
 console.log("✓ System initialized successfully\n");
-// Floating QR Logic
-const floatingQRBtn = document.getElementById('floatingQRBtn');
-const qrModal = document.getElementById('qrModal');
-const qrCloseBtn = document.getElementById('qrCloseBtn');
-const qrDownloadBtn = document.getElementById('qrDownloadBtn');
-
-floatingQRBtn.addEventListener('click', () => {
-  if(typeof playAudio === 'function') playAudio();
-  qrModal.classList.add('active');
-  document.body.style.overflow = 'hidden';
-});
-
-function closeQRModal() {
-  qrModal.classList.remove('active');
-  document.body.style.overflow = 'auto';
-}
-
-qrCloseBtn.addEventListener('click', closeQRModal);
-qrModal.addEventListener('click', (e) => { if(e.target === qrModal) closeQRModal(); });
-
-qrDownloadBtn.addEventListener('click', () => {
-  if(typeof playAudio === 'function') playAudio();
-  const link = document.createElement('a');
-  link.href = 'images/studio-erish.png';
-  link.download = 'Erish-Studio-QR.png';
-  link.click();
-});
 </script>
 
-  <!-- Floating QR -->
-<div class="floating-qr-btn" id="floatingQRBtn">QR</div>
-<div class="qr-modal" id="qrModal">
-  <img src="images/studio-erish.png" alt="QR Code">
-  <button class="qr-download-btn" id="qrDownloadBtn">DOWNLOAD QR</button>
-  <button class="qr-close-btn" id="qrCloseBtn">CLOSE</button>
-</div>
 </body>
 </html>
