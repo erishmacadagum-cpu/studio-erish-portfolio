@@ -254,7 +254,38 @@ nav.scrolled{background:rgba(28,22,16,0.92);backdrop-filter:blur(20px);border-bo
 .why-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--dark);margin-bottom:12px;}
 .why-desc{font-size:13.5px;line-height:2;color:var(--muted);}
 
-/* ── TESTIMONIAL ── */
+/* ── TESTIMONIALS CAROUSEL ── */
+.testimonials{background:var(--dark);padding:140px 24px;position:relative;overflow:hidden;}
+.testimonials::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:0.5px;height:100px;background:linear-gradient(to bottom,var(--gold),transparent);opacity:0.3;}
+.testimonials-header{text-align:center;margin-bottom:80px;}
+.test-label{font-size:9px;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:block;opacity:0.8;}
+.test-title{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,6vw,68px);font-weight:300;color:#fff;line-height:1.1;margin-bottom:20px;}
+.test-title em{font-style:italic;color:var(--gold-lt);}
+
+.testimonials-carousel{max-width:1000px;margin:0 auto;position:relative;}
+.carousel-container{position:relative;overflow:hidden;border-radius:8px;}
+.carousel-track{display:flex;transition:transform 0.5s ease;gap:24px;}
+.carousel-slide{min-width:100%;flex-shrink:0;background:rgba(255,255,255,0.02);border:1px solid rgba(184,150,90,0.2);border-radius:8px;padding:48px 40px;text-align:center;animation:slideIn 0.5s ease;}
+
+@keyframes slideIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+.testimonial-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,3vw,24px);font-weight:300;font-style:italic;color:rgba(255,255,255,0.85);line-height:1.8;margin-bottom:32px;}
+.testimonial-quote em{color:var(--gold-lt);}
+
+.testimonial-author{margin-bottom:12px;}
+.testimonial-name{font-size:14px;font-weight:500;color:#fff;letter-spacing:0.5px;}
+.testimonial-location{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-top:4px;}
+
+.carousel-controls{display:flex;align-items:center;justify-content:center;gap:20px;margin-top:40px;}
+.carousel-nav{width:40px;height:40px;border:1px solid rgba(184,150,90,0.3);background:transparent;color:var(--gold);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:4px;transition:all 0.3s ease;}
+.carousel-nav:hover{border-color:var(--gold);background:rgba(184,150,90,0.1);}
+.carousel-nav:active{transform:scale(0.95);}
+
+.carousel-dots{display:flex;gap:8px;}
+.carousel-dot{width:8px;height:8px;border-radius:50%;background:rgba(184,150,90,0.3);cursor:pointer;transition:all 0.3s ease;}
+.carousel-dot.active{background:var(--gold);width:24px;border-radius:4px;}
+
+/* ── TESTIMONIAL SECTION ── */
 .testimonial{background:var(--dark);padding:140px 24px;position:relative;overflow:hidden;}
 .testimonial::before{content:'"';position:absolute;top:60px;left:50%;transform:translateX(-50%);font-family:'Cormorant Garamond',serif;font-size:280px;font-weight:300;color:rgba(184,150,90,0.04);line-height:1;pointer-events:none;}
 .testimonial-inner{max-width:900px;margin:0 auto;text-align:center;position:relative;z-index:2;}
@@ -524,6 +555,9 @@ footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,
   .btn-primary,.btn-ghost{width:100%;max-width:320px;}
   .btn-flagship{padding:24px 48px;}
 
+  .carousel-slide{padding:32px 24px;}
+  .testimonial-quote{font-size:clamp(16px,3vw,20px);}
+
   .floating-qr-btn {
     width: 48px;
     height: 48px;
@@ -545,6 +579,12 @@ footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,
     padding: 10px 20px;
     font-size: 9px;
   }
+}
+
+@media (max-width:600px){
+  .carousel-slide{padding:24px 16px;}
+  .testimonial-quote{font-size:clamp(14px,2.5vw,18px);}
+  .testimonial-name{font-size:12px;}
 }
 </style>
 </head>
@@ -799,19 +839,114 @@ footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,
   </div>
 </section>
 
-<!-- TESTIMONIAL -->
-<section class="testimonial">
-  <div class="testimonial-inner">
-    <span class="t-label reveal">Client Testimonial</span>
-    <blockquote class="t-quote reveal">
-      "I have been to many weddings. But when I walked into mine, I stopped breathing. <em>Every single detail was beyond anything I imagined.</em> Erish didn't just style my wedding — she gave me the most beautiful day of my life."
-    </blockquote>
-    <div class="t-divider reveal">
-      <div class="tdl"></div>
-      <div class="tdd"></div>
-      <div class="tdl"></div>
+<!-- TESTIMONIALS CAROUSEL (NEW!) -->
+<section class="testimonials" id="testimonials">
+  <div class="testimonials-header reveal">
+    <span class="test-label">What Couples Say</span>
+    <h2 class="test-title">Trusted by <em>Hundreds of Couples</em></h2>
+  </div>
+  
+  <div class="testimonials-carousel">
+    <div class="carousel-container">
+      <div class="carousel-track" id="carouselTrack">
+        <!-- Testimonial 1 -->
+        <div class="carousel-slide">
+          <div class="testimonial-quote">"I highly recommend ma'am Erish. The best jud sila sa pag coordinate ug wedding. From initial consultation, preparation and up to our wedding day, they were incredibly professional, organized, and supportive. Every detail was flawless."</div>
+          <div class="testimonial-author">
+            <div class="testimonial-name">Mae Kotzelski</div>
+            <div class="testimonial-location">Hotel Wedding • Davao City</div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="carousel-slide">
+          <div class="testimonial-quote">"Thank you so much Ms. Erish & the whole team! From start to finish, you were an absolute lifesaver. You were incredibly hands-on, always available to address my concerns. Your genuine care truly made all the difference. You went above and beyond for us!"</div>
+          <div class="testimonial-author">
+            <div class="testimonial-name">Clyde Milly Ang</div>
+            <div class="testimonial-location">The View Wedding</div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="carousel-slide">
+          <div class="testimonial-quote">"It's already a little more than a week since our wedding but John and I are still on cloud nine. We would like to highly commend Ms. Erish Sazon Macadag-um and the whole team of Petals & Accent for being very competent and reliable. Your unparalleled craftsmanship stood out."</div>
+          <div class="testimonial-author">
+            <div class="testimonial-name">Kristine Pacoy-Macuto</div>
+            <div class="testimonial-location">Wedding Reception • Davao</div>
+          </div>
+        </div>
+
+        <!-- Testimonial 4 -->
+        <div class="carousel-slide">
+          <div class="testimonial-quote">"THE BEST THING THAT A COUPLE CAN RECEIVE FROM THEIR WEDDING PLANNER IS THE PEACE OF MIND. God is indeed a giver, he gave me Erish Sazon Macadag-um of Petals & Accent. Thank you for your patience, meticulous care, and for bringing in your talented team."</div>
+          <div class="testimonial-author">
+            <div class="testimonial-name">Kristine Pacoy-Macuto</div>
+            <div class="testimonial-location">Wedding Ceremony • Davao City</div>
+          </div>
+        </div>
+
+        <!-- Testimonial 5 -->
+        <div class="carousel-slide">
+          <div class="testimonial-quote">"Madam, good morning. So thankful to find one of the best coordinators. Thank you for your patience, guidance all throughout the wedding process from meeting up, prenup, final meet up, and even sa event mismo. You made that 'once in a lifetime moment' so memorable and amazing."</div>
+          <div class="testimonial-author">
+            <div class="testimonial-name">JM Moreno</div>
+            <div class="testimonial-location">Wedding Event • Davao</div>
+          </div>
+        </div>
+
+        <!-- Testimonial 6 -->
+        <div class="carousel-slide">
+          <div class="testimonial-quote">"Thank you so much Erish Sazon Macadag-um of Petals & Accent for making our special day a dream come true! We changed dates, venues, and even increased guests, but you still managed to work out everything in our favor. Everything went well and beyond our expectations. We truly enjoyed our day."</div>
+          <div class="testimonial-author">
+            <div class="testimonial-name">Appreciation Post</div>
+            <div class="testimonial-location">2 Months After Wedding</div>
+          </div>
+        </div>
+
+        <!-- Testimonial 7 -->
+        <div class="carousel-slide">
+          <div class="testimonial-quote">"Thank you so much Erish Sazon Macadag-um of Petals & Accent for making our wedding dream come true! My sincere thanks to you and the whole team. You have been accommodating and consistent all throughout the wedding preparation. The smiles and laughter of the team calmed our senses."</div>
+          <div class="testimonial-author">
+            <div class="testimonial-name">Ivory Lyn Diadula Carteciano-Bolival</div>
+            <div class="testimonial-location">Dream Wedding • Davao City</div>
+          </div>
+        </div>
+
+        <!-- Testimonial 8 -->
+        <div class="carousel-slide">
+          <div class="testimonial-quote">"Thank you so much for making our wedding a dream come true! Before heading off to the second part of our honeymoon, let me share the video of our magical wedding. The whole wedding set up by Petals & Accent made the groom cry after he saw the reception venue because of happiness. You truly deserve all the praise!"</div>
+          <div class="testimonial-author">
+            <div class="testimonial-name">Blessa De Maria</div>
+            <div class="testimonial-location">Magical Wedding • Davao</div>
+          </div>
+        </div>
+
+        <!-- Testimonial 9 -->
+        <div class="carousel-slide">
+          <div class="testimonial-quote">"Hi ma'am, thank you kaau kay successful jud amo big day! Everything went amazingly well that day jud, kanang walay ka stress2. Hehe and I cannot express how appreciative we are for everything that you guys did for us! Ug ang videos and photos captured ka PERFECT BA! Salamat pud kaau sa team."</div>
+          <div class="testimonial-author">
+            <div class="testimonial-name">Aem Aprahcab</div>
+            <div class="testimonial-location">Wedding Reception • Davao City</div>
+          </div>
+        </div>
+
+        <!-- Testimonial 10 -->
+        <div class="carousel-slide">
+          <div class="testimonial-quote">"Thank you so much Princess Parba Sobejana of Petals & Accent for making our special day a dream come true! All of the details of the wedding exceeded all our expectations. We would recommend you to anyone who is considering having a beautiful wedding. You truly go beyond what we've expected. THANK YOU SO MUCH!"</div>
+          <div class="testimonial-author">
+            <div class="testimonial-name">Princess Parba Sobejana</div>
+            <div class="testimonial-location">Beautiful Wedding • Davao</div>
+          </div>
+        </div>
+      </div>
     </div>
-    <p class="t-author reveal"><strong>The Bride</strong> &nbsp;·&nbsp; Garden Wedding, Davao City</p>
+
+    <!-- Carousel Controls -->
+    <div class="carousel-controls">
+      <button class="carousel-nav" id="prevBtn" title="Previous">❮</button>
+      <div class="carousel-dots" id="carouselDots"></div>
+      <button class="carousel-nav" id="nextBtn" title="Next">❯</button>
+    </div>
   </div>
 </section>
 
@@ -1009,6 +1144,76 @@ const observer = new IntersectionObserver((entries) => {
 reveals.forEach(r => observer.observe(r));
 console.log("✓ Scroll reveal animations active");
 
+/* ===== TESTIMONIALS CAROUSEL JAVASCRIPT ===== */
+const carouselTrack = document.getElementById('carouselTrack');
+const slides = document.querySelectorAll('.carousel-slide');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const carouselDots = document.getElementById('carouselDots');
+const carouselContainer = document.querySelector('.carousel-container');
+
+let currentIndex = 0;
+const slideCount = slides.length;
+
+// Create dots
+for (let i = 0; i < slideCount; i++) {
+  const dot = document.createElement('button');
+  dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+  dot.addEventListener('click', () => goToSlide(i));
+  carouselDots.appendChild(dot);
+}
+
+function updateCarousel() {
+  carouselTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
+  
+  // Update dots
+  document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+    dot.classList.toggle('active', i === currentIndex);
+  });
+}
+
+function nextSlide() {
+  currentIndex = (currentIndex + 1) % slideCount;
+  updateCarousel();
+  velvetSnap.currentTime = 0;
+  velvetSnap.play().catch(() => {});
+}
+
+function prevSlide() {
+  currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+  updateCarousel();
+  velvetSnap.currentTime = 0;
+  velvetSnap.play().catch(() => {});
+}
+
+function goToSlide(index) {
+  currentIndex = index;
+  updateCarousel();
+  velvetSnap.currentTime = 0;
+  velvetSnap.play().catch(() => {});
+}
+
+// Button listeners
+prevBtn.addEventListener('click', prevSlide);
+nextBtn.addEventListener('click', nextSlide);
+
+// Auto-play carousel
+let autoPlayInterval;
+function startAutoPlay() {
+  autoPlayInterval = setInterval(nextSlide, 5000);
+}
+
+function stopAutoPlay() {
+  clearInterval(autoPlayInterval);
+}
+
+// Pause on hover
+carouselContainer.addEventListener('mouseenter', stopAutoPlay);
+carouselContainer.addEventListener('mouseleave', startAutoPlay);
+
+startAutoPlay();
+console.log('✓ Testimonials Carousel Active | 10 Slides | Auto-play enabled');
+
 /* ===== FLOATING QR CODE JAVASCRIPT ===== */
 const floatingQRBtn = document.getElementById('floatingQRBtn');
 const qrModal = document.getElementById('qrModal');
@@ -1056,10 +1261,11 @@ console.log('✓ Floating QR Code System Loaded');
 
 // ════ DIAGNOSTIC SUMMARY ════
 console.log("\n╔════════════════════════════════════════════════════════╗");
-console.log("║  ERISH STUDIO AUDIO SYSTEM - READY                   ║");
+console.log("║  ERISH STUDIO HOMEPAGE - READY                        ║");
 console.log("╚════════════════════════════════════════════════════════╝");
 console.log("✓ START EXPERIENCE button: plays opening.mp3");
 console.log("✓ All other buttons & links: play velvet-snap.mp3");
+console.log("✓ Testimonials carousel: 10 slides, auto-play + manual nav");
 console.log("✓ Floating QR button: active & functional");
 console.log("✓ System initialized successfully\n");
 </script>
