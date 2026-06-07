@@ -15,9 +15,10 @@
 html{scroll-behavior:smooth;}
 body{background:var(--dark);color:#fff;font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;}
 
-/* ── PRELOADER WITH SOUND ── */
+/* ── PRELOADER WITH CINEMATIC LOGO ── */
 .preloader{position:fixed;inset:0;background:var(--dark);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:28px;transition:opacity 1s ease,visibility 1s ease;}
 .preloader.hidden{opacity:0;visibility:hidden;pointer-events:none;}
+@keyframes fadeOut{from{opacity:1;}to{opacity:0;}}
 .pre-logo{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;font-style:italic;color:rgba(255,255,255,0.12);letter-spacing:5px;animation:breathe 2.4s ease infinite;}
 .pre-logo em{color:var(--gold-lt);}
 .pre-line{width:0;height:0.7px;background:var(--gold);animation:expand 2s ease forwards;}
@@ -28,9 +29,12 @@ body{background:var(--dark);color:#fff;font-family:'Jost',sans-serif;font-weight
 /* ── NAVIGATION ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:24px 56px;display:flex;align-items:center;justify-content:space-between;background:rgba(28,22,16,0);backdrop-filter:blur(0px);border-bottom:0.5px solid rgba(184,150,90,0);transition:all 0.5s ease;}
 nav.scrolled{background:rgba(28,22,16,0.92);backdrop-filter:blur(20px);border-bottom:0.5px solid rgba(184,150,90,0.15);}
-.nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:#fff;letter-spacing:3px;text-decoration:none;transition:color 0.3s;}
-.nav-logo:hover{color:var(--gold-lt);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:#fff;letter-spacing:3px;text-decoration:none;transition:all 0.4s ease;display:flex;align-items:center;gap:12px;position:relative;}
+.nav-logo:hover{color:var(--gold-lt);transform:translateY(-2px);}
 .nav-logo em{font-style:italic;color:var(--gold);}
+.nav-logo-icon{width:28px;height:28px;display:flex;align-items:center;justify-content:center;}
+.nav-logo-icon svg{width:100%;height:100%;filter:drop-shadow(0 0 8px rgba(212,176,122,0.3));transition:all 0.4s ease;}
+.nav-logo:hover .nav-logo-icon svg{filter:drop-shadow(0 0 16px rgba(212,176,122,0.6));}
 .nav-links{display:flex;gap:36px;}
 .nav-links a{font-size:9.5px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.3s;position:relative;}
 .nav-links a:hover{color:var(--gold);}
@@ -416,8 +420,12 @@ nav.scrolled{background:rgba(28,22,16,0.92);backdrop-filter:blur(20px);border-bo
 
 /* ── FOOTER ── */
 footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,150,90,0.08);text-align:center;position:relative;z-index:10;}
-.f-logo{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:rgba(255,255,255,0.5);letter-spacing:2px;margin-bottom:16px;}
+.f-logo{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:rgba(255,255,255,0.5);letter-spacing:2px;margin-bottom:16px;display:flex;align-items:center;justify-content:center;gap:12px;transition:all 0.4s ease;}
+.f-logo:hover{color:rgba(255,255,255,0.8);}
 .f-logo em{font-style:italic;color:var(--gold);}
+.f-logo-icon{width:32px;height:32px;display:flex;align-items:center;justify-content:center;}
+.f-logo-icon svg{width:100%;height:100%;filter:drop-shadow(0 0 10px rgba(212,176,122,0.2));transition:all 0.4s ease;}
+.f-logo:hover .f-logo-icon svg{filter:drop-shadow(0 0 15px rgba(212,176,122,0.5));}
 .f-note{font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:1px;line-height:1.8;}
 
 /* ===== FLOATING QR CODE CSS ===== */
@@ -636,16 +644,118 @@ footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,
 </head>
 <body>
 
-<!-- PRELOADER -->
+<!-- PRELOADER WITH SVG LOGO -->
 <div class="preloader" id="preloader">
-  <div class="pre-logo"><em>Erish</em> Studio</div>
-  <div class="pre-line"></div>
-  <div class="pre-tagline">Est. 2007 · Davao City</div>
+  <div class="preloader-content">
+    <!-- SVG LOGO -->
+    <svg class="preloader-logo" id="preloaderLogo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <!-- Decorative outer circle -->
+      <circle cx="100" cy="100" r="95" fill="none" stroke="rgba(212,176,122,0.3)" stroke-width="1"/>
+      <circle cx="100" cy="100" r="85" fill="none" stroke="rgba(212,176,122,0.15)" stroke-width="0.5"/>
+      
+      <!-- Center decorative element -->
+      <circle cx="100" cy="100" r="70" fill="none" stroke="rgba(212,176,122,0.2)" stroke-width="1" stroke-dasharray="5,5"/>
+      
+      <!-- Main text circle path for curved text -->
+      <defs>
+        <path id="circlePath" d="M 30, 100 A 70, 70 0 0, 1 170, 100" fill="none"/>
+        <style>
+          .preloader-logo {
+            animation: rotateLogo 8s linear infinite, pulseGlow 3s ease-in-out infinite;
+          }
+          @keyframes rotateLogo {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+          @keyframes pulseGlow {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(212,176,122,0.3)); }
+            50% { filter: drop-shadow(0 0 25px rgba(212,176,122,0.6)); }
+          }
+        </style>
+      </defs>
+      
+      <!-- Centered text -->
+      <text x="100" y="105" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="32" font-weight="300" fill="rgba(212,176,122,0.9)" letter-spacing="2">
+        <tspan font-style="italic">ERISH</tspan>
+      </text>
+      <text x="100" y="135" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="20" font-weight="300" fill="rgba(255,255,255,0.7)" letter-spacing="3">
+        STUDIO
+      </text>
+      
+      <!-- Bottom decorative text -->
+      <text x="100" y="165" text-anchor="middle" font-family="Jost, sans-serif" font-size="9" font-weight="300" fill="rgba(255,255,255,0.3)" letter-spacing="2" text-transform="uppercase">
+        Est. 2007
+      </text>
+      
+      <!-- Corner accents -->
+      <line x1="20" y1="20" x2="40" y2="20" stroke="rgba(212,176,122,0.4)" stroke-width="1"/>
+      <line x1="20" y1="20" x2="20" y2="40" stroke="rgba(212,176,122,0.4)" stroke-width="1"/>
+      <line x1="180" y1="20" x2="160" y2="20" stroke="rgba(212,176,122,0.4)" stroke-width="1"/>
+      <line x1="180" y1="20" x2="180" y2="40" stroke="rgba(212,176,122,0.4)" stroke-width="1"/>
+      <line x1="20" y1="180" x2="40" y2="180" stroke="rgba(212,176,122,0.4)" stroke-width="1"/>
+      <line x1="20" y1="180" x2="20" y2="160" stroke="rgba(212,176,122,0.4)" stroke-width="1"/>
+      <line x1="180" y1="180" x2="160" y2="180" stroke="rgba(212,176,122,0.4)" stroke-width="1"/>
+      <line x1="180" y1="180" x2="180" y2="160" stroke="rgba(212,176,122,0.4)" stroke-width="1"/>
+    </svg>
+    
+    <p class="preloader-cta" id="preloaderCTA">Click Logo to Begin</p>
+    <div class="pre-tagline">Est. 2007 · Davao City</div>
+  </div>
 </div>
+
+<style>
+.preloader-content{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:40px;
+}
+
+.preloader-logo{
+  width:220px;
+  height:220px;
+  cursor:pointer;
+  transition:all 0.4s ease;
+  filter:drop-shadow(0 0 20px rgba(212,176,122,0.2));
+}
+
+.preloader-logo:hover{
+  width:240px;
+  height:240px;
+  filter:drop-shadow(0 0 40px rgba(212,176,122,0.5));
+}
+
+.preloader-cta{
+  font-size:12px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:rgba(212,176,122,0.8);
+  animation:fadeInOut 2s ease-in-out infinite;
+  font-family:'Jost',sans-serif;
+  font-weight:300;
+}
+
+@keyframes fadeInOut{
+  0%,100%{opacity:0.5;}
+  50%{opacity:1;}
+}
+</style>
 
 <!-- NAVIGATION -->
 <nav id="nav">
-  <a href="index.html" class="nav-logo"><em>Erish</em> Studio</a>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="48" fill="none" stroke="rgba(212,176,122,0.4)" stroke-width="0.5"/>
+        <text x="50" y="55" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="16" font-weight="300" fill="rgba(212,176,122,0.9)" letter-spacing="1">
+          <tspan font-style="italic">E</tspan>
+        </text>
+        <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(212,176,122,0.15)" stroke-width="0.3" stroke-dasharray="3,3"/>
+      </svg>
+    </span>
+    <em>Erish</em> Studio
+  </a>
   <div class="nav-links">
     <a href="highlights.html">Highlights</a>
     <a href="showcase.html">Showcase</a>
@@ -687,13 +797,6 @@ footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,
       Bespoke styling, florals, and coordination that tells your story beautifully.
     </p>
 
-    <!-- ── FLAGSHIP START EXPERIENCE BUTTON ── -->
-    <div class="hero-flagship">
-      <button id="start-exp-btn" class="btn-flagship">
-        <span>✦ Start Your Experience ✦</span>
-      </button>
-    </div>
-    
     <!-- ── SECONDARY CTA BUTTONS ── -->
     <div class="hero-ctas">
       <a href="showcase.html#inquiry" class="btn-primary"><span>Begin Your Inquiry</span></a>
@@ -972,7 +1075,18 @@ footer{background:var(--dark);padding:48px 24px;border-top:0.5px solid rgba(184,
 
 <!-- FOOTER -->
 <footer>
-  <div class="f-logo"><em>Erish</em> Studio</div>
+  <div class="f-logo">
+    <span class="f-logo-icon">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="48" fill="none" stroke="rgba(212,176,122,0.4)" stroke-width="0.5"/>
+        <text x="50" y="55" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="16" font-weight="300" fill="rgba(212,176,122,0.8)" letter-spacing="1">
+          <tspan font-style="italic">E</tspan>
+        </text>
+        <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(212,176,122,0.15)" stroke-width="0.3" stroke-dasharray="3,3"/>
+      </svg>
+    </span>
+    <em>Erish</em> Studio
+  </div>
   <div class="f-note">
     © 2007–2026 Erish Studio Events & Styling<br/>
     Davao City, Philippines &nbsp;·&nbsp; Crafting Celebrations Since 2007
@@ -1013,35 +1127,22 @@ velvetSnap.volume = 0.5;
 
 console.log("✓ Audio files defined");
 
-// ════ PRELOADER HANDLING ════
-window.addEventListener('load', () => {
-  console.log("✓ Page loaded");
-  setTimeout(() => {
-    const preloader = document.getElementById('preloader');
-    if (preloader) {
-      preloader.classList.add('hidden');
-      console.log("✓ Preloader hidden");
-    }
-  }, 1800);
-});
+// ════ PRELOADER LOGO CLICK (OPENING SOUND) ════
+const preloaderLogo = document.getElementById('preloaderLogo');
+const preloader = document.getElementById('preloader');
 
-// ════ START EXPERIENCE BUTTON (OPENING SOUND) ════
-const startBtn = document.getElementById('start-exp-btn');
-
-if (startBtn) {
-  console.log("✅ START EXPERIENCE BUTTON FOUND");
-  console.log("   └─ This button plays: opening.mp3");
+if (preloaderLogo) {
+  console.log("✅ PRELOADER LOGO FOUND");
+  console.log("   └─ Click to play opening.mp3 and start experience");
   
-  startBtn.style.pointerEvents = 'auto';
-  startBtn.style.cursor = 'pointer';
-  startBtn.style.position = 'relative';
-  startBtn.style.zIndex = '20';
+  preloaderLogo.style.cursor = 'pointer';
   
-  startBtn.addEventListener('click', function(e) {
-    console.log("🎬 START EXPERIENCE BUTTON CLICKED!");
+  preloaderLogo.addEventListener('click', function(e) {
+    console.log("🎬 PRELOADER LOGO CLICKED!");
     e.preventDefault();
     e.stopPropagation();
     
+    // Play opening sound
     openingSound.currentTime = 0;
     openingSound.play()
       .then(() => {
@@ -1051,12 +1152,28 @@ if (startBtn) {
         console.warn("⚠️ Opening sound blocked by browser autoplay policy");
         console.warn("   Reason: ", err.message);
       });
+    
+    // Hide preloader with cinematic fade
+    setTimeout(() => {
+      preloader.style.animation = 'fadeOut 0.8s ease forwards';
+      setTimeout(() => {
+        preloader.classList.add('hidden');
+      }, 800);
+    }, 300);
   });
   
-  console.log("✓ Click listener attached to START EXPERIENCE BUTTON");
+  console.log("✓ Click listener attached to PRELOADER LOGO");
 } else {
-  console.error("❌ START EXPERIENCE BUTTON NOT FOUND");
+  console.error("❌ PRELOADER LOGO NOT FOUND");
 }
+
+// ════ PRELOADER AUTO-HIDE (Optional: Hide after 8 seconds if not clicked) ════
+setTimeout(() => {
+  if (preloader && !preloader.classList.contains('hidden')) {
+    console.log("⏱️ Preloader auto-hiding (8 seconds)");
+    preloader.classList.add('hidden');
+  }
+}, 8000);
 
 // ════ ALL OTHER BUTTONS & LINKS (VELVET SNAP SOUND) ════
 const allClickables = document.querySelectorAll('a, button, .cat-btn');
@@ -1254,11 +1371,14 @@ console.log('✓ Floating QR Code System Loaded');
 
 // ════ DIAGNOSTIC SUMMARY ════
 console.log("\n╔════════════════════════════════════════════════════════╗");
-console.log("║  ERISH STUDIO HOMEPAGE - READY                        ║");
+console.log("║  ERISH STUDIO HOMEPAGE - LOGO-FIRST EXPERIENCE         ║");
 console.log("╚════════════════════════════════════════════════════════╝");
-console.log("✓ START EXPERIENCE button: plays opening.mp3");
+console.log("✓ Preloader logo: Displays on page load (cinematic SVG)");
+console.log("✓ Logo click: Plays opening.mp3");
+console.log("✓ Navigation logo: SVG icon + text (top-left)");
+console.log("✓ Footer logo: SVG icon + text (bottom center)");
 console.log("✓ All other buttons & links: play velvet-snap.mp3");
-console.log("✓ Testimonials carousel: 10 slides, auto-play + manual nav");
+console.log("✓ Testimonials: One-at-a-time with cinematic hover");
 console.log("✓ Floating QR button: active & functional");
 console.log("✓ System initialized successfully\n");
 </script>
